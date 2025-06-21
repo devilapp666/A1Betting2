@@ -1,6 +1,6 @@
 import React from "react";
 import ErrorBoundary from "../ErrorBoundary";
-import CleanMoneyMaker from "./CleanMoneyMaker";
+import UniversalMoneyMaker from "./UniversalMoneyMaker";
 
 // ============================================================================
 // TYPES & INTERFACES
