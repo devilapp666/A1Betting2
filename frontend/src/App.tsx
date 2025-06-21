@@ -108,7 +108,7 @@ const navigationItems: NavigationItem[] = [
     component: ({ onNavigate }: { onNavigate?: (id: string) => void }) => (
       <EliteFeaturesOverview onNavigate={onNavigate} />
     ),
-    shortcut: "⌘D",
+    shortcut: ["⌘", "D"],
     badge: "ELITE",
   },
   {
@@ -116,7 +116,7 @@ const navigationItems: NavigationItem[] = [
     label: "Money Maker",
     icon: <DollarSign className="w-5 h-5" />,
     component: CyberUltimateMoneyMaker,
-    shortcut: "⌘M",
+    shortcut: ["⌘", "M"],
     badge: "CYBER",
   },
   {
@@ -124,7 +124,7 @@ const navigationItems: NavigationItem[] = [
     label: "Analytics Hub",
     icon: <BarChart3 className="w-5 h-5" />,
     component: CyberAnalyticsHub,
-    shortcut: "⌘A",
+    shortcut: ["⌘", "A"],
     badge: "PRO",
   },
   {
@@ -132,7 +132,7 @@ const navigationItems: NavigationItem[] = [
     label: "AI Predictions",
     icon: <Brain className="w-5 h-5" />,
     component: EnhancedRevolutionaryInterface,
-    shortcut: "⌘P",
+    shortcut: ["⌘", "P"],
     badge: "ELITE",
   },
   {
@@ -140,7 +140,7 @@ const navigationItems: NavigationItem[] = [
     label: "AI Arbitrage",
     icon: <Target className="w-5 h-5" />,
     component: CyberUltimateMoneyMaker, // AI Arbitrage uses money maker for now
-    shortcut: "⌘R",
+    shortcut: ["⌘", "R"],
     badge: "AI",
   },
   {
@@ -148,7 +148,7 @@ const navigationItems: NavigationItem[] = [
     label: "ML Center",
     icon: <Activity className="w-5 h-5" />,
     component: UltraAdvancedMLDashboard,
-    shortcut: "⌘L",
+    shortcut: ["⌘", "L"],
     badge: "ML",
   },
   {
@@ -156,14 +156,14 @@ const navigationItems: NavigationItem[] = [
     label: "Profile",
     icon: <User className="w-5 h-5" />,
     component: UnifiedProfile,
-    shortcut: "⌘U",
+    shortcut: ["⌘", "U"],
   },
   {
     id: "settings",
     label: "Settings",
     icon: <Settings className="w-5 h-5" />,
     component: UltimateSettingsPage,
-    shortcut: "⌘,",
+    shortcut: ["⌘", ","],
   },
 ];
 
