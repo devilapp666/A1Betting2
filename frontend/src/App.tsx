@@ -29,13 +29,13 @@ import {
 import { SafeThemeProvider } from "./providers/SafeThemeProvider";
 import ErrorBoundary from "./components/ErrorBoundary";
 
-// Import main page components
-import ConsolidatedUniversalDashboard from "./components/dashboard/ConsolidatedUniversalDashboard";
-import ConsolidatedUniversalMoneyMaker from "./components/moneymaker/ConsolidatedUniversalMoneyMaker";
-import ConsolidatedUniversalAnalytics from "./components/analytics/ConsolidatedUniversalAnalytics";
-import UniversalPredictions from "./components/predictions/UniversalPredictions";
+// Import main page components - Using advanced versions
+import CyberAnalyticsHub from "./components/cyber/CyberAnalyticsHub";
+import CyberUltimateMoneyMaker from "./components/cyber/CyberUltimateMoneyMaker";
+import UltraAdvancedMLDashboard from "./components/ml/UltraAdvancedMLDashboard";
+import EnhancedRevolutionaryInterface from "./components/revolutionary/EnhancedRevolutionaryInterface";
 import UltimateSettingsPage from "./components/settings/UltimateSettingsPage";
-import ProfilePage from "./components/profile/ProfilePage";
+import UnifiedProfile from "./components/profile/UnifiedProfile";
 
 // Import modern UI components
 import ModernCommandPalette from "./components/ui/ModernCommandPalette";
@@ -95,36 +95,39 @@ const mockUser: UserData = {
   accuracy: 91.5,
 };
 
-// Clean, organized navigation - inspired by Linear
+// Advanced navigation with ultra-premium components
 const navigationItems: NavigationItem[] = [
   {
     id: "dashboard",
-    label: "Dashboard",
-    icon: <Home className="w-5 h-5" />,
-    component: ConsolidatedUniversalDashboard,
+    label: "ML Dashboard",
+    icon: <Brain className="w-5 h-5" />,
+    component: UltraAdvancedMLDashboard,
     shortcut: "⌘D",
+    badge: "ULTRA",
   },
   {
     id: "money-maker",
     label: "Money Maker",
     icon: <DollarSign className="w-5 h-5" />,
-    component: ConsolidatedUniversalMoneyMaker,
+    component: CyberUltimateMoneyMaker,
     shortcut: "⌘M",
-    badge: "NEW",
+    badge: "CYBER",
   },
   {
     id: "analytics",
-    label: "Analytics",
+    label: "Analytics Hub",
     icon: <BarChart3 className="w-5 h-5" />,
-    component: ConsolidatedUniversalAnalytics,
+    component: CyberAnalyticsHub,
     shortcut: "⌘A",
+    badge: "PRO",
   },
   {
     id: "predictions",
-    label: "Predictions",
-    icon: <Brain className="w-5 h-5" />,
-    component: UniversalPredictions,
+    label: "Revolutionary AI",
+    icon: <Zap className="w-5 h-5" />,
+    component: EnhancedRevolutionaryInterface,
     shortcut: "⌘P",
+    badge: "ELITE",
   },
   {
     id: "settings",
