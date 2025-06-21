@@ -574,7 +574,8 @@ const UltraAdvancedMLDashboard: React.FC = () => {
               </CardHeader>
               <CardContent>
                 <div className="h-64">
-                  <Line
+                  <SafeChart
+                    type="line"
                     data={predictionTrendData}
                     options={{
                       responsive: true,
@@ -590,6 +591,7 @@ const UltraAdvancedMLDashboard: React.FC = () => {
                         },
                       },
                     }}
+                    loadingMessage="Loading prediction quality trends..."
                   />
                 </div>
               </CardContent>
