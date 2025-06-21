@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode } from "react";
 
 interface LoggerContextType {
   log: (message: string) => void;
@@ -11,9 +11,17 @@ const LoggerContext = createContext<LoggerContextType | undefined>(undefined);
 
 export const useLogger = () => {
   const context = useContext(LoggerContext);
+
+  // If no provider, return a simple console logger
   if (!context) {
-    throw new Error('useLogger must be used within a LoggerProvider');
+    return {
+      log: (message: string) => console.log(message),
+      error: (message: string) => console.error(message),
+      warn: (message: string) => console.warn(message),
+      info: (message: string) => console.info(message),
+    };
   }
+
   return context;
 };
 
@@ -29,5 +37,9 @@ export const LoggerProvider: React.FC<LoggerProviderProps> = ({ children }) => {
     info: (message: string) => console.info(message),
   };
 
-  return React.createElement(LoggerContext.Provider, { value: logger }, children);
+  return React.createElement(
+    LoggerContext.Provider,
+    { value: logger },
+    children,
+  );
 };
