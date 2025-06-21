@@ -105,7 +105,9 @@ const navigationItems: NavigationItem[] = [
     id: "dashboard",
     label: "Elite Dashboard",
     icon: <Home className="w-5 h-5" />,
-    component: EliteFeaturesOverview,
+    component: ({ onNavigate }: { onNavigate?: (id: string) => void }) => (
+      <EliteFeaturesOverview onNavigate={onNavigate} />
+    ),
     shortcut: "⌘D",
     badge: "ELITE",
   },
