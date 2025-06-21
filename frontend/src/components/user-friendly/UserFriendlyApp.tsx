@@ -20,6 +20,8 @@ import UserFriendlyDashboard from "./UserFriendlyDashboard";
 import MoneyMakerPro from "./MoneyMakerPro";
 import PrizePicksPro from "./PrizePicksPro";
 import PropGPT from "./PropGPT";
+// Import advanced dashboard
+import UltraAdvancedMLDashboard from "../ml/UltraAdvancedMLDashboard";
 
 interface NavigationItem {
   id: string;
