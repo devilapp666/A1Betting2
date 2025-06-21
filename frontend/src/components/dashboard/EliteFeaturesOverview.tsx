@@ -366,7 +366,8 @@ export const EliteFeaturesOverview: React.FC<EliteFeaturesOverviewProps> = ({
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: index * 0.1 }}
               whileHover={{ scale: 1.05, y: -5 }}
-              className="p-6 bg-gradient-to-br from-gray-800/50 to-gray-900/50 border border-gray-700/50 hover:border-cyan-500/50 rounded-xl cursor-pointer group"
+              onClick={() => handleFeatureLaunch(feature.name)}
+              className="p-6 bg-gradient-to-br from-gray-800/50 to-gray-900/50 border border-gray-700/50 hover:border-cyan-500/50 rounded-xl cursor-pointer group transform hover:shadow-2xl hover:shadow-cyan-500/20 transition-all duration-300"
             >
               <div className="flex items-center justify-between mb-4">
                 <div
