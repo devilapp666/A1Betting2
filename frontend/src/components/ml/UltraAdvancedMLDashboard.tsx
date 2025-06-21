@@ -160,8 +160,6 @@ const UltraAdvancedMLDashboard: React.FC = () => {
 
   // Services
   const logger = useLogger();
-  const predictionService = UnifiedEnhancedPredictionService.getInstance();
-  const backendService = EnhancedBackendApiService.getInstance();
 
   // Auto-refresh effect
   useEffect(() => {
