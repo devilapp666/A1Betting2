@@ -1,6 +1,6 @@
-import React from 'react';
-import { BuilderComponent } from '@builder.io/react';
-import '../../config/builder';
+import React from "react";
+// import { BuilderComponent } from '@builder.io/react';
+import "../../config/builder";
 
 interface BuilderPageProps {
   model?: string;
@@ -8,22 +8,21 @@ interface BuilderPageProps {
   url?: string;
 }
 
-const BuilderPage: React.FC<BuilderPageProps> = ({ 
-  model = 'page', 
-  content, 
-  url 
+const BuilderPage: React.FC<BuilderPageProps> = ({
+  model = "page",
+  content,
+  url,
 }) => {
+  // Builder.io temporarily disabled - return our main app content
   return (
-    <BuilderComponent
-      model={model}
-      content={content}
-      url={url}
-      // Pass any custom data or context here
-      data={{
-        // You can pass app-specific data to Builder components
-        theme: 'betting-app',
-        user: null, // Replace with actual user data if needed
-      }}    />
+    <div className="p-8 text-center">
+      <h2 className="text-2xl font-bold text-white mb-4">
+        Builder.io Integration Disabled
+      </h2>
+      <p className="text-gray-400">
+        Using native Elite Sports Intelligence Platform instead
+      </p>
+    </div>
   );
 };
 
