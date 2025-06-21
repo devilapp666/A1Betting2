@@ -824,13 +824,43 @@ const UltraAdvancedMLDashboard: React.FC = () => {
         onValueChange={setSelectedTab}
         className="w-full"
       >
-        <TabsList className="grid w-full grid-cols-6 sticky top-0 z-50 bg-white/95 backdrop-blur-sm shadow-sm mb-6">
-          <TabsTrigger value="overview">Overview</TabsTrigger>
-          <TabsTrigger value="models">Model Performance</TabsTrigger>
-          <TabsTrigger value="predictions">Live Predictions</TabsTrigger>
-          <TabsTrigger value="health">System Health</TabsTrigger>
-          <TabsTrigger value="mathematical">Mathematical Analysis</TabsTrigger>
-          <TabsTrigger value="research">Research Insights</TabsTrigger>
+        <TabsList className="grid w-full grid-cols-6 sticky top-0 z-50 bg-black/20 backdrop-blur-xl border border-white/10 shadow-lg mb-6 p-2 rounded-xl">
+          <TabsTrigger
+            value="overview"
+            className="text-gray-400 hover:text-green-400 data-[state=active]:text-black data-[state=active]:bg-gradient-to-r data-[state=active]:from-green-400 data-[state=active]:to-blue-500 data-[state=active]:shadow-lg data-[state=active]:shadow-green-500/30 transition-all duration-300"
+          >
+            Overview
+          </TabsTrigger>
+          <TabsTrigger
+            value="models"
+            className="text-gray-400 hover:text-blue-400 data-[state=active]:text-black data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-400 data-[state=active]:to-purple-500 data-[state=active]:shadow-lg data-[state=active]:shadow-blue-500/30 transition-all duration-300"
+          >
+            Model Performance
+          </TabsTrigger>
+          <TabsTrigger
+            value="predictions"
+            className="text-gray-400 hover:text-purple-400 data-[state=active]:text-black data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-400 data-[state=active]:to-pink-500 data-[state=active]:shadow-lg data-[state=active]:shadow-purple-500/30 transition-all duration-300"
+          >
+            Live Predictions
+          </TabsTrigger>
+          <TabsTrigger
+            value="health"
+            className="text-gray-400 hover:text-green-400 data-[state=active]:text-black data-[state=active]:bg-gradient-to-r data-[state=active]:from-green-400 data-[state=active]:to-cyan-500 data-[state=active]:shadow-lg data-[state=active]:shadow-green-500/30 transition-all duration-300"
+          >
+            System Health
+          </TabsTrigger>
+          <TabsTrigger
+            value="mathematical"
+            className="text-gray-400 hover:text-cyan-400 data-[state=active]:text-black data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-400 data-[state=active]:to-blue-600 data-[state=active]:shadow-lg data-[state=active]:shadow-cyan-500/30 transition-all duration-300"
+          >
+            Mathematical Analysis
+          </TabsTrigger>
+          <TabsTrigger
+            value="research"
+            className="text-gray-400 hover:text-yellow-400 data-[state=active]:text-black data-[state=active]:bg-gradient-to-r data-[state=active]:from-yellow-400 data-[state=active]:to-orange-500 data-[state=active]:shadow-lg data-[state=active]:shadow-yellow-500/30 transition-all duration-300"
+          >
+            Research Insights
+          </TabsTrigger>
         </TabsList>
 
         {/* Overview Tab */}
