@@ -355,30 +355,30 @@ export const PrizePicksPro: React.FC = () => {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={() => addPick(prop, "under")}
-                  className={`p-4 rounded-xl border-2 transition-all ${
+                  className={`p-4 rounded-xl border-2 transition-all backdrop-blur-sm shadow-lg ${
                     isPickSelected(prop.id, "under")
-                      ? "border-red-500 bg-red-500/20 text-red-300"
-                      : "border-gray-600 hover:border-red-500 text-gray-300 hover:bg-red-500/10"
+                      ? "border-red-400 bg-red-500/30 text-red-200 shadow-red-500/25"
+                      : "border-gray-500 hover:border-red-400 text-gray-200 hover:bg-red-500/20 bg-gray-800/60 hover:text-red-200"
                   }`}
                 >
-                  <div className="font-bold text-lg">UNDER</div>
-                  <div className="text-sm">{prop.underOdds}</div>
+                  <div className="font-bold text-lg drop-shadow-lg">UNDER</div>
+                  <div className="text-sm drop-shadow-lg">{prop.underOdds}</div>
                 </motion.button>
 
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={() => addPick(prop, "over")}
-                  className={`p-4 rounded-xl border-2 transition-all ${
+                  className={`p-4 rounded-xl border-2 transition-all backdrop-blur-sm shadow-lg ${
                     isPickSelected(prop.id, "over")
-                      ? "border-green-500 bg-green-500/20 text-green-300"
-                      : "border-gray-600 hover:border-green-500 text-gray-300 hover:bg-green-500/10"
+                      ? "border-green-400 bg-green-500/30 text-green-200 shadow-green-500/25"
+                      : "border-gray-500 hover:border-green-400 text-gray-200 hover:bg-green-500/20 bg-gray-800/60 hover:text-green-200"
                   } ${prop.aiRecommendation === "over" ? "ring-2 ring-purple-400/50" : ""}`}
                 >
-                  <div className="font-bold text-lg">OVER</div>
-                  <div className="text-sm">{prop.overOdds}</div>
+                  <div className="font-bold text-lg drop-shadow-lg">OVER</div>
+                  <div className="text-sm drop-shadow-lg">{prop.overOdds}</div>
                   {prop.aiRecommendation === "over" && (
-                    <div className="text-xs text-purple-400 font-bold mt-1">
+                    <div className="text-xs text-purple-400 font-bold mt-1 drop-shadow-lg">
                       ⭐ AI PICK
                     </div>
                   )}
