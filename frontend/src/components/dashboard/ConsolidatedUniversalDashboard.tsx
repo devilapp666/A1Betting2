@@ -1,527 +1,299 @@
-import React, {
-  useState,
-  useEffect,
-  useMemo,
-  useCallback,
-  Suspense,
-} from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { useQuery } from "@tanstack/react-query";
+import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import {
-  Menu,
-  X,
-  Brain,
   TrendingUp,
-  BarChart3,
-  Activity,
-  Shield,
-  Zap,
-  Target,
   DollarSign,
-  RefreshCw,
-  Search,
-  Bell,
-  Settings,
-  User,
-  Home,
-  Wifi,
-  WifiOff,
-  Eye,
-  Trophy,
-  Flame,
-  Star,
-  Clock,
-  Calendar,
+  Target,
+  Activity,
   ArrowUpRight,
   ArrowDownRight,
+  Eye,
+  Clock,
+  Zap,
+  Brain,
+  Trophy,
+  Star,
   ChevronRight,
-  PlayCircle,
+  MoreHorizontal,
+  Play,
+  Pause,
+  RefreshCw,
+  Filter,
+  Calendar,
+  BarChart3,
+  PieChart,
+  LineChart,
   AlertTriangle,
   CheckCircle,
-  Filter,
-  MoreHorizontal,
+  Users,
+  Globe,
 } from "lucide-react";
 
-// UI Components
-import { MegaButton, MegaCard, MegaInput } from "../mega/MegaUI";
-import { CyberText, CyberContainer, CYBER_COLORS } from "../mega/CyberTheme";
-import { Badge } from "../ui/badge";
-import { Card } from "../ui/card";
-import { Skeleton } from "../ui/Skeleton";
-import { Toast } from "../ui/UnifiedUI";
-import { FeatureFlagIndicators } from "../ui/FeatureFlagIndicators";
-import { ServiceStatusIndicators } from "../ui/ServiceStatusIndicators";
-import ErrorBoundary from "../ErrorBoundary";
-
-// Components (restored from original)
-import PerformanceAnalyticsDashboard from "../analytics/PerformanceAnalyticsDashboard";
-import UniversalMoneyMaker from "../moneymaker/UniversalMoneyMaker";
-import UnifiedProfile from "../profile/UnifiedProfile";
-import UnifiedSettingsInterface from "../settings/UnifiedSettingsInterface";
-import UnifiedStrategyEngineDisplay from "../strategy/UnifiedStrategyEngineDisplay";
-import PropCards from "../modern/PropCards";
-import MLInsights from "../insights/MLInsights";
-import UserStats from "../analytics/UserStats";
-import PerformanceChart from "../charts/PerformanceChart";
-import ModernDashboardEnhancement from "./ModernDashboardEnhancement";
-
-// Import all the other dashboard components
-import { DataSourcesPanel } from "./DataSourcesPanel";
-
 // ============================================================================
-// MOCK DATA & TYPES
+// MOCK DATA
 // ============================================================================
 
-interface LiveOpportunity {
-  id: string;
-  matchup: string;
-  prediction: string;
-  confidence: number;
-  edge: number;
-  odds: string;
-  value: string;
-  status: "hot" | "warm" | "cool";
-  timeLeft: string;
-  sport: string;
-}
-
-interface MetricCard {
-  id: string;
-  title: string;
-  value: string;
-  change: string;
-  trend: "up" | "down" | "neutral";
-  period: string;
-  color: string;
-}
-
-interface AIMetric {
-  id: string;
-  title: string;
-  value: string;
-  subtext: string;
-  icon: React.ReactNode;
-  trend: string;
-  color: string;
-}
-
-const mockLiveOpportunities: LiveOpportunity[] = [
-  {
-    id: "1",
-    matchup: "Lakers vs Warriors",
-    prediction: "Over 230.5 Points",
-    confidence: 94,
-    edge: 12.3,
-    odds: "+110",
-    value: "Excellent",
-    status: "hot",
-    timeLeft: "2h 15m",
-    sport: "NBA",
-  },
-  {
-    id: "2",
-    matchup: "Celtics vs Heat",
-    prediction: "Celtics -4.5",
-    confidence: 87,
-    edge: 8.7,
-    odds: "-105",
-    value: "Good",
-    status: "warm",
-    timeLeft: "4h 30m",
-    sport: "NBA",
-  },
-];
-
-const mockMetrics: MetricCard[] = [
+const mockMetrics = [
   {
     id: "1",
     title: "Win Rate",
     value: "72.4%",
-    change: "+2.3% this period",
+    change: "+2.3%",
     trend: "up",
-    period: "Last 30 days",
     color: "green",
   },
   {
     id: "2",
-    title: "ROI",
-    value: "15.8%",
-    change: "+4.1% this period",
+    title: "Total Profit",
+    value: "$18,247",
+    change: "+$3,421",
     trend: "up",
-    period: "Last 30 days",
     color: "blue",
   },
   {
     id: "3",
-    title: "Profit/Loss",
-    value: "$4,247.83",
-    change: "+$1,247 this period",
+    title: "Active Bets",
+    value: "8",
+    change: "+3",
     trend: "up",
-    period: "Last 30 days",
     color: "purple",
   },
   {
     id: "4",
-    title: "Active Bets",
-    value: "8",
-    change: "+3 this period",
+    title: "Accuracy",
+    value: "91.5%",
+    change: "+1.2%",
     trend: "up",
-    period: "Currently",
     color: "orange",
   },
 ];
 
-const mockAIMetrics: AIMetric[] = [
+const mockOpportunities = [
   {
     id: "1",
-    title: "Total Profit",
-    value: "$12,847",
-    subtext: "Total",
-    icon: <DollarSign className="w-5 h-5" />,
-    trend: "+$2.3k",
-    color: "purple",
+    game: "Lakers vs Warriors",
+    prediction: "Over 230.5",
+    confidence: 94,
+    value: "+12.3%",
+    status: "live",
+    timeLeft: "2h 15m",
   },
   {
     id: "2",
-    title: "Win Rate",
-    value: "89.2%",
-    subtext: "Total",
-    icon: <Trophy className="w-5 h-5" />,
-    trend: "+2.1%",
-    color: "purple",
+    game: "Celtics vs Heat",
+    prediction: "Celtics -4.5",
+    confidence: 87,
+    value: "+8.7%",
+    status: "upcoming",
+    timeLeft: "4h 30m",
   },
   {
     id: "3",
-    title: "AI Confidence",
-    value: "94.7%",
-    subtext: "",
-    icon: <Brain className="w-5 h-5" />,
-    trend: "+1.4%",
-    color: "purple",
+    game: "Warriors vs Nets",
+    prediction: "Under 225.5",
+    confidence: 82,
+    value: "+6.1%",
+    status: "upcoming",
+    timeLeft: "6h 45m",
+  },
+];
+
+const mockRecentActivity = [
+  {
+    id: "1",
+    type: "win",
+    message: "Lakers Over 230.5 ✓",
+    amount: "+$247",
+    time: "5m ago",
+  },
+  {
+    id: "2",
+    type: "prediction",
+    message: "New prediction: Celtics -4.5",
+    confidence: "94%",
+    time: "12m ago",
+  },
+  {
+    id: "3",
+    type: "win",
+    message: "Warriors ML ✓",
+    amount: "+$180",
+    time: "1h ago",
   },
   {
     id: "4",
-    title: "Active Models",
-    value: "47",
-    subtext: "",
-    icon: <Zap className="w-5 h-5" />,
-    trend: "+3",
-    color: "purple",
+    type: "alert",
+    message: "Value opportunity detected",
+    time: "2h ago",
   },
 ];
 
 // ============================================================================
-// DASHBOARD COMPONENTS
+// COMPONENTS
 // ============================================================================
 
-const HeroSection: React.FC = () => {
+const MetricCard: React.FC<{ metric: (typeof mockMetrics)[0] }> = ({
+  metric,
+}) => {
+  const getColorClasses = (color: string) => {
+    switch (color) {
+      case "green":
+        return "border-green-200 bg-green-50";
+      case "blue":
+        return "border-blue-200 bg-blue-50";
+      case "purple":
+        return "border-purple-200 bg-purple-50";
+      case "orange":
+        return "border-orange-200 bg-orange-50";
+      default:
+        return "border-gray-200 bg-gray-50";
+    }
+  };
+
+  const getTextColor = (color: string) => {
+    switch (color) {
+      case "green":
+        return "text-green-700";
+      case "blue":
+        return "text-blue-700";
+      case "purple":
+        return "text-purple-700";
+      case "orange":
+        return "text-orange-700";
+      default:
+        return "text-gray-700";
+    }
+  };
+
+  const getIconColor = (color: string) => {
+    switch (color) {
+      case "green":
+        return "text-green-600";
+      case "blue":
+        return "text-blue-600";
+      case "purple":
+        return "text-purple-600";
+      case "orange":
+        return "text-orange-600";
+      default:
+        return "text-gray-600";
+    }
+  };
+
   return (
-    <div className="bg-gradient-to-r from-gray-900/50 to-gray-800/50 backdrop-blur-sm rounded-2xl border border-gray-700/50 p-8">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-4xl font-bold text-white mb-2">
-            AI Sports Intelligence Platform
-          </h1>
-          <p className="text-gray-300 text-lg mb-4">
-            Real-time data • Advanced ML predictions • Live updates
-          </p>
-          <div className="flex items-center gap-6 text-sm">
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-              <span className="text-gray-300">Live Data Connected</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
-              <span className="text-gray-300">AI Models Active</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
-              <span className="text-gray-300">Real-time Predictions</span>
-            </div>
-          </div>
+    <motion.div
+      whileHover={{ y: -2 }}
+      className={`p-6 rounded-xl border-2 ${getColorClasses(metric.color)} hover:shadow-lg transition-all duration-200`}
+    >
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="text-sm font-medium text-gray-600">{metric.title}</h3>
+        <div className={`p-2 rounded-lg ${getColorClasses(metric.color)}`}>
+          {metric.trend === "up" ? (
+            <ArrowUpRight className={`w-4 h-4 ${getIconColor(metric.color)}`} />
+          ) : (
+            <ArrowDownRight
+              className={`w-4 h-4 ${getIconColor(metric.color)}`}
+            />
+          )}
         </div>
-
-        <div className="text-right">
-          <div className="flex items-center gap-8">
-            <div>
-              <p className="text-gray-400 text-sm">Win Rate</p>
-              <p className="text-3xl font-bold text-green-400">72.4%</p>
-            </div>
-            <div>
-              <p className="text-gray-400 text-sm">Total Profit</p>
-              <p className="text-3xl font-bold text-purple-400">+$18K</p>
-            </div>
-            <div>
-              <p className="text-gray-400 text-sm">Accuracy</p>
-              <p className="text-3xl font-bold text-blue-400">91.5%</p>
-            </div>
-          </div>
-        </div>
       </div>
-    </div>
+
+      <div className="mb-2">
+        <p className={`text-2xl font-bold ${getTextColor(metric.color)}`}>
+          {metric.value}
+        </p>
+      </div>
+
+      <p className={`text-sm font-medium ${getTextColor(metric.color)}`}>
+        {metric.change} from last period
+      </p>
+    </motion.div>
   );
 };
 
-const MetricCards: React.FC = () => {
+const OpportunityCard: React.FC<{
+  opportunity: (typeof mockOpportunities)[0];
+}> = ({ opportunity }) => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-      {mockMetrics.map((metric) => (
-        <motion.div
-          key={metric.id}
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          className="bg-gray-900/50 backdrop-blur-sm rounded-xl border border-gray-700/50 p-6 hover:border-gray-600/50 transition-all duration-200"
-        >
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-gray-400 text-sm font-medium">
-              {metric.title}
-            </h3>
-            <div
-              className={`p-2 rounded-lg ${
-                metric.color === "green"
-                  ? "bg-green-500/10 text-green-400"
-                  : metric.color === "blue"
-                    ? "bg-blue-500/10 text-blue-400"
-                    : metric.color === "purple"
-                      ? "bg-purple-500/10 text-purple-400"
-                      : "bg-orange-500/10 text-orange-400"
-              }`}
-            >
-              {metric.trend === "up" ? (
-                <ArrowUpRight className="w-4 h-4" />
-              ) : (
-                <ArrowDownRight className="w-4 h-4" />
-              )}
-            </div>
-          </div>
-
-          <div className="mb-2">
-            <p className="text-2xl font-bold text-white">{metric.value}</p>
-          </div>
-
-          <div className="flex items-center justify-between">
-            <p
-              className={`text-sm ${
-                metric.trend === "up" ? "text-green-400" : "text-red-400"
-              }`}
-            >
-              {metric.change}
-            </p>
-            <p className="text-xs text-gray-500">{metric.period}</p>
-          </div>
-        </motion.div>
-      ))}
-    </div>
-  );
-};
-
-const AIMetricCards: React.FC = () => {
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-      {mockAIMetrics.map((metric) => (
-        <motion.div
-          key={metric.id}
-          whileHover={{ scale: 1.02, y: -2 }}
-          whileTap={{ scale: 0.98 }}
-          className="relative bg-gradient-to-br from-purple-900/30 to-pink-900/30 backdrop-blur-sm rounded-xl border border-purple-500/30 p-6 hover:border-purple-400/50 transition-all duration-200 overflow-hidden"
-        >
-          {/* Background glow effect */}
-          <div className="absolute inset-0 bg-gradient-to-br from-purple-600/5 to-pink-600/5 rounded-xl"></div>
-
-          <div className="relative">
-            <div className="flex items-center justify-between mb-4">
-              <div className="p-2 rounded-lg bg-purple-500/10 text-purple-400">
-                {metric.icon}
-              </div>
-              <span className="text-purple-400 text-sm font-medium">
-                {metric.trend}
-              </span>
-            </div>
-
-            <div className="mb-2">
-              <p className="text-2xl font-bold text-white">{metric.value}</p>
-              {metric.subtext && (
-                <p className="text-sm text-gray-400">{metric.subtext}</p>
-              )}
-            </div>
-
-            <h3 className="text-gray-300 text-sm font-medium">
-              {metric.title}
-            </h3>
-          </div>
-        </motion.div>
-      ))}
-    </div>
-  );
-};
-
-const LiveOpportunities: React.FC = () => {
-  return (
-    <div className="bg-gray-900/50 backdrop-blur-sm rounded-xl border border-gray-700/50 p-6">
-      <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center gap-3">
-          <div className="p-2 rounded-lg bg-yellow-500/10">
-            <Flame className="w-5 h-5 text-yellow-400" />
-          </div>
-          <h2 className="text-xl font-bold text-white">Live Opportunities</h2>
-          <div className="px-2 py-1 rounded-full bg-red-500/20 text-red-400 text-xs font-bold border border-red-500/30">
-            LIVE
-          </div>
-        </div>
-        <button className="text-purple-400 hover:text-purple-300 text-sm font-medium flex items-center gap-1">
-          View All <ChevronRight className="w-4 h-4" />
-        </button>
-      </div>
-
-      <div className="space-y-4">
-        {mockLiveOpportunities.map((opportunity) => (
-          <motion.div
-            key={opportunity.id}
-            whileHover={{ scale: 1.01 }}
-            className="bg-gradient-to-r from-purple-900/20 to-pink-900/20 backdrop-blur-sm rounded-lg border border-purple-500/20 p-4 hover:border-purple-400/30 transition-all duration-200"
-          >
-            <div className="flex items-center justify-between">
-              <div className="flex-1">
-                <div className="flex items-center gap-3 mb-2">
-                  <div
-                    className={`w-2 h-2 rounded-full ${
-                      opportunity.status === "hot"
-                        ? "bg-red-500"
-                        : opportunity.status === "warm"
-                          ? "bg-yellow-500"
-                          : "bg-blue-500"
-                    } animate-pulse`}
-                  ></div>
-                  <h3 className="text-white font-bold text-lg">
-                    {opportunity.matchup}
-                  </h3>
-                  <span className="text-purple-400 font-bold">
-                    +{opportunity.edge}%
-                  </span>
-                </div>
-
-                <div className="grid grid-cols-3 gap-4 text-sm">
-                  <div>
-                    <p className="text-gray-400">Our Prediction</p>
-                    <p className="text-white font-medium">
-                      {opportunity.prediction}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-gray-400">Confidence</p>
-                    <p className="text-green-400 font-bold">
-                      {opportunity.confidence}%
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-gray-400">Time Left</p>
-                    <p className="text-orange-400 font-medium">
-                      {opportunity.timeLeft}
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="text-right">
-                <button className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-medium transition-colors">
-                  View
-                </button>
-              </div>
-            </div>
-          </motion.div>
-        ))}
-      </div>
-    </div>
-  );
-};
-
-const RecentActivity: React.FC = () => {
-  const activities = [
-    {
-      id: "1",
-      type: "win",
-      message: "Lakers Over 230.5 ✓",
-      amount: "+$247",
-      time: "5m ago",
-    },
-    {
-      id: "2",
-      type: "prediction",
-      message: "New ML prediction: Celtics -4.5",
-      confidence: "94%",
-      time: "12m ago",
-    },
-    {
-      id: "3",
-      type: "win",
-      message: "Warriors ML ✓",
-      amount: "+$180",
-      time: "1h ago",
-    },
-    {
-      id: "4",
-      type: "alert",
-      message: "High-value opportunity detected",
-      game: "Heat vs Nets",
-      time: "2h ago",
-    },
-  ];
-
-  return (
-    <div className="bg-gray-900/50 backdrop-blur-sm rounded-xl border border-gray-700/50 p-6">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl font-bold text-white">Recent Activity</h2>
-        <button className="text-purple-400 hover:text-purple-300 text-sm">
-          View All
-        </button>
-      </div>
-
-      <div className="space-y-4">
-        {activities.map((activity) => (
+    <div className="p-4 bg-white rounded-lg border border-gray-200 hover:border-gray-300 transition-all duration-200">
+      <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center gap-2">
           <div
-            key={activity.id}
-            className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-800/30 transition-colors"
-          >
-            <div
-              className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                activity.type === "win"
-                  ? "bg-green-500/20 text-green-400"
-                  : activity.type === "prediction"
-                    ? "bg-purple-500/20 text-purple-400"
-                    : "bg-yellow-500/20 text-yellow-400"
-              }`}
-            >
-              {activity.type === "win" ? (
-                <CheckCircle className="w-4 h-4" />
-              ) : activity.type === "prediction" ? (
-                <Brain className="w-4 h-4" />
-              ) : (
-                <AlertTriangle className="w-4 h-4" />
-              )}
-            </div>
+            className={`w-2 h-2 rounded-full ${
+              opportunity.status === "live"
+                ? "bg-green-500 animate-pulse"
+                : "bg-orange-500"
+            }`}
+          ></div>
+          <h3 className="font-semibold text-gray-900">{opportunity.game}</h3>
+        </div>
+        <span className="text-green-600 font-bold text-sm">
+          {opportunity.value}
+        </span>
+      </div>
 
-            <div className="flex-1">
-              <p className="text-white text-sm">{activity.message}</p>
-              {activity.confidence && (
-                <p className="text-purple-400 text-xs">
-                  Confidence: {activity.confidence}
-                </p>
-              )}
-              {activity.game && (
-                <p className="text-gray-400 text-xs">{activity.game}</p>
-              )}
-            </div>
+      <div className="space-y-2">
+        <div className="flex justify-between">
+          <span className="text-sm text-gray-600">Prediction</span>
+          <span className="text-sm font-medium text-gray-900">
+            {opportunity.prediction}
+          </span>
+        </div>
+        <div className="flex justify-between">
+          <span className="text-sm text-gray-600">Confidence</span>
+          <span className="text-sm font-bold text-blue-600">
+            {opportunity.confidence}%
+          </span>
+        </div>
+        <div className="flex justify-between">
+          <span className="text-sm text-gray-600">Time Left</span>
+          <span className="text-sm font-medium text-orange-600">
+            {opportunity.timeLeft}
+          </span>
+        </div>
+      </div>
 
-            <div className="text-right">
-              {activity.amount && (
-                <p className="text-green-400 font-bold text-sm">
-                  {activity.amount}
-                </p>
-              )}
-              <p className="text-gray-500 text-xs">{activity.time}</p>
-            </div>
-          </div>
-        ))}
+      <button className="w-full mt-4 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors">
+        View Details
+      </button>
+    </div>
+  );
+};
+
+const ActivityItem: React.FC<{ activity: (typeof mockRecentActivity)[0] }> = ({
+  activity,
+}) => {
+  const getIcon = () => {
+    switch (activity.type) {
+      case "win":
+        return <CheckCircle className="w-4 h-4 text-green-600" />;
+      case "prediction":
+        return <Brain className="w-4 h-4 text-blue-600" />;
+      case "alert":
+        return <AlertTriangle className="w-4 h-4 text-orange-600" />;
+      default:
+        return <Activity className="w-4 h-4 text-gray-600" />;
+    }
+  };
+
+  return (
+    <div className="flex items-center gap-3 p-3 hover:bg-gray-50 rounded-lg transition-colors">
+      <div className="flex-shrink-0">{getIcon()}</div>
+      <div className="flex-1 min-w-0">
+        <p className="text-sm font-medium text-gray-900 truncate">
+          {activity.message}
+        </p>
+        {activity.confidence && (
+          <p className="text-xs text-blue-600">
+            Confidence: {activity.confidence}
+          </p>
+        )}
+      </div>
+      <div className="text-right flex-shrink-0">
+        {activity.amount && (
+          <p className="text-sm font-bold text-green-600">{activity.amount}</p>
+        )}
+        <p className="text-xs text-gray-500">{activity.time}</p>
       </div>
     </div>
   );
@@ -532,154 +304,237 @@ const RecentActivity: React.FC = () => {
 // ============================================================================
 
 const ConsolidatedUniversalDashboard: React.FC = () => {
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    // Simulate loading
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-gray-950 p-6">
-        <div className="max-w-7xl mx-auto space-y-6">
-          <Skeleton className="h-32 w-full" />
-          <div className="grid grid-cols-4 gap-6">
-            {[...Array(4)].map((_, i) => (
-              <Skeleton key={i} className="h-32 w-full" />
-            ))}
-          </div>
-          <div className="grid grid-cols-4 gap-6">
-            {[...Array(4)].map((_, i) => (
-              <Skeleton key={i} className="h-32 w-full" />
-            ))}
-          </div>
-          <Skeleton className="h-64 w-full" />
-        </div>
-      </div>
-    );
-  }
+  const [isLive, setIsLive] = useState(true);
 
   return (
-    <div className="min-h-screen bg-gray-950 p-6">
-      <div className="max-w-7xl mx-auto space-y-6">
-        {/* Hero Section */}
-        <HeroSection />
+    <div className="min-h-full bg-gray-50">
+      <div className="max-w-7xl mx-auto p-6 space-y-6">
+        {/* Header Section */}
+        <div className="bg-white rounded-xl border border-gray-200 p-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-2xl font-bold text-gray-900 mb-2">
+                Welcome back, Alex
+              </h1>
+              <p className="text-gray-600">
+                Here's what's happening with your betting strategy today
+              </p>
+            </div>
 
-        {/* Performance Metrics */}
-        <MetricCards />
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2">
+                <div
+                  className={`w-2 h-2 rounded-full ${isLive ? "bg-green-500 animate-pulse" : "bg-gray-400"}`}
+                ></div>
+                <span className="text-sm font-medium text-gray-700">
+                  {isLive ? "Live Data" : "Offline"}
+                </span>
+              </div>
 
-        {/* AI-Powered Metrics */}
-        <AIMetricCards />
+              <button
+                onClick={() => setIsLive(!isLive)}
+                className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+              >
+                {isLive ? (
+                  <Pause className="w-5 h-5 text-gray-600" />
+                ) : (
+                  <Play className="w-5 h-5 text-gray-600" />
+                )}
+              </button>
 
-        {/* Live Opportunities */}
-        <LiveOpportunities />
+              <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+                <RefreshCw className="w-5 h-5 text-gray-600" />
+              </button>
 
-        {/* Two Column Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Recent Activity */}
-          <RecentActivity />
+              <button className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors">
+                New Prediction
+              </button>
+            </div>
+          </div>
+        </div>
 
-          {/* Service Status */}
-          <div className="bg-gray-900/50 backdrop-blur-sm rounded-xl border border-gray-700/50 p-6">
-            <h2 className="text-xl font-bold text-white mb-6">
-              Service Status
-            </h2>
+        {/* Metrics Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {mockMetrics.map((metric) => (
+            <MetricCard key={metric.id} metric={metric} />
+          ))}
+        </div>
+
+        {/* Main Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Live Opportunities */}
+          <div className="lg:col-span-2 bg-white rounded-xl border border-gray-200 p-6">
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-green-50 rounded-lg">
+                  <Target className="w-5 h-5 text-green-600" />
+                </div>
+                <div>
+                  <h2 className="text-lg font-semibold text-gray-900">
+                    Live Opportunities
+                  </h2>
+                  <p className="text-sm text-gray-600">
+                    AI-detected high-value bets
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+                  <Filter className="w-4 h-4 text-gray-600" />
+                </button>
+                <button className="text-blue-600 hover:text-blue-700 text-sm font-medium flex items-center gap-1">
+                  View All <ChevronRight className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+
             <div className="space-y-4">
-              <div className="flex items-center justify-between p-3 rounded-lg bg-gray-800/30">
-                <div className="flex items-center gap-3">
-                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                  <span className="text-white">Live Data Feed</span>
+              {mockOpportunities.map((opportunity) => (
+                <OpportunityCard
+                  key={opportunity.id}
+                  opportunity={opportunity}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* Sidebar */}
+          <div className="space-y-6">
+            {/* Quick Stats */}
+            <div className="bg-white rounded-xl border border-gray-200 p-6">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                Quick Stats
+              </h3>
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-gray-600">Today's Bets</span>
+                  <span className="text-sm font-bold text-gray-900">3</span>
                 </div>
-                <span className="text-green-400 text-sm">Operational</span>
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-gray-600">This Week</span>
+                  <span className="text-sm font-bold text-green-600">
+                    +$1,247
+                  </span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-gray-600">Pending</span>
+                  <span className="text-sm font-bold text-orange-600">
+                    5 bets
+                  </span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-gray-600">AI Confidence</span>
+                  <span className="text-sm font-bold text-blue-600">94.2%</span>
+                </div>
               </div>
-              <div className="flex items-center justify-between p-3 rounded-lg bg-gray-800/30">
-                <div className="flex items-center gap-3">
-                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                  <span className="text-white">ML Prediction Engine</span>
-                </div>
-                <span className="text-green-400 text-sm">Operational</span>
+            </div>
+
+            {/* Recent Activity */}
+            <div className="bg-white rounded-xl border border-gray-200 p-6">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-semibold text-gray-900">
+                  Recent Activity
+                </h3>
+                <button className="text-blue-600 hover:text-blue-700 text-sm font-medium">
+                  View All
+                </button>
               </div>
-              <div className="flex items-center justify-between p-3 rounded-lg bg-gray-800/30">
-                <div className="flex items-center gap-3">
-                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                  <span className="text-white">Risk Management</span>
-                </div>
-                <span className="text-green-400 text-sm">Operational</span>
+
+              <div className="space-y-2">
+                {mockRecentActivity.map((activity) => (
+                  <ActivityItem key={activity.id} activity={activity} />
+                ))}
               </div>
-              <div className="flex items-center justify-between p-3 rounded-lg bg-gray-800/30">
-                <div className="flex items-center gap-3">
-                  <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
-                  <span className="text-white">Weather Integration</span>
+            </div>
+
+            {/* System Status */}
+            <div className="bg-white rounded-xl border border-gray-200 p-6">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                System Status
+              </h3>
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                    <span className="text-sm text-gray-700">Data Feed</span>
+                  </div>
+                  <span className="text-xs text-green-600 font-medium">
+                    Operational
+                  </span>
                 </div>
-                <span className="text-yellow-400 text-sm">Maintenance</span>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                    <span className="text-sm text-gray-700">ML Models</span>
+                  </div>
+                  <span className="text-xs text-green-600 font-medium">
+                    Operational
+                  </span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                    <span className="text-sm text-gray-700">Predictions</span>
+                  </div>
+                  <span className="text-xs text-green-600 font-medium">
+                    Operational
+                  </span>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Additional Components */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Money Maker Callout */}
-          <div className="bg-gradient-to-br from-green-900/30 to-emerald-900/30 backdrop-blur-sm rounded-xl border border-green-500/30 p-6">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 rounded-lg bg-green-500/20">
-                <DollarSign className="w-5 h-5 text-green-400" />
-              </div>
+        {/* Charts Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {/* Performance Chart */}
+          <div className="bg-white rounded-xl border border-gray-200 p-6">
+            <div className="flex items-center justify-between mb-6">
               <div>
-                <h3 className="text-white font-bold">Money Maker Active</h3>
-                <p className="text-green-400 text-sm">
-                  3 opportunities identified
+                <h3 className="text-lg font-semibold text-gray-900">
+                  Performance Trend
+                </h3>
+                <p className="text-sm text-gray-600">Profit over time</p>
+              </div>
+              <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+                <MoreHorizontal className="w-5 h-5 text-gray-600" />
+              </button>
+            </div>
+
+            <div className="h-64 flex items-center justify-center bg-gray-50 rounded-lg">
+              <div className="text-center">
+                <LineChart className="w-12 h-12 text-gray-400 mx-auto mb-2" />
+                <p className="text-sm text-gray-500">
+                  Chart visualization would go here
                 </p>
               </div>
             </div>
-            <p className="text-gray-300 text-sm mb-4">
-              Our AI has identified high-value betting opportunities with 94.2%
-              confidence.
-            </p>
-            <button className="w-full px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium transition-colors">
-              View Opportunities
-            </button>
           </div>
 
-          {/* Feature Flags */}
-          <div className="bg-gray-900/50 backdrop-blur-sm rounded-xl border border-gray-700/50 p-6">
-            <h3 className="text-white font-bold mb-4">Feature Status</h3>
-            <ErrorBoundary>
-              <FeatureFlagIndicators />
-            </ErrorBoundary>
-          </div>
-
-          {/* Data Sources */}
-          <div className="bg-gray-900/50 backdrop-blur-sm rounded-xl border border-gray-700/50 p-6">
-            <h3 className="text-white font-bold mb-4">Data Sources</h3>
-            <ErrorBoundary>
-              <DataSourcesPanel />
-            </ErrorBoundary>
-          </div>
-        </div>
-
-        {/* Enhanced Components */}
-        <div className="space-y-6">
-          <ErrorBoundary>
-            <ModernDashboardEnhancement />
-          </ErrorBoundary>
-
-          <ErrorBoundary>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <PropCards />
-              <MLInsights />
+          {/* Betting Distribution */}
+          <div className="bg-white rounded-xl border border-gray-200 p-6">
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900">
+                  Bet Distribution
+                </h3>
+                <p className="text-sm text-gray-600">By sport and type</p>
+              </div>
+              <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+                <MoreHorizontal className="w-5 h-5 text-gray-600" />
+              </button>
             </div>
-          </ErrorBoundary>
 
-          <ErrorBoundary>
-            <PerformanceAnalyticsDashboard />
-          </ErrorBoundary>
+            <div className="h-64 flex items-center justify-center bg-gray-50 rounded-lg">
+              <div className="text-center">
+                <PieChart className="w-12 h-12 text-gray-400 mx-auto mb-2" />
+                <p className="text-sm text-gray-500">
+                  Distribution chart would go here
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
