@@ -32,6 +32,7 @@ import {
   Radar,
 } from "lucide-react";
 import SafeChart from "../ui/SafeChart";
+import { Bar } from "react-chartjs-2";
 import toast from "react-hot-toast";
 
 // Import types for mock data
