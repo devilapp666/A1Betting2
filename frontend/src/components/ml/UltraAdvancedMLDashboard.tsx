@@ -721,22 +721,22 @@ const UltraAdvancedMLDashboard: React.FC = () => {
       {/* System Status Overview */}
       {systemHealth && (
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-8">
-          <Card>
+          <Card className="bg-black/20 backdrop-blur-xl border border-white/10 shadow-lg hover:shadow-green-500/20 transition-all duration-300">
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="text-sm font-medium text-gray-700">
+                  <h3 className="text-sm font-medium text-gray-400 uppercase tracking-wider">
                     System Status
                   </h3>
                   <p
-                    className={`text-lg font-semibold ${
+                    className={`text-lg font-bold ${
                       !systemHealth
-                        ? "text-gray-600"
+                        ? "text-gray-400"
                         : systemHealth.overallHealth > 0.8
-                          ? "text-green-600"
+                          ? "text-green-400 animate-pulse"
                           : systemHealth.overallHealth > 0.6
-                            ? "text-yellow-600"
-                            : "text-red-600"
+                            ? "text-yellow-400"
+                            : "text-red-400"
                     }`}
                   >
                     {!systemHealth
@@ -751,22 +751,22 @@ const UltraAdvancedMLDashboard: React.FC = () => {
                 <div
                   className={`p-2 rounded-full ${
                     !systemHealth
-                      ? "bg-gray-100"
+                      ? "bg-gray-500/20"
                       : systemHealth.overallHealth > 0.8
-                        ? "bg-green-100"
+                        ? "bg-green-500/20 shadow-lg shadow-green-500/30"
                         : systemHealth.overallHealth > 0.6
-                          ? "bg-yellow-100"
-                          : "bg-red-100"
+                          ? "bg-yellow-500/20 shadow-lg shadow-yellow-500/30"
+                          : "bg-red-500/20 shadow-lg shadow-red-500/30"
                   }`}
                 >
                   {!systemHealth ? (
-                    <AlertTriangle className="w-6 h-6 text-gray-600" />
+                    <AlertTriangle className="w-6 h-6 text-gray-400" />
                   ) : systemHealth.overallHealth > 0.8 ? (
-                    <CheckCircle className="w-6 h-6 text-green-600" />
+                    <CheckCircle className="w-6 h-6 text-green-400" />
                   ) : systemHealth.overallHealth > 0.6 ? (
-                    <AlertTriangle className="w-6 h-6 text-yellow-600" />
+                    <AlertTriangle className="w-6 h-6 text-yellow-400" />
                   ) : (
-                    <XCircle className="w-6 h-6 text-red-600" />
+                    <XCircle className="w-6 h-6 text-red-400" />
                   )}
                 </div>
               </div>
