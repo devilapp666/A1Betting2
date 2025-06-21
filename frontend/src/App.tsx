@@ -209,7 +209,9 @@ const CyberModernSidebar: React.FC<SidebarProps> = ({
             whileHover={{ scale: 1.05 }}
             className="text-center p-3 rounded-lg bg-gradient-to-b from-emerald-500/20 to-green-600/20 border border-emerald-500/30"
           >
-            <p className="text-xl font-bold text-emerald-400">{user.winRate}%</p>
+            <p className="text-xl font-bold text-emerald-400">
+              {user.winRate}%
+            </p>
             <p className="text-xs text-emerald-300 font-medium">Win Rate</p>
           </motion.div>
           <motion.div
@@ -225,7 +227,9 @@ const CyberModernSidebar: React.FC<SidebarProps> = ({
             whileHover={{ scale: 1.05 }}
             className="text-center p-3 rounded-lg bg-gradient-to-b from-purple-500/20 to-violet-600/20 border border-purple-500/30"
           >
-            <p className="text-xl font-bold text-purple-400">{user.accuracy}%</p>
+            <p className="text-xl font-bold text-purple-400">
+              {user.accuracy}%
+            </p>
             <p className="text-xs text-purple-300 font-medium">Accuracy</p>
           </motion.div>
         </div>
@@ -255,7 +259,9 @@ const CyberModernSidebar: React.FC<SidebarProps> = ({
                 }
               `}
             >
-              <div className={`${activeItem === item.id ? "text-cyan-400" : "text-gray-400 group-hover:text-cyan-400"} transition-colors`}>
+              <div
+                className={`${activeItem === item.id ? "text-cyan-400" : "text-gray-400 group-hover:text-cyan-400"} transition-colors`}
+              >
                 {item.icon}
               </div>
               <span className="font-semibold text-sm flex-1">{item.label}</span>
@@ -305,14 +311,21 @@ const CyberModernSidebar: React.FC<SidebarProps> = ({
                 <span className="text-xs text-gray-400 group-hover:text-gray-300 flex-1">
                   {feature.name}
                 </span>
-                <div className={`w-2 h-2 rounded-full ${
-                  feature.status === "active" ? "bg-green-400" :
-                  feature.status === "pro" ? "bg-purple-400" :
-                  feature.status === "premium" ? "bg-yellow-400" :
-                  feature.status === "ai" ? "bg-cyan-400" :
-                  feature.status === "live" ? "bg-red-400 animate-pulse" :
-                  "bg-orange-400"
-                }`} />
+                <div
+                  className={`w-2 h-2 rounded-full ${
+                    feature.status === "active"
+                      ? "bg-green-400"
+                      : feature.status === "pro"
+                        ? "bg-purple-400"
+                        : feature.status === "premium"
+                          ? "bg-yellow-400"
+                          : feature.status === "ai"
+                            ? "bg-cyan-400"
+                            : feature.status === "live"
+                              ? "bg-red-400 animate-pulse"
+                              : "bg-orange-400"
+                  }`}
+                />
               </motion.div>
             ))}
           </div>
@@ -338,7 +351,9 @@ const CyberModernSidebar: React.FC<SidebarProps> = ({
           </div>
           <div className="flex-1">
             <p className="text-sm font-semibold text-white">{user.name}</p>
-            <p className="text-xs text-cyan-400 font-medium">{user.tier} Member</p>
+            <p className="text-xs text-cyan-400 font-medium">
+              {user.tier} Member
+            </p>
           </div>
           <motion.div whileHover={{ rotate: 180 }}>
             <ChevronDown className="w-4 h-4 text-gray-400" />
@@ -391,9 +406,7 @@ const CyberTopBar: React.FC<TopBarProps> = ({
             `}
           >
             <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent" />
-            <div className="relative text-cyan-400">
-              {currentItem?.icon}
-            </div>
+            <div className="relative text-cyan-400">{currentItem?.icon}</div>
           </motion.div>
           <div>
             <h1 className="text-2xl font-bold text-white tracking-tight">
@@ -417,7 +430,9 @@ const CyberTopBar: React.FC<TopBarProps> = ({
           </div>
           <div className="flex items-center gap-2 px-3 py-1 bg-cyan-500/20 border border-cyan-500/30 rounded-full">
             <Activity className="w-3 h-3 text-cyan-400" />
-            <span className="text-xs text-cyan-400 font-semibold">47 Models Active</span>
+            <span className="text-xs text-cyan-400 font-semibold">
+              47 Models Active
+            </span>
           </div>
         </div>
       </div>
@@ -433,7 +448,9 @@ const CyberTopBar: React.FC<TopBarProps> = ({
         >
           <Search className="w-4 h-4 text-gray-400" />
           <span className="text-sm text-gray-300">Quantum Search...</span>
-          <span className="text-xs text-cyan-400 font-mono bg-gray-800 px-2 py-1 rounded border border-gray-600">⌘K</span>
+          <span className="text-xs text-cyan-400 font-mono bg-gray-800 px-2 py-1 rounded border border-gray-600">
+            ⌘K
+          </span>
         </motion.button>
 
         {/* Enhanced Action Buttons */}
@@ -478,7 +495,8 @@ const CyberTopBar: React.FC<TopBarProps> = ({
 const AppContent: React.FC = () => {
   const [activeNavItem, setActiveNavItem] = useState("dashboard");
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
-  const [isNotificationCenterOpen, setIsNotificationCenterOpen] = useState(false);
+  const [isNotificationCenterOpen, setIsNotificationCenterOpen] =
+    useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   // App initialization
@@ -624,7 +642,7 @@ const AppContent: React.FC = () => {
         isOpen={isNotificationCenterOpen}
         onClose={() => setIsNotificationCenterOpen(false)}
       />
-    </div>
+    </motion.div>
   );
 };
 
