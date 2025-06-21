@@ -541,7 +541,8 @@ const UltraAdvancedMLDashboard: React.FC = () => {
               <CardContent>
                 {systemHealthRadarData && (
                   <div className="h-64">
-                    <Radar
+                    <SafeChart
+                      type="radar"
                       data={systemHealthRadarData}
                       options={{
                         responsive: true,
@@ -556,6 +557,7 @@ const UltraAdvancedMLDashboard: React.FC = () => {
                           },
                         },
                       }}
+                      loadingMessage="Loading system health radar..."
                     />
                   </div>
                 )}
