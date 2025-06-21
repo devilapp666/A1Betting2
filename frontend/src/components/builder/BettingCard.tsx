@@ -47,47 +47,47 @@ const BettingCard: React.FC<BettingCardProps> = ({
   );
 };
 
-// Register the component with Builder.io
-Builder.registerComponent(BettingCard, {
-  name: "BettingCard",
-  inputs: [
-    {
-      name: "title",
-      type: "string",
-      defaultValue: "Match Title",
-      helperText: "Title of the betting match",
-    },
-    {
-      name: "odds",
-      type: "string",
-      defaultValue: "2.5",
-      helperText: "Betting odds",
-    },
-    {
-      name: "team1",
-      type: "string",
-      defaultValue: "Team A",
-      helperText: "First team name",
-    },
-    {
-      name: "team2",
-      type: "string",
-      defaultValue: "Team B",
-      helperText: "Second team name",
-    },
-    {
-      name: "sport",
-      type: "string",
-      defaultValue: "Football",
-      helperText: "Sport type",
-    },
-    {
-      name: "time",
-      type: "string",
-      defaultValue: "Today 3:00 PM",
-      helperText: "Match time",
-    },
-  ],
-});
+// Builder.io registration temporarily disabled
+// Builder.registerComponent(BettingCard, {
+//   name: 'BettingCard',
+//   inputs: [
+//     {
+//       name: 'title',
+//       type: 'string',
+//       defaultValue: 'Match Title',
+//       helperText: 'Title of the betting match'
+//     },
+//     {
+//       name: 'odds',
+//       type: 'string',
+//       defaultValue: '2.5',
+//       helperText: 'Betting odds'
+//     },
+//     {
+//       name: 'team1',
+//       type: 'string',
+//       defaultValue: 'Team A',
+//       helperText: 'First team name'
+//     },
+//     {
+//       name: 'team2',
+//       type: 'string',
+//       defaultValue: 'Team B',
+//       helperText: 'Second team name'
+//     },
+//     {
+//       name: 'sport',
+//       type: 'string',
+//       defaultValue: 'Football',
+//       helperText: 'Sport type'
+//     },
+//     {
+//       name: 'time',
+//       type: 'string',
+//       defaultValue: 'Today 3:00 PM',
+//       helperText: 'Match time'
+//     }
+//   ]
+// });
 
 export default BettingCard;
