@@ -9,9 +9,9 @@ import {
   MegaHeader,
 } from "./components/mega/MegaLayout.tsx";
 import {
-  UniversalDashboard,
-  UniversalMoneyMaker,
-  UniversalAnalytics,
+  ConsolidatedUniversalDashboard,
+  ConsolidatedUniversalMoneyMaker,
+  ConsolidatedUniversalAnalytics,
   UniversalPredictions,
 } from "./components";
 import UltimateSettingsPage from "./components/settings/UltimateSettingsPage";
