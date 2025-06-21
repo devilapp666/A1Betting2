@@ -28,59 +28,171 @@ const eliteFeatures = [
   {
     category: "Core Analytics",
     features: [
-      { name: "Business Dashboard", icon: <BarChart3 className="w-5 h-5" />, status: "active", description: "Real-time business intelligence" },
-      { name: "AI Business Analysis", icon: <Brain className="w-5 h-5" />, status: "active", description: "Advanced AI-powered analysis" },
-      { name: "Elite Analytics", icon: <TrendingUp className="w-5 h-5" />, status: "premium", description: "Premium analytics suite" },
-      { name: "Model Analysis", icon: <Activity className="w-5 h-5" />, status: "ai", description: "Deep model performance analysis" },
-    ]
+      {
+        name: "Business Dashboard",
+        icon: <BarChart3 className="w-5 h-5" />,
+        status: "active",
+        description: "Real-time business intelligence",
+      },
+      {
+        name: "AI Business Analysis",
+        icon: <Brain className="w-5 h-5" />,
+        status: "active",
+        description: "Advanced AI-powered analysis",
+      },
+      {
+        name: "Elite Analytics",
+        icon: <TrendingUp className="w-5 h-5" />,
+        status: "premium",
+        description: "Premium analytics suite",
+      },
+      {
+        name: "Model Analysis",
+        icon: <Activity className="w-5 h-5" />,
+        status: "ai",
+        description: "Deep model performance analysis",
+      },
+    ],
   },
   {
     category: "Money Making",
     features: [
-      { name: "Money Maker", icon: <DollarSign className="w-5 h-5" />, status: "active", description: "AI-powered money generation" },
-      { name: "AI Arbitrage", icon: <Target className="w-5 h-5" />, status: "pro", description: "Arbitrage opportunity detection" },
-      { name: "Elite Bankroll", icon: <Shield className="w-5 h-5" />, status: "premium", description: "Advanced bankroll management" },
-      { name: "AI Edge ML", icon: <Cpu className="w-5 h-5" />, status: "ai", description: "Machine learning edge detection" },
-    ]
+      {
+        name: "Money Maker",
+        icon: <DollarSign className="w-5 h-5" />,
+        status: "active",
+        description: "AI-powered money generation",
+      },
+      {
+        name: "AI Arbitrage",
+        icon: <Target className="w-5 h-5" />,
+        status: "pro",
+        description: "Arbitrage opportunity detection",
+      },
+      {
+        name: "Elite Bankroll",
+        icon: <Shield className="w-5 h-5" />,
+        status: "premium",
+        description: "Advanced bankroll management",
+      },
+      {
+        name: "AI Edge ML",
+        icon: <Cpu className="w-5 h-5" />,
+        status: "ai",
+        description: "Machine learning edge detection",
+      },
+    ],
   },
   {
     category: "Sports Intelligence",
     features: [
-      { name: "Mega Sports", icon: <Zap className="w-5 h-5" />, status: "mega", description: "Comprehensive sports analytics" },
-      { name: "SQL Sports", icon: <Database className="w-5 h-5" />, status: "active", description: "Advanced sports data queries" },
-      { name: "Elite Sports", icon: <Award className="w-5 h-5" />, status: "elite", description: "Premium sports intelligence" },
-      { name: "Sports Advantage", icon: <TrendingUp className="w-5 h-5" />, status: "pro", description: "Competitive sports advantage" },
-    ]
+      {
+        name: "Mega Sports",
+        icon: <Zap className="w-5 h-5" />,
+        status: "mega",
+        description: "Comprehensive sports analytics",
+      },
+      {
+        name: "SQL Sports",
+        icon: <Database className="w-5 h-5" />,
+        status: "active",
+        description: "Advanced sports data queries",
+      },
+      {
+        name: "Elite Sports",
+        icon: <Award className="w-5 h-5" />,
+        status: "elite",
+        description: "Premium sports intelligence",
+      },
+      {
+        name: "Sports Advantage",
+        icon: <TrendingUp className="w-5 h-5" />,
+        status: "pro",
+        description: "Competitive sports advantage",
+      },
+    ],
   },
   {
     category: "Market & Trading",
     features: [
-      { name: "Market Connector", icon: <Globe className="w-5 h-5" />, status: "live", description: "Real-time market connections" },
-      { name: "Trading Engine", icon: <Activity className="w-5 h-5" />, status: "active", description: "Automated trading algorithms" },
-      { name: "Risk Analysis", icon: <Shield className="w-5 h-5" />, status: "premium", description: "Advanced risk assessment" },
-      { name: "Portfolio Manager", icon: <BarChart3 className="w-5 h-5" />, status: "pro", description: "Smart portfolio optimization" },
-    ]
+      {
+        name: "Market Connector",
+        icon: <Globe className="w-5 h-5" />,
+        status: "live",
+        description: "Real-time market connections",
+      },
+      {
+        name: "Trading Engine",
+        icon: <Activity className="w-5 h-5" />,
+        status: "active",
+        description: "Automated trading algorithms",
+      },
+      {
+        name: "Risk Analysis",
+        icon: <Shield className="w-5 h-5" />,
+        status: "premium",
+        description: "Advanced risk assessment",
+      },
+      {
+        name: "Portfolio Manager",
+        icon: <BarChart3 className="w-5 h-5" />,
+        status: "pro",
+        description: "Smart portfolio optimization",
+      },
+    ],
   },
   {
     category: "Simulation & Testing",
     features: [
-      { name: "Real Simulator", icon: <Play className="w-5 h-5" />, status: "beta", description: "Real-time strategy simulation" },
-      { name: "Strategy Tester", icon: <Target className="w-5 h-5" />, status: "active", description: "Backtesting and validation" },
-      { name: "ML Validator", icon: <Brain className="w-5 h-5" />, status: "ai", description: "Machine learning validation" },
-      { name: "Performance Monitor", icon: <Eye className="w-5 h-5" />, status: "live", description: "Real-time performance tracking" },
-    ]
-  }
+      {
+        name: "Real Simulator",
+        icon: <Play className="w-5 h-5" />,
+        status: "beta",
+        description: "Real-time strategy simulation",
+      },
+      {
+        name: "Strategy Tester",
+        icon: <Target className="w-5 h-5" />,
+        status: "active",
+        description: "Backtesting and validation",
+      },
+      {
+        name: "ML Validator",
+        icon: <Brain className="w-5 h-5" />,
+        status: "ai",
+        description: "Machine learning validation",
+      },
+      {
+        name: "Performance Monitor",
+        icon: <Eye className="w-5 h-5" />,
+        status: "live",
+        description: "Real-time performance tracking",
+      },
+    ],
+  },
 ];
 
 const statusConfig = {
-  active: { color: "bg-green-500", textColor: "text-green-400", label: "ACTIVE" },
+  active: {
+    color: "bg-green-500",
+    textColor: "text-green-400",
+    label: "ACTIVE",
+  },
   pro: { color: "bg-purple-500", textColor: "text-purple-400", label: "PRO" },
-  premium: { color: "bg-yellow-500", textColor: "text-yellow-400", label: "PREMIUM" },
+  premium: {
+    color: "bg-yellow-500",
+    textColor: "text-yellow-400",
+    label: "PREMIUM",
+  },
   ai: { color: "bg-cyan-500", textColor: "text-cyan-400", label: "AI" },
   live: { color: "bg-red-500", textColor: "text-red-400", label: "LIVE" },
   beta: { color: "bg-orange-500", textColor: "text-orange-400", label: "BETA" },
   mega: { color: "bg-pink-500", textColor: "text-pink-400", label: "MEGA" },
-  elite: { color: "bg-indigo-500", textColor: "text-indigo-400", label: "ELITE" },
+  elite: {
+    color: "bg-indigo-500",
+    textColor: "text-indigo-400",
+    label: "ELITE",
+  },
 };
 
 // Navigation mapping for features to app sections
@@ -112,14 +224,15 @@ interface EliteFeaturesOverviewProps {
 }
 
 const EliteFeaturesOverview: React.FC<EliteFeaturesOverviewProps> = ({
-export const EliteFeaturesOverview: React.FC<EliteFeaturesOverviewProps> = ({ onNavigate }) => {
+  onNavigate,
+}) => {
   const [activeCategory, setActiveCategory] = useState(0);
   const [isRefreshing, setIsRefreshing] = useState(false);
 
   const handleRefresh = async () => {
     setIsRefreshing(true);
     // Simulate refresh
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    await new Promise((resolve) => setTimeout(resolve, 2000));
     setIsRefreshing(false);
   };
 
@@ -148,8 +261,10 @@ export const EliteFeaturesOverview: React.FC<EliteFeaturesOverviewProps> = ({ on
           onClick={handleRefresh}
           className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 text-black font-bold rounded-xl hover:from-cyan-400 hover:to-blue-400 transition-all"
         >
-          <RefreshCw className={`w-5 h-5 ${isRefreshing ? 'animate-spin' : ''}`} />
-          {isRefreshing ? 'Refreshing...' : 'Refresh All'}
+          <RefreshCw
+            className={`w-5 h-5 ${isRefreshing ? "animate-spin" : ""}`}
+          />
+          {isRefreshing ? "Refreshing..." : "Refresh All"}
         </motion.button>
       </div>
 
@@ -225,8 +340,8 @@ export const EliteFeaturesOverview: React.FC<EliteFeaturesOverviewProps> = ({ on
             onClick={() => setActiveCategory(index)}
             className={`px-4 py-2 rounded-lg font-semibold text-sm transition-all ${
               activeCategory === index
-                ? 'bg-gradient-to-r from-cyan-500 to-blue-500 text-black'
-                : 'bg-gray-800/50 text-gray-400 hover:text-gray-300 border border-gray-700/50'
+                ? "bg-gradient-to-r from-cyan-500 to-blue-500 text-black"
+                : "bg-gray-800/50 text-gray-400 hover:text-gray-300 border border-gray-700/50"
             }`}
           >
             {category.category}
@@ -242,7 +357,8 @@ export const EliteFeaturesOverview: React.FC<EliteFeaturesOverviewProps> = ({ on
         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
       >
         {eliteFeatures[activeCategory].features.map((feature, index) => {
-          const config = statusConfig[feature.status as keyof typeof statusConfig];
+          const config =
+            statusConfig[feature.status as keyof typeof statusConfig];
           return (
             <motion.div
               key={feature.name}
@@ -254,11 +370,15 @@ export const EliteFeaturesOverview: React.FC<EliteFeaturesOverviewProps> = ({ on
               className="p-6 bg-gradient-to-br from-gray-800/50 to-gray-900/50 border border-gray-700/50 hover:border-cyan-500/50 rounded-xl cursor-pointer group transform hover:shadow-2xl hover:shadow-cyan-500/20 transition-all duration-300"
             >
               <div className="flex items-center justify-between mb-4">
-                <div className={`p-2 rounded-lg bg-gradient-to-r from-gray-700 to-gray-800 group-hover:from-cyan-500/20 group-hover:to-blue-500/20 ${config.textColor} transition-all`}>
+                <div
+                  className={`p-2 rounded-lg bg-gradient-to-r from-gray-700 to-gray-800 group-hover:from-cyan-500/20 group-hover:to-blue-500/20 ${config.textColor} transition-all`}
+                >
                   {feature.icon}
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className={`w-2 h-2 rounded-full ${config.color} ${feature.status === 'live' ? 'animate-pulse' : ''}`} />
+                  <div
+                    className={`w-2 h-2 rounded-full ${config.color} ${feature.status === "live" ? "animate-pulse" : ""}`}
+                  />
                   <span className={`text-xs font-bold ${config.textColor}`}>
                     {config.label}
                   </span>
@@ -299,15 +419,21 @@ export const EliteFeaturesOverview: React.FC<EliteFeaturesOverviewProps> = ({ on
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="flex items-center gap-3">
             <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse" />
-            <span className="text-green-400 font-semibold">All Systems Operational</span>
+            <span className="text-green-400 font-semibold">
+              All Systems Operational
+            </span>
           </div>
           <div className="flex items-center gap-3">
             <div className="w-3 h-3 bg-cyan-400 rounded-full animate-pulse" />
-            <span className="text-cyan-400 font-semibold">Real-time Data Streaming</span>
+            <span className="text-cyan-400 font-semibold">
+              Real-time Data Streaming
+            </span>
           </div>
           <div className="flex items-center gap-3">
             <div className="w-3 h-3 bg-purple-400 rounded-full animate-pulse" />
-            <span className="text-purple-400 font-semibold">AI Models Learning</span>
+            <span className="text-purple-400 font-semibold">
+              AI Models Learning
+            </span>
           </div>
         </div>
       </div>
