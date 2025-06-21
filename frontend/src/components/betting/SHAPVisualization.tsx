@@ -107,7 +107,12 @@ const SHAPVisualization: React.FC<SHAPVisualizationProps> = ({
   return (
     <Box>
       <Box className="h-96">
-        <Bar data={chartData} options={options} />
+        <SafeChart
+          type="bar"
+          data={chartData}
+          options={options}
+          loadingMessage="Loading SHAP visualization..."
+        />
       </Box>
       <Box mt={2}>
         <Typography color="text.secondary" variant="body2">
