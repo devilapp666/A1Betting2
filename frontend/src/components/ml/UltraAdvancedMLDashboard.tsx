@@ -190,10 +190,7 @@ const UltraAdvancedMLDashboard: React.FC = () => {
 
     try {
       // Mock model performance metrics
-      const mockMetrics: (ModelPerformanceMetrics & {
-        model_name: string;
-        model_id: string;
-      })[] = [
+      const mockMetrics: (ModelPerformanceMetrics & { model_name: string; model_id: string })[] = [
         {
           model_name: "Neural Network Alpha",
           model_id: "nn_alpha_v1",
@@ -228,7 +225,7 @@ const UltraAdvancedMLDashboard: React.FC = () => {
           precision: 0.89,
           recall: 0.84,
           f1Score: 0.86,
-          roc: 0.9,
+          roc: 0.90,
           predictionCount: 892,
           successRate: 0.93,
           averageConfidence: 0.85,
@@ -741,11 +738,11 @@ const UltraAdvancedMLDashboard: React.FC = () => {
                   >
                     {!systemHealth
                       ? "LOADING"
-                      : systemHealth.overallHealth > 0.8
-                        ? "HEALTHY"
-                        : systemHealth.overallHealth > 0.6
-                          ? "DEGRADED"
-                          : "CRITICAL"}
+                      : (systemHealth.overallHealth > 0.8
+                          ? "HEALTHY"
+                          : systemHealth.overallHealth > 0.6
+                            ? "DEGRADED"
+                            : "CRITICAL")}
                   </p>
                 </div>
                 <div
@@ -787,39 +784,43 @@ const UltraAdvancedMLDashboard: React.FC = () => {
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="bg-black/20 backdrop-blur-xl border border-white/10 shadow-lg hover:shadow-blue-500/20 transition-all duration-300">
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-600">Mathematical Rigor</p>
-                  <p className="text-lg font-semibold text-purple-600">
-                    {systemHealth.mathematical_rigor_score}
+                  <h3 className="text-sm font-medium text-gray-400 uppercase tracking-wider">
+                    Prediction Accuracy
+                  </h3>
+                  <p className="text-lg font-bold text-blue-400 animate-pulse">
+                    {((systemHealth?.overallHealth || 0) * 100).toFixed(1)}%
                   </p>
                 </div>
-                <Calculator className="w-6 h-6 text-purple-600" />
+                <div className="p-2 rounded-full bg-blue-500/20 shadow-lg shadow-blue-500/30">
+                  <Target className="w-6 h-6 text-blue-400" />
+                </div>
               </div>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="bg-black/20 backdrop-blur-xl border border-white/10 shadow-lg hover:shadow-green-500/20 transition-all duration-300">
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-600">Response Time</p>
-                  <p className="text-lg font-semibold text-green-600">
+                  <h3 className="text-sm font-medium text-gray-400 uppercase tracking-wider">
+                    Response Time
+                  </h3>
+                  <p className="text-lg font-bold text-green-400 animate-pulse">
                     {(systemHealth?.responseTime || 0).toFixed(0)}ms
                   </p>
                 </div>
-                <Zap className="w-6 h-6 text-green-600" />
+                <div className="p-2 rounded-full bg-green-500/20 shadow-lg shadow-green-500/30">
+                  <Zap className="w-6 h-6 text-green-400" />
+                </div>
               </div>
             </CardContent>
           </Card>
         </div>
       )}
-
-      {/* Main Dashboard Tabs */}
-      <Tabs
-        value={selectedTab}
         onValueChange={setSelectedTab}
         className="w-full"
       >
@@ -942,76 +943,80 @@ const UltraAdvancedMLDashboard: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Model Cards */}
             <div className="lg:col-span-2 space-y-4">
-              {modelMetrics
-                .filter((model) => model && model.model_id)
-                .map((model) => (
-                  <Card key={model.model_id}>
-                    <CardHeader>
-                      <div className="flex items-center justify-between">
-                        <CardTitle className="flex items-center">
-                          <Brain className="w-5 h-5 mr-2 text-blue-600" />
-                          {model.model_name}
-                        </CardTitle>
-                        <Badge
-                          variant={model.accuracy > 0.9 ? "success" : "warning"}
-                        >
-                          {model.accuracy > 0.9 ? "Verified" : "Pending"}
-                        </Badge>
+              {modelMetrics.filter(model => model && model.model_id).map((model) => (
+                <Card key={model.model_id}>
+                  <CardHeader>
+                    <div className="flex items-center justify-between">
+                      <CardTitle className="flex items-center">
+                        <Brain className="w-5 h-5 mr-2 text-blue-600" />
+                        {model.model_name}
+                      </CardTitle>
+                      <Badge
+                        variant={
+                          model.accuracy > 0.9
+                            ? "success"
+                            : "warning"
+                        }
+                      >
+                        {model.accuracy > 0.9
+                          ? "Verified"
+                          : "Pending"}
+                      </Badge>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                      <div>
+                        <p className="text-sm text-gray-600">Accuracy</p>
+                        <p className="text-lg font-semibold text-blue-600">
+                          {(model.accuracy * 100).toFixed(1)}%
+                        </p>
                       </div>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        <div>
-                          <p className="text-sm text-gray-600">Accuracy</p>
-                          <p className="text-lg font-semibold text-blue-600">
-                            {(model.accuracy * 100).toFixed(1)}%
-                          </p>
-                        </div>
-                        <div>
-                          <p className="text-sm text-gray-600">Precision</p>
-                          <p className="text-lg font-semibold text-green-600">
-                            {(model.precision * 100).toFixed(1)}%
-                          </p>
-                        </div>
-                        <div>
-                          <p className="text-sm text-gray-600">F1 Score</p>
-                          <p className="text-lg font-semibold text-purple-600">
-                            {(model.f1Score * 100).toFixed(1)}%
-                          </p>
-                        </div>
-                        <div>
-                          <p className="text-sm text-gray-600">Speed</p>
-                          <p className="text-lg font-semibold text-yellow-600">
-                            {model.inferenceTime.toFixed(1)}ms
-                          </p>
-                        </div>
+                      <div>
+                        <p className="text-sm text-gray-600">Precision</p>
+                        <p className="text-lg font-semibold text-green-600">
+                          {(model.precision * 100).toFixed(1)}%
+                        </p>
                       </div>
+                      <div>
+                        <p className="text-sm text-gray-600">F1 Score</p>
+                        <p className="text-lg font-semibold text-purple-600">
+                          {(model.f1Score * 100).toFixed(1)}%
+                        </p>
+                      </div>
+                      <div>
+                        <p className="text-sm text-gray-600">Speed</p>
+                        <p className="text-lg font-semibold text-yellow-600">
+                          {model.inferenceTime.toFixed(1)}ms
+                        </p>
+                      </div>
+                    </div>
 
-                      <div className="mt-4 space-y-2">
-                        <div className="flex items-center justify-between text-sm">
-                          <span>Mathematical Guarantees:</span>
-                          <div className="flex gap-1">
-                            {model.accuracy > 0.9 && (
-                              <Badge variant="success" size="sm">
-                                Convergence
-                              </Badge>
-                            )}
-                            {model.successRate > 0.95 && (
-                              <Badge variant="success" size="sm">
-                                Stability
-                              </Badge>
-                            )}
-                            {model.precision > 0.85 && model.recall > 0.85 && (
-                              <Badge variant="success" size="sm">
-                                Bounds
-                              </Badge>
-                            )}
-                          </div>
+                    <div className="mt-4 space-y-2">
+                      <div className="flex items-center justify-between text-sm">
+                        <span>Mathematical Guarantees:</span>
+                        <div className="flex gap-1">
+                          {model.accuracy > 0.9 && (
+                            <Badge variant="success" size="sm">
+                              Convergence
+                            </Badge>
+                          )}
+                          {model.successRate > 0.95 && (
+                            <Badge variant="success" size="sm">
+                              Stability
+                            </Badge>
+                          )}
+                          {model.precision > 0.85 && model.recall > 0.85 && (
+                            <Badge variant="success" size="sm">
+                              Bounds
+                            </Badge>
+                          )}
                         </div>
                       </div>
-                    </CardContent>
-                  </Card>
-                ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
 
             {/* Model Complexity Visualization */}
@@ -1105,10 +1110,7 @@ const UltraAdvancedMLDashboard: React.FC = () => {
                               </div>
                               <div className="text-center">
                                 <p className="text-lg font-semibold text-green-600">
-                                  {((prediction.confidence || 0) * 100).toFixed(
-                                    1,
-                                  )}
-                                  %
+                                  {((prediction.confidence || 0) * 100).toFixed(1)}%
                                 </p>
                                 <p className="text-xs text-gray-500">
                                   Confidence
@@ -1169,10 +1171,7 @@ const UltraAdvancedMLDashboard: React.FC = () => {
                         {systemHealth?.cpuUsage || 0}%
                       </span>
                     </div>
-                    <Progress
-                      value={systemHealth?.cpuUsage || 0}
-                      className="h-2"
-                    />
+                    <Progress value={systemHealth?.cpuUsage || 0} className="h-2" />
                   </div>
 
                   <div>
@@ -1311,35 +1310,35 @@ const UltraAdvancedMLDashboard: React.FC = () => {
               <CardContent>
                 {mathematicalFoundations ? (
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {Object.entries(mathematicalFoundations || {}).map(
-                      ([key, value]: [string, any]) => (
-                        <Card key={key}>
-                          <CardContent className="p-4">
-                            <h4 className="font-medium text-gray-900 mb-2 capitalize">
-                              {key.replace(/_/g, " ")}
-                            </h4>
-                            <div className="space-y-2 text-sm">
+                    {Object.entries(
+                      mathematicalFoundations || {},
+                    ).map(([key, value]: [string, any]) => (
+                      <Card key={key}>
+                        <CardContent className="p-4">
+                          <h4 className="font-medium text-gray-900 mb-2 capitalize">
+                            {key.replace(/_/g, " ")}
+                          </h4>
+                          <div className="space-y-2 text-sm">
+                            <div>
+                              <span className="text-gray-600">Basis:</span>
+                              <p className="font-mono text-xs">
+                                {value.mathematical_basis}
+                              </p>
+                            </div>
+                            {value.computational_complexity && (
                               <div>
-                                <span className="text-gray-600">Basis:</span>
+                                <span className="text-gray-600">
+                                  Complexity:
+                                </span>
                                 <p className="font-mono text-xs">
-                                  {value.mathematical_basis}
+                                  {value.computational_complexity}
                                 </p>
                               </div>
-                              {value.computational_complexity && (
-                                <div>
-                                  <span className="text-gray-600">
-                                    Complexity:
-                                  </span>
-                                  <p className="font-mono text-xs">
-                                    {value.computational_complexity}
-                                  </p>
-                                </div>
-                              )}
-                            </div>
-                          </CardContent>
-                        </Card>
-                      ),
-                    )}
+                            )}
+                          </div>
+                        </CardContent>
+                      </Card>
+                    ))}
                   </div>
                 ) : (
                   <div className="text-center py-8 text-gray-500">
