@@ -683,14 +683,22 @@ const UltraAdvancedMLDashboard: React.FC = () => {
                   <p className="text-sm text-gray-600">System Status</p>
                   <p
                     className={`text-lg font-semibold ${
-                      systemHealth.overall_status === "healthy"
-                        ? "text-green-600"
-                        : systemHealth.overall_status === "degraded"
-                          ? "text-yellow-600"
-                          : "text-red-600"
+                      !systemHealth
+                        ? "text-gray-600"
+                        : systemHealth.overallHealth > 0.8
+                          ? "text-green-600"
+                          : systemHealth.overallHealth > 0.6
+                            ? "text-yellow-600"
+                            : "text-red-600"
                     }`}
                   >
-                    {systemHealth.overall_status.toUpperCase()}
+                    {!systemHealth
+                      ? "LOADING"
+                      : systemHealth.overallHealth > 0.8
+                        ? "HEALTHY"
+                        : systemHealth.overallHealth > 0.6
+                          ? "DEGRADED"
+                          : "CRITICAL"}
                   </p>
                 </div>
                 <div
