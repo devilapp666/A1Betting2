@@ -238,9 +238,9 @@ const CyberModernSidebar: React.FC<SidebarProps> = ({
       </div>
 
       {/* Enhanced Navigation with Feature Categories */}
-      <nav className="flex-1 p-4 overflow-y-auto">
+      <nav className="flex-1 p-4 overflow-y-auto pointer-events-auto">
         {/* Main Navigation */}
-        <div className="space-y-1 mb-6">
+        <div className="space-y-1 mb-6 pointer-events-auto">
           <div className="text-xs font-bold text-cyan-400 uppercase tracking-wider mb-3 px-2">
             Core Platform
           </div>
