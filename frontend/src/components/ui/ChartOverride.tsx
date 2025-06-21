@@ -1,5 +1,11 @@
 import React from "react";
-import SafeChart from "./SafeChart";
+import {
+  Line as OriginalLine,
+  Bar as OriginalBar,
+  Doughnut as OriginalDoughnut,
+  Radar as OriginalRadar,
+  Scatter as OriginalScatter,
+} from "react-chartjs-2";
 import { Activity, BarChart3, PieChart, Zap } from "lucide-react";
 
 // Create fallback components that mirror Chart.js API but use SafeChart internally
