@@ -198,3 +198,6 @@ export const bettingService = {
     }
   },
 };
+
+// Also export as default for easier importing
+export default bettingService;
