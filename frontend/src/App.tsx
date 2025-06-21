@@ -39,8 +39,7 @@ import {
   Trophy,
   Bookmark,
   Flame,
-  FlashZolt,
-  Lightning,
+  Zap as Lightning,
   Home,
 } from "lucide-react";
 
