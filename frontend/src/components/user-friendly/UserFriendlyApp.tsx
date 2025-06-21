@@ -312,22 +312,41 @@ export const UserFriendlyApp: React.FC = () => {
             </nav>
 
             {/* AI Status */}
-            <div className="mt-8 p-4 bg-purple-500/10 rounded-xl border border-purple-500/30">
-              <h3 className="font-bold text-purple-400 mb-2">🧠 AI Status</h3>
-              <div className="space-y-2 text-sm">
-                <div className="flex justify-between">
-                  <span className="text-gray-400">Neural Networks</span>
-                  <span className="text-green-400 font-semibold">
-                    47 Active
+            <div className="mt-8 p-4 bg-gradient-to-br from-purple-500/20 via-cyan-500/10 to-green-500/20 rounded-xl border border-purple-500/40 backdrop-blur-sm relative shadow-2xl shadow-purple-500/20">
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-cyan-500/10 rounded-xl" />
+              <div className="relative">
+                <h3 className="font-bold text-purple-400 mb-3 drop-shadow-lg flex items-center gap-2">
+                  <span className="text-lg">🧠</span>
+                  <span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
+                    AI Status
                   </span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-400">Processing Speed</span>
-                  <span className="text-cyan-400 font-semibold">12ms</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-400">Quantum Qubits</span>
-                  <span className="text-purple-400 font-semibold">∞</span>
+                </h3>
+                <div className="space-y-3 text-sm">
+                  <div className="flex justify-between items-center p-2 bg-green-500/10 rounded-lg border border-green-500/30">
+                    <span className="text-green-300/80 font-medium">
+                      Neural Networks
+                    </span>
+                    <span className="text-green-400 font-bold drop-shadow-lg flex items-center gap-1">
+                      <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse shadow-lg shadow-green-400/50" />
+                      47 Active
+                    </span>
+                  </div>
+                  <div className="flex justify-between items-center p-2 bg-cyan-500/10 rounded-lg border border-cyan-500/30">
+                    <span className="text-cyan-300/80 font-medium">
+                      Processing Speed
+                    </span>
+                    <span className="text-cyan-400 font-bold drop-shadow-lg">
+                      12ms
+                    </span>
+                  </div>
+                  <div className="flex justify-between items-center p-2 bg-purple-500/10 rounded-lg border border-purple-500/30">
+                    <span className="text-purple-300/80 font-medium">
+                      Quantum Qubits
+                    </span>
+                    <span className="text-purple-400 font-bold drop-shadow-lg animate-pulse">
+                      ∞
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
