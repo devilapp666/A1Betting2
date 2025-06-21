@@ -1273,7 +1273,7 @@ const UltraAdvancedMLDashboard: React.FC = () => {
                     </div>
                     <div className="text-center">
                       <p className="text-2xl font-bold text-purple-600">
-                        {(systemHealth.error_rate * 100).toFixed(2)}%
+                        {((systemHealth?.errorRate || 0) * 100).toFixed(2)}%
                       </p>
                       <p className="text-sm text-gray-600">Error Rate</p>
                     </div>
