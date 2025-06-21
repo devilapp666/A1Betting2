@@ -523,7 +523,7 @@ const UltraAdvancedMLDashboard: React.FC = () => {
       );
 
       toast.success(
-        `Live prediction completed: ${result.final_prediction.toFixed(2)} (${(result.prediction_confidence * 100).toFixed(1)}% confidence)`,
+        `Live prediction completed: ${(result.final_prediction || 0).toFixed(2)} (${((result.prediction_confidence || 0) * 100).toFixed(1)}% confidence)`,
       );
     } catch (error) {
       setLivePredictions((prev) =>
