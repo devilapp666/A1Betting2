@@ -58,7 +58,7 @@ export const AdvancedMLDashboardPanels: React.FC<
           Model Performance Over Time
         </h3>
         <div className="h-64">
-          <Chart
+          <SafeChart
             type="line"
             data={perfChartData}
             options={{
@@ -87,6 +87,7 @@ export const AdvancedMLDashboardPanels: React.FC<
                 },
               },
             }}
+            loadingMessage="Loading performance data..."
           />
         </div>
       </div>
