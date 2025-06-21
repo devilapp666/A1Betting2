@@ -69,12 +69,71 @@ const createSafeChartComponent = (
         );
       }
 
+      // Default safe options
+      const safeOptions = React.useMemo(
+        () => ({
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: "top" as const,
+              labels: { color: "#e5e7eb" },
+            },
+          },
+          scales:
+            chartType !== "doughnut"
+              ? {
+                  x: {
+                    ticks: { color: "#9ca3af" },
+                    grid: { color: "rgba(156, 163, 175, 0.2)" },
+                  },
+                  y: {
+                    ticks: { color: "#9ca3af" },
+                    grid: { color: "rgba(156, 163, 175, 0.2)" },
+                  },
+                }
+              : undefined,
+          ...options,
+        }),
+        [options, chartType],
+      );
+
+      // Render the appropriate original Chart.js component
+      const ChartComponent = (() => {
+        switch (chartType) {
+          case "line":
+            return OriginalLine;
+          case "bar":
+            return OriginalBar;
+          case "doughnut":
+            return OriginalDoughnut;
+          case "radar":
+            return OriginalRadar;
+          case "scatter":
+            return OriginalScatter;
+          default:
+            return null;
+        }
+      })();
+
+      if (!ChartComponent) {
+        return (
+          <div className="flex items-center justify-center h-full text-red-400 p-8 min-h-[200px]">
+            <div className="text-center">
+              <BarChart3 className="w-8 h-8 mx-auto mb-2 text-red-400" />
+              <p className="text-sm text-red-400">Unsupported Chart Type</p>
+              <p className="text-xs text-gray-500 mt-1">
+                {chartType} charts not available
+              </p>
+            </div>
+          </div>
+        );
+      }
+
       return (
-        <SafeChart
-          type={chartType}
+        <ChartComponent
           data={data}
-          options={options}
-          loadingMessage={`Loading ${chartType} chart...`}
+          options={safeOptions}
           {...restProps}
           ref={ref}
         />
