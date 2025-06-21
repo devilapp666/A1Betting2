@@ -27,10 +27,8 @@ const PerformanceAnalyticsDashboard = React.lazy(
 const UnifiedMoneyMaker = React.lazy(
   () => import("../money-maker/UnifiedMoneyMaker"),
 );
-const UnifiedStrategyEngineDisplay = React.lazy(() =>
-  import("../strategy/UnifiedStrategyEngineDisplay").then((m) => ({
-    default: m.default,
-  })),
+const UnifiedStrategyEngineDisplay = React.lazy(
+  () => import("../strategy/UnifiedStrategyEngineDisplay"),
 );
 
 // ============================================================================
