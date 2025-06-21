@@ -32,11 +32,7 @@ import {
 } from "lucide-react";
 import {
   Line,
-  Radar as RadarChart,
-  Scatter,
-  Bar,
-  Doughnut,
-} from "react-chartjs-2";
+import SafeChart from "../ui/SafeChart";
 import {
   Chart as ChartJS,
   CategoryScale,
