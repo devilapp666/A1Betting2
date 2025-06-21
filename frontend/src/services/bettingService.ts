@@ -132,8 +132,8 @@ export const connectToOddsWebSocket = (
   };
 };
 
-// Main betting service object for easy import
-export const bettingService = {
+// Main betting service object
+const bettingService = {
   placeBet: async (betData: any) => {
     try {
       const response = await bettingApi.post(endpoints.bets, betData);
@@ -199,5 +199,6 @@ export const bettingService = {
   },
 };
 
-// Also export as default for easier importing
+// Export both ways for maximum compatibility
+export { bettingService };
 export default bettingService;
