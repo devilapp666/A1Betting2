@@ -258,7 +258,7 @@ const AppContent: React.FC = () => {
           sidebarOpen={sidebarOpen}
         >
           {/* Render current page component */}
-          <CurrentComponent />
+          <CurrentComponent {...(currentNavItem?.props || {})} />
 
           {/* Consolidation Status Banner */}
           <div className="fixed bottom-4 left-4 z-50">
