@@ -28,7 +28,6 @@ import {
 // Import providers and utilities
 import { SafeThemeProvider } from "./providers/SafeThemeProvider";
 import ErrorBoundary from "./components/ErrorBoundary";
-import { initializeMUIClickPatch } from "./utils/muiClickPatch";
 
 // Import main page components
 import ConsolidatedUniversalDashboard from "./components/dashboard/ConsolidatedUniversalDashboard";
@@ -77,7 +76,7 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       staleTime: 300000,
-      cacheTime: 600000,
+      gcTime: 600000, // Updated from cacheTime
       refetchOnWindowFocus: false,
       refetchOnMount: false,
       refetchOnReconnect: false,
@@ -353,11 +352,6 @@ const AppContent: React.FC = () => {
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
   const [isNotificationCenterOpen, setIsNotificationCenterOpen] =
     useState(false);
-
-  // Initialize MUI click patch
-  useEffect(() => {
-    initializeMUIClickPatch();
-  }, []);
 
   // Keyboard shortcuts
   useEffect(() => {
