@@ -87,37 +87,63 @@ const SafeChart: React.FC<SafeChartProps> = ({
   };
 
   try {
-    switch (type) {
-      case "line":
-        return <Line data={data} options={safeOptions} className={className} />;
-      case "bar":
-        return <Bar data={data} options={safeOptions} className={className} />;
-      case "doughnut":
-        return (
-          <Doughnut data={data} options={safeOptions} className={className} />
-        );
-      case "radar":
-        return (
-          <Radar data={data} options={safeOptions} className={className} />
-        );
-      case "scatter":
-        return (
-          <Scatter data={data} options={safeOptions} className={className} />
-        );
-      default:
-        return (
+    // Add extra validation right before rendering
+    if (!data?.labels || !data?.datasets) {
+      throw new Error("Invalid chart data structure");
+    }
+
+    const ChartComponent = (() => {
+      switch (type) {
+        case "line":
+          return Line;
+        case "bar":
+          return Bar;
+        case "doughnut":
+          return Doughnut;
+        case "radar":
+          return Radar;
+        case "scatter":
+          return Scatter;
+        default:
+          return null;
+      }
+    })();
+
+    if (!ChartComponent) {
+      return (
+        <div
+          className={`flex items-center justify-center h-full text-gray-400 ${className}`}
+        >
+          <div className="text-center">
+            <BarChart3 className="w-8 h-8 mx-auto mb-2" />
+            <p className="text-sm">Unsupported chart type: {type}</p>
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <React.Suspense
+        fallback={
           <div
             className={`flex items-center justify-center h-full text-gray-400 ${className}`}
           >
             <div className="text-center">
-              <BarChart3 className="w-8 h-8 mx-auto mb-2" />
-              <p className="text-sm">Unsupported chart type: {type}</p>
+              <BarChart3 className="w-8 h-8 mx-auto mb-2 animate-pulse" />
+              <p className="text-sm">Loading chart...</p>
             </div>
           </div>
-        );
-    }
+        }
+      >
+        <ChartComponent
+          data={data}
+          options={safeOptions}
+          className={className}
+        />
+      </React.Suspense>
+    );
   } catch (error) {
-    console.error("Chart rendering error:", error);
+    console.error("SafeChart rendering error:", error);
     return (
       <div
         className={`flex items-center justify-center h-full text-red-400 ${className}`}
