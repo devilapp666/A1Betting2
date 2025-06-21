@@ -1,1 +1,2 @@
-// (File removed as part of Builder.io uninstall process)
+// Builder.io completely removed - this file is now disabled
+export default {};
