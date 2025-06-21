@@ -9,11 +9,16 @@ import {
   MegaHeader,
 } from "./components/mega/MegaLayout.tsx";
 import {
-  ConsolidatedUniversalDashboard,
-  ConsolidatedUniversalMoneyMaker,
-  ConsolidatedUniversalAnalytics,
+  UniversalDashboard,
+  UniversalMoneyMaker,
+  UniversalAnalytics,
   UniversalPredictions,
 } from "./components";
+
+// Import consolidated components directly to bypass index.ts issues
+import ConsolidatedUniversalDashboard from "./components/dashboard/ConsolidatedUniversalDashboard";
+import ConsolidatedUniversalMoneyMaker from "./components/moneymaker/ConsolidatedUniversalMoneyMaker";
+import ConsolidatedUniversalAnalytics from "./components/analytics/ConsolidatedUniversalAnalytics";
 import UltimateSettingsPage from "./components/settings/UltimateSettingsPage";
 import ProfilePage from "./components/profile/ProfilePage";
 import ThemeDemo from "./components/ThemeDemo";
