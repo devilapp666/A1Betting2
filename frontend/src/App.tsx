@@ -498,6 +498,11 @@ const CyberTopBar: React.FC<TopBarProps> = ({
 
 const AppContent: React.FC = () => {
   const [activeNavItem, setActiveNavItem] = useState("dashboard");
+
+  const handleNavigation = (itemId: string) => {
+    console.log(`🧭 Navigation clicked: ${itemId}`);
+    setActiveNavItem(itemId);
+  };
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
   const [isNotificationCenterOpen, setIsNotificationCenterOpen] =
     useState(false);
@@ -615,7 +620,7 @@ const AppContent: React.FC = () => {
       {/* Cyber Modern Sidebar */}
       <CyberModernSidebar
         activeItem={activeNavItem}
-        onNavigate={setActiveNavItem}
+        onNavigate={handleNavigation}
         user={mockUser}
       />
 
