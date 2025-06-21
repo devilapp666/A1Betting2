@@ -38,6 +38,7 @@ import { Toast } from "../ui/UnifiedUI";
 import { FeatureFlagIndicators } from "../ui/FeatureFlagIndicators";
 import { ServiceStatusIndicators } from "../ui/ServiceStatusIndicators";
 import ErrorBoundary from "../ErrorBoundary";
+import ModernDashboardEnhancement from "./ModernDashboardEnhancement";
 
 // Replace lazy loaded components with direct imports to avoid undefined issues
 import PerformanceAnalyticsDashboard from "../analytics/PerformanceAnalyticsDashboard";
