@@ -7,51 +7,86 @@ const createSafeChartComponent = (
   chartType: "line" | "bar" | "doughnut" | "radar" | "scatter",
 ) => {
   return React.forwardRef<any, any>((props, ref) => {
-    // Extract data and options from props
-    const { data, options, ...restProps } = props;
+    try {
+      // Extract data and options from props
+      const { data, options, ...restProps } = props;
 
-    // If no data or data is invalid, show loading state
-    if (!data || !data.labels || !data.datasets) {
-      const icons = {
-        line: (
-          <Activity className="w-8 h-8 mx-auto mb-2 animate-pulse text-cyan-400" />
-        ),
-        bar: (
-          <BarChart3 className="w-8 h-8 mx-auto mb-2 animate-pulse text-cyan-400" />
-        ),
-        doughnut: (
-          <PieChart className="w-8 h-8 mx-auto mb-2 animate-pulse text-cyan-400" />
-        ),
-        radar: (
-          <Zap className="w-8 h-8 mx-auto mb-2 animate-pulse text-cyan-400" />
-        ),
-        scatter: (
-          <Activity className="w-8 h-8 mx-auto mb-2 animate-pulse text-cyan-400" />
-        ),
-      };
+      // Enhanced validation
+      const isValidData = React.useMemo(() => {
+        if (!data || typeof data !== "object") return false;
+        if (!data.labels || !Array.isArray(data.labels)) return false;
+        if (!data.datasets || !Array.isArray(data.datasets)) return false;
+        if (data.labels.length === 0) return false;
+        if (data.datasets.length === 0) return false;
+
+        // Check if datasets have data property
+        return data.datasets.every(
+          (dataset: any) =>
+            dataset &&
+            typeof dataset === "object" &&
+            (Array.isArray(dataset.data) || typeof dataset.data === "object"),
+        );
+      }, [data]);
+
+      // If no data or data is invalid, show loading state
+      if (!isValidData) {
+        const icons = {
+          line: (
+            <Activity className="w-8 h-8 mx-auto mb-2 animate-pulse text-cyan-400" />
+          ),
+          bar: (
+            <BarChart3 className="w-8 h-8 mx-auto mb-2 animate-pulse text-cyan-400" />
+          ),
+          doughnut: (
+            <PieChart className="w-8 h-8 mx-auto mb-2 animate-pulse text-cyan-400" />
+          ),
+          radar: (
+            <Zap className="w-8 h-8 mx-auto mb-2 animate-pulse text-cyan-400" />
+          ),
+          scatter: (
+            <Activity className="w-8 h-8 mx-auto mb-2 animate-pulse text-cyan-400" />
+          ),
+        };
+
+        return (
+          <div className="flex items-center justify-center h-full text-gray-400 p-8 min-h-[200px]">
+            <div className="text-center">
+              {icons[chartType]}
+              <p className="text-sm text-gray-400">
+                Loading {chartType} chart data...
+              </p>
+              <p className="text-xs text-gray-500 mt-1">
+                Waiting for data to load
+              </p>
+            </div>
+          </div>
+        );
+      }
 
       return (
-        <div className="flex items-center justify-center h-full text-gray-400 p-8">
+        <SafeChart
+          type={chartType}
+          data={data}
+          options={options}
+          loadingMessage={`Loading ${chartType} chart...`}
+          {...restProps}
+          ref={ref}
+        />
+      );
+    } catch (error) {
+      console.warn(`SafeChart ${chartType} error:`, error);
+      return (
+        <div className="flex items-center justify-center h-full text-red-400 p-8 min-h-[200px]">
           <div className="text-center">
-            {icons[chartType]}
-            <p className="text-sm text-gray-400">
-              Loading {chartType} chart data...
+            <BarChart3 className="w-8 h-8 mx-auto mb-2 text-red-400" />
+            <p className="text-sm text-red-400">Chart Error</p>
+            <p className="text-xs text-gray-500 mt-1">
+              Unable to render {chartType} chart
             </p>
           </div>
         </div>
       );
     }
-
-    return (
-      <SafeChart
-        type={chartType}
-        data={data}
-        options={options}
-        loadingMessage={`Loading ${chartType} chart...`}
-        {...restProps}
-        ref={ref}
-      />
-    );
   });
 };
 
