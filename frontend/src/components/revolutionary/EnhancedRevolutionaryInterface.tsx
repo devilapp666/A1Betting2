@@ -412,7 +412,7 @@ const EnhancedRevolutionaryInterface: React.FC = () => {
             Hodgkin-Huxley ODEs
           </Badge>
           <Badge className="bg-green-100 text-green-800">
-            <Function className="w-3 h-3 mr-1" />
+            <Calculator className="w-3 h-3 mr-1" />
             PC Algorithm
           </Badge>
           <Badge className="bg-blue-100 text-blue-800">
