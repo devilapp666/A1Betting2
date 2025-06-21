@@ -867,10 +867,10 @@ const UltraAdvancedMLDashboard: React.FC = () => {
         <TabsContent value="overview">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Model Performance Chart */}
-            <Card>
+            <Card className="bg-black/20 backdrop-blur-xl border border-white/10 shadow-lg hover:shadow-blue-500/20 transition-all duration-300">
               <CardHeader>
-                <CardTitle className="flex items-center">
-                  <BarChart3 className="w-5 h-5 mr-2 text-blue-600" />
+                <CardTitle className="flex items-center text-blue-400">
+                  <BarChart3 className="w-5 h-5 mr-2 text-blue-400" />
                   Model Performance Metrics
                 </CardTitle>
               </CardHeader>
