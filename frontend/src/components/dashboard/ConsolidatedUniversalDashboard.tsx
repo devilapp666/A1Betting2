@@ -908,7 +908,7 @@ const GridLayoutContent: React.FC<{
       <div className="lg:col-span-8">
         <MegaCard className="h-full">
           <Suspense fallback={<Skeleton className="h-96" />}>
-            <UnifiedMoneyMaker />
+            <UniversalMoneyMaker />
           </Suspense>
         </MegaCard>
       </div>
