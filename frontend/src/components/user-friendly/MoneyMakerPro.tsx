@@ -263,7 +263,7 @@ export const MoneyMakerPro: React.FC = () => {
                 whileTap={{ scale: 0.95 }}
                 onClick={generatePredictions}
                 disabled={isGenerating}
-                className="w-full py-4 bg-gradient-to-r from-green-500 to-blue-500 text-black font-black text-lg rounded-xl hover:shadow-2xl hover:shadow-green-500/25 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full py-4 bg-gradient-to-r from-green-500 to-blue-500 text-black font-black text-lg rounded-xl hover:shadow-2xl hover:shadow-green-500/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed border-2 border-green-400/50 hover:border-green-300 shadow-lg shadow-green-500/25"
               >
                 {isGenerating ? (
                   <div className="flex items-center justify-center space-x-2">
