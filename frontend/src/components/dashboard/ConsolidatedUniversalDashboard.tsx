@@ -1,10 +1,9 @@
 import React, {
   useState,
   useEffect,
-  useCallback,
   useMemo,
+  useCallback,
   Suspense,
-  lazy,
 } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
