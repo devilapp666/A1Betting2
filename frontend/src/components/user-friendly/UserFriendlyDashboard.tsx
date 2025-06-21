@@ -188,34 +188,44 @@ export const UserFriendlyDashboard: React.FC<{
   );
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 animate-slide-in-up">
       {/* Hero Section */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-center mb-12"
+        className="text-center mb-12 glass-card rounded-3xl p-12 shadow-neon relative"
       >
-        <div className="text-8xl mb-6 animate-bounce">🚀</div>
-        <h1 className="text-6xl font-black bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mb-4">
-          A1BETTING
-        </h1>
-        <p className="text-2xl text-gray-300 mb-6">
-          Quantum Sports Intelligence Platform
-        </p>
-        <div className="flex justify-center space-x-8 text-sm">
-          <div className="flex items-center space-x-2">
-            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-            <span className="text-green-400">All Systems Online</span>
+        <div className="absolute inset-0 bg-gradient-to-r from-electric-400 to-neon-blue rounded-3xl blur-2xl opacity-50 animate-pulse" />
+        <div className="relative">
+          <div className="text-8xl mb-6 animate-float">💰</div>
+          <h1 className="holographic text-6xl font-black mb-6">
+            A1BETTING INTELLIGENCE
+          </h1>
+          <div className="text-6xl font-black text-electric-500 mb-6 animate-cyber-pulse">
+            $∞
           </div>
-          <div className="flex items-center space-x-2">
-            <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" />
-            <span className="text-blue-400">
-              {liveStats.activeGames} Live Games
-            </span>
-          </div>
-          <div className="flex items-center space-x-2">
-            <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse" />
-            <span className="text-purple-400">AI Processing Active</span>
+          <p className="text-2xl text-gray-300 mb-8">
+            Real-time AI-powered sports analysis with quantum enhancement
+          </p>
+          <div className="flex justify-center space-x-8 text-sm">
+            <div className="flex items-center space-x-2 px-3 py-2 bg-green-500/10 rounded-lg border border-green-500/30 backdrop-blur-sm">
+              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse shadow-lg shadow-green-400/50" />
+              <span className="text-green-400 font-semibold drop-shadow-lg">
+                All Systems Online
+              </span>
+            </div>
+            <div className="flex items-center space-x-2 px-3 py-2 bg-blue-500/10 rounded-lg border border-blue-500/30 backdrop-blur-sm">
+              <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse shadow-lg shadow-blue-400/50" />
+              <span className="text-blue-400 font-semibold drop-shadow-lg">
+                {liveStats.activeGames} Live Games
+              </span>
+            </div>
+            <div className="flex items-center space-x-2 px-3 py-2 bg-purple-500/10 rounded-lg border border-purple-500/30 backdrop-blur-sm">
+              <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse shadow-lg shadow-purple-400/50" />
+              <span className="text-purple-400 font-semibold drop-shadow-lg">
+                Quantum Processing Active
+              </span>
+            </div>
           </div>
         </div>
       </motion.div>
