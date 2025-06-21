@@ -32,6 +32,14 @@ import { SafeThemeProvider } from "./providers/SafeThemeProvider";
 // Import elite feature components
 import { BusinessAnalysis } from "./components/elite/BusinessAnalysis";
 import { AIEdgeML } from "./components/elite/AIEdgeML";
+import {
+  MegaSports,
+  EliteBankroll,
+  SQLSports,
+  ModelAnalysis,
+  MarketConnector,
+  RealSimulator,
+} from "./components/elite/index";
 import ErrorBoundary from "./components/ErrorBoundary";
 
 // Import main page components - Using advanced versions
