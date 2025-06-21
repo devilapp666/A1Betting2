@@ -931,74 +931,76 @@ const UltraAdvancedMLDashboard: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Model Cards */}
             <div className="lg:col-span-2 space-y-4">
-              {modelMetrics.map((model) => (
-                <Card key={model.model_id}>
-                  <CardHeader>
-                    <div className="flex items-center justify-between">
-                      <CardTitle className="flex items-center">
-                        <Brain className="w-5 h-5 mr-2 text-blue-600" />
-                        {model.model_name}
-                      </CardTitle>
-                      <Badge
-                        variant={model.accuracy > 0.9 ? "success" : "warning"}
-                      >
-                        {model.accuracy > 0.9 ? "Verified" : "Pending"}
-                      </Badge>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                      <div>
-                        <p className="text-sm text-gray-600">Accuracy</p>
-                        <p className="text-lg font-semibold text-blue-600">
-                          {(model.accuracy * 100).toFixed(1)}%
-                        </p>
+              {modelMetrics
+                .filter((model) => model && model.model_id)
+                .map((model) => (
+                  <Card key={model.model_id}>
+                    <CardHeader>
+                      <div className="flex items-center justify-between">
+                        <CardTitle className="flex items-center">
+                          <Brain className="w-5 h-5 mr-2 text-blue-600" />
+                          {model.model_name}
+                        </CardTitle>
+                        <Badge
+                          variant={model.accuracy > 0.9 ? "success" : "warning"}
+                        >
+                          {model.accuracy > 0.9 ? "Verified" : "Pending"}
+                        </Badge>
                       </div>
-                      <div>
-                        <p className="text-sm text-gray-600">Precision</p>
-                        <p className="text-lg font-semibold text-green-600">
-                          {(model.precision * 100).toFixed(1)}%
-                        </p>
-                      </div>
-                      <div>
-                        <p className="text-sm text-gray-600">F1 Score</p>
-                        <p className="text-lg font-semibold text-purple-600">
-                          {(model.f1Score * 100).toFixed(1)}%
-                        </p>
-                      </div>
-                      <div>
-                        <p className="text-sm text-gray-600">Speed</p>
-                        <p className="text-lg font-semibold text-yellow-600">
-                          {model.inferenceTime.toFixed(1)}ms
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="mt-4 space-y-2">
-                      <div className="flex items-center justify-between text-sm">
-                        <span>Mathematical Guarantees:</span>
-                        <div className="flex gap-1">
-                          {model.accuracy > 0.9 && (
-                            <Badge variant="success" size="sm">
-                              Convergence
-                            </Badge>
-                          )}
-                          {model.successRate > 0.95 && (
-                            <Badge variant="success" size="sm">
-                              Stability
-                            </Badge>
-                          )}
-                          {model.precision > 0.85 && model.recall > 0.85 && (
-                            <Badge variant="success" size="sm">
-                              Bounds
-                            </Badge>
-                          )}
+                    </CardHeader>
+                    <CardContent>
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div>
+                          <p className="text-sm text-gray-600">Accuracy</p>
+                          <p className="text-lg font-semibold text-blue-600">
+                            {(model.accuracy * 100).toFixed(1)}%
+                          </p>
+                        </div>
+                        <div>
+                          <p className="text-sm text-gray-600">Precision</p>
+                          <p className="text-lg font-semibold text-green-600">
+                            {(model.precision * 100).toFixed(1)}%
+                          </p>
+                        </div>
+                        <div>
+                          <p className="text-sm text-gray-600">F1 Score</p>
+                          <p className="text-lg font-semibold text-purple-600">
+                            {(model.f1Score * 100).toFixed(1)}%
+                          </p>
+                        </div>
+                        <div>
+                          <p className="text-sm text-gray-600">Speed</p>
+                          <p className="text-lg font-semibold text-yellow-600">
+                            {model.inferenceTime.toFixed(1)}ms
+                          </p>
                         </div>
                       </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
+
+                      <div className="mt-4 space-y-2">
+                        <div className="flex items-center justify-between text-sm">
+                          <span>Mathematical Guarantees:</span>
+                          <div className="flex gap-1">
+                            {model.accuracy > 0.9 && (
+                              <Badge variant="success" size="sm">
+                                Convergence
+                              </Badge>
+                            )}
+                            {model.successRate > 0.95 && (
+                              <Badge variant="success" size="sm">
+                                Stability
+                              </Badge>
+                            )}
+                            {model.precision > 0.85 && model.recall > 0.85 && (
+                              <Badge variant="success" size="sm">
+                                Bounds
+                              </Badge>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
             </div>
 
             {/* Model Complexity Visualization */}
