@@ -1,7 +1,6 @@
 import React from "react";
-// import { Builder } from '@builder.io/react';
 
-// Custom Betting Card Component for Builder.io
+// Custom Betting Card Component (Builder.io removed)
 interface BettingCardProps {
   title?: string;
   odds?: string;
@@ -47,47 +46,6 @@ const BettingCard: React.FC<BettingCardProps> = ({
   );
 };
 
-// Builder.io registration temporarily disabled
-// Builder.registerComponent(BettingCard, {
-//   name: 'BettingCard',
-//   inputs: [
-//     {
-//       name: 'title',
-//       type: 'string',
-//       defaultValue: 'Match Title',
-//       helperText: 'Title of the betting match'
-//     },
-//     {
-//       name: 'odds',
-//       type: 'string',
-//       defaultValue: '2.5',
-//       helperText: 'Betting odds'
-//     },
-//     {
-//       name: 'team1',
-//       type: 'string',
-//       defaultValue: 'Team A',
-//       helperText: 'First team name'
-//     },
-//     {
-//       name: 'team2',
-//       type: 'string',
-//       defaultValue: 'Team B',
-//       helperText: 'Second team name'
-//     },
-//     {
-//       name: 'sport',
-//       type: 'string',
-//       defaultValue: 'Football',
-//       helperText: 'Sport type'
-//     },
-//     {
-//       name: 'time',
-//       type: 'string',
-//       defaultValue: 'Today 3:00 PM',
-//       helperText: 'Match time'
-//     }
-//   ]
-// });
+// Builder.io registration completely removed
 
 export default BettingCard;
