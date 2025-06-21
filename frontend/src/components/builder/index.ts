@@ -1,6 +1,6 @@
-// Builder.io component exports (temporarily disabled)
+// Builder.io components (Builder.io completely removed)
 export { default as BuilderPage } from "./BuilderPage";
 export { default as BettingCard } from "./BettingCard";
 
-// Builder.io registration temporarily disabled
-// import './BettingCard'; // This will register the component with Builder.io
+// Builder.io registration completely disabled
+// All components now work as standalone React components
