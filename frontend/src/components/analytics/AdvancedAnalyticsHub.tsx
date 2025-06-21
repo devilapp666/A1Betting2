@@ -166,20 +166,33 @@ const AdvancedAnalyticsHub: React.FC<AdvancedAnalyticsHubProps> = ({
     ],
   };
 
-  const modelComparisonData = {
-    labels: models.map((m) => m.modelName),
-    datasets: [
-      {
-        label: "Accuracy",
-        data: models.map((m) => m.accuracy),
-        backgroundColor: [
-          "rgba(6, 255, 165, 0.8)",
-          "rgba(0, 212, 255, 0.8)",
-          "rgba(124, 58, 237, 0.8)",
-        ],
-      },
-    ],
-  };
+  // Ensure models array has data before creating chart data
+  const modelComparisonData =
+    models && models.length > 0
+      ? {
+          labels: models.map((m) => m?.modelName || "Unknown"),
+          datasets: [
+            {
+              label: "Accuracy",
+              data: models.map((m) => m?.accuracy || 0),
+              backgroundColor: [
+                "rgba(6, 255, 165, 0.8)",
+                "rgba(0, 212, 255, 0.8)",
+                "rgba(124, 58, 237, 0.8)",
+              ],
+            },
+          ],
+        }
+      : {
+          labels: ["Loading..."],
+          datasets: [
+            {
+              label: "Accuracy",
+              data: [0],
+              backgroundColor: ["rgba(156, 163, 175, 0.3)"],
+            },
+          ],
+        };
 
   const handleRefresh = async () => {
     setIsRefreshing(true);
@@ -237,55 +250,77 @@ const AdvancedAnalyticsHub: React.FC<AdvancedAnalyticsHubProps> = ({
       {/* Performance Charts */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <GlassCard title="Performance Trends" className="h-96">
-          <Line
-            data={performanceData}
-            options={{
-              responsive: true,
-              maintainAspectRatio: false,
-              plugins: {
-                legend: {
-                  position: "top" as const,
-                  labels: { color: "#e5e7eb" },
+          {performanceData &&
+          performanceData.labels &&
+          performanceData.datasets ? (
+            <Line
+              data={performanceData}
+              options={{
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                  legend: {
+                    position: "top" as const,
+                    labels: { color: "#e5e7eb" },
+                  },
                 },
-              },
-              scales: {
-                x: {
-                  ticks: { color: "#9ca3af" },
-                  grid: { color: "rgba(156, 163, 175, 0.2)" },
+                scales: {
+                  x: {
+                    ticks: { color: "#9ca3af" },
+                    grid: { color: "rgba(156, 163, 175, 0.2)" },
+                  },
+                  y: {
+                    ticks: { color: "#9ca3af" },
+                    grid: { color: "rgba(156, 163, 175, 0.2)" },
+                  },
                 },
-                y: {
-                  ticks: { color: "#9ca3af" },
-                  grid: { color: "rgba(156, 163, 175, 0.2)" },
-                },
-              },
-            }}
-          />
+              }}
+            />
+          ) : (
+            <div className="flex items-center justify-center h-full text-gray-400">
+              <div className="text-center">
+                <Activity className="w-8 h-8 mx-auto mb-2 animate-spin" />
+                <p>Loading performance data...</p>
+              </div>
+            </div>
+          )}
         </GlassCard>
 
         <GlassCard title="Model Comparison" className="h-96">
-          <Bar
-            data={modelComparisonData}
-            options={{
-              responsive: true,
-              maintainAspectRatio: false,
-              plugins: {
-                legend: {
-                  position: "top" as const,
-                  labels: { color: "#e5e7eb" },
+          {modelComparisonData &&
+          modelComparisonData.labels &&
+          modelComparisonData.datasets ? (
+            <Bar
+              data={modelComparisonData}
+              options={{
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                  legend: {
+                    position: "top" as const,
+                    labels: { color: "#e5e7eb" },
+                  },
                 },
-              },
-              scales: {
-                x: {
-                  ticks: { color: "#9ca3af" },
-                  grid: { color: "rgba(156, 163, 175, 0.2)" },
+                scales: {
+                  x: {
+                    ticks: { color: "#9ca3af" },
+                    grid: { color: "rgba(156, 163, 175, 0.2)" },
+                  },
+                  y: {
+                    ticks: { color: "#9ca3af" },
+                    grid: { color: "rgba(156, 163, 175, 0.2)" },
+                  },
                 },
-                y: {
-                  ticks: { color: "#9ca3af" },
-                  grid: { color: "rgba(156, 163, 175, 0.2)" },
-                },
-              },
-            }}
-          />
+              }}
+            />
+          ) : (
+            <div className="flex items-center justify-center h-full text-gray-400">
+              <div className="text-center">
+                <BarChart3 className="w-8 h-8 mx-auto mb-2 animate-pulse" />
+                <p>Loading model comparison...</p>
+              </div>
+            </div>
+          )}
         </GlassCard>
       </div>
 
