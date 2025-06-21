@@ -55,39 +55,21 @@ import PerformanceChart from "../charts/PerformanceChart";
 const FallbackComponent = ({ title = "Component" }: { title?: string }) => (
   <div className="modern-card p-6 text-center">
     <h3 className="text-lg font-semibold mb-2">🚧 {title}</h3>
-    <p className="text-gray-500">
-      This component is currently under development.
-    </p>
+    <p className="text-gray-500">This component is currently under development.</p>
   </div>
 );
 
-const MarketAnalysisDashboard = () => (
-  <FallbackComponent title="Market Analysis Dashboard" />
-);
-const ArbitrageOpportunities = () => (
-  <FallbackComponent title="Arbitrage Opportunities" />
-);
-const PrizePicksEdgeDisplay = () => (
-  <FallbackComponent title="PrizePicks Edge Display" />
-);
-const SmartLineupBuilder = () => (
-  <FallbackComponent title="Smart Lineup Builder" />
-);
+const MarketAnalysisDashboard = () => <FallbackComponent title="Market Analysis Dashboard" />;
+const ArbitrageOpportunities = () => <FallbackComponent title="Arbitrage Opportunities" />;
+const PrizePicksEdgeDisplay = () => <FallbackComponent title="PrizePicks Edge Display" />;
+const SmartLineupBuilder = () => <FallbackComponent title="Smart Lineup Builder" />;
 const MLFactorViz = () => <FallbackComponent title="ML Factor Visualization" />;
-const QuantumPredictionsInterface = () => (
-  <FallbackComponent title="Quantum Predictions Interface" />
-);
-const BetSimulationTool = () => (
-  <FallbackComponent title="Bet Simulation Tool" />
-);
+const QuantumPredictionsInterface = () => <FallbackComponent title="Quantum Predictions Interface" />;
+const BetSimulationTool = () => <FallbackComponent title="Bet Simulation Tool" />;
 const LiveOddsTicker = () => <FallbackComponent title="Live Odds Ticker" />;
 const ModelPerformance = () => <FallbackComponent title="Model Performance" />;
-const PerformanceMetrics = () => (
-  <FallbackComponent title="Performance Metrics" />
-);
-const ESPNHeadlinesTicker = () => (
-  <FallbackComponent title="ESPN Headlines Ticker" />
-);
+const PerformanceMetrics = () => <FallbackComponent title="Performance Metrics" />;
+const ESPNHeadlinesTicker = () => <FallbackComponent title="ESPN Headlines Ticker" />;
 const EntryTracking = () => <FallbackComponent title="Entry Tracking" />;
 
 // ============================================================================
@@ -132,13 +114,7 @@ interface DashboardMetrics {
 }
 
 interface ConsolidatedDashboardProps {
-  variant?:
-    | "standard"
-    | "cyber"
-    | "premium"
-    | "modern"
-    | "unified"
-    | "features";
+  variant?: "standard" | "cyber" | "premium" | "modern" | "unified" | "features";
   layout?: "grid" | "tabs" | "sidebar" | "card-based";
   features?: {
     realTime?: boolean;
@@ -371,9 +347,7 @@ const mockRecentActivity: ActivityItem[] = [
 // MAIN CONSOLIDATED DASHBOARD COMPONENT
 // ============================================================================
 
-export const ConsolidatedUniversalDashboard: React.FC<
-  ConsolidatedDashboardProps
-> = ({
+export const ConsolidatedUniversalDashboard: React.FC<ConsolidatedDashboardProps> = ({
   variant = "unified",
   layout = "tabs",
   features = {
@@ -392,6 +366,13 @@ export const ConsolidatedUniversalDashboard: React.FC<
     propCards: true,
   },
 }) => {
+  // Return the clean dashboard without nested navigation
+  return (
+    <ErrorBoundary>
+      <CleanDashboard />
+    </ErrorBoundary>
+  );
+};
   // ========== STATE ==========
   const [activeTab, setActiveTab] = useState("overview");
   const [searchQuery, setSearchQuery] = useState("");
@@ -494,14 +475,14 @@ export const ConsolidatedUniversalDashboard: React.FC<
         isPremium: true,
       },
     ],
-    [metrics, recentActivity, features],
+    [metrics, recentActivity, features]
   );
 
   // ========== HANDLERS ==========
   const handleRefresh = useCallback(async () => {
     setIsRefreshing(true);
     // Simulate refresh
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    await new Promise(resolve => setTimeout(resolve, 2000));
     setIsRefreshing(false);
   }, []);
 
@@ -687,7 +668,7 @@ export const ConsolidatedUniversalDashboard: React.FC<
 const OverviewTab: React.FC<{
   metrics: DashboardMetrics;
   recentActivity: ActivityItem[];
-  features: ConsolidatedDashboardProps["features"];
+  features: ConsolidatedDashboardProps['features'];
 }> = ({ metrics, recentActivity, features }) => (
   <div className="space-y-6">
     <HeroSection
@@ -746,11 +727,7 @@ const OverviewTab: React.FC<{
         <Suspense fallback={<Skeleton className="h-64" />}>
           <Card className="p-6">
             <h3 className="text-lg font-bold mb-4">User Statistics</h3>
-            <ErrorBoundary
-              fallback={
-                <div className="text-red-500">Error loading user stats</div>
-              }
-            >
+            <ErrorBoundary fallback={<div className="text-red-500">Error loading user stats</div>}>
               <UserStats />
             </ErrorBoundary>
           </Card>
@@ -864,9 +841,7 @@ const OverviewTab: React.FC<{
             </div>
             {activity.amount && (
               <div className="text-right">
-                <div className="font-medium">
-                  {formatCurrency(activity.amount)}
-                </div>
+                <div className="font-medium">{formatCurrency(activity.amount)}</div>
                 {activity.odds && (
                   <div className="text-sm text-gray-500">@{activity.odds}</div>
                 )}
@@ -885,7 +860,7 @@ const OverviewTab: React.FC<{
 
 const GridLayoutContent: React.FC<{
   metrics: DashboardMetrics | undefined;
-  features: ConsolidatedDashboardProps["features"];
+  features: ConsolidatedDashboardProps['features'];
 }> = ({ metrics, features }) => (
   <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
     {/* Quick Stats */}
@@ -951,9 +926,7 @@ const GridLayoutContent: React.FC<{
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {features?.arbitrage && (
             <MegaCard className="p-6">
-              <h3 className="text-lg font-bold mb-4">
-                Arbitrage Opportunities
-              </h3>
+              <h3 className="text-lg font-bold mb-4">Arbitrage Opportunities</h3>
               <Suspense fallback={<Skeleton className="h-48" />}>
                 <ArbitrageOpportunities />
               </Suspense>
@@ -1037,19 +1010,14 @@ const MetricCard: React.FC<{
 }> = ({ title, value, change, icon, color }) => {
   const colorClasses = {
     blue: "from-blue-500/20 to-purple-500/10 text-blue-600 dark:text-blue-300",
-    green:
-      "from-green-500/20 to-teal-500/10 text-green-600 dark:text-green-300",
+    green: "from-green-500/20 to-teal-500/10 text-green-600 dark:text-green-300",
     red: "from-red-500/20 to-pink-500/10 text-red-600 dark:text-red-300",
-    purple:
-      "from-purple-500/20 to-pink-500/10 text-purple-600 dark:text-purple-300",
-    yellow:
-      "from-yellow-500/20 to-orange-500/10 text-yellow-600 dark:text-yellow-300",
+    purple: "from-purple-500/20 to-pink-500/10 text-purple-600 dark:text-purple-300",
+    yellow: "from-yellow-500/20 to-orange-500/10 text-yellow-600 dark:text-yellow-300",
   };
 
   return (
-    <Card
-      className={`glass-card bg-gradient-to-br ${colorClasses[color]} border-0 shadow-xl hover:shadow-2xl transition-all duration-300`}
-    >
+    <Card className={`glass-card bg-gradient-to-br ${colorClasses[color]} border-0 shadow-xl hover:shadow-2xl transition-all duration-300`}>
       <div className="p-6">
         <div className="flex items-center justify-between mb-4">
           <div className="text-lg font-semibold">{title}</div>
@@ -1057,11 +1025,8 @@ const MetricCard: React.FC<{
         </div>
         <div className="text-3xl font-extrabold mb-2">{value}</div>
         {change !== undefined && (
-          <div
-            className={`text-sm ${change >= 0 ? "text-green-500" : "text-red-500"}`}
-          >
-            {change >= 0 ? "+" : ""}
-            {change}% this period
+          <div className={`text-sm ${change >= 0 ? "text-green-500" : "text-red-500"}`}>
+            {change >= 0 ? "+" : ""}{change}% this period
           </div>
         )}
       </div>
