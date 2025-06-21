@@ -1092,7 +1092,7 @@ const UltraAdvancedMLDashboard: React.FC = () => {
                             <>
                               <div className="text-center">
                                 <p className="text-lg font-semibold text-blue-600">
-                                  {prediction.prediction.toFixed(2)}
+                                  {(prediction.prediction || 0).toFixed(2)}
                                 </p>
                                 <p className="text-xs text-gray-500">
                                   Prediction
@@ -1100,7 +1100,10 @@ const UltraAdvancedMLDashboard: React.FC = () => {
                               </div>
                               <div className="text-center">
                                 <p className="text-lg font-semibold text-green-600">
-                                  {(prediction.confidence * 100).toFixed(1)}%
+                                  {((prediction.confidence || 0) * 100).toFixed(
+                                    1,
+                                  )}
+                                  %
                                 </p>
                                 <p className="text-xs text-gray-500">
                                   Confidence
