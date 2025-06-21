@@ -34,14 +34,86 @@ import {
 import SafeChart from "../ui/SafeChart";
 import toast from "react-hot-toast";
 
-// Import enhanced services
-import UnifiedEnhancedPredictionService, {
-  ModelPerformanceMetrics,
-  SystemHealthMetrics,
-  UnifiedPredictionRequest,
-  UnifiedPredictionResponse,
-} from "../../services/unified/UnifiedEnhancedPredictionService";
-import EnhancedBackendApiService from "../../services/unified/EnhancedBackendApiService";
+// Import types for mock data
+interface ModelPerformanceMetrics {
+  accuracy: number;
+  precision: number;
+  recall: number;
+  f1Score: number;
+  roc: number;
+  predictionCount: number;
+  successRate: number;
+  averageConfidence: number;
+  modelStatus: string;
+  lastUpdated: string;
+  trainingTime: number;
+  inferenceTime: number;
+  memoryUsage: number;
+  cpuUsage: number;
+  modelVersion: string;
+  datasetSize: number;
+  featureCount: number;
+  hyperparameters: Record<string, any>;
+}
+
+interface SystemHealthMetrics {
+  overallHealth: number;
+  cpuUsage: number;
+  memoryUsage: number;
+  diskUsage: number;
+  networkLatency: number;
+  activeConnections: number;
+  errorRate: number;
+  uptime: number;
+  responseTime: number;
+  throughput: number;
+  lastHealthCheck: string;
+  services: Record<string, string>;
+  alerts: Array<{ level: string; message: string; timestamp: string }>;
+}
+
+interface UnifiedPredictionRequest {
+  event_id: string;
+  sport: string;
+  features: Record<string, number>;
+  processing_level: string;
+  include_uncertainty_quantification: boolean;
+  include_feature_engineering: boolean;
+  include_risk_assessment: boolean;
+  include_causal_analysis: boolean;
+  include_topological_analysis: boolean;
+  include_manifold_learning: boolean;
+  use_gpu_acceleration: boolean;
+  parallel_processing: boolean;
+  cache_results: boolean;
+  real_time_monitoring: boolean;
+  numerical_precision: string;
+  convergence_tolerance: number;
+  max_iterations: number;
+  stability_threshold: number;
+}
+
+interface UnifiedPredictionResponse {
+  final_prediction: number;
+  prediction_confidence: number;
+  risk_score: number;
+  uncertainty_bounds: {
+    lower: number;
+    upper: number;
+  };
+  feature_importance: Record<string, number>;
+  model_ensemble: Array<{
+    model_name: string;
+    prediction: number;
+    weight: number;
+  }>;
+  processing_metadata: {
+    computation_time: number;
+    models_used: number;
+    features_processed: number;
+    data_quality_score: number;
+  };
+}
 import { useLogger } from "../../hooks/useLogger";
 
 interface DashboardState {
