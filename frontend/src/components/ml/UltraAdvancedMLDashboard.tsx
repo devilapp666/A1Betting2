@@ -191,8 +191,126 @@ const UltraAdvancedMLDashboard: React.FC = () => {
 
   const loadMathematicalFoundations = async () => {
     try {
-      const foundations = await backendService.getMathematicalFoundations();
-      setMathematicalFoundations(foundations);
+      // Mock mathematical foundations data
+      const mockFoundations = {
+        probabilityTheory: {
+          bayesianInference: {
+            description:
+              "Advanced Bayesian methods for uncertainty quantification",
+            confidence: 0.94,
+            applications: [
+              "Risk Assessment",
+              "Prediction Intervals",
+              "Model Selection",
+            ],
+            algorithms: ["MCMC", "Variational Bayes", "Empirical Bayes"],
+          },
+          stochasticProcesses: {
+            description:
+              "Time series modeling with stochastic differential equations",
+            confidence: 0.89,
+            applications: [
+              "Market Volatility",
+              "Player Performance",
+              "Weather Patterns",
+            ],
+            algorithms: [
+              "Geometric Brownian Motion",
+              "Ornstein-Uhlenbeck",
+              "Jump Diffusion",
+            ],
+          },
+        },
+        statisticalLearning: {
+          ensembleMethods: {
+            description: "Advanced ensemble techniques for robust predictions",
+            confidence: 0.96,
+            applications: [
+              "Model Aggregation",
+              "Uncertainty Reduction",
+              "Bias Correction",
+            ],
+            algorithms: [
+              "Random Forest",
+              "Gradient Boosting",
+              "Bayesian Model Averaging",
+            ],
+          },
+          deepLearning: {
+            description:
+              "Neural network architectures for complex pattern recognition",
+            confidence: 0.91,
+            applications: [
+              "Feature Learning",
+              "Sequence Modeling",
+              "Attention Mechanisms",
+            ],
+            algorithms: ["Transformers", "LSTM", "CNN", "GAN"],
+          },
+        },
+        optimizationTheory: {
+          convexOptimization: {
+            description:
+              "Efficient algorithms for convex optimization problems",
+            confidence: 0.93,
+            applications: [
+              "Portfolio Optimization",
+              "Resource Allocation",
+              "Model Training",
+            ],
+            algorithms: [
+              "Interior Point",
+              "Gradient Descent",
+              "Proximal Methods",
+            ],
+          },
+          metaheuristics: {
+            description: "Global optimization for non-convex problems",
+            confidence: 0.87,
+            applications: [
+              "Hyperparameter Tuning",
+              "Feature Selection",
+              "Strategy Optimization",
+            ],
+            algorithms: [
+              "Genetic Algorithm",
+              "Simulated Annealing",
+              "Particle Swarm",
+            ],
+          },
+        },
+        informationTheory: {
+          mutualInformation: {
+            description: "Measuring statistical dependencies between variables",
+            confidence: 0.92,
+            applications: [
+              "Feature Selection",
+              "Causality Analysis",
+              "Network Analysis",
+            ],
+            algorithms: [
+              "KSG Estimator",
+              "Binning Methods",
+              "Neural Estimation",
+            ],
+          },
+          entropyMethods: {
+            description: "Information-theoretic approaches to model selection",
+            confidence: 0.88,
+            applications: ["Model Complexity", "Regularization", "Compression"],
+            algorithms: [
+              "Cross Entropy",
+              "Relative Entropy",
+              "Maximum Entropy",
+            ],
+          },
+        },
+      };
+
+      setMathematicalFoundations(mockFoundations);
+      logger.info(
+        "Mathematical foundations loaded successfully (using mock data)",
+      );
     } catch (error) {
       logger.error("Failed to load mathematical foundations", error);
     }
