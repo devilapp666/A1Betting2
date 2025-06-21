@@ -597,6 +597,9 @@ const AppContent: React.FC = () => {
               ))}
             </div>
           </div>
+          <p className="text-gray-400 text-sm mt-4 opacity-75">
+            Click anywhere to continue
+          </p>
         </motion.div>
       </div>
     );
