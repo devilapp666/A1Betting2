@@ -2735,12 +2735,119 @@ export const ConsolidatedUniversalMoneyMaker: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div className="space-y-4">
               <h4 className="font-semibold">Top Props</h4>
-              {/* Prop cards would be rendered here */}
+              <div className="space-y-3">
+                {[
+                  {
+                    player: "LeBron James",
+                    stat: "Points",
+                    line: 27.5,
+                    edge: "+12.4%",
+                    confidence: 0.89,
+                  },
+                  {
+                    player: "Stephen Curry",
+                    stat: "3PM",
+                    line: 4.5,
+                    edge: "+8.7%",
+                    confidence: 0.84,
+                  },
+                  {
+                    player: "Nikola Jokic",
+                    stat: "Rebounds",
+                    line: 11.5,
+                    edge: "+15.2%",
+                    confidence: 0.91,
+                  },
+                  {
+                    player: "Luka Doncic",
+                    stat: "Assists",
+                    line: 8.5,
+                    edge: "+6.9%",
+                    confidence: 0.82,
+                  },
+                ].map((prop, index) => (
+                  <div
+                    key={index}
+                    className="border rounded-lg p-3 bg-gray-50 dark:bg-gray-700"
+                  >
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="font-medium">{prop.player}</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">
+                          {prop.stat} {prop.line}
+                        </p>
+                      </div>
+                      <div className="text-right">
+                        <Badge className="bg-green-100 text-green-800 text-xs mb-1">
+                          {prop.edge} Edge
+                        </Badge>
+                        <p className="text-xs text-gray-500">
+                          {formatPercentage(prop.confidence)} Confidence
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
 
             <div className="space-y-4">
               <h4 className="font-semibold">Optimal Lineups</h4>
-              {/* Lineup builder would be rendered here */}
+              <div className="space-y-3">
+                {[
+                  {
+                    name: "High Confidence",
+                    picks: 4,
+                    payout: "3x",
+                    edge: "+24.7%",
+                    ev: "$147",
+                  },
+                  {
+                    name: "Balanced Risk",
+                    picks: 5,
+                    payout: "10x",
+                    edge: "+18.3%",
+                    ev: "$183",
+                  },
+                  {
+                    name: "Moonshot",
+                    picks: 6,
+                    payout: "25x",
+                    edge: "+11.2%",
+                    ev: "$280",
+                  },
+                ].map((lineup, index) => (
+                  <div
+                    key={index}
+                    className="border rounded-lg p-4 bg-white dark:bg-gray-800"
+                  >
+                    <div className="flex items-center justify-between mb-2">
+                      <h5 className="font-medium">{lineup.name}</h5>
+                      <Badge className="bg-blue-100 text-blue-800">
+                        {lineup.picks} Picks
+                      </Badge>
+                    </div>
+                    <div className="grid grid-cols-3 gap-2 text-sm">
+                      <div>
+                        <p className="text-gray-500">Payout</p>
+                        <p className="font-semibold">{lineup.payout}</p>
+                      </div>
+                      <div>
+                        <p className="text-gray-500">Edge</p>
+                        <p className="font-semibold text-green-600">
+                          {lineup.edge}
+                        </p>
+                      </div>
+                      <div>
+                        <p className="text-gray-500">Expected Value</p>
+                        <p className="font-semibold text-blue-600">
+                          {lineup.ev}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </MegaCard>
