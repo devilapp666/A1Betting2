@@ -58,7 +58,7 @@ interface NavigationItem {
   label: string;
   icon: React.ReactNode;
   component: React.ComponentType<any>;
-  shortcut?: string;
+  shortcut?: string[];
   badge?: string;
 }
 
