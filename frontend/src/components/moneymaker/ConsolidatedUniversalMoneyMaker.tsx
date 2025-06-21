@@ -3427,12 +3427,87 @@ const SimulationTab: React.FC = () => (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <div className="space-y-4">
         <h4 className="font-semibold">Simulation Parameters</h4>
-        {/* Simulation controls would go here */}
+        <div className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium mb-2">
+              Simulation Period
+            </label>
+            <select className="w-full border rounded-lg px-3 py-2">
+              <option value="1m">1 Month</option>
+              <option value="3m">3 Months</option>
+              <option value="6m">6 Months</option>
+              <option value="1y">1 Year</option>
+            </select>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium mb-2">
+              Initial Bankroll
+            </label>
+            <MegaInput type="number" placeholder="10000" defaultValue="10000" />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium mb-2">
+              Strategy Type
+            </label>
+            <select className="w-full border rounded-lg px-3 py-2">
+              <option value="conservative">Conservative</option>
+              <option value="balanced">Balanced</option>
+              <option value="aggressive">Aggressive</option>
+              <option value="custom">Custom</option>
+            </select>
+          </div>
+
+          <MegaButton variant="primary" className="w-full">
+            <Play size={16} />
+            Run Simulation
+          </MegaButton>
+        </div>
       </div>
 
       <div className="space-y-4">
         <h4 className="font-semibold">Results</h4>
-        {/* Simulation results would go here */}
+        <div className="space-y-4">
+          <div className="grid grid-cols-2 gap-4">
+            <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Final Bankroll
+              </p>
+              <p className="text-2xl font-bold text-green-600">$24,847</p>
+              <p className="text-sm text-green-500">+148.5% Return</p>
+            </div>
+            <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Max Drawdown
+              </p>
+              <p className="text-2xl font-bold text-red-500">-8.3%</p>
+              <p className="text-sm text-gray-500">Occurred in Month 3</p>
+            </div>
+          </div>
+
+          <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+            <h5 className="font-medium mb-2">Performance Metrics</h5>
+            <div className="grid grid-cols-3 gap-3 text-sm">
+              <div>
+                <p className="text-gray-500">Sharpe Ratio</p>
+                <p className="font-semibold">2.84</p>
+              </div>
+              <div>
+                <p className="text-gray-500">Win Rate</p>
+                <p className="font-semibold">72.4%</p>
+              </div>
+              <div>
+                <p className="text-gray-500">Profit Factor</p>
+                <p className="font-semibold">2.91</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="h-32 bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center">
+            <span className="text-gray-500">Performance Chart</span>
+          </div>
+        </div>
       </div>
     </div>
   </MegaCard>
