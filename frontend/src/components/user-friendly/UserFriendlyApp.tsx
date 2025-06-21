@@ -40,6 +40,125 @@ interface UserData {
   totalProfit: number;
 }
 
+// Add missing CSS classes for prototype styling
+const styleSheet = document.createElement("style");
+styleSheet.textContent = `
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-6px); }
+  }
+
+  @keyframes glow-pulse {
+    0% { box-shadow: 0 0 20px rgba(0,255,136,0.4); }
+    100% { box-shadow: 0 0 40px rgba(0,255,136,0.8); }
+  }
+
+  @keyframes slide-in-up {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes cyber-pulse {
+    0%, 100% { text-shadow: 0 0 10px rgba(0,255,136,0.8); }
+    50% { text-shadow: 0 0 20px rgba(0,255,136,1), 0 0 30px rgba(0,255,136,0.8); }
+  }
+
+  @keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  }
+
+  .dark .glass-card {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .holographic {
+    background: linear-gradient(45deg, #ff006e, #8338ec, #3a86ff, #06ffa5, #ffbe0b);
+    background-size: 400% 400%;
+    animation: gradient-shift 8s ease infinite;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .cyber-btn {
+    background: linear-gradient(45deg, #00ff88, #00d4ff);
+    border: none;
+    color: black;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cyber-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    transition: left 0.5s;
+  }
+
+  .cyber-btn:hover::before {
+    left: 100%;
+  }
+
+  .cyber-btn:hover {
+    box-shadow: 0 0 30px rgba(0,255,136,0.6);
+    transform: translateY(-2px);
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-glow-pulse {
+    animation: glow-pulse 2s ease-in-out infinite alternate;
+  }
+
+  .animate-slide-in-up {
+    animation: slide-in-up 0.6s ease-out;
+  }
+
+  .animate-cyber-pulse {
+    animation: cyber-pulse 3s ease-in-out infinite;
+  }
+
+  .shadow-neon {
+    box-shadow: 0 0 20px rgba(0,255,136,0.6), 0 0 40px rgba(0,255,136,0.4);
+  }
+
+  .shadow-neon-pink {
+    box-shadow: 0 0 20px rgba(255,16,240,0.6), 0 0 40px rgba(255,16,240,0.4);
+  }
+
+  .shadow-neon-blue {
+    box-shadow: 0 0 20px rgba(0,212,255,0.6), 0 0 40px rgba(0,212,255,0.4);
+  }
+
+  .text-electric-400 { color: #06ffa5; }
+  .text-electric-500 { color: #00ff88; }
+  .text-neon-blue { color: #00d4ff; }
+  .text-neon-pink { color: #ff10f0; }
+  .text-neon-purple { color: #7c3aed; }
+  .text-neon-green { color: #39ff14; }
+`;
+document.head.appendChild(styleSheet);
+
 export const UserFriendlyApp: React.FC = () => {
   const [currentPage, setCurrentPage] = useState("dashboard");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
