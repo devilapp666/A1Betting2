@@ -3166,7 +3166,7 @@ const QuickStatCard: React.FC<{
   </MegaCard>
 );
 
-const MetricCard: React.FC<{
+const MoneyMakerMetricCard: React.FC<{
   title: string;
   value: string;
   change?: number;
