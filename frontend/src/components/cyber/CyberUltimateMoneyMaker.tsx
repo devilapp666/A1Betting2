@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 
 // Import existing Money Maker component
-import { UltimateMoneyMaker } from "../MoneyMaker/UltimateMoneyMaker";
+import UltimateMoneyMaker from "../MoneyMaker/UltimateMoneyMaker";
 
 // Cyber UI Components
 import GlassCard from "../ui/GlassCard";
