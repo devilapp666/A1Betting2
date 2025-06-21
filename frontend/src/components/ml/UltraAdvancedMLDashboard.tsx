@@ -679,6 +679,30 @@ const UltraAdvancedMLDashboard: React.FC = () => {
           <Card>
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
+                <div>
+                  <h3 className="text-sm font-medium text-gray-700">
+                    System Status
+                  </h3>
+                  <p
+                    className={`text-lg font-semibold ${
+                      !systemHealth
+                        ? "text-gray-600"
+                        : systemHealth.overallHealth > 0.8
+                          ? "text-green-600"
+                          : systemHealth.overallHealth > 0.6
+                            ? "text-yellow-600"
+                            : "text-red-600"
+                    }`}
+                  >
+                    {!systemHealth
+                      ? "LOADING"
+                      : systemHealth.overallHealth > 0.8
+                        ? "HEALTHY"
+                        : systemHealth.overallHealth > 0.6
+                          ? "DEGRADED"
+                          : "CRITICAL"}
+                  </p>
+                </div>
                 <div
                   className={`p-2 rounded-full ${
                     !systemHealth
@@ -698,26 +722,6 @@ const UltraAdvancedMLDashboard: React.FC = () => {
                     <AlertTriangle className="w-6 h-6 text-yellow-600" />
                   ) : (
                     <XCircle className="w-6 h-6 text-red-600" />
-                  )}
-                          ? "HEALTHY"
-                          : systemHealth.overallHealth > 0.6
-                            ? "DEGRADED"
-                            : "CRITICAL")}
-                  </p>
-                </div>
-                <div
-                  className={`p-2 rounded-full ${
-                    systemHealth.overall_status === "healthy"
-                      ? "bg-green-100"
-                      : systemHealth.overall_status === "degraded"
-                        ? "bg-yellow-100"
-                        : "bg-red-100"
-                  }`}
-                >
-                  {systemHealth.overall_status === "healthy" ? (
-                    <CheckCircle className="w-6 h-6 text-green-600" />
-                  ) : (
-                    <AlertCircle className="w-6 h-6 text-yellow-600" />
                   )}
                 </div>
               </div>
