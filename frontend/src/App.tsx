@@ -183,7 +183,7 @@ const CyberModernSidebar: React.FC<SidebarProps> = ({
   user,
 }) => {
   return (
-    <aside className="w-72 h-full bg-gradient-to-b from-gray-900/95 to-black/95 border-r border-cyan-500/20 flex flex-col backdrop-blur-xl">
+    <aside className="w-72 h-full bg-gradient-to-b from-gray-900/95 to-black/95 border-r border-cyan-500/20 flex flex-col backdrop-blur-xl z-50 relative">
       {/* Cyber Logo Section */}
       <div className="p-6 border-b border-cyan-500/30">
         <div className="flex items-center gap-4">
