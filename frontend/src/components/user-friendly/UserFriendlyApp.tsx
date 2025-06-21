@@ -210,10 +210,10 @@ export const UserFriendlyApp: React.FC = () => {
                   whileHover={{ scale: 1.1, rotate: 180 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => setIsAdvancedMode(!isAdvancedMode)}
-                  className={`p-3 rounded-xl transition-all duration-300 ${
+                  className={`p-3 rounded-xl transition-all duration-300 backdrop-blur-sm ${
                     isAdvancedMode
-                      ? "bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-500/50 text-cyan-400 shadow-lg shadow-cyan-500/20"
-                      : "bg-gray-800/50 hover:bg-gray-700/50 text-gray-400"
+                      ? "bg-gradient-to-r from-cyan-500/30 to-blue-500/30 border border-cyan-500/60 text-cyan-400 shadow-2xl shadow-cyan-500/40"
+                      : "bg-gray-800/30 hover:bg-gray-700/30 border border-gray-600/30 text-gray-400 hover:text-cyan-400 hover:border-cyan-500/30"
                   }`}
                   title={
                     isAdvancedMode
@@ -221,39 +221,40 @@ export const UserFriendlyApp: React.FC = () => {
                       : "Switch to Advanced Mode"
                   }
                 >
-                  <span className="text-lg">🔄</span>
+                  <span className="text-lg drop-shadow-lg">🔄</span>
                 </motion.button>
 
                 <motion.button
                   whileHover={{ scale: 1.1 }}
-                  className="p-3 bg-gray-800/50 rounded-xl hover:bg-gray-700/50 transition-all"
+                  className="p-3 bg-gray-800/30 border border-gray-600/30 rounded-xl hover:bg-blue-500/20 hover:border-blue-500/40 transition-all backdrop-blur-sm group"
                 >
-                  <Search className="w-5 h-5 text-gray-400" />
+                  <Search className="w-5 h-5 text-gray-400 group-hover:text-blue-400 transition-colors" />
                 </motion.button>
 
                 <motion.button
                   whileHover={{ scale: 1.1 }}
-                  className="relative p-3 bg-gray-800/50 rounded-xl hover:bg-gray-700/50 transition-all"
+                  className="relative p-3 bg-gray-800/30 border border-gray-600/30 rounded-xl hover:bg-red-500/20 hover:border-red-500/40 transition-all backdrop-blur-sm group"
                 >
-                  <Bell className="w-5 h-5 text-gray-400" />
-                  <div className="absolute top-1 right-1 w-3 h-3 bg-red-500 rounded-full animate-pulse" />
+                  <Bell className="w-5 h-5 text-gray-400 group-hover:text-red-400 transition-colors" />
+                  <div className="absolute top-1 right-1 w-3 h-3 bg-red-500 rounded-full animate-pulse shadow-lg shadow-red-500/50" />
                 </motion.button>
 
                 {/* User Avatar */}
                 <div className="flex items-center space-x-3">
                   <div className="relative">
-                    <div className="absolute inset-0 bg-purple-500 rounded-full blur-sm opacity-50" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full blur-md opacity-60" />
+                    <div className="absolute inset-0 bg-purple-500 rounded-full blur-sm opacity-40" />
                     <img
                       src={`https://ui-avatars.com/api/?name=${user.name}&background=7c3aed&color=fff&bold=true`}
                       alt="Profile"
-                      className="relative w-10 h-10 rounded-full border-2 border-purple-500"
+                      className="relative w-10 h-10 rounded-full border-2 border-purple-500 shadow-2xl shadow-purple-500/50"
                     />
                   </div>
                   <div className="hidden md:block">
-                    <div className="font-semibold text-white text-sm">
+                    <div className="font-semibold text-white text-sm drop-shadow-lg">
                       {user.name}
                     </div>
-                    <div className="text-xs text-gray-400">{user.email}</div>
+                    <div className="text-xs text-cyan-300/80">{user.email}</div>
                   </div>
                 </div>
               </div>
