@@ -177,21 +177,29 @@ export const UserFriendlyApp: React.FC = () => {
             <div className="flex items-center space-x-6">
               {/* Balance & Stats */}
               <div className="hidden md:flex items-center space-x-6 text-sm">
-                <div className="text-center">
-                  <div className="text-xs text-gray-400 uppercase">Balance</div>
-                  <div className="font-bold text-green-400">
+                <div className="text-center px-4 py-2 bg-green-500/10 rounded-lg border border-green-500/30 backdrop-blur-sm">
+                  <div className="text-xs text-green-300/80 uppercase font-semibold">
+                    Balance
+                  </div>
+                  <div className="font-bold text-green-400 drop-shadow-lg">
                     ${user.balance.toLocaleString()}
                   </div>
                 </div>
-                <div className="text-center">
-                  <div className="text-xs text-gray-400 uppercase">
+                <div className="text-center px-4 py-2 bg-cyan-500/10 rounded-lg border border-cyan-500/30 backdrop-blur-sm">
+                  <div className="text-xs text-cyan-300/80 uppercase font-semibold">
                     Win Rate
                   </div>
-                  <div className="font-bold text-cyan-400">{user.winRate}%</div>
+                  <div className="font-bold text-cyan-400 drop-shadow-lg">
+                    {user.winRate}%
+                  </div>
                 </div>
-                <div className="text-center">
-                  <div className="text-xs text-gray-400 uppercase">Tier</div>
-                  <div className="font-bold text-purple-400">{user.tier}</div>
+                <div className="text-center px-4 py-2 bg-purple-500/10 rounded-lg border border-purple-500/30 backdrop-blur-sm">
+                  <div className="text-xs text-purple-300/80 uppercase font-semibold">
+                    Tier
+                  </div>
+                  <div className="font-bold text-purple-400 drop-shadow-lg">
+                    {user.tier}
+                  </div>
                 </div>
               </div>
 
