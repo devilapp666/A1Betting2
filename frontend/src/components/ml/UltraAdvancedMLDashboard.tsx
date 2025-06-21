@@ -642,23 +642,28 @@ const UltraAdvancedMLDashboard: React.FC = () => {
   }, [modelMetrics]);
 
   return (
-    <div className="space-y-6 p-6">
+    <div className="space-y-6 p-6 min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
       {/* Header */}
-      <div className="flex items-center justify-between sticky top-0 z-40 bg-white/95 backdrop-blur-sm py-4 -mx-6 px-6 mb-2 shadow-sm">
+      <div className="flex items-center justify-between sticky top-0 z-40 bg-black/20 backdrop-blur-xl border-b border-white/10 py-4 -mx-6 px-6 mb-2 shadow-lg">
         <div>
           <div className="flex items-center gap-3 mb-2">
-            <Brain className="w-8 h-8 text-purple-600" />
-            <h1 className="text-3xl font-bold text-gray-900">
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-green-400 to-blue-500 rounded-xl blur-lg opacity-75 animate-pulse" />
+              <div className="relative w-8 h-8 bg-gradient-to-br from-green-400 to-blue-500 rounded-xl flex items-center justify-center">
+                <Brain className="w-5 h-5 text-black font-bold" />
+              </div>
+            </div>
+            <h1 className="text-3xl font-black bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 bg-clip-text text-transparent animate-pulse">
               Ultra-Advanced ML Dashboard
             </h1>
             <Badge
               variant="outline"
-              className="bg-purple-50 text-purple-700 border-purple-300"
+              className="bg-green-500/20 text-green-400 border-green-500/50 shadow-lg shadow-green-500/20"
             >
               Research Grade
             </Badge>
           </div>
-          <p className="text-gray-600">
+          <p className="text-gray-300">
             Real-time monitoring of enhanced mathematical ML systems with
             research-grade rigor
           </p>
