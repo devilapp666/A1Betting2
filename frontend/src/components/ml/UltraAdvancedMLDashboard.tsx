@@ -29,6 +29,7 @@ import {
   Binary,
   Play,
   Pause,
+  Radar,
 } from "lucide-react";
 import SafeChart from "../ui/SafeChart";
 import toast from "react-hot-toast";
