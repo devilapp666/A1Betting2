@@ -43,6 +43,7 @@ interface UserData {
 export const UserFriendlyApp: React.FC = () => {
   const [currentPage, setCurrentPage] = useState("dashboard");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isAdvancedMode, setIsAdvancedMode] = useState(false);
 
   const [user] = useState<UserData>({
     name: "Alex Chen",
