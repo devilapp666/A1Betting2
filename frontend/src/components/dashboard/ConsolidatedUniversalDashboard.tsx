@@ -753,7 +753,7 @@ const OverviewTab: React.FC<{
           AI finds the highest-paying 84%+ win probability lineup
         </div>
         <Suspense fallback={<Skeleton className="h-32" />}>
-          <UnifiedMoneyMaker />
+          <UniversalMoneyMaker />
         </Suspense>
       </div>
     )}
