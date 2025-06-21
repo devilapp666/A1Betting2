@@ -299,61 +299,103 @@ export const UserFriendlyDashboard: React.FC<{
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
-        className="space-y-6"
+        className="grid grid-cols-1 md:grid-cols-2 gap-8"
       >
-        <h2 className="text-3xl font-bold text-center text-white mb-8">
-          🎯 Choose Your Path to Profit
-        </h2>
+        {/* Money Maker Pro */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          whileHover={{ scale: 1.02, y: -4 }}
+          onClick={() => onNavigate("money-maker")}
+          className="glass-card rounded-2xl p-8 text-center hover:shadow-neon transition-all duration-300 cursor-pointer group"
+        >
+          <div className="text-5xl mb-4 text-green-400 animate-float">💰</div>
+          <h3 className="text-xl font-bold mb-2 text-green-400">
+            Money Maker Pro
+          </h3>
+          <p className="text-gray-300 mb-4 text-sm">
+            AI-powered profit generation with quantum enhancement
+          </p>
+          <button className="cyber-btn w-full py-3 rounded-xl font-semibold transition-all duration-300">
+            <div className="flex items-center justify-center space-x-2">
+              <span>Get Started</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </div>
+          </button>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {quickActions.map((action, index) => (
-            <motion.div
-              key={action.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 + index * 0.1 }}
-              whileHover={{ scale: 1.02, y: -4 }}
-              onClick={() => onNavigate(action.action)}
-              className="relative bg-white/5 backdrop-blur-xl rounded-3xl p-8 border border-white/10 hover:border-white/20 cursor-pointer transition-all overflow-hidden group"
-            >
-              {/* Background Gradient */}
-              <div
-                className={`absolute inset-0 bg-gradient-to-r ${action.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}
-              />
+        {/* PrizePicks Pro */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+          whileHover={{ scale: 1.02, y: -4 }}
+          onClick={() => onNavigate("prizepicks")}
+          className="glass-card rounded-2xl p-8 text-center hover:shadow-neon transition-all duration-300 cursor-pointer group"
+        >
+          <div className="text-5xl mb-4 text-blue-400 animate-float">🏆</div>
+          <h3 className="text-xl font-bold mb-2 text-blue-400">
+            PrizePicks Pro
+          </h3>
+          <p className="text-gray-300 mb-4 text-sm">
+            Enhanced player prop analysis with AI recommendations
+          </p>
+          <button className="cyber-btn w-full py-3 rounded-xl font-semibold transition-all duration-300">
+            <div className="flex items-center justify-center space-x-2">
+              <span>Get Started</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </div>
+          </button>
+        </motion.div>
 
-              {/* Badge */}
-              {action.badge && (
-                <div className="absolute top-4 right-4">
-                  <div
-                    className={`px-3 py-1 bg-gradient-to-r ${action.gradient} text-white text-xs font-bold rounded-full`}
-                  >
-                    {action.badge}
-                  </div>
-                </div>
-              )}
+        {/* PropGPT Chat */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+          whileHover={{ scale: 1.02, y: -4 }}
+          onClick={() => onNavigate("propgpt")}
+          className="glass-card rounded-2xl p-8 text-center hover:shadow-neon transition-all duration-300 cursor-pointer group"
+        >
+          <div className="text-5xl mb-4 text-purple-400 animate-float">🤖</div>
+          <h3 className="text-xl font-bold mb-2 text-purple-400">
+            PropGPT Chat
+          </h3>
+          <p className="text-gray-300 mb-4 text-sm">
+            Your AI sports betting assistant for instant insights
+          </p>
+          <button className="cyber-btn w-full py-3 rounded-xl font-semibold transition-all duration-300">
+            <div className="flex items-center justify-center space-x-2">
+              <span>Get Started</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </div>
+          </button>
+        </motion.div>
 
-              <div className="relative z-10">
-                <div
-                  className={`inline-flex p-4 rounded-2xl bg-gradient-to-r ${action.gradient} bg-opacity-20 mb-6`}
-                >
-                  {action.icon}
-                </div>
-
-                <h3 className="text-2xl font-bold text-white mb-3">
-                  {action.title}
-                </h3>
-                <p className="text-gray-300 mb-6 leading-relaxed">
-                  {action.description}
-                </p>
-
-                <div className="flex items-center text-white font-semibold group-hover:text-cyan-400 transition-colors">
-                  <span className="mr-2">Get Started</span>
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+        {/* Live Analytics */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6 }}
+          whileHover={{ scale: 1.02, y: -4 }}
+          onClick={() => onNavigate("analytics")}
+          className="glass-card rounded-2xl p-8 text-center hover:shadow-neon transition-all duration-300 cursor-pointer group"
+        >
+          <div className="text-5xl mb-4 text-orange-400 animate-float">📊</div>
+          <h3 className="text-xl font-bold mb-2 text-orange-400">
+            Live Analytics
+          </h3>
+          <p className="text-gray-300 mb-4 text-sm">
+            Real-time data analysis and performance tracking
+          </p>
+          <button className="cyber-btn w-full py-3 rounded-xl font-semibold transition-all duration-300">
+            <div className="flex items-center justify-center space-x-2">
+              <span>Get Started</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </div>
+          </button>
+        </motion.div>
       </motion.div>
 
       {/* Live Games Feed */}
