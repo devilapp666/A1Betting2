@@ -1,12 +1,4 @@
-import React, {
-  useState,
-  useEffect,
-  useCallback,
-  useMemo,
-  Suspense,
-  lazy,
-} from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useState, useCallback } from "react";
 import { useQuery } from "@tanstack/react-query";
 import {
   BarChart3,
@@ -21,49 +13,20 @@ import {
   Download,
   Filter,
   RefreshCw,
-  Calendar,
-  Clock,
-  Eye,
   AlertTriangle,
   CheckCircle,
-  XCircle,
   Info,
-  Star,
-  Award,
   Cpu,
-  Database,
-  Network,
-  PieChart,
-  LineChart,
-  BarChart,
-  Scatter,
-  Map,
-  Grid,
-  List,
-  Table,
-  Layout,
-  Maximize,
-  Minimize,
-  Plus,
-  Minus,
-  ArrowUp,
-  ArrowDown,
-  ArrowRight,
-  ArrowLeft,
 } from "lucide-react";
 
 // UI Components
-import { MegaButton, MegaCard, MegaInput } from "../mega/MegaUI";
+import { MegaButton, MegaCard } from "../mega/MegaUI";
 import { CyberText, CyberContainer } from "../mega/CyberTheme";
 import { Badge } from "../ui/badge";
-import { Card } from "../ui/card";
 import { Skeleton } from "../ui/Skeleton";
 
-// Chart components (lazy loaded) - commented out to avoid import issues
-// const Chart = lazy(() => import("react-chartjs-2").then(m => ({ default: m.Chart })));
-
 // ============================================================================
-// TYPES & INTERFACES - Consolidated from all analytics variants
+// TYPES & INTERFACES
 // ============================================================================
 
 export interface AnalyticsMetric {
@@ -83,320 +46,10 @@ export interface AnalyticsMetric {
     critical: number;
   };
   description?: string;
-  calculation?: string;
   lastUpdated: Date;
   source: string;
   reliability: number;
   frequency: "realtime" | "minute" | "hourly" | "daily" | "weekly" | "monthly";
-}
-
-export interface ModelAnalysis {
-  modelId: string;
-  modelName: string;
-  modelType: "ml" | "statistical" | "hybrid" | "ensemble";
-  version: string;
-  status: "active" | "training" | "testing" | "deprecated" | "error";
-  accuracy: number;
-  precision: number;
-  recall: number;
-  f1Score: number;
-  auc: number;
-  sharpeRatio: number;
-  maxDrawdown: number;
-  winRate: number;
-  profitFactor: number;
-  kellyOptimal: number;
-  confidence: number;
-  stability: number;
-  robustness: number;
-  generalization: number;
-  overfitting: number;
-  bias: number;
-  variance: number;
-  noiseRatio: number;
-  signalStrength: number;
-  featureImportance: Record<string, number>;
-  performanceHistory: Array<{
-    date: Date;
-    accuracy: number;
-    profit: number;
-    drawdown: number;
-  }>;
-  backtestResults: {
-    period: string;
-    totalReturn: number;
-    annualizedReturn: number;
-    volatility: number;
-    sharpeRatio: number;
-    maxDrawdown: number;
-    calmarRatio: number;
-    winRate: number;
-    profitFactor: number;
-    trades: number;
-    avgWin: number;
-    avgLoss: number;
-    largestWin: number;
-    largestLoss: number;
-  };
-  realTimeMetrics: {
-    predictions: number;
-    accuracy: number;
-    latency: number;
-    throughput: number;
-    errorRate: number;
-    uptime: number;
-  };
-  resourceUsage: {
-    cpu: number;
-    memory: number;
-    gpu?: number;
-    storage: number;
-    network: number;
-  };
-  training: {
-    dataset: string;
-    samples: number;
-    features: number;
-    epochs: number;
-    batchSize: number;
-    learningRate: number;
-    regularization: number;
-    validationSplit: number;
-    trainingTime: number;
-    convergence: boolean;
-  };
-  deployment: {
-    environment: string;
-    version: string;
-    deployedAt: Date;
-    instances: number;
-    loadBalancer: boolean;
-    autoScaling: boolean;
-    healthCheck: boolean;
-  };
-  monitoring: {
-    alerts: Array<{
-      id: string;
-      type: "performance" | "accuracy" | "latency" | "error";
-      severity: "low" | "medium" | "high" | "critical";
-      message: string;
-      timestamp: Date;
-      resolved: boolean;
-    }>;
-    metrics: Array<{
-      name: string;
-      value: number;
-      timestamp: Date;
-    }>;
-  };
-  metadata: {
-    tags: string[];
-    description: string;
-    author: string;
-    createdAt: Date;
-    updatedAt: Date;
-    notes: string;
-  };
-}
-
-export interface BettingAnalysis {
-  period: string;
-  totalBets: number;
-  totalStake: number;
-  totalPayout: number;
-  totalProfit: number;
-  roi: number;
-  winRate: number;
-  lossRate: number;
-  pushRate: number;
-  averageStake: number;
-  averageOdds: number;
-  averageWin: number;
-  averageLoss: number;
-  largestWin: number;
-  largestLoss: number;
-  longestWinStreak: number;
-  longestLossStreak: number;
-  currentStreak: {
-    type: "win" | "loss" | "none";
-    count: number;
-  };
-  profitFactor: number;
-  sharpeRatio: number;
-  maxDrawdown: number;
-  currentDrawdown: number;
-  recoveryFactor: number;
-  calmarRatio: number;
-  sortinoRatio: number;
-  omegaRatio: number;
-  kellyOptimal: number;
-  bankrollGrowth: number;
-  riskAdjustedReturn: number;
-  volatility: number;
-  beta: number;
-  alpha: number;
-  informationRatio: number;
-  trackingError: number;
-  hitRate: number;
-  missRate: number;
-  edgeDetection: {
-    totalEdge: number;
-    realizedEdge: number;
-    edgeEfficiency: number;
-    valueExtraction: number;
-  };
-  marketAnalysis: {
-    favoritesBias: number;
-    underdogSuccess: number;
-    lineMovement: number;
-    steamMoves: number;
-    reverseMoves: number;
-    marketEfficiency: number;
-  };
-  sportBreakdown: Record<
-    string,
-    {
-      bets: number;
-      profit: number;
-      roi: number;
-      winRate: number;
-      averageOdds: number;
-    }
-  >;
-  marketBreakdown: Record<
-    string,
-    {
-      bets: number;
-      profit: number;
-      roi: number;
-      winRate: number;
-      averageOdds: number;
-    }
-  >;
-  timeAnalysis: {
-    hourly: Record<string, number>;
-    daily: Record<string, number>;
-    weekly: Record<string, number>;
-    monthly: Record<string, number>;
-    seasonal: Record<string, number>;
-  };
-  stakingAnalysis: {
-    flatBetting: {
-      roi: number;
-      profit: number;
-      maxDrawdown: number;
-    };
-    kellyBetting: {
-      roi: number;
-      profit: number;
-      maxDrawdown: number;
-    };
-    proportionalBetting: {
-      roi: number;
-      profit: number;
-      maxDrawdown: number;
-    };
-    optimization: {
-      optimalStakeSize: number;
-      optimalKelly: number;
-      riskBudget: number;
-      diversification: number;
-    };
-  };
-  riskMetrics: {
-    valueAtRisk: number;
-    conditionalVaR: number;
-    expectedShortfall: number;
-    riskBudgetUtilization: number;
-    concentrationRisk: number;
-    correlationRisk: number;
-    liquidityRisk: number;
-    operationalRisk: number;
-  };
-  benchmarking: {
-    marketReturn: number;
-    excessReturn: number;
-    relativeSharpe: number;
-    informationRatio: number;
-    trackingError: number;
-    activeReturn: number;
-    benchmarkBeaten: boolean;
-    outperformancePeriods: number;
-    underperformancePeriods: number;
-  };
-}
-
-export interface SystemAnalytics {
-  uptime: number;
-  availability: number;
-  reliability: number;
-  performance: {
-    averageLatency: number;
-    p95Latency: number;
-    p99Latency: number;
-    throughput: number;
-    requestsPerSecond: number;
-    errorsPerSecond: number;
-    errorRate: number;
-  };
-  resources: {
-    cpu: {
-      usage: number;
-      cores: number;
-      frequency: number;
-      load: number;
-    };
-    memory: {
-      usage: number;
-      total: number;
-      available: number;
-      cached: number;
-    };
-    disk: {
-      usage: number;
-      total: number;
-      available: number;
-      io: {
-        read: number;
-        write: number;
-      };
-    };
-    network: {
-      bandwidth: number;
-      latency: number;
-      packetLoss: number;
-      connections: number;
-    };
-  };
-  dataQuality: {
-    completeness: number;
-    accuracy: number;
-    timeliness: number;
-    consistency: number;
-    validity: number;
-    uniqueness: number;
-  };
-  security: {
-    threatLevel: "low" | "medium" | "high" | "critical";
-    incidents: number;
-    vulnerabilities: number;
-    patches: number;
-    compliance: number;
-  };
-  monitoring: {
-    activeAlerts: number;
-    resolvedAlerts: number;
-    meanTimeToDetection: number;
-    meanTimeToResolution: number;
-    escalations: number;
-  };
-  integrations: Array<{
-    name: string;
-    status: "healthy" | "degraded" | "down";
-    latency: number;
-    errorRate: number;
-    lastCheck: Date;
-  }>;
 }
 
 interface ConsolidatedAnalyticsProps {
@@ -418,7 +71,7 @@ interface ConsolidatedAnalyticsProps {
 }
 
 // ============================================================================
-// MOCK DATA - Consolidated from all variants
+// MOCK DATA
 // ============================================================================
 
 const mockMetrics: AnalyticsMetric[] = [
@@ -522,110 +175,6 @@ const mockMetrics: AnalyticsMetric[] = [
   },
 ];
 
-const mockModelAnalysis: ModelAnalysis[] = [
-  {
-    modelId: "xgb-v4",
-    modelName: "XGBoost Enhanced V4",
-    modelType: "ml",
-    version: "4.2.1",
-    status: "active",
-    accuracy: 0.892,
-    precision: 0.887,
-    recall: 0.894,
-    f1Score: 0.89,
-    auc: 0.934,
-    sharpeRatio: 2.84,
-    maxDrawdown: 0.073,
-    winRate: 0.724,
-    profitFactor: 2.91,
-    kellyOptimal: 0.245,
-    confidence: 0.912,
-    stability: 0.956,
-    robustness: 0.934,
-    generalization: 0.887,
-    overfitting: 0.023,
-    bias: 0.012,
-    variance: 0.034,
-    noiseRatio: 0.087,
-    signalStrength: 0.913,
-    featureImportance: {
-      recent_form: 0.234,
-      head_to_head: 0.187,
-      injury_impact: 0.156,
-      weather: 0.123,
-      line_movement: 0.089,
-      public_betting: 0.067,
-      sharp_money: 0.144,
-    },
-    performanceHistory: [],
-    backtestResults: {
-      period: "2023-2024",
-      totalReturn: 0.248,
-      annualizedReturn: 0.267,
-      volatility: 0.091,
-      sharpeRatio: 2.84,
-      maxDrawdown: 0.073,
-      calmarRatio: 3.66,
-      winRate: 0.724,
-      profitFactor: 2.91,
-      trades: 1247,
-      avgWin: 147.8,
-      avgLoss: -89.3,
-      largestWin: 1834.7,
-      largestLoss: -456.2,
-    },
-    realTimeMetrics: {
-      predictions: 847,
-      accuracy: 0.889,
-      latency: 23,
-      throughput: 1847,
-      errorRate: 0.002,
-      uptime: 0.9987,
-    },
-    resourceUsage: {
-      cpu: 0.34,
-      memory: 0.67,
-      gpu: 0.23,
-      storage: 0.12,
-      network: 0.08,
-    },
-    training: {
-      dataset: "NBA_2024_Enhanced",
-      samples: 45632,
-      features: 287,
-      epochs: 1500,
-      batchSize: 128,
-      learningRate: 0.001,
-      regularization: 0.01,
-      validationSplit: 0.2,
-      trainingTime: 1847,
-      convergence: true,
-    },
-    deployment: {
-      environment: "production",
-      version: "4.2.1",
-      deployedAt: new Date(),
-      instances: 3,
-      loadBalancer: true,
-      autoScaling: true,
-      healthCheck: true,
-    },
-    monitoring: {
-      alerts: [],
-      metrics: [],
-    },
-    metadata: {
-      tags: ["nba", "ml", "gradient-boosting", "production"],
-      description:
-        "Enhanced XGBoost model for NBA predictions with weather and injury integration",
-      author: "ML Team",
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      notes: "Latest version with improved feature engineering",
-    },
-  },
-];
-
 // ============================================================================
 // MAIN CONSOLIDATED ANALYTICS COMPONENT
 // ============================================================================
@@ -660,11 +209,7 @@ export const ConsolidatedUniversalAnalytics: React.FC<
     | "real-time"
     | "comparison"
   >("overview");
-  const [selectedMetrics, setSelectedMetrics] = useState<string[]>([]);
   const [isRefreshing, setIsRefreshing] = useState(false);
-  const [viewMode, setViewMode] = useState<
-    "cards" | "charts" | "table" | "dashboard"
-  >("dashboard");
   const [filters, setFilters] = useState({
     timeRange,
     category: "all",
@@ -683,12 +228,6 @@ export const ConsolidatedUniversalAnalytics: React.FC<
     refetchInterval: refreshInterval,
   });
 
-  const { data: modelAnalysis, isLoading: modelsLoading } = useQuery({
-    queryKey: ["model-analysis"],
-    queryFn: async () => mockModelAnalysis,
-    refetchInterval: refreshInterval,
-  });
-
   // ========== HANDLERS ==========
   const handleRefresh = useCallback(async () => {
     setIsRefreshing(true);
@@ -697,10 +236,8 @@ export const ConsolidatedUniversalAnalytics: React.FC<
   }, [refetchMetrics]);
 
   const handleExport = useCallback(() => {
-    // Export analytics data
     const data = {
       metrics,
-      models: modelAnalysis,
       exportDate: new Date().toISOString(),
       timeRange: filters.timeRange,
     };
@@ -716,7 +253,7 @@ export const ConsolidatedUniversalAnalytics: React.FC<
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
-  }, [metrics, modelAnalysis, filters.timeRange]);
+  }, [metrics, filters.timeRange]);
 
   // ========== UTILITY FUNCTIONS ==========
   const formatValue = (value: number, format: string) => {
@@ -777,7 +314,16 @@ export const ConsolidatedUniversalAnalytics: React.FC<
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
         {metrics
           ?.slice(0, 5)
-          .map((metric) => <MetricCard key={metric.id} metric={metric} />)}
+          .map((metric) => (
+            <MetricCard
+              key={metric.id}
+              metric={metric}
+              formatValue={formatValue}
+              getTrendColor={getTrendColor}
+              getTrendIcon={getTrendIcon}
+              getImportanceColor={getImportanceColor}
+            />
+          ))}
       </div>
 
       {/* Charts Section */}
@@ -865,165 +411,70 @@ export const ConsolidatedUniversalAnalytics: React.FC<
         </div>
       </div>
 
-      {modelsLoading ? (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {[...Array(4)].map((_, i) => (
-            <Skeleton key={i} className="h-64" />
-          ))}
-        </div>
-      ) : (
-        <div className="space-y-6">
-          {modelAnalysis?.map((model) => (
-            <ModelAnalysisCard key={model.modelId} model={model} />
-          ))}
-        </div>
-      )}
-    </div>
-  );
-
-  const renderPerformanceTab = () => (
-    <div className="space-y-6">
-      <h2 className="text-2xl font-bold">Performance Analytics</h2>
-
-      {/* Performance Metrics Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <PerformanceMetricCard
-          title="Total Return"
-          value="24.8%"
-          change={5.2}
-          icon={<TrendingUp size={24} />}
-        />
-        <PerformanceMetricCard
-          title="Sharpe Ratio"
-          value="2.84"
-          change={0.17}
-          icon={<Activity size={24} />}
-        />
-        <PerformanceMetricCard
-          title="Max Drawdown"
-          value="8.3%"
-          change={-1.2}
-          icon={<TrendingDown size={24} />}
-        />
-        <PerformanceMetricCard
-          title="Win Rate"
-          value="72.4%"
-          change={2.1}
-          icon={<Target size={24} />}
-        />
-      </div>
-
-      {/* Performance Charts */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <MegaCard className="p-6">
-          <h3 className="text-lg font-bold mb-4">Equity Curve</h3>
-          <div className="h-80 bg-gray-50 dark:bg-gray-800 rounded-lg flex items-center justify-center">
-            <span className="text-gray-500">Equity Curve Chart</span>
-          </div>
-        </MegaCard>
+        {[
+          {
+            name: "XGBoost Enhanced V4",
+            accuracy: 89.2,
+            status: "active",
+            version: "4.2.1",
+          },
+          {
+            name: "Neural Network Pro",
+            accuracy: 87.8,
+            status: "active",
+            version: "2.1.0",
+          },
+          {
+            name: "Ensemble Master",
+            accuracy: 91.4,
+            status: "training",
+            version: "1.5.2",
+          },
+          {
+            name: "Quantum Predictor",
+            accuracy: 93.1,
+            status: "testing",
+            version: "0.8.1",
+          },
+        ].map((model, index) => (
+          <MegaCard key={index} className="p-6">
+            <div className="flex items-start justify-between mb-4">
+              <div>
+                <h3 className="text-lg font-bold">{model.name}</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  v{model.version}
+                </p>
+              </div>
 
-        <MegaCard className="p-6">
-          <h3 className="text-lg font-bold mb-4">Drawdown Analysis</h3>
-          <div className="h-80 bg-gray-50 dark:bg-gray-800 rounded-lg flex items-center justify-center">
-            <span className="text-gray-500">Drawdown Chart</span>
-          </div>
-        </MegaCard>
+              <Badge
+                className={`${
+                  model.status === "active"
+                    ? "bg-green-100 text-green-800"
+                    : model.status === "training"
+                      ? "bg-yellow-100 text-yellow-800"
+                      : "bg-blue-100 text-blue-800"
+                }`}
+              >
+                {model.status.toUpperCase()}
+              </Badge>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <p className="text-xs text-gray-500">Accuracy</p>
+                <p className="font-semibold text-green-600">
+                  {model.accuracy}%
+                </p>
+              </div>
+              <div>
+                <p className="text-xs text-gray-500">Last Updated</p>
+                <p className="text-xs text-gray-600">2 hours ago</p>
+              </div>
+            </div>
+          </MegaCard>
+        ))}
       </div>
-    </div>
-  );
-
-  const renderRiskTab = () => (
-    <div className="space-y-6">
-      <h2 className="text-2xl font-bold">Risk Analytics</h2>
-
-      {/* Risk Metrics */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <RiskMetricCard
-          title="Value at Risk (95%)"
-          value="$2,847"
-          severity="medium"
-          icon={<Shield size={24} />}
-        />
-        <RiskMetricCard
-          title="Expected Shortfall"
-          value="$4,236"
-          severity="medium"
-          icon={<AlertTriangle size={24} />}
-        />
-        <RiskMetricCard
-          title="Risk Budget Utilization"
-          value="67.3%"
-          severity="low"
-          icon={<BarChart3 size={24} />}
-        />
-      </div>
-
-      {/* Risk Charts */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <MegaCard className="p-6">
-          <h3 className="text-lg font-bold mb-4">Risk Distribution</h3>
-          <div className="h-80 bg-gray-50 dark:bg-gray-800 rounded-lg flex items-center justify-center">
-            <span className="text-gray-500">Risk Distribution Chart</span>
-          </div>
-        </MegaCard>
-
-        <MegaCard className="p-6">
-          <h3 className="text-lg font-bold mb-4">Correlation Matrix</h3>
-          <div className="h-80 bg-gray-50 dark:bg-gray-800 rounded-lg flex items-center justify-center">
-            <span className="text-gray-500">Correlation Heatmap</span>
-          </div>
-        </MegaCard>
-      </div>
-    </div>
-  );
-
-  const renderSystemTab = () => (
-    <div className="space-y-6">
-      <h2 className="text-2xl font-bold">System Analytics</h2>
-
-      {/* System Health */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <SystemMetricCard
-          title="Uptime"
-          value="99.87%"
-          status="healthy"
-          icon={<CheckCircle size={24} />}
-        />
-        <SystemMetricCard
-          title="Latency"
-          value="23ms"
-          status="healthy"
-          icon={<Zap size={24} />}
-        />
-        <SystemMetricCard
-          title="Throughput"
-          value="1,847/s"
-          status="healthy"
-          icon={<Activity size={24} />}
-        />
-        <SystemMetricCard
-          title="Error Rate"
-          value="0.002%"
-          status="healthy"
-          icon={<CheckCircle size={24} />}
-        />
-      </div>
-
-      {/* Resource Usage */}
-      <MegaCard className="p-6">
-        <h3 className="text-lg font-bold mb-4">Resource Usage</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <ResourceChart title="CPU" value={34} unit="%" color="blue" />
-          <ResourceChart title="Memory" value={67} unit="%" color="green" />
-          <ResourceChart title="Disk" value={23} unit="%" color="yellow" />
-          <ResourceChart
-            title="Network"
-            value={12}
-            unit="MB/s"
-            color="purple"
-          />
-        </div>
-      </MegaCard>
     </div>
   );
 
@@ -1139,11 +590,62 @@ export const ConsolidatedUniversalAnalytics: React.FC<
 
       {/* Tab Content */}
       <div className="min-h-96">
-        {activeTab === "overview" && renderOverviewTab()}
-        {activeTab === "models" && renderModelsTab()}
-        {activeTab === "performance" && renderPerformanceTab()}
-        {activeTab === "risk" && renderRiskTab()}
-        {activeTab === "system" && renderSystemTab()}
+        {metricsLoading ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+            {[...Array(5)].map((_, i) => (
+              <Skeleton key={i} className="h-32" />
+            ))}
+          </div>
+        ) : (
+          <>
+            {activeTab === "overview" && renderOverviewTab()}
+            {activeTab === "models" && renderModelsTab()}
+            {activeTab === "performance" && (
+              <div className="text-center py-12">
+                <TrendingUp size={48} className="mx-auto text-gray-400 mb-4" />
+                <h3 className="text-lg font-medium text-gray-600 mb-2">
+                  Performance Analytics
+                </h3>
+                <p className="text-gray-500">
+                  Detailed performance metrics and analysis
+                </p>
+              </div>
+            )}
+            {activeTab === "risk" && (
+              <div className="text-center py-12">
+                <Shield size={48} className="mx-auto text-gray-400 mb-4" />
+                <h3 className="text-lg font-medium text-gray-600 mb-2">
+                  Risk Analytics
+                </h3>
+                <p className="text-gray-500">
+                  Risk assessment and monitoring tools
+                </p>
+              </div>
+            )}
+            {activeTab === "betting" && (
+              <div className="text-center py-12">
+                <Target size={48} className="mx-auto text-gray-400 mb-4" />
+                <h3 className="text-lg font-medium text-gray-600 mb-2">
+                  Betting Analytics
+                </h3>
+                <p className="text-gray-500">
+                  Comprehensive betting performance analysis
+                </p>
+              </div>
+            )}
+            {activeTab === "system" && (
+              <div className="text-center py-12">
+                <Cpu size={48} className="mx-auto text-gray-400 mb-4" />
+                <h3 className="text-lg font-medium text-gray-600 mb-2">
+                  System Analytics
+                </h3>
+                <p className="text-gray-500">
+                  System health and performance monitoring
+                </p>
+              </div>
+            )}
+          </>
+        )}
       </div>
     </CyberContainer>
   );
@@ -1153,324 +655,58 @@ export const ConsolidatedUniversalAnalytics: React.FC<
 // SUPPORTING COMPONENTS
 // ============================================================================
 
-const MetricCard: React.FC<{ metric: AnalyticsMetric }> = ({ metric }) => {
-  const formatValue = (value: number, format: string) => {
-    switch (format) {
-      case "currency":
-        return new Intl.NumberFormat("en-US", {
-          style: "currency",
-          currency: "USD",
-        }).format(value);
-      case "percentage":
-        return `${(value * 100).toFixed(2)}%`;
-      case "ratio":
-        return value.toFixed(2);
-      default:
-        return value.toLocaleString();
-    }
-  };
-
-  return (
-    <MegaCard className={`p-6 ${getImportanceColor(metric.importance)}`}>
-      <div className="flex items-center justify-between mb-4">
-        <div className="text-sm font-medium text-gray-600 dark:text-gray-400">
-          {metric.name}
-        </div>
-        <div className={getTrendColor(metric.trend)}>
-          {getTrendIcon(metric.trend)}
-        </div>
-      </div>
-
-      <div className="text-2xl font-bold mb-2">
-        {formatValue(metric.value, metric.format)}
-      </div>
-
-      {metric.change && (
-        <div className={`text-sm ${getTrendColor(metric.trend)}`}>
-          {metric.change >= 0 ? "+" : ""}
-          {formatValue(Math.abs(metric.change), metric.format)}
-          {metric.changePercent &&
-            ` (${metric.changePercent >= 0 ? "+" : ""}${metric.changePercent.toFixed(1)}%)`}
-        </div>
-      )}
-
-      {metric.target && (
-        <div className="mt-2">
-          <div className="text-xs text-gray-500 mb-1">
-            Target: {formatValue(metric.target, metric.format)}
-          </div>
-          <div className="w-full bg-gray-200 rounded-full h-1">
-            <div
-              className="bg-blue-600 h-1 rounded-full"
-              style={{
-                width: `${Math.min((metric.value / metric.target) * 100, 100)}%`,
-              }}
-            />
-          </div>
-        </div>
-      )}
-    </MegaCard>
-  );
-};
-
-const ModelAnalysisCard: React.FC<{ model: ModelAnalysis }> = ({ model }) => (
-  <MegaCard className="p-6">
-    <div className="flex items-start justify-between mb-4">
-      <div>
-        <h3 className="text-lg font-bold">{model.modelName}</h3>
-        <p className="text-sm text-gray-600 dark:text-gray-400">
-          {model.modelType.toUpperCase()} • v{model.version}
-        </p>
-      </div>
-
-      <Badge
-        className={`${
-          model.status === "active"
-            ? "bg-green-100 text-green-800"
-            : model.status === "training"
-              ? "bg-yellow-100 text-yellow-800"
-              : "bg-gray-100 text-gray-800"
-        }`}
-      >
-        {model.status.toUpperCase()}
-      </Badge>
-    </div>
-
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
-      <div>
-        <p className="text-xs text-gray-500">Accuracy</p>
-        <p className="font-semibold text-green-600">
-          {(model.accuracy * 100).toFixed(1)}%
-        </p>
-      </div>
-      <div>
-        <p className="text-xs text-gray-500">Sharpe Ratio</p>
-        <p className="font-semibold">{model.sharpeRatio.toFixed(2)}</p>
-      </div>
-      <div>
-        <p className="text-xs text-gray-500">Win Rate</p>
-        <p className="font-semibold text-blue-600">
-          {(model.winRate * 100).toFixed(1)}%
-        </p>
-      </div>
-      <div>
-        <p className="text-xs text-gray-500">Max Drawdown</p>
-        <p className="font-semibold text-red-600">
-          {(model.maxDrawdown * 100).toFixed(1)}%
-        </p>
-      </div>
-    </div>
-
-    <div className="flex items-center justify-between">
-      <div className="text-xs text-gray-500">
-        Last updated: {model.metadata.updatedAt.toLocaleDateString()}
-      </div>
-
-      <div className="flex items-center gap-2">
-        <MegaButton variant="outline" size="sm">
-          <Eye size={14} />
-          Details
-        </MegaButton>
-        <MegaButton variant="outline" size="sm">
-          <Settings size={14} />
-          Configure
-        </MegaButton>
-      </div>
-    </div>
-  </MegaCard>
-);
-
-const PerformanceMetricCard: React.FC<{
-  title: string;
-  value: string;
-  change: number;
-  icon: React.ReactNode;
-}> = ({ title, value, change, icon }) => (
-  <MegaCard className="p-6">
+const MetricCard: React.FC<{
+  metric: AnalyticsMetric;
+  formatValue: (value: number, format: string) => string;
+  getTrendColor: (trend: string) => string;
+  getTrendIcon: (trend: string) => React.ReactNode;
+  getImportanceColor: (importance: string) => string;
+}> = ({
+  metric,
+  formatValue,
+  getTrendColor,
+  getTrendIcon,
+  getImportanceColor,
+}) => (
+  <MegaCard className={`p-6 ${getImportanceColor(metric.importance)}`}>
     <div className="flex items-center justify-between mb-4">
       <div className="text-sm font-medium text-gray-600 dark:text-gray-400">
-        {title}
+        {metric.name}
       </div>
-      <div className="text-blue-500">{icon}</div>
+      <div className={getTrendColor(metric.trend)}>
+        {getTrendIcon(metric.trend)}
+      </div>
     </div>
 
-    <div className="text-2xl font-bold mb-2">{value}</div>
-
-    <div
-      className={`text-sm flex items-center ${
-        change >= 0 ? "text-green-500" : "text-red-500"
-      }`}
-    >
-      {change >= 0 ? <ArrowUp size={14} /> : <ArrowDown size={14} />}
-      {Math.abs(change).toFixed(1)}% from last period
+    <div className="text-2xl font-bold mb-2">
+      {formatValue(metric.value, metric.format)}
     </div>
-  </MegaCard>
-);
 
-const RiskMetricCard: React.FC<{
-  title: string;
-  value: string;
-  severity: "low" | "medium" | "high";
-  icon: React.ReactNode;
-}> = ({ title, value, severity, icon }) => {
-  const severityColors = {
-    low: "text-green-500 bg-green-50 border-green-200",
-    medium: "text-yellow-600 bg-yellow-50 border-yellow-200",
-    high: "text-red-500 bg-red-50 border-red-200",
-  };
-
-  return (
-    <MegaCard className={`p-6 ${severityColors[severity]}`}>
-      <div className="flex items-center justify-between mb-4">
-        <div className="text-sm font-medium">{title}</div>
-        <div>{icon}</div>
+    {metric.change && (
+      <div className={`text-sm ${getTrendColor(metric.trend)}`}>
+        {metric.change >= 0 ? "+" : ""}
+        {formatValue(Math.abs(metric.change), metric.format)}
+        {metric.changePercent &&
+          ` (${metric.changePercent >= 0 ? "+" : ""}${metric.changePercent.toFixed(1)}%)`}
       </div>
+    )}
 
-      <div className="text-2xl font-bold mb-2">{value}</div>
-
-      <Badge
-        className={`text-xs ${
-          severity === "low"
-            ? "bg-green-100 text-green-800"
-            : severity === "medium"
-              ? "bg-yellow-100 text-yellow-800"
-              : "bg-red-100 text-red-800"
-        }`}
-      >
-        {severity.toUpperCase()} RISK
-      </Badge>
-    </MegaCard>
-  );
-};
-
-const SystemMetricCard: React.FC<{
-  title: string;
-  value: string;
-  status: "healthy" | "warning" | "critical";
-  icon: React.ReactNode;
-}> = ({ title, value, status, icon }) => {
-  const statusColors = {
-    healthy: "text-green-500 bg-green-50 border-green-200",
-    warning: "text-yellow-600 bg-yellow-50 border-yellow-200",
-    critical: "text-red-500 bg-red-50 border-red-200",
-  };
-
-  return (
-    <MegaCard className={`p-6 ${statusColors[status]}`}>
-      <div className="flex items-center justify-between mb-4">
-        <div className="text-sm font-medium">{title}</div>
-        <div>{icon}</div>
-      </div>
-
-      <div className="text-2xl font-bold mb-2">{value}</div>
-
-      <Badge
-        className={`text-xs ${
-          status === "healthy"
-            ? "bg-green-100 text-green-800"
-            : status === "warning"
-              ? "bg-yellow-100 text-yellow-800"
-              : "bg-red-100 text-red-800"
-        }`}
-      >
-        {status.toUpperCase()}
-      </Badge>
-    </MegaCard>
-  );
-};
-
-const ResourceChart: React.FC<{
-  title: string;
-  value: number;
-  unit: string;
-  color: "blue" | "green" | "yellow" | "purple";
-}> = ({ title, value, unit, color }) => {
-  const colorClasses = {
-    blue: "text-blue-600",
-    green: "text-green-600",
-    yellow: "text-yellow-600",
-    purple: "text-purple-600",
-  };
-
-  const backgroundColors = {
-    blue: "bg-blue-600",
-    green: "bg-green-600",
-    yellow: "bg-yellow-600",
-    purple: "bg-purple-600",
-  };
-
-  return (
-    <div className="text-center">
-      <div className="relative w-16 h-16 mx-auto mb-2">
-        <svg className="w-16 h-16 transform -rotate-90" viewBox="0 0 64 64">
-          <circle
-            cx="32"
-            cy="32"
-            r="28"
-            stroke="currentColor"
-            strokeWidth="4"
-            fill="none"
-            className="text-gray-200"
+    {metric.target && (
+      <div className="mt-2">
+        <div className="text-xs text-gray-500 mb-1">
+          Target: {formatValue(metric.target, metric.format)}
+        </div>
+        <div className="w-full bg-gray-200 rounded-full h-1">
+          <div
+            className="bg-blue-600 h-1 rounded-full"
+            style={{
+              width: `${Math.min((metric.value / metric.target) * 100, 100)}%`,
+            }}
           />
-          <circle
-            cx="32"
-            cy="32"
-            r="28"
-            stroke="currentColor"
-            strokeWidth="4"
-            fill="none"
-            strokeDasharray={`${(value / 100) * 175.93} 175.93`}
-            className={colorClasses[color]}
-            strokeLinecap="round"
-          />
-        </svg>
-        <div className="absolute inset-0 flex items-center justify-center">
-          <span className={`text-sm font-bold ${colorClasses[color]}`}>
-            {value}%
-          </span>
         </div>
       </div>
-      <div className="text-sm font-medium">{title}</div>
-      <div className="text-xs text-gray-500">
-        {value} {unit}
-      </div>
-    </div>
-  );
-};
-
-function getImportanceColor(importance: string): string {
-  switch (importance) {
-    case "critical":
-      return "border-red-500 bg-red-50";
-    case "high":
-      return "border-orange-500 bg-orange-50";
-    case "medium":
-      return "border-yellow-500 bg-yellow-50";
-    default:
-      return "border-gray-500 bg-gray-50";
-  }
-}
-
-function getTrendColor(trend: string): string {
-  switch (trend) {
-    case "up":
-      return "text-green-500";
-    case "down":
-      return "text-red-500";
-    default:
-      return "text-gray-500";
-  }
-}
-
-function getTrendIcon(trend: string): React.ReactNode {
-  switch (trend) {
-    case "up":
-      return <TrendingUp size={16} />;
-    case "down":
-      return <TrendingDown size={16} />;
-    default:
-      return <Activity size={16} />;
-  }
-}
+    )}
+  </MegaCard>
+);
 
 export default ConsolidatedUniversalAnalytics;
