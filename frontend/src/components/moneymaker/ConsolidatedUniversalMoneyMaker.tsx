@@ -2872,20 +2872,20 @@ export const ConsolidatedUniversalMoneyMaker: React.FC = () => {
 
         {/* Portfolio metrics */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <MetricCard
+          <MoneyMakerMetricCard
             title="Portfolio Value"
             value={formatCurrency(state.performance.portfolioValue)}
             change={5.2}
             icon={<TrendingUp size={24} />}
             color="green"
           />
-          <MetricCard
+          <MoneyMakerMetricCard
             title="Diversification"
             value={formatPercentage(state.performance.diversificationRatio)}
             icon={<BarChart3 size={24} />}
             color="blue"
           />
-          <MetricCard
+          <MoneyMakerMetricCard
             title="Risk Score"
             value={state.performance.riskScore.toFixed(1)}
             icon={<Shield size={24} />}
