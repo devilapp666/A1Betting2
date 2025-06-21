@@ -181,7 +181,7 @@ export const PropGPT: React.FC = () => {
 • *Edge*: Warriors defense allows 118 PPG at home
 • *Trend*: 8/10 games over 25.5 this season
 
-**Stephen Curry Over 4.5 Three-Pointers** | 91.3% Confidence  
+**Stephen Curry Over 4.5 Three-Pointers** | 91.3% Confidence
 • *Analysis*: Shooting 43% from three at home (5.2 attempts/game)
 • *Edge*: Lakers allow 14.2 threes per game (28th in NBA)
 • *Trend*: 7/10 games over 4.5 threes
@@ -212,7 +212,7 @@ export const PropGPT: React.FC = () => {
 • *Fair odds*: -135 | *Available*: +105
 • *Reason*: Market undervaluing his dominance vs Miami
 
-**Luka Dončić Over 8.5 Assists** | +8.7% EV  
+**Luka Dončić Over 8.5 Assists** | +8.7% EV
 • *Fair odds*: -180 | *Available*: -110
 • *Reason*: Suns pace creates assist opportunities
 
@@ -251,7 +251,7 @@ export const PropGPT: React.FC = () => {
 • *Weather*: No factor (indoor)
 • *Analysis*: Sharp bettors see defensive game script
 
-**Curry Threes 4.5 → 5.5** | Prop Adjustment  
+**Curry Threes 4.5 → 5.5** | Prop Adjustment
 • *Movement*: Full point increase
 • *Volume*: 89% of prop bets on over
 • *Analysis*: Sportsbooks adjusting to public sentiment
@@ -283,7 +283,7 @@ export const PropGPT: React.FC = () => {
 • *Confidence*: Continue riding the over
 
 **Road Team Totals in NBA**
-• *Trend*: Under hitting 68% last 2 weeks  
+• *Trend*: Under hitting 68% last 2 weeks
 • *Reason*: Travel fatigue + tighter defense
 • *Opportunity*: Target road team unders
 
@@ -323,7 +323,7 @@ export const PropGPT: React.FC = () => {
 • *Pace*: Clippers playing faster lately
 • *Form*: 10.3 assists per game last 8
 
-**Anthony Davis Over 11.5 Rebounds** | 95.4% Confidence  
+**Anthony Davis Over 11.5 Rebounds** | 95.4% Confidence
 • *Size advantage*: Warriors play small
 • *Motivation*: Bounce-back game expected
 • *Trend*: 8/10 games over 11.5 at home
@@ -561,7 +561,7 @@ export const PropGPT: React.FC = () => {
                   e.key === "Enter" && !e.shiftKey && sendMessage()
                 }
                 placeholder="Ask about props, odds, trends, or get betting advice..."
-                className="flex-1 px-6 py-4 bg-gray-800/50 border border-gray-600 rounded-2xl text-white placeholder-gray-400 focus:border-purple-400 focus:ring-2 focus:ring-purple-400/50 transition-all text-lg"
+                className="flex-1 px-6 py-4 bg-gray-800/80 border-2 border-gray-500 rounded-2xl text-white placeholder-gray-300 focus:border-purple-400 focus:ring-2 focus:ring-purple-400/50 transition-all text-lg backdrop-blur-sm shadow-lg"
                 disabled={isTyping}
               />
               <motion.button
@@ -569,9 +569,9 @@ export const PropGPT: React.FC = () => {
                 whileTap={{ scale: 0.95 }}
                 onClick={() => sendMessage()}
                 disabled={!input.trim() || isTyping}
-                className="px-6 py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold rounded-2xl hover:shadow-lg hover:shadow-purple-500/25 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-6 py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold rounded-2xl hover:shadow-lg hover:shadow-purple-500/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed border-2 border-purple-400/50 hover:border-purple-300 shadow-lg shadow-purple-500/25"
               >
-                <Send className="w-5 h-5" />
+                <Send className="w-5 h-5 drop-shadow-lg" />
               </motion.button>
             </div>
 
