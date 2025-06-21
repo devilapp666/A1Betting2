@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -9,13 +9,13 @@ import {
   Tooltip,
   Legend,
   Filler,
-} from 'chart.js';
-import { ArbitrageOpportunity } from '../types';
-import { FaChartLine, FaCalculator, FaExchangeAlt } from 'react-icons/fa';
-import { Line } from 'react-chartjs-2';
-import { calculateKellyCriterion, americanToDecimal } from '../utils/odds';
-import { motion } from 'framer-motion';
-import { useApiRequest } from '../hooks/useApiRequest';
+} from "chart.js";
+import { ArbitrageOpportunity } from "../types";
+import { FaChartLine, FaCalculator, FaExchangeAlt } from "react-icons/fa";
+import SafeChart from "./ui/SafeChart";
+import { calculateKellyCriterion, americanToDecimal } from "../utils/odds";
+import { motion } from "framer-motion";
+import { useApiRequest } from "../hooks/useApiRequest";
 
 // Register ChartJS components
 ChartJS.register(
@@ -26,7 +26,7 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
-  Filler
+  Filler,
 );
 
 /**
@@ -62,13 +62,13 @@ const Analytics: React.FC = () => {
     data: perf,
     isLoading: perfLoading,
     error: perfError,
-  } = useApiRequest<PerformanceData>('/api/user/performance');
+  } = useApiRequest<PerformanceData>("/api/user/performance");
   // Fetch arbitrage opportunities
   const {
     data: arbs,
     isLoading: arbsLoading,
     error: arbsError,
-  } = useApiRequest<ArbitrageOpportunity[]>('/api/arbitrage/opportunities');
+  } = useApiRequest<ArbitrageOpportunity[]>("/api/arbitrage/opportunities");
 
   // Chart data for recent history
   const chartData = useMemo(() => {
@@ -84,8 +84,8 @@ const Analytics: React.FC = () => {
         ...dataset,
         fill: true,
         tension: 0.4,
-        borderColor: dataset.borderColor || 'rgb(16, 185, 129)',
-        backgroundColor: dataset.backgroundColor || 'rgba(16, 185, 129, 0.1)',
+        borderColor: dataset.borderColor || "rgb(16, 185, 129)",
+        backgroundColor: dataset.backgroundColor || "rgba(16, 185, 129, 0.1)",
       })),
     };
   }, [perf]);
@@ -97,7 +97,7 @@ const Analytics: React.FC = () => {
       Number(kellyProb),
       decOdds,
       Number(kellyBankroll),
-      Number(kellyFraction)
+      Number(kellyFraction),
     );
   }, [kellyBankroll, kellyProb, kellyOdds, kellyFraction]);
 
@@ -114,7 +114,9 @@ const Analytics: React.FC = () => {
           My Performance
         </h3>
         {perfLoading ? (
-          <div className="text-gray-500 animate-pulse-soft">Loading performance...</div>
+          <div className="text-gray-500 animate-pulse-soft">
+            Loading performance...
+          </div>
         ) : perfError ? (
           <div className="text-red-500">{perfError.message}</div>
         ) : perf ? (
@@ -153,7 +155,10 @@ const Analytics: React.FC = () => {
               animation: { duration: 800 },
               plugins: { legend: { display: false } },
               scales: {
-                y: { beginAtZero: true, grid: { color: 'rgba(156,163,175,0.1)' } },
+                y: {
+                  beginAtZero: true,
+                  grid: { color: "rgba(156,163,175,0.1)" },
+                },
                 x: { grid: { display: false } },
               },
             }}
@@ -180,11 +185,13 @@ const Analytics: React.FC = () => {
               min={1}
               type="number"
               value={kellyBankroll}
-              onChange={e => setKellyBankroll(Number(e.target.value))}
+              onChange={(e) => setKellyBankroll(Number(e.target.value))}
             />
           </div>
           <div>
-            <label className="block text-xs text-gray-500 mb-1">Win Probability</label>
+            <label className="block text-xs text-gray-500 mb-1">
+              Win Probability
+            </label>
             <input
               className="premium-input w-full"
               max={1}
@@ -192,16 +199,18 @@ const Analytics: React.FC = () => {
               step={0.01}
               type="number"
               value={kellyProb}
-              onChange={e => setKellyProb(Number(e.target.value))}
+              onChange={(e) => setKellyProb(Number(e.target.value))}
             />
           </div>
           <div>
-            <label className="block text-xs text-gray-500 mb-1">Odds (American)</label>
+            <label className="block text-xs text-gray-500 mb-1">
+              Odds (American)
+            </label>
             <input
               className="premium-input w-full"
               type="number"
               value={kellyOdds}
-              onChange={e => setKellyOdds(Number(e.target.value))}
+              onChange={(e) => setKellyOdds(Number(e.target.value))}
             />
           </div>
           <div>
@@ -213,7 +222,7 @@ const Analytics: React.FC = () => {
               step={0.01}
               type="number"
               value={kellyFraction}
-              onChange={e => setKellyFraction(Number(e.target.value))}
+              onChange={(e) => setKellyFraction(Number(e.target.value))}
             />
           </div>
         </div>
@@ -234,12 +243,14 @@ const Analytics: React.FC = () => {
           Arbitrage Opportunities
         </h3>
         {arbsLoading ? (
-          <div className="text-gray-500 animate-pulse-soft">Loading opportunities...</div>
+          <div className="text-gray-500 animate-pulse-soft">
+            Loading opportunities...
+          </div>
         ) : arbsError ? (
           <div className="text-red-500">{arbsError.message}</div>
         ) : arbs && arbs.length > 0 ? (
           <div className="space-y-4">
-            {arbs.map(opp => (
+            {arbs.map((opp) => (
               <div
                 key={opp.id}
                 className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow"
@@ -256,11 +267,13 @@ const Analytics: React.FC = () => {
                       </span>
                     </div>
                     <div className="mt-2 grid grid-cols-2 gap-4">
-                      {opp.books.map(book => (
+                      {opp.books.map((book) => (
                         <div key={book.name} className="text-sm">
-                          <span className="text-gray-600 dark:text-gray-400">{book.name}:</span>
+                          <span className="text-gray-600 dark:text-gray-400">
+                            {book.name}:
+                          </span>
                           <span className="ml-1 font-medium">
-                            {book.line} @ {book.odds > 0 ? '+' : ''}
+                            {book.line} @ {book.odds > 0 ? "+" : ""}
                             {book.odds}
                           </span>
                         </div>
@@ -290,7 +303,7 @@ const Analytics: React.FC = () => {
       </motion.div>
     </div>
   );
-}
+};
 
 // React.memo is used here to prevent unnecessary re-renders of Analytics when its props/state do not change.
 // This is beneficial because Analytics fetches data and renders charts, which can be expensive operations.
