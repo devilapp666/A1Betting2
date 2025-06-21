@@ -505,7 +505,11 @@ const AppContent: React.FC = () => {
 
   // App initialization
   useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 1500);
+    console.log("🚀 App initialization started");
+    const timer = setTimeout(() => {
+      console.log("✅ Loading complete, showing main app");
+      setIsLoading(false);
+    }, 500);
     return () => clearTimeout(timer);
   }, []);
 
