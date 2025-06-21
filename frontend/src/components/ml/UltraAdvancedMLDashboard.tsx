@@ -644,7 +644,7 @@ const UltraAdvancedMLDashboard: React.FC = () => {
   return (
     <div className="space-y-6 p-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between sticky top-0 z-40 bg-white/95 backdrop-blur-sm py-4 -mx-6 px-6 mb-2 shadow-sm">
         <div>
           <div className="flex items-center gap-3 mb-2">
             <Brain className="w-8 h-8 text-purple-600" />
