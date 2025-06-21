@@ -443,7 +443,7 @@ export const MoneyMakerPro: React.FC = () => {
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="px-12 py-4 bg-gradient-to-r from-green-500 to-blue-500 text-black font-black text-xl rounded-xl hover:shadow-2xl hover:shadow-green-500/25 transition-all"
+                    className="px-12 py-4 bg-gradient-to-r from-green-500 to-blue-500 text-black font-black text-xl rounded-xl hover:shadow-2xl hover:shadow-green-500/50 transition-all border-2 border-green-400/50 hover:border-green-300 shadow-lg shadow-green-500/25"
                   >
                     <div className="flex items-center space-x-3">
                       <Trophy className="w-6 h-6" />
