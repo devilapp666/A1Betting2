@@ -279,7 +279,9 @@ const CyberModernSidebar: React.FC<SidebarProps> = ({
 
               {item.shortcut && (
                 <span className="text-xs text-gray-500 font-mono bg-gray-800/50 px-1.5 py-0.5 rounded border border-gray-700">
-                  {item.shortcut}
+                  {Array.isArray(item.shortcut)
+                    ? item.shortcut.join("")
+                    : item.shortcut}
                 </span>
               )}
             </motion.button>
