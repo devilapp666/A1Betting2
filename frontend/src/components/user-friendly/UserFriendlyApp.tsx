@@ -431,13 +431,22 @@ export const UserFriendlyApp: React.FC = () => {
       </div>
 
       {/* Footer */}
-      <footer className="bg-black/20 backdrop-blur-xl border-t border-white/10 py-6">
-        <div className="max-w-7xl mx-auto px-6 text-center text-sm text-gray-400">
-          <div className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent font-bold mb-1">
-            A1BETTING QUANTUM INTELLIGENCE
+      <footer className="relative bg-black/30 backdrop-blur-2xl border-t border-cyan-500/20 py-6 shadow-2xl shadow-cyan-500/10">
+        <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 via-purple-500/5 to-green-500/5" />
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-500/10 to-transparent animate-pulse" />
+        <div className="relative max-w-7xl mx-auto px-6 text-center text-sm text-gray-400">
+          <div className="bg-gradient-to-r from-cyan-400 via-green-400 to-blue-500 bg-clip-text text-transparent font-bold mb-2 text-lg drop-shadow-2xl relative">
+            <span className="relative z-10">
+              A1BETTING QUANTUM INTELLIGENCE
+            </span>
+            <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-green-400 to-blue-500 bg-clip-text text-transparent blur-sm opacity-50">
+              A1BETTING QUANTUM INTELLIGENCE
+            </div>
           </div>
-          © 2024 Advanced Sports Intelligence Platform • Auto-Optimizing AI •
-          Real-time Analysis
+          <div className="text-cyan-300/60 font-medium">
+            © 2024 Advanced Sports Intelligence Platform • Auto-Optimizing AI •
+            Real-time Analysis
+          </div>
         </div>
       </footer>
     </div>
