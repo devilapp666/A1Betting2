@@ -118,20 +118,70 @@ const UltraAdvancedMLDashboard: React.FC = () => {
     setDashboardState((prev) => ({ ...prev, isLoading: true }));
 
     try {
-      const [metrics, health] = await Promise.all([
-        predictionService.getModelPerformance(),
-        predictionService.getSystemHealth(),
-      ]);
+      // Mock model performance metrics
+      const mockMetrics: ModelPerformanceMetrics = {
+        accuracy: 0.94,
+        precision: 0.91,
+        recall: 0.88,
+        f1Score: 0.89,
+        roc: 0.93,
+        predictionCount: 1247,
+        successRate: 0.96,
+        averageConfidence: 0.87,
+        modelStatus: "active",
+        lastUpdated: new Date().toISOString(),
+        trainingTime: 45000,
+        inferenceTime: 120,
+        memoryUsage: 2.4,
+        cpuUsage: 0.65,
+        modelVersion: "2.1.4",
+        datasetSize: 50000,
+        featureCount: 247,
+        hyperparameters: {
+          learning_rate: 0.001,
+          batch_size: 32,
+          epochs: 100,
+          dropout: 0.2,
+        },
+      };
 
-      setModelMetrics(metrics);
-      setSystemHealth(health);
+      // Mock system health metrics
+      const mockHealth: SystemHealthMetrics = {
+        overallHealth: 0.92,
+        cpuUsage: 0.68,
+        memoryUsage: 0.73,
+        diskUsage: 0.45,
+        networkLatency: 25,
+        activeConnections: 247,
+        errorRate: 0.02,
+        uptime: 99.7,
+        responseTime: 145,
+        throughput: 850,
+        lastHealthCheck: new Date().toISOString(),
+        services: {
+          database: "healthy",
+          cache: "healthy",
+          messageQueue: "healthy",
+          apiGateway: "healthy",
+        },
+        alerts: [
+          {
+            level: "warning",
+            message: "Memory usage approaching threshold",
+            timestamp: new Date().toISOString(),
+          },
+        ],
+      };
+
+      setModelMetrics(mockMetrics);
+      setSystemHealth(mockHealth);
       setDashboardState((prev) => ({
         ...prev,
         lastUpdate: new Date(),
         isLoading: false,
       }));
 
-      logger.info("Dashboard data refreshed successfully");
+      logger.info("Dashboard data refreshed successfully (using mock data)");
     } catch (error) {
       logger.error("Failed to refresh dashboard data", error);
       toast.error("Failed to refresh dashboard data");
