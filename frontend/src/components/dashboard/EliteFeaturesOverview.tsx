@@ -195,6 +195,30 @@ const statusConfig = {
   },
 };
 
+// Navigation mapping for features to app sections
+const featureNavigation: Record<string, string> = {
+  "Business Dashboard": "analytics",
+  "AI Business Analysis": "analytics",
+  "Elite Analytics": "analytics",
+  "Model Analysis": "ml-center",
+  "Money Maker": "money-maker",
+  "AI Arbitrage": "arbitrage",
+  "Elite Bankroll": "money-maker",
+  "AI Edge ML": "ml-center",
+  "Mega Sports": "analytics",
+  "SQL Sports": "analytics",
+  "Elite Sports": "analytics",
+  "Sports Advantage": "analytics",
+  "Market Connector": "analytics",
+  "Trading Engine": "arbitrage",
+  "Risk Analysis": "analytics",
+  "Portfolio Manager": "money-maker",
+  "Real Simulator": "ai-predictions",
+  "Strategy Tester": "ai-predictions",
+  "ML Validator": "ml-center",
+  "Performance Monitor": "analytics",
+};
+
 interface EliteFeaturesOverviewProps {
   onNavigate?: (sectionId: string) => void;
 }
