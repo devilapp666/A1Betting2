@@ -1,6 +1,6 @@
-// Builder.io component exports
-export { default as BuilderPage } from './BuilderPage';
-export { default as BettingCard } from './BettingCard';
+// Builder.io component exports (temporarily disabled)
+export { default as BuilderPage } from "./BuilderPage";
+export { default as BettingCard } from "./BettingCard";
 
-// Register all custom components
-import './BettingCard'; // This will register the component with Builder.io
+// Builder.io registration temporarily disabled
+// import './BettingCard'; // This will register the component with Builder.io
