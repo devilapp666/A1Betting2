@@ -1,6 +1,6 @@
 import React from "react";
 import ErrorBoundary from "../ErrorBoundary";
-import CleanAnalytics from "./CleanAnalytics";
+import UniversalAnalytics from "./UniversalAnalytics";
 
 // ============================================================================
 // TYPES & INTERFACES
