@@ -132,21 +132,22 @@ const mockRecentActivity = [
 // COMPONENTS
 // ============================================================================
 
-const MetricCard: React.FC<{ metric: (typeof mockMetrics)[0] }> = ({
-  metric,
-}) => {
+const MetricCard: React.FC<{
+  metric: (typeof mockMetrics)[0];
+  index: number;
+}> = ({ metric, index }) => {
   const getColorClasses = (color: string) => {
     switch (color) {
       case "green":
-        return "border-green-200 bg-green-50";
+        return "border-green-200 bg-gradient-to-br from-green-50 to-green-100";
       case "blue":
-        return "border-blue-200 bg-blue-50";
+        return "border-blue-200 bg-gradient-to-br from-blue-50 to-blue-100";
       case "purple":
-        return "border-purple-200 bg-purple-50";
+        return "border-purple-200 bg-gradient-to-br from-purple-50 to-purple-100";
       case "orange":
-        return "border-orange-200 bg-orange-50";
+        return "border-orange-200 bg-gradient-to-br from-orange-50 to-orange-100";
       default:
-        return "border-gray-200 bg-gray-50";
+        return "border-gray-200 bg-gradient-to-br from-gray-50 to-gray-100";
     }
   };
 
@@ -180,33 +181,85 @@ const MetricCard: React.FC<{ metric: (typeof mockMetrics)[0] }> = ({
     }
   };
 
+  const getGlowColor = (color: string) => {
+    switch (color) {
+      case "green":
+        return "rgba(34, 197, 94, 0.1)";
+      case "blue":
+        return "rgba(59, 130, 246, 0.1)";
+      case "purple":
+        return "rgba(147, 51, 234, 0.1)";
+      case "orange":
+        return "rgba(251, 146, 60, 0.1)";
+      default:
+        return "rgba(156, 163, 175, 0.1)";
+    }
+  };
+
   return (
     <motion.div
-      whileHover={{ y: -2 }}
-      className={`p-6 rounded-xl border-2 ${getColorClasses(metric.color)} hover:shadow-lg transition-all duration-200`}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: index * 0.1, duration: 0.5 }}
+      whileHover={{
+        y: -4,
+        scale: 1.02,
+        boxShadow: `0 20px 40px ${getGlowColor(metric.color)}`,
+      }}
+      className={`p-6 rounded-xl border-2 ${getColorClasses(metric.color)} hover:shadow-2xl transition-all duration-300 cursor-pointer relative overflow-hidden`}
     >
-      <div className="flex items-center justify-between mb-4">
-        <h3 className="text-sm font-medium text-gray-600">{metric.title}</h3>
-        <div className={`p-2 rounded-lg ${getColorClasses(metric.color)}`}>
-          {metric.trend === "up" ? (
-            <ArrowUpRight className={`w-4 h-4 ${getIconColor(metric.color)}`} />
-          ) : (
-            <ArrowDownRight
-              className={`w-4 h-4 ${getIconColor(metric.color)}`}
-            />
-          )}
+      {/* Background gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-white/60 to-transparent pointer-events-none" />
+
+      <div className="relative z-10">
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="text-sm font-semibold text-gray-700 uppercase tracking-wide">
+            {metric.title}
+          </h3>
+          <motion.div
+            whileHover={{ rotate: 180, scale: 1.2 }}
+            transition={{ duration: 0.3 }}
+            className={`p-2 rounded-lg ${getColorClasses(metric.color)} shadow-sm`}
+          >
+            {metric.trend === "up" ? (
+              <TrendingUp className={`w-4 h-4 ${getIconColor(metric.color)}`} />
+            ) : (
+              <ArrowDownRight
+                className={`w-4 h-4 ${getIconColor(metric.color)}`}
+              />
+            )}
+          </motion.div>
+        </div>
+
+        <div className="mb-3">
+          <motion.p
+            initial={{ scale: 0.8 }}
+            animate={{ scale: 1 }}
+            transition={{ delay: index * 0.1 + 0.2 }}
+            className={`text-3xl font-bold ${getTextColor(metric.color)} tracking-tight`}
+          >
+            {metric.value}
+          </motion.p>
+        </div>
+
+        <div className="flex items-center justify-between">
+          <p
+            className={`text-sm font-medium ${getTextColor(metric.color)} flex items-center gap-1`}
+          >
+            <span className="w-2 h-2 rounded-full bg-green-400"></span>
+            {metric.change} from last period
+          </p>
+          <motion.div
+            whileHover={{ scale: 1.1 }}
+            className="text-xs text-gray-500 bg-white/70 px-2 py-1 rounded-full"
+          >
+            24h
+          </motion.div>
         </div>
       </div>
 
-      <div className="mb-2">
-        <p className={`text-2xl font-bold ${getTextColor(metric.color)}`}>
-          {metric.value}
-        </p>
-      </div>
-
-      <p className={`text-sm font-medium ${getTextColor(metric.color)}`}>
-        {metric.change} from last period
-      </p>
+      {/* Animated border */}
+      <div className="absolute inset-0 rounded-xl border-2 border-transparent bg-gradient-to-r from-transparent via-white/20 to-transparent bg-[length:200%_100%] animate-pulse" />
     </motion.div>
   );
 };
@@ -355,8 +408,8 @@ const ConsolidatedUniversalDashboard: React.FC = () => {
 
         {/* Metrics Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {mockMetrics.map((metric) => (
-            <MetricCard key={metric.id} metric={metric} />
+          {mockMetrics.map((metric, index) => (
+            <MetricCard key={metric.id} metric={metric} index={index} />
           ))}
         </div>
 
