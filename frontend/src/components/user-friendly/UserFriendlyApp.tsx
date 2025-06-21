@@ -277,8 +277,10 @@ export const UserFriendlyApp: React.FC = () => {
 
       <div className="flex">
         {/* Sidebar */}
-        <aside className="hidden lg:block w-80 min-h-screen bg-black/20 backdrop-blur-xl border-r border-white/10">
-          <div className="p-6">
+        <aside className="hidden lg:block w-80 min-h-screen bg-black/30 backdrop-blur-2xl border-r border-cyan-500/20 relative">
+          <div className="absolute inset-0 bg-gradient-to-b from-cyan-500/5 via-purple-500/5 to-green-500/5" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-500/10 to-transparent" />
+          <div className="relative p-6">
             <nav className="space-y-2">
               {navigationItems.map((item) => (
                 <motion.button
