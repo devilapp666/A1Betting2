@@ -561,7 +561,13 @@ const AppContent: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div className="h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black flex items-center justify-center">
+      <div
+        className="h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black flex items-center justify-center cursor-pointer"
+        onClick={() => {
+          console.log("🖱️ Loading screen clicked, force continuing");
+          setIsLoading(false);
+        }}
+      >
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
