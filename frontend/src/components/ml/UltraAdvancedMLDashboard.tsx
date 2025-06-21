@@ -767,7 +767,7 @@ const UltraAdvancedMLDashboard: React.FC = () => {
                 <div>
                   <p className="text-sm text-gray-600">Prediction Accuracy</p>
                   <p className="text-lg font-semibold text-blue-600">
-                    {(systemHealth.prediction_accuracy * 100).toFixed(1)}%
+                    {((systemHealth?.overallHealth || 0) * 100).toFixed(1)}%
                   </p>
                 </div>
                 <Target className="w-6 h-6 text-blue-600" />
