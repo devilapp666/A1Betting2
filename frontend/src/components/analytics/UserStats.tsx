@@ -3,17 +3,31 @@ import { useAppStore, AppStore } from "../../store/useAppStore";
 import { calculateUserStats } from "../../utils/analyticsHelpers";
 
 // Memoize the selector to prevent unnecessary re-renders
-const selectUserData = (state: AppStore) => ({
-  entries: state.entries || [],
-  user: state.user,
-});
+const selectUserData = (state: AppStore) => {
+  const entries = Array.isArray(state.entries) ? state.entries : [];
+  return {
+    entries,
+    user: state.user,
+  };
+};
 
 const UserStats: React.FC = () => {
   const { entries, user } = useAppStore(selectUserData);
 
   // Memoize stats calculation to prevent re-calculation on every render
   const stats = useMemo(() => {
-    return calculateUserStats(entries, user?.id);
+    try {
+      return calculateUserStats(entries, user?.id);
+    } catch (error) {
+      console.error("Error calculating user stats:", error);
+      return {
+        totalBets: 0,
+        settledBets: 0,
+        winRate: 0,
+        totalProfitLoss: 0,
+        roi: 0,
+      };
+    }
   }, [entries, user?.id]);
   // Placeholder data removed
   // const stats = {
