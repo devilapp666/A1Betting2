@@ -709,7 +709,9 @@ const App: React.FC = () => {
     <ErrorBoundary>
       <QueryClientProvider client={queryClient}>
         <SafeThemeProvider>
-          <AppContent />
+          <ChartErrorBoundary>
+            <AppContent />
+          </ChartErrorBoundary>
         </SafeThemeProvider>
       </QueryClientProvider>
     </ErrorBoundary>
