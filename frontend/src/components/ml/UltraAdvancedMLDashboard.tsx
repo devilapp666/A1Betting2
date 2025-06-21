@@ -1137,11 +1137,11 @@ const UltraAdvancedMLDashboard: React.FC = () => {
                         Memory Usage
                       </span>
                       <span className="text-sm font-medium">
-                        {systemHealth.memory_usage}%
+                        {systemHealth.memoryUsage}%
                       </span>
                     </div>
                     <Progress
-                      value={systemHealth.memory_usage}
+                      value={systemHealth.memoryUsage}
                       className="h-2"
                     />
                   </div>
