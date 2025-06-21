@@ -147,7 +147,8 @@ const Analytics: React.FC = () => {
         ) : null}
         {/* Recent History Chart */}
         <div className="h-64">
-          <Line
+          <SafeChart
+            type="line"
             data={chartData}
             options={{
               responsive: true,
@@ -162,6 +163,7 @@ const Analytics: React.FC = () => {
                 x: { grid: { display: false } },
               },
             }}
+            loadingMessage="Loading performance history..."
           />
         </div>
       </motion.div>
