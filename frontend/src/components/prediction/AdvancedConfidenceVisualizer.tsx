@@ -461,7 +461,8 @@ export const AdvancedConfidenceVisualizer: React.FC = () => {
             <CardContent>
               {confidenceTrendData && (
                 <div className="h-80">
-                  <Line
+                  <SafeChart
+                    type="line"
                     data={confidenceTrendData}
                     options={{
                       responsive: true,
