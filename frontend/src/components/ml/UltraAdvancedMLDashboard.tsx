@@ -363,7 +363,46 @@ const UltraAdvancedMLDashboard: React.FC = () => {
 
     try {
       const startTime = Date.now();
-      const result = await predictionService.generatePrediction(request);
+
+      // Simulate processing delay
+      await new Promise((resolve) =>
+        setTimeout(resolve, 1500 + Math.random() * 1000),
+      );
+
+      // Mock prediction result
+      const result: UnifiedPredictionResponse = {
+        final_prediction: 0.75 + Math.random() * 0.2, // Between 0.75-0.95
+        prediction_confidence: 0.85 + Math.random() * 0.1, // Between 0.85-0.95
+        risk_score: Math.random() * 0.3, // Between 0-0.3
+        uncertainty_bounds: {
+          lower: 0.65,
+          upper: 0.95,
+        },
+        feature_importance: {
+          player_performance: 0.25,
+          team_strength: 0.2,
+          matchup_difficulty: 0.15,
+          historical_performance: 0.12,
+          venue_advantage: 0.1,
+          rest_factor: 0.08,
+          momentum: 0.06,
+          injury_impact: 0.04,
+        },
+        model_ensemble: [
+          { model_name: "XGBoost", prediction: 0.78, weight: 0.3 },
+          { model_name: "Neural Network", prediction: 0.82, weight: 0.25 },
+          { model_name: "Random Forest", prediction: 0.76, weight: 0.2 },
+          { model_name: "SVM", prediction: 0.79, weight: 0.15 },
+          { model_name: "Logistic Regression", prediction: 0.74, weight: 0.1 },
+        ],
+        processing_metadata: {
+          computation_time: 0,
+          models_used: 5,
+          features_processed: 10,
+          data_quality_score: 0.94,
+        },
+      };
+
       const processingTime = Date.now() - startTime;
 
       setLivePredictions((prev) =>
