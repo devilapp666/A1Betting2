@@ -2918,26 +2918,26 @@ export const ConsolidatedUniversalMoneyMaker: React.FC = () => {
 
         {/* Key metrics grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <MetricCard
+          <MoneyMakerMetricCard
             title="Total Return"
             value={formatPercentage(state.performance.totalReturn / 100)}
             change={state.performance.totalReturn}
             icon={<TrendingUp size={24} />}
             color="green"
           />
-          <MetricCard
+          <MoneyMakerMetricCard
             title="Sharpe Ratio"
             value={state.performance.sharpeRatio.toFixed(2)}
             icon={<Activity size={24} />}
             color="blue"
           />
-          <MetricCard
+          <MoneyMakerMetricCard
             title="Max Drawdown"
             value={formatPercentage(state.performance.maxDrawdown / 100)}
             icon={<TrendingDown size={24} />}
             color="red"
           />
-          <MetricCard
+          <MoneyMakerMetricCard
             title="Hit Rate"
             value={formatPercentage(state.performance.hitRate / 100)}
             icon={<Target size={24} />}
