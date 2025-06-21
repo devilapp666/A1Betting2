@@ -974,7 +974,7 @@ const UltraAdvancedMLDashboard: React.FC = () => {
                       <div>
                         <p className="text-sm text-gray-600">Speed</p>
                         <p className="text-lg font-semibold text-yellow-600">
-                          {model.prediction_speed.toFixed(1)}ms
+                          {model.inferenceTime.toFixed(1)}ms
                         </p>
                       </div>
                     </div>
