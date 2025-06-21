@@ -195,24 +195,51 @@ const EnhancedRevolutionaryInterface = () => {
   const performRealTimeAnalysis = async () => {
     if (!predictionResult) return;
     try {
-      const analysis = await backendService.getMathematicalAnalysis({
-        prediction_data: [
-          {
-            features: predictionRequest.features,
-            prediction: predictionResult.final_prediction,
-            confidence: predictionResult.prediction_confidence,
+      // Mock mathematical analysis data
+      const mockAnalysis = {
+        stability_analysis: {
+          lyapunov_exponents: [-0.23, 0.45, -1.2],
+          stability_index: 0.87,
+          convergence_rate: 0.034,
+          is_stable: true,
+        },
+        convergence_analysis: {
+          converged: true,
+          iterations: 1247,
+          final_tolerance: 1e-8,
+          convergence_rate: "quadratic",
+        },
+        sensitivity_analysis: {
+          parameter_sensitivity: {
+            feature_1: 0.234,
+            feature_2: 0.456,
+            feature_3: 0.123,
           },
-        ],
-        analysis_depth: "comprehensive",
-        include_stability_analysis: true,
-        include_convergence_analysis: true,
-        include_sensitivity_analysis: true,
-        include_robustness_analysis: true,
-        verify_theoretical_guarantees: true,
-        check_mathematical_consistency: true,
-      });
-      setMathematicalAnalysis(analysis);
-      logger.info("Real-time mathematical analysis updated");
+          robust_features: ["feature_2", "feature_1"],
+          sensitivity_score: 0.67,
+        },
+        robustness_analysis: {
+          noise_tolerance: 0.15,
+          outlier_resistance: 0.82,
+          perturbation_bounds: [-0.05, 0.05],
+          robustness_score: 0.89,
+        },
+        theoretical_guarantees: {
+          pac_bound: 0.95,
+          generalization_bound: 0.08,
+          statistical_significance: true,
+          confidence_interval: [0.87, 0.93],
+        },
+        mathematical_consistency: {
+          energy_conservation: true,
+          symmetry_preservation: true,
+          causality_respected: true,
+          consistency_score: 0.96,
+        },
+      };
+      await new Promise((resolve) => setTimeout(resolve, 200));
+      setMathematicalAnalysis(mockAnalysis);
+      logger.info("Real-time mathematical analysis updated (using mock data)");
     } catch (error) {
       logger.error("Real-time analysis failed", error);
     }
