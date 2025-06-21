@@ -193,6 +193,48 @@ const navigationItems: NavigationItem[] = [
     component: AIEdgeML,
     badge: "AI",
   },
+  {
+    id: "mega-sports",
+    label: "Mega Sports",
+    icon: <Zap className="w-5 h-5" />,
+    component: MegaSports,
+    badge: "PRO",
+  },
+  {
+    id: "elite-bankroll",
+    label: "Elite Bankroll",
+    icon: <DollarSign className="w-5 h-5" />,
+    component: EliteBankroll,
+    badge: "PREMIUM",
+  },
+  {
+    id: "sql-sports",
+    label: "SQL Sports",
+    icon: <Database className="w-5 h-5" />,
+    component: SQLSports,
+    badge: "ACTIVE",
+  },
+  {
+    id: "model-analysis",
+    label: "Model Analysis",
+    icon: <BarChart3 className="w-5 h-5" />,
+    component: ModelAnalysis,
+    badge: "AI",
+  },
+  {
+    id: "market-connector",
+    label: "Market Connector",
+    icon: <Globe className="w-5 h-5" />,
+    component: MarketConnector,
+    badge: "LIVE",
+  },
+  {
+    id: "real-simulator",
+    label: "Real Simulator",
+    icon: <Target className="w-5 h-5" />,
+    component: RealSimulator,
+    badge: "BETA",
+  },
 ];
 
 // ============================================================================
