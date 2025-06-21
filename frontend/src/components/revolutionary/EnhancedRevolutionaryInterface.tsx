@@ -72,16 +72,7 @@ import EnhancedBackendApiService, {
   EnhancedPredictionResponse,
   MathematicalAnalysisResponse,
 } from "../../services/unified/EnhancedBackendApiService";
-// Simple logger without context dependency
-const logger = {
-  log: (message: string) => console.log(`[RevolutionaryInterface] ${message}`),
-  error: (message: string) =>
-    console.error(`[RevolutionaryInterface] ${message}`),
-  warn: (message: string) =>
-    console.warn(`[RevolutionaryInterface] ${message}`),
-  info: (message: string) =>
-    console.info(`[RevolutionaryInterface] ${message}`),
-};
+import { useLogger } from "../../hooks/useLogger";
 
 // Register Chart.js components
 ChartJS.register(
@@ -147,7 +138,7 @@ const EnhancedRevolutionaryInterface: React.FC = () => {
     });
 
   // Hooks
-  // Logger is now available as imported constant
+  const logger = useLogger();
   const backendService = EnhancedBackendApiService.getInstance();
 
   // Load mathematical foundations on mount
