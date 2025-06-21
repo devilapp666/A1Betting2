@@ -361,13 +361,17 @@ export const UserFriendlyApp: React.FC = () => {
           <div className="p-6">
             <AnimatePresence mode="wait">
               <motion.div
-                key={currentPage}
+                key={isAdvancedMode ? "advanced" : currentPage}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.3 }}
               >
-                <CurrentComponent onNavigate={setCurrentPage} />
+                {isAdvancedMode ? (
+                  <UltraAdvancedMLDashboard />
+                ) : (
+                  <CurrentComponent onNavigate={setCurrentPage} />
+                )}
               </motion.div>
             </AnimatePresence>
           </div>
