@@ -206,7 +206,8 @@ const AppContent: React.FC = () => {
   const currentNavItem = navigationItems.find(
     (item) => item.id === currentPage,
   );
-  const CurrentComponent = currentNavItem?.component || UniversalDashboard;
+  const CurrentComponent =
+    currentNavItem?.component || ConsolidatedUniversalDashboard;
 
   // Handle navigation
   const handleNavigate = (pageId: string) => {
