@@ -652,7 +652,7 @@ const AppContent: React.FC = () => {
               transition={{ duration: 0.5 }}
               className="relative z-10 p-8"
             >
-              <ActiveComponent onNavigate={setActiveNavItem} />
+              <ActiveComponent onNavigate={handleNavigation} />
             </motion.div>
           </ErrorBoundary>
         </main>
@@ -663,7 +663,7 @@ const AppContent: React.FC = () => {
         isOpen={isCommandPaletteOpen}
         onClose={() => setIsCommandPaletteOpen(false)}
         navigationItems={navigationItems}
-        onNavigate={setActiveNavItem}
+        onNavigate={handleNavigation}
       />
 
       {/* Notification Center */}
