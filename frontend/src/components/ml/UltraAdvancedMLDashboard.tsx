@@ -709,7 +709,7 @@ const UltraAdvancedMLDashboard: React.FC = () => {
 
       {/* System Status Overview */}
       {systemHealth && (
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-8">
           <Card>
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
