@@ -31,7 +31,6 @@ import {
   Infinity,
   Sigma,
   Pi,
-  Function,
   Triangle,
   Minimize,
   Maximize,
