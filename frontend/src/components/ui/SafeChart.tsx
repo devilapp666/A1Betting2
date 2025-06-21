@@ -1,5 +1,11 @@
 import React from "react";
-import { Line, Bar, Doughnut, Radar, Scatter } from "react-chartjs-2";
+import {
+  Line,
+  Bar,
+  Doughnut,
+  Radar,
+  Scatter,
+} from "react-chartjs-2/dist/index.js";
 import { Activity, BarChart3, PieChart, Zap } from "lucide-react";
 
 interface SafeChartProps {
