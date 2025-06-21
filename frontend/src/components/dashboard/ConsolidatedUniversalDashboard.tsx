@@ -401,13 +401,15 @@ export const ConsolidatedUniversalDashboard: React.FC<
   const { data: metrics, isLoading: metricsLoading } = useQuery({
     queryKey: ["dashboard-metrics"],
     queryFn: async () => mockMetrics,
-    refetchInterval: 30000,
+    staleTime: 300000, // 5 minutes
+    refetchInterval: false, // Disable auto-refresh to prevent infinite loops
   });
 
   const { data: recentActivity, isLoading: activityLoading } = useQuery({
     queryKey: ["dashboard-activity"],
     queryFn: async () => mockRecentActivity,
-    refetchInterval: 10000,
+    staleTime: 300000, // 5 minutes
+    refetchInterval: false, // Disable auto-refresh to prevent infinite loops
   });
 
   // ========== TAB CONFIGURATION - Consolidated from all variants ==========
