@@ -260,16 +260,18 @@ export const UserFriendlyApp: React.FC = () => {
               </div>
 
               {/* Mobile Menu Button */}
-              <button
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="lg:hidden p-2 text-gray-400 hover:text-white"
+                className="lg:hidden p-3 bg-gray-800/80 border-2 border-gray-500 rounded-xl text-gray-200 hover:text-white hover:border-cyan-400 hover:bg-gray-700/80 transition-all backdrop-blur-sm"
               >
                 {isMobileMenuOpen ? (
-                  <X className="w-6 h-6" />
+                  <X className="w-6 h-6 drop-shadow-lg" />
                 ) : (
-                  <Menu className="w-6 h-6" />
+                  <Menu className="w-6 h-6 drop-shadow-lg" />
                 )}
-              </button>
+              </motion.button>
             </div>
           </div>
         </div>
