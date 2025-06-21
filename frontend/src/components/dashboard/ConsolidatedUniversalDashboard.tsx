@@ -739,7 +739,13 @@ const OverviewTab: React.FC<{
         <Suspense fallback={<Skeleton className="h-64" />}>
           <Card className="p-6">
             <h3 className="text-lg font-bold mb-4">User Statistics</h3>
-            <UserStats />
+            <ErrorBoundary
+              fallback={
+                <div className="text-red-500">Error loading user stats</div>
+              }
+            >
+              <UserStats />
+            </ErrorBoundary>
           </Card>
         </Suspense>
       )}
