@@ -113,12 +113,7 @@ const navigationItems: NavigationItem[] = [
     id: "money-maker",
     label: "Money Maker",
     icon: <DollarSign className="w-5 h-5" />,
-    component: () => (
-      <div className="p-8 text-white">
-        <h1 className="text-2xl font-bold">Money Maker</h1>
-        <p>AI-powered opportunities loading...</p>
-      </div>
-    ),
+    component: CyberUltimateMoneyMaker,
     shortcut: "⌘M",
     badge: "CYBER",
   },
@@ -126,12 +121,7 @@ const navigationItems: NavigationItem[] = [
     id: "analytics",
     label: "Analytics Hub",
     icon: <BarChart3 className="w-5 h-5" />,
-    component: () => (
-      <div className="p-8 text-white">
-        <h1 className="text-2xl font-bold">Analytics Hub</h1>
-        <p>Advanced analytics loading...</p>
-      </div>
-    ),
+    component: CyberAnalyticsHub,
     shortcut: "⌘A",
     badge: "PRO",
   },
@@ -139,12 +129,7 @@ const navigationItems: NavigationItem[] = [
     id: "ai-predictions",
     label: "AI Predictions",
     icon: <Brain className="w-5 h-5" />,
-    component: () => (
-      <div className="p-8 text-white">
-        <h1 className="text-2xl font-bold">AI Predictions</h1>
-        <p>Revolutionary AI loading...</p>
-      </div>
-    ),
+    component: EnhancedRevolutionaryInterface,
     shortcut: "⌘P",
     badge: "ELITE",
   },
