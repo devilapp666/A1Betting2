@@ -968,7 +968,7 @@ const UltraAdvancedMLDashboard: React.FC = () => {
                       <div>
                         <p className="text-sm text-gray-600">F1 Score</p>
                         <p className="text-lg font-semibold text-purple-600">
-                          {(model.f1_score * 100).toFixed(1)}%
+                          {(model.f1Score * 100).toFixed(1)}%
                         </p>
                       </div>
                       <div>
