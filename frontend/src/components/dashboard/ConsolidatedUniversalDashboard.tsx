@@ -430,7 +430,7 @@ export const ConsolidatedUniversalDashboard: React.FC<
         key: "moneymaker",
         label: "Money Maker",
         icon: <DollarSign size={20} />,
-        component: UnifiedMoneyMaker,
+        component: UniversalMoneyMaker,
         isPremium: true,
       },
       {
