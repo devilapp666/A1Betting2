@@ -59,10 +59,8 @@ import { CyberText, CyberContainer } from "../mega/CyberTheme";
 import { Badge } from "../ui/badge";
 import { Skeleton } from "../ui/Skeleton";
 
-// Chart components (lazy loaded)
-const Chart = lazy(() =>
-  import("react-chartjs-2").then((m) => ({ default: m.Chart })),
-);
+// Chart components (lazy loaded) - commented out to avoid import issues
+// const Chart = lazy(() => import("react-chartjs-2").then(m => ({ default: m.Chart })));
 
 // ============================================================================
 // TYPES & INTERFACES - Consolidated from all analytics variants
