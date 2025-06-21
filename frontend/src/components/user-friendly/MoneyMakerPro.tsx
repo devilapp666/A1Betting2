@@ -205,7 +205,7 @@ export const MoneyMakerPro: React.FC = () => {
                       investment: parseInt(e.target.value) || 0,
                     })
                   }
-                  className="w-full pl-8 pr-4 py-4 bg-gray-800/50 border border-gray-600 rounded-xl text-white text-xl font-bold text-center focus:border-green-400 focus:ring-2 focus:ring-green-400/50 transition-all"
+                  className="w-full pl-8 pr-4 py-4 bg-gray-800/80 border-2 border-gray-500 rounded-xl text-white text-xl font-bold text-center focus:border-green-400 focus:ring-2 focus:ring-green-400/50 transition-all backdrop-blur-sm shadow-lg"
                   min="10"
                   max="10000"
                 />
