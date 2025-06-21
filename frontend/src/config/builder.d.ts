@@ -1,2 +1,6 @@
-import { builder } from '@builder.io/react';
-export { builder };
+// Builder.io types removed
+export declare const builder: {
+  init: () => void;
+  get: () => Promise<null>;
+  register: () => void;
+};
