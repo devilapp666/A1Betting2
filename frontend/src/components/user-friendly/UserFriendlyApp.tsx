@@ -186,6 +186,25 @@ export const UserFriendlyApp: React.FC = () => {
 
               {/* Action Buttons */}
               <div className="flex items-center space-x-3">
+                {/* Advanced Mode Toggle */}
+                <motion.button
+                  whileHover={{ scale: 1.1, rotate: 180 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => setIsAdvancedMode(!isAdvancedMode)}
+                  className={`p-3 rounded-xl transition-all duration-300 ${
+                    isAdvancedMode
+                      ? "bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-500/50 text-cyan-400 shadow-lg shadow-cyan-500/20"
+                      : "bg-gray-800/50 hover:bg-gray-700/50 text-gray-400"
+                  }`}
+                  title={
+                    isAdvancedMode
+                      ? "Switch to User-Friendly Mode"
+                      : "Switch to Advanced Mode"
+                  }
+                >
+                  <span className="text-lg">🔄</span>
+                </motion.button>
+
                 <motion.button
                   whileHover={{ scale: 1.1 }}
                   className="p-3 bg-gray-800/50 rounded-xl hover:bg-gray-700/50 transition-all"
