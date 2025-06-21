@@ -288,20 +288,22 @@ export const UserFriendlyApp: React.FC = () => {
                   whileHover={{ x: 4, scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={() => setCurrentPage(item.id)}
-                  className={`w-full flex items-center gap-4 px-4 py-4 rounded-xl text-left transition-all duration-300 ${
+                  className={`w-full flex items-center gap-4 px-4 py-4 rounded-xl text-left transition-all duration-300 backdrop-blur-sm ${
                     currentPage === item.id
-                      ? "bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-500/50 text-cyan-400 shadow-lg shadow-cyan-500/20"
-                      : "text-gray-300 hover:bg-white/10 hover:text-white"
+                      ? "bg-gradient-to-r from-cyan-500/30 to-blue-500/30 border border-cyan-500/60 text-cyan-400 shadow-2xl shadow-cyan-500/40"
+                      : "text-gray-300 hover:bg-gradient-to-r hover:from-cyan-500/10 hover:to-blue-500/10 hover:border hover:border-cyan-500/30 hover:text-cyan-300 hover:shadow-lg hover:shadow-cyan-500/20 border border-transparent"
                   }`}
                 >
                   <div
-                    className={`${currentPage === item.id ? "text-cyan-400" : "text-gray-400"} transition-colors`}
+                    className={`${currentPage === item.id ? "text-cyan-400 drop-shadow-lg" : "text-gray-400"} transition-all`}
                   >
                     {item.icon}
                   </div>
-                  <span className="font-semibold flex-1">{item.label}</span>
+                  <span className="font-semibold flex-1 drop-shadow-lg">
+                    {item.label}
+                  </span>
                   {item.badge && (
-                    <span className="px-2 py-1 bg-gradient-to-r from-cyan-500 to-blue-500 text-black text-xs font-bold rounded-full">
+                    <span className="px-2 py-1 bg-gradient-to-r from-cyan-500 to-blue-500 text-black text-xs font-bold rounded-full shadow-lg shadow-cyan-500/50">
                       {item.badge}
                     </span>
                   )}
