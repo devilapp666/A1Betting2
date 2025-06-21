@@ -2,49 +2,31 @@ import React, { useState, useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  BarChart3,
+  Home,
   DollarSign,
+  BarChart3,
   Brain,
   Target,
   Settings,
   User,
-  Activity,
-  TrendingUp,
-  Shield,
   Bell,
   Search,
   Command,
   Menu,
   X,
+  ChevronDown,
+  Plus,
+  Activity,
+  TrendingUp,
   Zap,
-  Eye,
-  Gamepad2,
-  Cpu,
-  LineChart,
   Globe,
-  Clock,
-  Sun,
-  Cloud,
-  Thermometer,
-  Wind,
-  Database,
-  Radio,
-  Monitor,
-  Layers,
-  Filter,
-  BarChart,
-  PieChart,
   Calendar,
-  Star,
-  Trophy,
-  Bookmark,
-  Flame,
-  Zap as Lightning,
-  Home,
+  BookOpen,
+  HelpCircle,
 } from "lucide-react";
 
 // Import providers and utilities
-import { SafeThemeProvider, useTheme } from "./providers/SafeThemeProvider";
+import { SafeThemeProvider } from "./providers/SafeThemeProvider";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { initializeMUIClickPatch } from "./utils/muiClickPatch";
 
@@ -63,13 +45,6 @@ import ModernNotificationCenter from "./components/ui/ModernNotificationCenter";
 // Import styling
 import "./App.css";
 import "./styles/enhanced-modern-theme.css";
-import "./styles/enhanced-cyber-theme.css";
-import "./styles/cyber-theme-override.css";
-import "./styles/global-cyber-theme.css";
-import "./styles/cyber-theme.css";
-import "./styles/prototype-override.css";
-import "./styles/force-prototype.css";
-import "./styles/enhanced-animations.css";
 
 // ============================================================================
 // TYPES & INTERFACES
@@ -80,11 +55,8 @@ interface NavigationItem {
   label: string;
   icon: React.ReactNode;
   component: React.ComponentType<any>;
-  category?: string;
-  isPremium?: boolean;
+  shortcut?: string;
   badge?: string;
-  isSubItem?: boolean;
-  parentId?: string;
 }
 
 interface UserData {
@@ -92,22 +64,20 @@ interface UserData {
   email: string;
   tier: string;
   avatar?: string;
-  balance: number;
+  winRate: number;
   totalProfit: number;
   accuracy: number;
-  winRate: number;
 }
 
 // ============================================================================
 // CONFIGURATION
 // ============================================================================
 
-// Create React Query client
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 300000, // 5 minutes
-      cacheTime: 600000, // 10 minutes
+      staleTime: 300000,
+      cacheTime: 600000,
       refetchOnWindowFocus: false,
       refetchOnMount: false,
       refetchOnReconnect: false,
@@ -117,344 +87,272 @@ const queryClient = new QueryClient({
   },
 });
 
-// Mock user data
 const mockUser: UserData = {
   name: "Alex Chen",
   email: "alex@a1betting.com",
   tier: "Pro",
-  balance: 127430.5,
-  totalProfit: 47230,
-  accuracy: 94.2,
   winRate: 72.4,
+  totalProfit: 18000,
+  accuracy: 91.5,
 };
 
-// ============================================================================
-// COMPREHENSIVE NAVIGATION CONFIGURATION
-// ============================================================================
-
+// Clean, organized navigation - inspired by Linear
 const navigationItems: NavigationItem[] = [
   {
     id: "dashboard",
     label: "Dashboard",
     icon: <Home className="w-5 h-5" />,
     component: ConsolidatedUniversalDashboard,
-    category: "main",
+    shortcut: "⌘D",
   },
   {
     id: "money-maker",
     label: "Money Maker",
     icon: <DollarSign className="w-5 h-5" />,
     component: ConsolidatedUniversalMoneyMaker,
-    category: "main",
-    badge: "HOT",
+    shortcut: "⌘M",
+    badge: "NEW",
   },
-
-  // ANALYTICS SECTION
   {
     id: "analytics",
     label: "Analytics",
     icon: <BarChart3 className="w-5 h-5" />,
     component: ConsolidatedUniversalAnalytics,
-    category: "analytics",
+    shortcut: "⌘A",
   },
-  {
-    id: "market-analytics",
-    label: "Market Analytics",
-    icon: <LineChart className="w-5 h-5" />,
-    component: ConsolidatedUniversalAnalytics,
-    category: "analytics",
-    isSubItem: true,
-    parentId: "analytics",
-  },
-  {
-    id: "advanced-analytics",
-    label: "Advanced Analytics",
-    icon: <Brain className="w-5 h-5" />,
-    component: ConsolidatedUniversalAnalytics,
-    category: "analytics",
-    isSubItem: true,
-    parentId: "analytics",
-  },
-
-  // PREDICTIONS SECTION
   {
     id: "predictions",
     label: "Predictions",
-    icon: <Target className="w-5 h-5" />,
+    icon: <Brain className="w-5 h-5" />,
     component: UniversalPredictions,
-    category: "predictions",
-  },
-  {
-    id: "livequickpicks",
-    label: "LiveQuickPicks",
-    icon: <Lightning className="w-5 h-5" />,
-    component: UniversalPredictions,
-    category: "predictions",
-    isSubItem: true,
-    parentId: "predictions",
-    badge: "LIVE",
-  },
-  {
-    id: "quantum-predictions",
-    label: "Quantum Predictions",
-    icon: <Cpu className="w-5 h-5" />,
-    component: UniversalPredictions,
-    category: "predictions",
-    isSubItem: true,
-    parentId: "predictions",
-    isPremium: true,
-  },
-  {
-    id: "live-simulations",
-    label: "Live Simulations",
-    icon: <Gamepad2 className="w-5 h-5" />,
-    component: UniversalPredictions,
-    category: "predictions",
-    isSubItem: true,
-    parentId: "predictions",
-  },
-  {
-    id: "strategy-engine",
-    label: "Strategy Engine",
-    icon: <Shield className="w-5 h-5" />,
-    component: UniversalPredictions,
-    category: "predictions",
-    isSubItem: true,
-    parentId: "predictions",
-  },
-
-  // MONEY MAKERS SECTION
-  {
-    id: "money-makers",
-    label: "Money Makers",
-    icon: <Star className="w-5 h-5" />,
-    component: ConsolidatedUniversalMoneyMaker,
-    category: "money",
-    isSubItem: true,
-    parentId: "money-maker",
-  },
-  {
-    id: "advanced-spec",
-    label: "Advanced/Spec",
-    icon: <Zap className="w-5 h-5" />,
-    component: ConsolidatedUniversalMoneyMaker,
-    category: "money",
-    isSubItem: true,
-    parentId: "money-maker",
-    isPremium: true,
-  },
-
-  // PLAYTEXT SECTION
-  {
-    id: "playtext",
-    label: "PLAYTEXT",
-    icon: <Monitor className="w-5 h-5" />,
-    component: ConsolidatedUniversalAnalytics,
-    category: "playtext",
-  },
-  {
-    id: "nfl",
-    label: "NFL",
-    icon: <Trophy className="w-5 h-5" />,
-    component: ConsolidatedUniversalAnalytics,
-    category: "playtext",
-    isSubItem: true,
-    parentId: "playtext",
-  },
-  {
-    id: "nba",
-    label: "NBA",
-    icon: <Activity className="w-5 h-5" />,
-    component: ConsolidatedUniversalAnalytics,
-    category: "playtext",
-    isSubItem: true,
-    parentId: "playtext",
-  },
-  {
-    id: "mlb",
-    label: "MLB",
-    icon: <Target className="w-5 h-5" />,
-    component: ConsolidatedUniversalAnalytics,
-    category: "playtext",
-    isSubItem: true,
-    parentId: "playtext",
-  },
-  {
-    id: "pga",
-    label: "PGA",
-    icon: <Flame className="w-5 h-5" />,
-    component: ConsolidatedUniversalAnalytics,
-    category: "playtext",
-    isSubItem: true,
-    parentId: "playtext",
-  },
-  {
-    id: "soccer",
-    label: "SOCCER",
-    icon: <Globe className="w-5 h-5" />,
-    component: ConsolidatedUniversalAnalytics,
-    category: "playtext",
-    isSubItem: true,
-    parentId: "playtext",
-  },
-  {
-    id: "ncaa",
-    label: "NCAA",
-    icon: <Bookmark className="w-5 h-5" />,
-    component: ConsolidatedUniversalAnalytics,
-    category: "playtext",
-    isSubItem: true,
-    parentId: "playtext",
-  },
-
-  // INJURIES SECTION
-  {
-    id: "injuries",
-    label: "INJURIES",
-    icon: <Shield className="w-5 h-5" />,
-    component: ConsolidatedUniversalAnalytics,
-    category: "injuries",
-  },
-  {
-    id: "nfl-inj",
-    label: "NFL",
-    icon: <Trophy className="w-5 h-5" />,
-    component: ConsolidatedUniversalAnalytics,
-    category: "injuries",
-    isSubItem: true,
-    parentId: "injuries",
-  },
-  {
-    id: "nba-inj",
-    label: "NBA",
-    icon: <Activity className="w-5 h-5" />,
-    component: ConsolidatedUniversalAnalytics,
-    category: "injuries",
-    isSubItem: true,
-    parentId: "injuries",
-  },
-
-  // WEATHER SECTION
-  {
-    id: "weather",
-    label: "WEATHER",
-    icon: <Cloud className="w-5 h-5" />,
-    component: ConsolidatedUniversalAnalytics,
-    category: "weather",
-  },
-  {
-    id: "current",
-    label: "CURRENT",
-    icon: <Sun className="w-5 h-5" />,
-    component: ConsolidatedUniversalAnalytics,
-    category: "weather",
-    isSubItem: true,
-    parentId: "weather",
-  },
-  {
-    id: "forecast",
-    label: "FORECAST",
-    icon: <Wind className="w-5 h-5" />,
-    component: ConsolidatedUniversalAnalytics,
-    category: "weather",
-    isSubItem: true,
-    parentId: "weather",
-  },
-  {
-    id: "historical",
-    label: "HISTORICAL",
-    icon: <Calendar className="w-5 h-5" />,
-    component: ConsolidatedUniversalAnalytics,
-    category: "weather",
-    isSubItem: true,
-    parentId: "weather",
-  },
-
-  // REAL TIME SECTION
-  {
-    id: "realtime",
-    label: "REAL TIME",
-    icon: <Radio className="w-5 h-5" />,
-    component: ConsolidatedUniversalDashboard,
-    category: "realtime",
-    badge: "LIVE",
-  },
-  {
-    id: "scores",
-    label: "SCORES",
-    icon: <BarChart className="w-5 h-5" />,
-    component: ConsolidatedUniversalDashboard,
-    category: "realtime",
-    isSubItem: true,
-    parentId: "realtime",
-  },
-  {
-    id: "odds",
-    label: "ODDS",
-    icon: <TrendingUp className="w-5 h-5" />,
-    component: ConsolidatedUniversalDashboard,
-    category: "realtime",
-    isSubItem: true,
-    parentId: "realtime",
-  },
-  {
-    id: "lineups",
-    label: "LINEUPS",
-    icon: <Layers className="w-5 h-5" />,
-    component: ConsolidatedUniversalDashboard,
-    category: "realtime",
-    isSubItem: true,
-    parentId: "realtime",
-  },
-
-  // ANALYTICS DETAILED SECTION
-  {
-    id: "analytics-detailed",
-    label: "ANALYTICS",
-    icon: <PieChart className="w-5 h-5" />,
-    component: ConsolidatedUniversalAnalytics,
-    category: "analytics-detailed",
-  },
-  {
-    id: "dashboard-analytics",
-    label: "DASHBOARD",
-    icon: <Monitor className="w-5 h-5" />,
-    component: ConsolidatedUniversalAnalytics,
-    category: "analytics-detailed",
-    isSubItem: true,
-    parentId: "analytics-detailed",
-  },
-
-  // USER SECTION
-  {
-    id: "profile",
-    label: "Profile",
-    icon: <User className="w-5 h-5" />,
-    component: ProfilePage,
-    category: "user",
+    shortcut: "⌘P",
   },
   {
     id: "settings",
     label: "Settings",
     icon: <Settings className="w-5 h-5" />,
     component: UltimateSettingsPage,
-    category: "user",
+    shortcut: "⌘,",
   },
 ];
 
 // ============================================================================
-// MAIN COMPONENT
+// MODERN SIDEBAR COMPONENT
+// ============================================================================
+
+interface SidebarProps {
+  activeItem: string;
+  onNavigate: (itemId: string) => void;
+  user: UserData;
+}
+
+const ModernSidebar: React.FC<SidebarProps> = ({
+  activeItem,
+  onNavigate,
+  user,
+}) => {
+  return (
+    <aside className="w-64 h-full bg-white border-r border-gray-200 flex flex-col">
+      {/* Logo Section */}
+      <div className="p-6 border-b border-gray-100">
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+            <Brain className="w-5 h-5 text-white" />
+          </div>
+          <div>
+            <h1 className="text-lg font-semibold text-gray-900">A1 Sports</h1>
+            <p className="text-xs text-gray-500">Intelligence Platform</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Quick Stats */}
+      <div className="p-6 border-b border-gray-100">
+        <div className="grid grid-cols-3 gap-4">
+          <div className="text-center">
+            <p className="text-lg font-bold text-green-600">{user.winRate}%</p>
+            <p className="text-xs text-gray-500">Win Rate</p>
+          </div>
+          <div className="text-center">
+            <p className="text-lg font-bold text-blue-600">
+              ${(user.totalProfit / 1000).toFixed(0)}K
+            </p>
+            <p className="text-xs text-gray-500">Profit</p>
+          </div>
+          <div className="text-center">
+            <p className="text-lg font-bold text-purple-600">
+              {user.accuracy}%
+            </p>
+            <p className="text-xs text-gray-500">Accuracy</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Navigation */}
+      <nav className="flex-1 p-4">
+        <div className="space-y-1">
+          {navigationItems.map((item) => (
+            <button
+              key={item.id}
+              onClick={() => onNavigate(item.id)}
+              className={`
+                w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-all duration-150
+                ${
+                  activeItem === item.id
+                    ? "bg-blue-50 text-blue-700 border border-blue-200"
+                    : "text-gray-700 hover:bg-gray-50 hover:text-gray-900"
+                }
+              `}
+            >
+              <div
+                className={`
+                ${activeItem === item.id ? "text-blue-600" : "text-gray-500"}
+              `}
+              >
+                {item.icon}
+              </div>
+              <span className="font-medium text-sm flex-1">{item.label}</span>
+
+              {item.badge && (
+                <span className="px-2 py-0.5 bg-blue-100 text-blue-700 text-xs font-semibold rounded-full">
+                  {item.badge}
+                </span>
+              )}
+
+              {item.shortcut && (
+                <span className="text-xs text-gray-400 font-mono">
+                  {item.shortcut}
+                </span>
+              )}
+            </button>
+          ))}
+        </div>
+      </nav>
+
+      {/* User Section */}
+      <div className="p-4 border-t border-gray-100">
+        <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
+          <div className="w-8 h-8 bg-gradient-to-br from-purple-600 to-pink-600 rounded-full flex items-center justify-center">
+            <span className="text-white text-sm font-semibold">
+              {user.name
+                .split(" ")
+                .map((n) => n[0])
+                .join("")}
+            </span>
+          </div>
+          <div className="flex-1">
+            <p className="text-sm font-medium text-gray-900">{user.name}</p>
+            <p className="text-xs text-gray-500">{user.tier} Member</p>
+          </div>
+          <ChevronDown className="w-4 h-4 text-gray-400" />
+        </div>
+      </div>
+    </aside>
+  );
+};
+
+// ============================================================================
+// MODERN TOP BAR COMPONENT
+// ============================================================================
+
+interface TopBarProps {
+  onOpenCommandPalette: () => void;
+  onOpenNotifications: () => void;
+  currentPage: string;
+}
+
+const ModernTopBar: React.FC<TopBarProps> = ({
+  onOpenCommandPalette,
+  onOpenNotifications,
+  currentPage,
+}) => {
+  const currentItem = navigationItems.find((item) => item.id === currentPage);
+
+  return (
+    <header className="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6">
+      {/* Left Section */}
+      <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
+          <div
+            className={`
+            p-2 rounded-lg
+            ${
+              currentPage === "dashboard"
+                ? "bg-blue-50 text-blue-600"
+                : currentPage === "money-maker"
+                  ? "bg-green-50 text-green-600"
+                  : currentPage === "analytics"
+                    ? "bg-purple-50 text-purple-600"
+                    : currentPage === "predictions"
+                      ? "bg-orange-50 text-orange-600"
+                      : "bg-gray-50 text-gray-600"
+            }
+          `}
+          >
+            {currentItem?.icon}
+          </div>
+          <div>
+            <h1 className="text-xl font-semibold text-gray-900">
+              {currentItem?.label}
+            </h1>
+            <p className="text-sm text-gray-500">
+              {currentPage === "dashboard" &&
+                "Real-time insights and performance metrics"}
+              {currentPage === "money-maker" &&
+                "AI-powered betting opportunities"}
+              {currentPage === "analytics" &&
+                "Advanced data analysis and trends"}
+              {currentPage === "predictions" && "Machine learning predictions"}
+              {currentPage === "settings" && "Configure your preferences"}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Right Section */}
+      <div className="flex items-center gap-3">
+        {/* Search Button */}
+        <button
+          onClick={onOpenCommandPalette}
+          className="flex items-center gap-2 px-3 py-2 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors"
+        >
+          <Search className="w-4 h-4 text-gray-500" />
+          <span className="text-sm text-gray-500">Search...</span>
+          <span className="text-xs text-gray-400 font-mono ml-auto">⌘K</span>
+        </button>
+
+        {/* Quick Actions */}
+        <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+          <Plus className="w-5 h-5 text-gray-600" />
+        </button>
+
+        {/* Notifications */}
+        <button
+          onClick={onOpenNotifications}
+          className="relative p-2 hover:bg-gray-100 rounded-lg transition-colors"
+        >
+          <Bell className="w-5 h-5 text-gray-600" />
+          <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+        </button>
+
+        {/* Help */}
+        <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+          <HelpCircle className="w-5 h-5 text-gray-600" />
+        </button>
+      </div>
+    </header>
+  );
+};
+
+// ============================================================================
+// MAIN APP COMPONENT
 // ============================================================================
 
 const AppContent: React.FC = () => {
   const [activeNavItem, setActiveNavItem] = useState("dashboard");
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
   const [isNotificationCenterOpen, setIsNotificationCenterOpen] =
     useState(false);
-  const [expandedCategories, setExpandedCategories] = useState<Set<string>>(
-    new Set(["main", "analytics", "predictions"]),
-  );
 
   // Initialize MUI click patch
   useEffect(() => {
@@ -472,6 +370,26 @@ const AppContent: React.FC = () => {
         e.preventDefault();
         setIsNotificationCenterOpen(true);
       }
+      if ((e.metaKey || e.ctrlKey) && e.key === "d") {
+        e.preventDefault();
+        setActiveNavItem("dashboard");
+      }
+      if ((e.metaKey || e.ctrlKey) && e.key === "m") {
+        e.preventDefault();
+        setActiveNavItem("money-maker");
+      }
+      if ((e.metaKey || e.ctrlKey) && e.key === "a") {
+        e.preventDefault();
+        setActiveNavItem("analytics");
+      }
+      if ((e.metaKey || e.ctrlKey) && e.key === "p") {
+        e.preventDefault();
+        setActiveNavItem("predictions");
+      }
+      if ((e.metaKey || e.ctrlKey) && e.key === ",") {
+        e.preventDefault();
+        setActiveNavItem("settings");
+      }
       if (e.key === "Escape") {
         setIsCommandPaletteOpen(false);
         setIsNotificationCenterOpen(false);
@@ -487,237 +405,31 @@ const AppContent: React.FC = () => {
   )?.component;
   const ActiveComponent = activeComponent || ConsolidatedUniversalDashboard;
 
-  const toggleCategory = (category: string) => {
-    setExpandedCategories((prev) => {
-      const newSet = new Set(prev);
-      if (newSet.has(category)) {
-        newSet.delete(category);
-      } else {
-        newSet.add(category);
-      }
-      return newSet;
-    });
-  };
-
-  const renderNavigationItem = (item: NavigationItem) => {
-    const isActive = activeNavItem === item.id;
-    const isExpanded = expandedCategories.has(item.id);
-    const hasChildren = navigationItems.some(
-      (navItem) => navItem.parentId === item.id,
-    );
-    const isChildVisible = item.parentId
-      ? expandedCategories.has(item.parentId)
-      : true;
-
-    if (!isChildVisible) return null;
-
-    return (
-      <motion.div
-        key={item.id}
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        className={`${item.isSubItem ? "ml-6" : ""}`}
-      >
-        <div
-          onClick={() => {
-            if (hasChildren) {
-              toggleCategory(item.id);
-            } else {
-              setActiveNavItem(item.id);
-            }
-          }}
-          className={`
-            flex items-center gap-3 px-4 py-3 rounded-lg cursor-pointer transition-all duration-200
-            ${
-              isActive
-                ? "bg-gradient-to-r from-purple-600/20 to-pink-600/20 border border-purple-500/30 text-white shadow-lg shadow-purple-500/10"
-                : "text-gray-300 hover:text-white hover:bg-white/5"
-            }
-            ${item.isSubItem ? "text-sm py-2" : ""}
-          `}
-        >
-          <div
-            className={`
-            flex items-center justify-center rounded-lg transition-all duration-200
-            ${isActive ? "text-purple-400" : "text-gray-400"}
-            ${item.isSubItem ? "w-4 h-4" : "w-5 h-5"}
-          `}
-          >
-            {item.icon}
-          </div>
-
-          {!isSidebarCollapsed && (
-            <>
-              <span
-                className={`font-medium ${item.isSubItem ? "text-xs" : "text-sm"}`}
-              >
-                {item.label}
-              </span>
-
-              {item.badge && (
-                <span
-                  className={`
-                  px-2 py-0.5 rounded-full text-xs font-bold
-                  ${
-                    item.badge === "HOT"
-                      ? "bg-red-500/20 text-red-400 border border-red-500/30"
-                      : item.badge === "LIVE"
-                        ? "bg-green-500/20 text-green-400 border border-green-500/30"
-                        : "bg-purple-500/20 text-purple-400 border border-purple-500/30"
-                  }
-                `}
-                >
-                  {item.badge}
-                </span>
-              )}
-
-              {item.isPremium && (
-                <span className="px-2 py-0.5 rounded-full text-xs font-bold bg-amber-500/20 text-amber-400 border border-amber-500/30">
-                  PRO
-                </span>
-              )}
-
-              {hasChildren && (
-                <motion.div
-                  animate={{ rotate: isExpanded ? 90 : 0 }}
-                  transition={{ duration: 0.2 }}
-                  className="ml-auto"
-                >
-                  <svg
-                    className="w-4 h-4"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-                </motion.div>
-              )}
-            </>
-          )}
-        </div>
-      </motion.div>
-    );
-  };
-
   return (
-    <div className="min-h-screen bg-gray-950 text-white">
-      {/* Enhanced Sidebar */}
-      <motion.aside
-        initial={false}
-        animate={{ width: isSidebarCollapsed ? 80 : 280 }}
-        transition={{ duration: 0.3, ease: "easeInOut" }}
-        className="fixed left-0 top-0 h-full bg-gray-900/90 backdrop-blur-xl border-r border-gray-800/50 z-50"
-      >
-        <div className="flex flex-col h-full">
-          {/* Header */}
-          <div className="flex items-center gap-3 p-4 border-b border-gray-800/50">
-            <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-purple-600 to-pink-600 shadow-lg">
-              <Brain className="w-6 h-6 text-white" />
-            </div>
-            {!isSidebarCollapsed && (
-              <div>
-                <h1 className="text-lg font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                  A1 Sports Intelligence
-                </h1>
-                <p className="text-xs text-gray-400">Advanced ML Predictions</p>
-              </div>
-            )}
-            <button
-              onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
-              className="ml-auto p-2 rounded-lg hover:bg-white/5 transition-colors"
-            >
-              <Menu className="w-5 h-5" />
-            </button>
-          </div>
+    <div className="h-screen bg-gray-50 flex">
+      {/* Modern Sidebar */}
+      <ModernSidebar
+        activeItem={activeNavItem}
+        onNavigate={setActiveNavItem}
+        user={mockUser}
+      />
 
-          {/* User Info */}
-          {!isSidebarCollapsed && (
-            <div className="p-4 border-b border-gray-800/50">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center">
-                  <span className="text-sm font-bold text-white">
-                    {mockUser.name
-                      .split(" ")
-                      .map((n) => n[0])
-                      .join("")}
-                  </span>
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-white">
-                    {mockUser.name}
-                  </p>
-                  <p className="text-xs text-gray-400">
-                    {mockUser.tier} Member
-                  </p>
-                </div>
-              </div>
-              <div className="mt-3 grid grid-cols-2 gap-2">
-                <div className="bg-gray-800/50 rounded-lg p-2">
-                  <p className="text-xs text-gray-400">Win Rate</p>
-                  <p className="text-sm font-bold text-green-400">
-                    {mockUser.winRate}%
-                  </p>
-                </div>
-                <div className="bg-gray-800/50 rounded-lg p-2">
-                  <p className="text-xs text-gray-400">Accuracy</p>
-                  <p className="text-sm font-bold text-purple-400">
-                    {mockUser.accuracy}%
-                  </p>
-                </div>
-              </div>
-            </div>
-          )}
+      {/* Main Content Area */}
+      <div className="flex-1 flex flex-col min-w-0">
+        {/* Top Navigation Bar */}
+        <ModernTopBar
+          onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
+          onOpenNotifications={() => setIsNotificationCenterOpen(true)}
+          currentPage={activeNavItem}
+        />
 
-          {/* Navigation */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-2">
-            {navigationItems.map((item) => renderNavigationItem(item))}
-          </div>
-
-          {/* Bottom Actions */}
-          <div className="p-4 border-t border-gray-800/50">
-            {!isSidebarCollapsed && (
-              <div className="space-y-2">
-                <button
-                  onClick={() => setIsCommandPaletteOpen(true)}
-                  className="w-full flex items-center gap-3 px-4 py-2 text-left text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
-                >
-                  <Command className="w-4 h-4" />
-                  <span className="text-sm">Command Palette</span>
-                  <span className="ml-auto text-xs text-gray-500">⌘K</span>
-                </button>
-
-                <button
-                  onClick={() => setIsNotificationCenterOpen(true)}
-                  className="w-full flex items-center gap-3 px-4 py-2 text-left text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
-                >
-                  <Bell className="w-4 h-4" />
-                  <span className="text-sm">Notifications</span>
-                  <span className="ml-auto w-2 h-2 bg-red-500 rounded-full"></span>
-                </button>
-              </div>
-            )}
-          </div>
-        </div>
-      </motion.aside>
-
-      {/* Main Content */}
-      <main
-        className={`transition-all duration-300 ${
-          isSidebarCollapsed ? "ml-20" : "ml-[280px]"
-        }`}
-      >
-        <div className="min-h-screen">
+        {/* Page Content */}
+        <main className="flex-1 overflow-auto">
           <ErrorBoundary>
             <ActiveComponent />
           </ErrorBoundary>
-        </div>
-      </main>
+        </main>
+      </div>
 
       {/* Command Palette */}
       <ModernCommandPalette
