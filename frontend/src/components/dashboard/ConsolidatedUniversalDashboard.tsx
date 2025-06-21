@@ -730,6 +730,11 @@ const OverviewTab: React.FC<{
       />
     </div>
 
+    {/* Modern Dashboard Enhancement */}
+    <div className="my-8">
+      <ModernDashboardEnhancement />
+    </div>
+
     {/* Feature Components Grid */}
     <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
       <DataSourcesPanel
