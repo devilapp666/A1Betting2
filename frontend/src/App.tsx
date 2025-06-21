@@ -501,7 +501,7 @@ const AppContent: React.FC = () => {
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
   const [isNotificationCenterOpen, setIsNotificationCenterOpen] =
     useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   // App initialization
   useEffect(() => {
