@@ -210,10 +210,10 @@ export const UserFriendlyApp: React.FC = () => {
                   whileHover={{ scale: 1.1, rotate: 180 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => setIsAdvancedMode(!isAdvancedMode)}
-                  className={`p-3 rounded-xl transition-all duration-300 backdrop-blur-sm ${
+                  className={`p-3 rounded-xl transition-all duration-300 backdrop-blur-sm border-2 ${
                     isAdvancedMode
-                      ? "bg-gradient-to-r from-cyan-500/30 to-blue-500/30 border border-cyan-500/60 text-cyan-400 shadow-2xl shadow-cyan-500/40"
-                      : "bg-gray-800/30 hover:bg-gray-700/30 border border-gray-600/30 text-gray-400 hover:text-cyan-400 hover:border-cyan-500/30"
+                      ? "bg-gradient-to-r from-cyan-500/50 to-blue-500/50 border-cyan-400 text-cyan-300 shadow-2xl shadow-cyan-500/50"
+                      : "bg-gray-800/80 hover:bg-gray-700/80 border-gray-500 text-gray-300 hover:text-cyan-300 hover:border-cyan-400 hover:bg-gray-600/80"
                   }`}
                   title={
                     isAdvancedMode
@@ -221,22 +221,22 @@ export const UserFriendlyApp: React.FC = () => {
                       : "Switch to Advanced Mode"
                   }
                 >
-                  <span className="text-lg drop-shadow-lg">🔄</span>
+                  <span className="text-lg drop-shadow-lg font-bold">🔄</span>
                 </motion.button>
 
                 <motion.button
                   whileHover={{ scale: 1.1 }}
-                  className="p-3 bg-gray-800/30 border border-gray-600/30 rounded-xl hover:bg-blue-500/20 hover:border-blue-500/40 transition-all backdrop-blur-sm group"
+                  className="p-3 bg-gray-800/80 border-2 border-gray-500 rounded-xl hover:bg-blue-500/30 hover:border-blue-400 transition-all backdrop-blur-sm group"
                 >
-                  <Search className="w-5 h-5 text-gray-400 group-hover:text-blue-400 transition-colors" />
+                  <Search className="w-5 h-5 text-gray-300 group-hover:text-blue-300 transition-colors drop-shadow-lg" />
                 </motion.button>
 
                 <motion.button
                   whileHover={{ scale: 1.1 }}
-                  className="relative p-3 bg-gray-800/30 border border-gray-600/30 rounded-xl hover:bg-red-500/20 hover:border-red-500/40 transition-all backdrop-blur-sm group"
+                  className="relative p-3 bg-gray-800/80 border-2 border-gray-500 rounded-xl hover:bg-red-500/30 hover:border-red-400 transition-all backdrop-blur-sm group"
                 >
-                  <Bell className="w-5 h-5 text-gray-400 group-hover:text-red-400 transition-colors" />
-                  <div className="absolute top-1 right-1 w-3 h-3 bg-red-500 rounded-full animate-pulse shadow-lg shadow-red-500/50" />
+                  <Bell className="w-5 h-5 text-gray-300 group-hover:text-red-300 transition-colors drop-shadow-lg" />
+                  <div className="absolute top-1 right-1 w-3 h-3 bg-red-500 rounded-full animate-pulse shadow-lg shadow-red-500/50 border border-white/50" />
                 </motion.button>
 
                 {/* User Avatar */}
