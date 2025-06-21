@@ -151,106 +151,139 @@ interface SidebarProps {
   user: UserData;
 }
 
-const ModernSidebar: React.FC<SidebarProps> = ({
+const CyberModernSidebar: React.FC<SidebarProps> = ({
   activeItem,
   onNavigate,
   user,
 }) => {
   return (
-    <aside className="w-64 h-full bg-white border-r border-gray-200 flex flex-col">
-      {/* Logo Section */}
-      <div className="p-6 border-b border-gray-100">
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-            <Brain className="w-5 h-5 text-white" />
+    <aside className="w-72 h-full bg-gradient-to-b from-gray-900/95 to-black/95 border-r border-cyan-500/20 flex flex-col backdrop-blur-xl">
+      {/* Cyber Logo Section */}
+      <div className="p-6 border-b border-cyan-500/30">
+        <div className="flex items-center gap-4">
+          <div className="relative">
+            <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-xl blur-lg opacity-75 animate-pulse" />
+            <div className="relative w-12 h-12 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-xl flex items-center justify-center">
+              <Brain className="w-7 h-7 text-black font-bold" />
+            </div>
           </div>
           <div>
-            <h1 className="text-lg font-semibold text-gray-900">A1 Sports</h1>
-            <p className="text-xs text-gray-500">Intelligence Platform</p>
+            <div className="text-xl font-black tracking-tight bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+              A1BETTING
+            </div>
+            <div className="text-xs text-cyan-400 uppercase tracking-widest font-semibold">
+              Quantum Intelligence
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Quick Stats */}
-      <div className="p-6 border-b border-gray-100">
-        <div className="grid grid-cols-3 gap-4">
-          <div className="text-center">
-            <p className="text-lg font-bold text-green-600">{user.winRate}%</p>
-            <p className="text-xs text-gray-500">Win Rate</p>
-          </div>
-          <div className="text-center">
-            <p className="text-lg font-bold text-blue-600">
+      {/* Enhanced Stats with Glow Effects */}
+      <div className="p-6 border-b border-cyan-500/20">
+        <div className="grid grid-cols-3 gap-3">
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            className="text-center p-3 rounded-lg bg-gradient-to-b from-emerald-500/20 to-green-600/20 border border-emerald-500/30"
+          >
+            <p className="text-xl font-bold text-emerald-400">
+              {user.winRate}%
+            </p>
+            <p className="text-xs text-emerald-300 font-medium">Win Rate</p>
+          </motion.div>
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            className="text-center p-3 rounded-lg bg-gradient-to-b from-cyan-500/20 to-blue-600/20 border border-cyan-500/30"
+          >
+            <p className="text-xl font-bold text-cyan-400">
               ${(user.totalProfit / 1000).toFixed(0)}K
             </p>
-            <p className="text-xs text-gray-500">Profit</p>
-          </div>
-          <div className="text-center">
-            <p className="text-lg font-bold text-purple-600">
+            <p className="text-xs text-cyan-300 font-medium">Profit</p>
+          </motion.div>
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            className="text-center p-3 rounded-lg bg-gradient-to-b from-purple-500/20 to-violet-600/20 border border-purple-500/30"
+          >
+            <p className="text-xl font-bold text-purple-400">
               {user.accuracy}%
             </p>
-            <p className="text-xs text-gray-500">Accuracy</p>
-          </div>
+            <p className="text-xs text-purple-300 font-medium">Accuracy</p>
+          </motion.div>
         </div>
       </div>
 
-      {/* Navigation */}
+      {/* Enhanced Navigation */}
       <nav className="flex-1 p-4">
-        <div className="space-y-1">
-          {navigationItems.map((item) => (
-            <button
+        <div className="space-y-2">
+          {navigationItems.map((item, index) => (
+            <motion.button
               key={item.id}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: index * 0.1 }}
+              whileHover={{ x: 4, scale: 1.02 }}
               onClick={() => onNavigate(item.id)}
               className={`
-                w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-all duration-150
+                w-full flex items-center gap-4 px-4 py-3 rounded-xl text-left transition-all duration-300 group
                 ${
                   activeItem === item.id
-                    ? "bg-blue-50 text-blue-700 border border-blue-200"
-                    : "text-gray-700 hover:bg-gray-50 hover:text-gray-900"
+                    ? "bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-500/50 text-cyan-400 shadow-lg shadow-cyan-500/20"
+                    : "text-gray-300 hover:bg-gradient-to-r hover:from-white/10 hover:to-cyan-500/10 hover:text-cyan-300 hover:border hover:border-cyan-500/30"
                 }
               `}
             >
               <div
-                className={`
-                ${activeItem === item.id ? "text-blue-600" : "text-gray-500"}
-              `}
+                className={`${activeItem === item.id ? "text-cyan-400" : "text-gray-400 group-hover:text-cyan-400"} transition-colors`}
               >
                 {item.icon}
               </div>
-              <span className="font-medium text-sm flex-1">{item.label}</span>
+              <span className="font-semibold text-sm flex-1">{item.label}</span>
 
               {item.badge && (
-                <span className="px-2 py-0.5 bg-blue-100 text-blue-700 text-xs font-semibold rounded-full">
+                <motion.span
+                  whileHover={{ scale: 1.1 }}
+                  className="px-2 py-1 bg-gradient-to-r from-cyan-500 to-blue-500 text-black text-xs font-bold rounded-full"
+                >
                   {item.badge}
-                </span>
+                </motion.span>
               )}
 
               {item.shortcut && (
-                <span className="text-xs text-gray-400 font-mono">
+                <span className="text-xs text-gray-500 font-mono bg-gray-800/50 px-1.5 py-0.5 rounded border border-gray-700">
                   {item.shortcut}
                 </span>
               )}
-            </button>
+            </motion.button>
           ))}
         </div>
       </nav>
 
-      {/* User Section */}
-      <div className="p-4 border-t border-gray-100">
-        <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
-          <div className="w-8 h-8 bg-gradient-to-br from-purple-600 to-pink-600 rounded-full flex items-center justify-center">
-            <span className="text-white text-sm font-semibold">
-              {user.name
-                .split(" ")
-                .map((n) => n[0])
-                .join("")}
-            </span>
+      {/* Enhanced User Section */}
+      <div className="p-4 border-t border-cyan-500/20">
+        <motion.div
+          whileHover={{ scale: 1.02 }}
+          className="flex items-center gap-4 p-4 rounded-xl bg-gradient-to-r from-gray-800/50 to-gray-900/50 border border-gray-700/50 hover:border-cyan-500/30 cursor-pointer transition-all duration-300"
+        >
+          <div className="relative">
+            <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full blur opacity-75" />
+            <div className="relative w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
+              <span className="text-white text-sm font-bold">
+                {user.name
+                  .split(" ")
+                  .map((n) => n[0])
+                  .join("")}
+              </span>
+            </div>
           </div>
           <div className="flex-1">
-            <p className="text-sm font-medium text-gray-900">{user.name}</p>
-            <p className="text-xs text-gray-500">{user.tier} Member</p>
+            <p className="text-sm font-semibold text-white">{user.name}</p>
+            <p className="text-xs text-cyan-400 font-medium">
+              {user.tier} Member
+            </p>
           </div>
-          <ChevronDown className="w-4 h-4 text-gray-400" />
-        </div>
+          <motion.div whileHover={{ rotate: 180 }}>
+            <ChevronDown className="w-4 h-4 text-gray-400" />
+          </motion.div>
+        </motion.div>
       </div>
     </aside>
   );
@@ -406,9 +439,9 @@ const AppContent: React.FC = () => {
   const ActiveComponent = activeComponent || ConsolidatedUniversalDashboard;
 
   return (
-    <div className="h-screen bg-gray-50 flex">
-      {/* Modern Sidebar */}
-      <ModernSidebar
+    <div className="h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black flex">
+      {/* Cyber Modern Sidebar */}
+      <CyberModernSidebar
         activeItem={activeNavItem}
         onNavigate={setActiveNavItem}
         user={mockUser}
