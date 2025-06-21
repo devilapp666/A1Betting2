@@ -189,31 +189,64 @@ const UltraAdvancedMLDashboard: React.FC = () => {
 
     try {
       // Mock model performance metrics
-      const mockMetrics: ModelPerformanceMetrics = {
-        accuracy: 0.94,
-        precision: 0.91,
-        recall: 0.88,
-        f1Score: 0.89,
-        roc: 0.93,
-        predictionCount: 1247,
-        successRate: 0.96,
-        averageConfidence: 0.87,
-        modelStatus: "active",
-        lastUpdated: new Date().toISOString(),
-        trainingTime: 45000,
-        inferenceTime: 120,
-        memoryUsage: 2.4,
-        cpuUsage: 0.65,
-        modelVersion: "2.1.4",
-        datasetSize: 50000,
-        featureCount: 247,
-        hyperparameters: {
-          learning_rate: 0.001,
-          batch_size: 32,
-          epochs: 100,
-          dropout: 0.2,
+      const mockMetrics: (ModelPerformanceMetrics & {
+        model_name: string;
+        model_id: string;
+      })[] = [
+        {
+          model_name: "Neural Network Alpha",
+          model_id: "nn_alpha_v1",
+          accuracy: 0.94,
+          precision: 0.91,
+          recall: 0.88,
+          f1Score: 0.89,
+          roc: 0.93,
+          predictionCount: 1247,
+          successRate: 0.96,
+          averageConfidence: 0.87,
+          modelStatus: "active",
+          lastUpdated: new Date().toISOString(),
+          trainingTime: 45000,
+          inferenceTime: 120,
+          memoryUsage: 2.4,
+          cpuUsage: 0.65,
+          modelVersion: "2.1.4",
+          datasetSize: 50000,
+          featureCount: 247,
+          hyperparameters: {
+            learning_rate: 0.001,
+            batch_size: 32,
+            epochs: 100,
+            dropout: 0.2,
+          },
         },
-      };
+        {
+          model_name: "Random Forest Beta",
+          model_id: "rf_beta_v2",
+          accuracy: 0.91,
+          precision: 0.89,
+          recall: 0.84,
+          f1Score: 0.86,
+          roc: 0.9,
+          predictionCount: 892,
+          successRate: 0.93,
+          averageConfidence: 0.85,
+          modelStatus: "active",
+          lastUpdated: new Date().toISOString(),
+          trainingTime: 32000,
+          inferenceTime: 95,
+          memoryUsage: 1.8,
+          cpuUsage: 0.52,
+          modelVersion: "1.7.2",
+          datasetSize: 42000,
+          featureCount: 189,
+          hyperparameters: {
+            n_estimators: 100,
+            max_depth: 10,
+            min_samples_split: 2,
+          },
+        },
+      ];
 
       // Mock system health metrics
       const mockHealth: SystemHealthMetrics = {
