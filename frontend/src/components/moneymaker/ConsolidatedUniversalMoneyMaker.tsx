@@ -2497,16 +2497,15 @@ export const ConsolidatedUniversalMoneyMaker: React.FC = () => {
     (message: string, type: "success" | "error" | "warning" | "info") => {
       setToastMessage(message);
       setToastType(type);
-      setShowToast(true);
+      setShowToastModal(true);
 
       // Auto-hide after 5 seconds
       setTimeout(() => {
-        setShowToast(false);
+        setShowToastModal(false);
       }, 5000);
     },
     [],
   );
-
   const formatCurrency = (amount: number) =>
     new Intl.NumberFormat("en-US", {
       style: "currency",
