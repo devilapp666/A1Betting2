@@ -1009,7 +1009,82 @@ const GridLayoutContent: React.FC<{
       />
     </div>
 
-    {/* Additional feature grids as needed */}
+    {/* Additional Features Row */}
+    {(features?.arbitrage || features?.prizePicks) && (
+      <div className="lg:col-span-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {features?.arbitrage && (
+            <MegaCard className="p-6">
+              <h3 className="text-lg font-bold mb-4">
+                Arbitrage Opportunities
+              </h3>
+              <Suspense fallback={<Skeleton className="h-48" />}>
+                <ArbitrageOpportunities />
+              </Suspense>
+            </MegaCard>
+          )}
+
+          {features?.prizePicks && (
+            <MegaCard className="p-6">
+              <h3 className="text-lg font-bold mb-4">PrizePicks Edge</h3>
+              <Suspense fallback={<Skeleton className="h-48" />}>
+                <PrizePicksEdgeDisplay />
+              </Suspense>
+            </MegaCard>
+          )}
+        </div>
+      </div>
+    )}
+
+    {/* Live Data Row */}
+    {(features?.liveOdds || features?.espnNews) && (
+      <div className="lg:col-span-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {features?.liveOdds && (
+            <MegaCard className="p-6">
+              <h3 className="text-lg font-bold mb-4">Live Odds</h3>
+              <Suspense fallback={<Skeleton className="h-48" />}>
+                <LiveOddsTicker />
+              </Suspense>
+            </MegaCard>
+          )}
+
+          {features?.espnNews && (
+            <MegaCard className="p-6">
+              <h3 className="text-lg font-bold mb-4">ESPN Headlines</h3>
+              <Suspense fallback={<Skeleton className="h-48" />}>
+                <ESPNHeadlinesTicker />
+              </Suspense>
+            </MegaCard>
+          )}
+        </div>
+      </div>
+    )}
+
+    {/* Advanced Features Row */}
+    {(features?.mlInsights || features?.modelPerformance) && (
+      <div className="lg:col-span-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {features?.mlInsights && (
+            <MegaCard className="p-6">
+              <h3 className="text-lg font-bold mb-4">ML Insights</h3>
+              <Suspense fallback={<Skeleton className="h-48" />}>
+                <MLInsights />
+              </Suspense>
+            </MegaCard>
+          )}
+
+          {features?.modelPerformance && (
+            <MegaCard className="p-6">
+              <h3 className="text-lg font-bold mb-4">Model Performance</h3>
+              <Suspense fallback={<Skeleton className="h-48" />}>
+                <ModelPerformance />
+              </Suspense>
+            </MegaCard>
+          )}
+        </div>
+      </div>
+    )}
   </div>
 );
 
