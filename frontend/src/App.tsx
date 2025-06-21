@@ -42,6 +42,9 @@ import {
   MarketConnector,
   RealSimulator,
 } from "./components/elite/index";
+
+// Import user-friendly app
+import UserFriendlyApp from "./components/user-friendly/UserFriendlyApp";
 import ErrorBoundary from "./components/ErrorBoundary";
 
 // Import main page components - Using advanced versions
