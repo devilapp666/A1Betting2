@@ -1,17 +1,86 @@
-import { SportSelector } from "@/components/common/SportSelector";
-import { EnhancedPrediction } from "@/services/realTimePredictionEngine";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { getSportDisplayName } from "../../constants/sports";
 
+interface EnhancedPrediction {
+  id: string;
+  sport: string;
+  type: string;
+  game: string;
+  prediction: string;
+  confidence: number;
+  odds: number;
+  valueGrade: string;
+  risk: number;
+  expectedValue: number;
+  timestamp: Date;
+}
+
 interface RealTimePredictionsProps {
-  predictions: EnhancedPrediction[];
-  loading: boolean;
+  predictions?: EnhancedPrediction[];
+  loading?: boolean;
 }
 
 export function RealTimePredictions({
-  predictions = [], // Default to empty array
-  loading = false,
-}: RealTimePredictionsProps) {
+  predictions: propPredictions,
+  loading: propLoading,
+}: RealTimePredictionsProps = {}) {
+  const [predictions, setPredictions] = useState<EnhancedPrediction[]>([]);
+  const [loading, setLoading] = useState(false);
+
+  // Mock data for when no predictions are provided
+  useEffect(() => {
+    if (!propPredictions) {
+      setLoading(true);
+      // Simulate loading and then set mock data
+      setTimeout(() => {
+        setPredictions([
+          {
+            id: "1",
+            sport: "NBA",
+            type: "game",
+            game: "Lakers vs Warriors",
+            prediction: "Over 235.5 Points",
+            confidence: 89,
+            odds: 1.85,
+            valueGrade: "A",
+            risk: 0.15,
+            expectedValue: 12.3,
+            timestamp: new Date(),
+          },
+          {
+            id: "2",
+            sport: "NBA",
+            type: "player_prop",
+            game: "Celtics vs Heat",
+            prediction: "LeBron Over 28.5 Points",
+            confidence: 84,
+            odds: 1.92,
+            valueGrade: "B+",
+            risk: 0.22,
+            expectedValue: 8.7,
+            timestamp: new Date(),
+          },
+          {
+            id: "3",
+            sport: "NFL",
+            type: "game",
+            game: "Chiefs vs Bills",
+            prediction: "Chiefs -3.5",
+            confidence: 91,
+            odds: 1.95,
+            valueGrade: "A+",
+            risk: 0.12,
+            expectedValue: 15.8,
+            timestamp: new Date(),
+          },
+        ]);
+        setLoading(false);
+      }, 1000);
+    } else {
+      setPredictions(propPredictions);
+      setLoading(propLoading || false);
+    }
+  }, [propPredictions, propLoading]);
   const [selectedSport, setSelectedSport] = useState("All");
   const [selectedType, setSelectedType] = useState("All");
 
