@@ -30,6 +30,7 @@ import { SafeThemeProvider } from "./providers/SafeThemeProvider";
 import ErrorBoundary from "./components/ErrorBoundary";
 
 // Import main page components - Using advanced versions
+import EliteFeaturesOverview from "./components/dashboard/EliteFeaturesOverview";
 import CyberAnalyticsHub from "./components/cyber/CyberAnalyticsHub";
 import CyberUltimateMoneyMaker from "./components/cyber/CyberUltimateMoneyMaker";
 import UltraAdvancedMLDashboard from "./components/ml/UltraAdvancedMLDashboard";
@@ -104,9 +105,9 @@ const navigationItems: NavigationItem[] = [
     id: "dashboard",
     label: "Elite Dashboard",
     icon: <Home className="w-5 h-5" />,
-    component: UltraAdvancedMLDashboard,
+    component: EliteFeaturesOverview,
     shortcut: "⌘D",
-    badge: "ULTRA",
+    badge: "ELITE",
   },
   {
     id: "money-maker",
