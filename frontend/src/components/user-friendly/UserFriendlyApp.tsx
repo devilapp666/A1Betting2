@@ -380,10 +380,10 @@ export const UserFriendlyApp: React.FC = () => {
                           setCurrentPage(item.id);
                           setIsMobileMenuOpen(false);
                         }}
-                        className={`w-full flex items-center gap-4 px-4 py-4 rounded-xl text-left transition-all backdrop-blur-sm ${
+                        className={`w-full flex items-center gap-4 px-4 py-4 rounded-xl text-left transition-all backdrop-blur-sm border-2 ${
                           currentPage === item.id
-                            ? "bg-gradient-to-r from-cyan-500/30 to-blue-500/30 border border-cyan-500/60 text-cyan-400 shadow-2xl shadow-cyan-500/40"
-                            : "text-gray-300 hover:bg-gradient-to-r hover:from-cyan-500/10 hover:to-blue-500/10 hover:border hover:border-cyan-500/30 hover:text-cyan-300 border border-transparent"
+                            ? "bg-gradient-to-r from-cyan-500/50 to-blue-500/50 border-cyan-400 text-cyan-200 shadow-2xl shadow-cyan-500/50"
+                            : "text-gray-200 hover:bg-gradient-to-r hover:from-cyan-500/20 hover:to-blue-500/20 hover:border-cyan-400 hover:text-cyan-200 border-gray-600 hover:border-cyan-400 bg-gray-800/60 hover:bg-gray-700/80"
                         }`}
                       >
                         <div
