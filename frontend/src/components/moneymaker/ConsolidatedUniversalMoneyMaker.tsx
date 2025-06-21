@@ -1947,7 +1947,7 @@ export const ConsolidatedUniversalMoneyMaker: React.FC = () => {
     useState<BettingOpportunity | null>(null);
   const [isPlacingBet, setIsPlacingBet] = useState(false);
   const [notifications, setNotifications] = useState<any[]>([]);
-  const [showToast, setShowToast] = useState(false);
+  const [showToastModal, setShowToastModal] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
   const [toastType, setToastType] = useState<
     "success" | "error" | "warning" | "info"
