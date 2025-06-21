@@ -99,29 +99,74 @@ export const Scatter = createSafeChartComponent("scatter");
 
 // Also create a generic Chart component
 export const Chart = React.forwardRef<any, any>((props, ref) => {
-  const { type, data, options, ...restProps } = props;
+  try {
+    const { type, data, options, ...restProps } = props;
 
-  if (!data || !data.labels || !data.datasets) {
+    // Validate type parameter
+    if (!type || typeof type !== "string") {
+      return (
+        <div className="flex items-center justify-center h-full text-orange-400 p-8 min-h-[200px]">
+          <div className="text-center">
+            <BarChart3 className="w-8 h-8 mx-auto mb-2 text-orange-400" />
+            <p className="text-sm text-orange-400">Invalid Chart Type</p>
+            <p className="text-xs text-gray-500 mt-1">
+              Chart type "{type}" not supported
+            </p>
+          </div>
+        </div>
+      );
+    }
+
+    // Enhanced data validation
+    const isValidData = React.useMemo(() => {
+      if (!data || typeof data !== "object") return false;
+      if (!data.labels || !Array.isArray(data.labels)) return false;
+      if (!data.datasets || !Array.isArray(data.datasets)) return false;
+      if (data.labels.length === 0) return false;
+      if (data.datasets.length === 0) return false;
+
+      return data.datasets.every(
+        (dataset: any) =>
+          dataset &&
+          typeof dataset === "object" &&
+          (Array.isArray(dataset.data) || typeof dataset.data === "object"),
+      );
+    }, [data]);
+
+    if (!isValidData) {
+      return (
+        <div className="flex items-center justify-center h-full text-gray-400 p-8 min-h-[200px]">
+          <div className="text-center">
+            <BarChart3 className="w-8 h-8 mx-auto mb-2 animate-pulse text-cyan-400" />
+            <p className="text-sm text-gray-400">Loading chart data...</p>
+            <p className="text-xs text-gray-500 mt-1">Preparing {type} chart</p>
+          </div>
+        </div>
+      );
+    }
+
     return (
-      <div className="flex items-center justify-center h-full text-gray-400 p-8">
+      <SafeChart
+        type={type}
+        data={data}
+        options={options}
+        loadingMessage={`Loading ${type} chart...`}
+        {...restProps}
+        ref={ref}
+      />
+    );
+  } catch (error) {
+    console.error("Chart component error:", error);
+    return (
+      <div className="flex items-center justify-center h-full text-red-400 p-8 min-h-[200px]">
         <div className="text-center">
-          <BarChart3 className="w-8 h-8 mx-auto mb-2 animate-pulse text-cyan-400" />
-          <p className="text-sm text-gray-400">Loading chart data...</p>
+          <BarChart3 className="w-8 h-8 mx-auto mb-2 text-red-400" />
+          <p className="text-sm text-red-400">Chart Error</p>
+          <p className="text-xs text-gray-500 mt-1">Unable to render chart</p>
         </div>
       </div>
     );
   }
-
-  return (
-    <SafeChart
-      type={type}
-      data={data}
-      options={options}
-      loadingMessage={`Loading ${type} chart...`}
-      {...restProps}
-      ref={ref}
-    />
-  );
 });
 
 // Set display names for debugging
