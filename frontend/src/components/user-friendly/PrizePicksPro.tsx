@@ -484,7 +484,7 @@ export const PrizePicksPro: React.FC = () => {
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="px-12 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-black text-xl rounded-xl hover:shadow-2xl hover:shadow-blue-500/25 transition-all"
+                    className="px-12 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-black text-xl rounded-xl hover:shadow-2xl hover:shadow-blue-500/50 transition-all border-2 border-blue-400/50 hover:border-blue-300 shadow-lg shadow-blue-500/25"
                   >
                     <div className="flex items-center space-x-3">
                       <Trophy className="w-6 h-6" />
