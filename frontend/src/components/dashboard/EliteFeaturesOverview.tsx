@@ -395,6 +395,7 @@ export const EliteFeaturesOverview: React.FC<EliteFeaturesOverviewProps> = ({
               <div className="flex gap-2 mt-4">
                 <motion.button
                   whileHover={{ scale: 1.1 }}
+                  onClick={() => handleFeatureLaunch(feature.name)}
                   className="flex-1 py-2 px-3 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-500/30 rounded-lg text-xs text-cyan-400 font-semibold hover:from-cyan-500/30 hover:to-blue-500/30 transition-all"
                 >
                   Launch
