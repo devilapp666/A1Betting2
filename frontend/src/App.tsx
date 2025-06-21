@@ -24,6 +24,7 @@ import {
   Calendar,
   BookOpen,
   HelpCircle,
+  Database,
 } from "lucide-react";
 
 // Import providers and utilities
