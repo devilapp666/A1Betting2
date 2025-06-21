@@ -630,7 +630,7 @@ const UltraAdvancedMLDashboard: React.FC = () => {
       datasets: [
         {
           label: "Memory Usage (MB)",
-          data: modelMetrics.map((m) => m.memory_usage),
+          data: modelMetrics.map((m) => m.memoryUsage),
           backgroundColor: modelMetrics.map(
             (_, i) =>
               `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 0.8)`,
