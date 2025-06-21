@@ -17,7 +17,7 @@ import {
   Eye,
   Settings,
 } from "lucide-react";
-import { Line, Bar, Scatter, Radar } from "react-chartjs-2";
+import SafeChart from "../ui/SafeChart";
 import {
   Chart as ChartJS,
   CategoryScale,
