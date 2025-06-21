@@ -124,7 +124,7 @@ export const AdvancedMLDashboard: React.FC<AdvancedMLDashboardProps> = ({
           Model Confidence Distribution
         </h3>
         <div className="h-64">
-          <Chart
+          <SafeChart
             type="bar"
             data={chartData}
             options={{
@@ -137,6 +137,7 @@ export const AdvancedMLDashboard: React.FC<AdvancedMLDashboardProps> = ({
                 },
               },
             }}
+            loadingMessage="Loading model confidence data..."
           />
         </div>
       </div>
