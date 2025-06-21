@@ -35,7 +35,7 @@ import CyberUltimateMoneyMaker from "./components/cyber/CyberUltimateMoneyMaker"
 import UltraAdvancedMLDashboard from "./components/ml/UltraAdvancedMLDashboard";
 import EnhancedRevolutionaryInterface from "./components/revolutionary/EnhancedRevolutionaryInterface";
 import UltimateSettingsPage from "./components/settings/UltimateSettingsPage";
-import UnifiedProfile from "./components/profile/UnifiedProfile";
+import { UnifiedProfile } from "./components/profile/UnifiedProfile";
 
 // Import modern UI components and advanced layout
 import ModernCommandPalette from "./components/ui/ModernCommandPalette";
