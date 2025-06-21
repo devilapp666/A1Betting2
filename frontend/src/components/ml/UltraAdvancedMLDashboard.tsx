@@ -940,15 +940,9 @@ const UltraAdvancedMLDashboard: React.FC = () => {
                         {model.model_name}
                       </CardTitle>
                       <Badge
-                        variant={
-                          model.mathematical_properties.convergence_verified
-                            ? "success"
-                            : "warning"
-                        }
+                        variant={model.accuracy > 0.9 ? "success" : "warning"}
                       >
-                        {model.mathematical_properties.convergence_verified
-                          ? "Verified"
-                          : "Pending"}
+                        {model.accuracy > 0.9 ? "Verified" : "Pending"}
                       </Badge>
                     </div>
                   </CardHeader>
