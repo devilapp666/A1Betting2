@@ -360,16 +360,17 @@ export const UserFriendlyApp: React.FC = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="lg:hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-sm"
+              className="lg:hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-lg"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               <motion.div
                 initial={{ x: -300 }}
                 animate={{ x: 0 }}
                 exit={{ x: -300 }}
-                className="w-80 h-full bg-slate-900 border-r border-white/10 p-6"
+                className="w-80 h-full bg-slate-900/95 backdrop-blur-2xl border-r border-cyan-500/30 p-6 relative shadow-2xl shadow-cyan-500/20"
                 onClick={(e) => e.stopPropagation()}
               >
+                <div className="absolute inset-0 bg-gradient-to-b from-cyan-500/5 via-purple-500/5 to-green-500/5" />
                 <nav className="space-y-2">
                   {navigationItems.map((item) => (
                     <button
