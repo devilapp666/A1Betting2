@@ -170,6 +170,21 @@ const navigationItems: NavigationItem[] = [
     component: UltimateSettingsPage,
     shortcut: ["⌘", ","],
   },
+  // Elite Features
+  {
+    id: "business-analysis",
+    label: "Business Analysis",
+    icon: <BarChart3 className="w-5 h-5" />,
+    component: BusinessAnalysis,
+    badge: "ELITE",
+  },
+  {
+    id: "ai-edge-ml",
+    label: "AI Edge ML",
+    icon: <Brain className="w-5 h-5" />,
+    component: AIEdgeML,
+    badge: "AI",
+  },
 ];
 
 // ============================================================================
