@@ -24,10 +24,8 @@ import useStore from "../../store/useStore";
 const PerformanceAnalyticsDashboard = React.lazy(
   () => import("../analytics/PerformanceAnalyticsDashboard"),
 );
-const UnifiedMoneyMaker = React.lazy(() =>
-  import("../money-maker/UnifiedMoneyMaker").then((m) => ({
-    default: m.UnifiedMoneyMaker,
-  })),
+const UnifiedMoneyMaker = React.lazy(
+  () => import("../money-maker/UnifiedMoneyMaker"),
 );
 const UnifiedStrategyEngineDisplay = React.lazy(() =>
   import("../strategy/UnifiedStrategyEngineDisplay").then((m) => ({
