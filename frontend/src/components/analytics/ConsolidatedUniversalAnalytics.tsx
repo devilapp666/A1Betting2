@@ -92,7 +92,7 @@ export const ConsolidatedUniversalAnalytics: React.FC<
   return (
     <ErrorBoundary>
       <div className={className}>
-        <CleanAnalytics />
+        <UniversalAnalytics />
       </div>
     </ErrorBoundary>
   );
