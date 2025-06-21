@@ -116,7 +116,12 @@ const PerformanceChart: React.FC<PerformanceChartProps> = ({
 
   return (
     <div style={{ height, width }}>
-      <Line data={data} options={options} />
+      <SafeChart
+        type="line"
+        data={data}
+        options={options}
+        loadingMessage="Loading performance metrics..."
+      />
     </div>
   );
 };
