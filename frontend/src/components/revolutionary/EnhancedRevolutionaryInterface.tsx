@@ -59,12 +59,17 @@ import {
 } from "chart.js";
 import toast from "react-hot-toast";
 
-// Import enhanced backend service
-import EnhancedBackendApiService, {
-  EnhancedPredictionRequest,
-  EnhancedPredictionResponse,
-  MathematicalAnalysisResponse,
-} from "../../services/unified/EnhancedBackendApiService";
+// Types for the prediction system
+interface EnhancedPredictionRequest {
+  event_id: string;
+  sport: string;
+  features: Record<string, number>;
+  enable_neuromorphic: boolean;
+  enable_mamba: boolean;
+  enable_causal_inference: boolean;
+  enable_topological: boolean;
+  enable_riemannian: boolean;
+}
 import { useLogger } from "../../hooks/useLogger";
 
 // Register Chart.js components
@@ -132,7 +137,6 @@ const EnhancedRevolutionaryInterface: React.FC = () => {
 
   // Hooks
   const logger = useLogger();
-  const backendService = EnhancedBackendApiService.getInstance();
 
   // Load mathematical foundations on mount
   useEffect(() => {
