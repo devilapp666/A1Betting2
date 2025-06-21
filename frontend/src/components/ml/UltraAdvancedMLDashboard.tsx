@@ -1301,20 +1301,17 @@ const UltraAdvancedMLDashboard: React.FC = () => {
                         {systemHealth.throughput}
                       </p>
                       <p className="text-sm text-gray-600">Requests/min</p>
-                    </div>
-                    <div className="text-center">
-                      <p className="text-2xl font-bold text-green-600">
-                        {(systemHealth?.responseTime || 0).toFixed(0)}ms
-                      </p>
-                      <p className="text-sm text-gray-600">Avg Response</p>
-                    </div>
-                    <div className="text-center">
-                      <p className="text-2xl font-bold text-purple-600">
-                        {((systemHealth?.errorRate || 0) * 100).toFixed(2)}%
-                      </p>
-                      <p className="text-sm text-gray-600">Error Rate</p>
-                    </div>
-                    <div className="text-center">
+                <div>
+                  <h3 className="text-sm font-medium text-gray-400 uppercase tracking-wider">
+                    Prediction Accuracy
+                  </h3>
+                  <p className="text-lg font-bold text-blue-400 animate-pulse">
+                    {((systemHealth?.overallHealth || 0) * 100).toFixed(1)}%
+                  </p>
+                </div>
+                <div className="p-2 rounded-full bg-blue-500/20 shadow-lg shadow-blue-500/30">
+                  <Target className="w-6 h-6 text-blue-400" />
+                </div>
                       <p className="text-2xl font-bold text-yellow-600">
                         {systemHealth.mathematical_rigor_score}
                       </p>
