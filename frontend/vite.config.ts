@@ -14,8 +14,6 @@ export default defineConfig({
       "@/utils": path.resolve(__dirname, "src/utils"),
       "@/services": path.resolve(__dirname, "src/services"),
       "@": path.resolve(__dirname, "src"),
-      // Global override for react-chartjs-2 to use our safe wrapper
-      "react-chartjs-2": path.resolve(__dirname, "src/utils/chartjs-safe.tsx"),
     },
   },
   plugins: [react()],
