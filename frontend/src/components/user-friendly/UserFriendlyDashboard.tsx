@@ -237,41 +237,61 @@ export const UserFriendlyDashboard: React.FC<{
         transition={{ delay: 0.1 }}
         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
       >
-        <StatCard
-          label="Total Profit (Today)"
-          value={`$${liveStats.totalProfit.toLocaleString()}`}
-          icon={<DollarSign className="w-6 h-6 text-green-400" />}
-          change="+$1.2K (1h)"
-          live={true}
-          color="from-green-500 to-emerald-500"
-        />
+        <div className="glass-card rounded-xl p-6 text-center hover:shadow-neon transition-all duration-300 transform hover:scale-105">
+          <div className="text-3xl mb-3 text-electric-400">
+            <i className="fas fa-dollar-sign"></i>
+          </div>
+          <div className="text-2xl font-bold mb-2 text-white animate-cyber-pulse">
+            ${liveStats.totalProfit.toLocaleString()}
+          </div>
+          <div className="text-gray-400 text-sm mb-2">Total Profit (Today)</div>
+          <div className="flex items-center justify-center text-xs text-green-400">
+            <i className="fas fa-arrow-up mr-1"></i>
+            +$1.2K (1h)
+          </div>
+        </div>
 
-        <StatCard
-          label="AI Win Rate"
-          value={`${liveStats.winRate.toFixed(1)}%`}
-          icon={<Target className="w-6 h-6 text-blue-400" />}
-          change="+0.3% (24h)"
-          live={true}
-          color="from-blue-500 to-cyan-500"
-        />
+        <div className="glass-card rounded-xl p-6 text-center hover:shadow-neon transition-all duration-300 transform hover:scale-105">
+          <div className="text-3xl mb-3 text-electric-400">
+            <i className="fas fa-target"></i>
+          </div>
+          <div className="text-2xl font-bold mb-2 text-white animate-cyber-pulse">
+            {liveStats.winRate.toFixed(1)}%
+          </div>
+          <div className="text-gray-400 text-sm mb-2">AI Win Rate</div>
+          <div className="flex items-center justify-center text-xs text-green-400">
+            <i className="fas fa-arrow-up mr-1"></i>
+            +0.3% (24h)
+          </div>
+        </div>
 
-        <StatCard
-          label="AI Accuracy"
-          value={`${liveStats.aiAccuracy.toFixed(1)}%`}
-          icon={<Brain className="w-6 h-6 text-purple-400" />}
-          change="+0.1% (1h)"
-          live={true}
-          color="from-purple-500 to-pink-500"
-        />
+        <div className="glass-card rounded-xl p-6 text-center hover:shadow-neon transition-all duration-300 transform hover:scale-105">
+          <div className="text-3xl mb-3 text-electric-400">
+            <i className="fas fa-brain"></i>
+          </div>
+          <div className="text-2xl font-bold mb-2 text-white animate-cyber-pulse">
+            {liveStats.aiAccuracy.toFixed(1)}%
+          </div>
+          <div className="text-gray-400 text-sm mb-2">Real-Time Accuracy</div>
+          <div className="flex items-center justify-center text-xs text-green-400">
+            <i className="fas fa-arrow-up mr-1"></i>
+            +0.2% (1h)
+          </div>
+        </div>
 
-        <StatCard
-          label="Live Alerts"
-          value={liveStats.liveAlerts}
-          icon={<Zap className="w-6 h-6 text-yellow-400" />}
-          change="+3 new"
-          live={true}
-          color="from-yellow-500 to-orange-500"
-        />
+        <div className="glass-card rounded-xl p-6 text-center hover:shadow-neon transition-all duration-300 transform hover:scale-105">
+          <div className="text-3xl mb-3 text-electric-400">
+            <i className="fas fa-bolt"></i>
+          </div>
+          <div className="text-2xl font-bold mb-2 text-white animate-cyber-pulse">
+            {liveStats.liveAlerts}
+          </div>
+          <div className="text-gray-400 text-sm mb-2">Live Alerts</div>
+          <div className="flex items-center justify-center text-xs text-green-400">
+            <i className="fas fa-arrow-up mr-1"></i>
+            +3 new
+          </div>
+        </div>
       </motion.div>
 
       {/* Quick Actions */}
