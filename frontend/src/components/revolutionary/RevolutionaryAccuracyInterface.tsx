@@ -30,8 +30,6 @@ import {
   Gauge,
   Workflow,
 } from "lucide-react";
-import {
-  Line,
 import SafeChart from "../ui/SafeChart";
 import {
   Chart as ChartJS,
