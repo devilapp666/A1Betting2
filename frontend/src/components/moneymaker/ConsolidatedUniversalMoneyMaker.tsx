@@ -53,7 +53,6 @@ import { Skeleton } from "../ui/Skeleton";
 import { Toast } from "../ui/UnifiedUI";
 import GlassCard from "../ui/GlassCard";
 import CyberButton from "../ui/CyberButton";
-import MetricCard from "../ui/MetricCard";
 import StatusIndicator from "../ui/StatusIndicator";
 
 // Store integrations
