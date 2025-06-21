@@ -779,7 +779,9 @@ const UltraAdvancedMLDashboard: React.FC = () => {
                     {((systemHealth?.overallHealth || 0) * 100).toFixed(1)}%
                   </p>
                 </div>
-                <Target className="w-6 h-6 text-blue-600" />
+                <div className="p-2 rounded-full bg-blue-500/20 shadow-lg shadow-blue-500/30">
+                  <Target className="w-6 h-6 text-blue-400" />
+                </div>
               </div>
             </CardContent>
           </Card>
