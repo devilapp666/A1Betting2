@@ -115,13 +115,12 @@ export const AdvancedCharts: React.FC<AdvancedChartsProps> = React.memo(
             {title}
           </figcaption>
         )}
-        <Chart
+        <SafeChart
           type={type}
           data={data}
           options={{ ...defaultOptions, ...options }}
-          aria-label={title || "Chart"}
-          role="img"
-          tabIndex={0}
+          className="w-full h-full"
+          loadingMessage="Loading chart data..."
         />
       </figure>
     );
