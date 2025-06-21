@@ -98,12 +98,12 @@ const mockUser: UserData = {
   accuracy: 91.5,
 };
 
-// Advanced navigation with ultra-premium components
+// Comprehensive Elite Sports Intelligence Platform Navigation
 const navigationItems: NavigationItem[] = [
   {
     id: "dashboard",
-    label: "ML Dashboard",
-    icon: <Brain className="w-5 h-5" />,
+    label: "Elite Dashboard",
+    icon: <Home className="w-5 h-5" />,
     component: UltraAdvancedMLDashboard,
     shortcut: "⌘D",
     badge: "ULTRA",
@@ -125,12 +125,35 @@ const navigationItems: NavigationItem[] = [
     badge: "PRO",
   },
   {
-    id: "predictions",
-    label: "Revolutionary AI",
-    icon: <Zap className="w-5 h-5" />,
+    id: "ai-predictions",
+    label: "AI Predictions",
+    icon: <Brain className="w-5 h-5" />,
     component: EnhancedRevolutionaryInterface,
     shortcut: "⌘P",
     badge: "ELITE",
+  },
+  {
+    id: "arbitrage",
+    label: "AI Arbitrage",
+    icon: <Target className="w-5 h-5" />,
+    component: CyberAnalyticsHub, // Using existing component for now
+    shortcut: "⌘R",
+    badge: "AI",
+  },
+  {
+    id: "ml-center",
+    label: "ML Center",
+    icon: <Activity className="w-5 h-5" />,
+    component: UltraAdvancedMLDashboard,
+    shortcut: "⌘L",
+    badge: "ML",
+  },
+  {
+    id: "profile",
+    label: "Profile",
+    icon: <User className="w-5 h-5" />,
+    component: UnifiedProfile,
+    shortcut: "⌘U",
   },
   {
     id: "settings",
@@ -211,9 +234,13 @@ const CyberModernSidebar: React.FC<SidebarProps> = ({
         </div>
       </div>
 
-      {/* Enhanced Navigation */}
-      <nav className="flex-1 p-4">
-        <div className="space-y-2">
+      {/* Enhanced Navigation with Feature Categories */}
+      <nav className="flex-1 p-4 overflow-y-auto">
+        {/* Main Navigation */}
+        <div className="space-y-1 mb-6">
+          <div className="text-xs font-bold text-cyan-400 uppercase tracking-wider mb-3 px-2">
+            Core Platform
+          </div>
           {navigationItems.map((item, index) => (
             <motion.button
               key={item.id}
@@ -254,6 +281,53 @@ const CyberModernSidebar: React.FC<SidebarProps> = ({
               )}
             </motion.button>
           ))}
+        </div>
+
+        {/* Additional Features from Error Screen */}
+        <div className="border-t border-cyan-500/20 pt-4">
+          <div className="text-xs font-bold text-emerald-400 uppercase tracking-wider mb-3 px-2">
+            Elite Features
+          </div>
+          <div className="space-y-1">
+            {[
+              { name: "Business Analysis", icon: "📊", status: "active" },
+              { name: "AI Edge ML", icon: "🧠", status: "active" },
+              { name: "Mega Sports", icon: "⚡", status: "pro" },
+              { name: "Elite Bankroll", icon: "💰", status: "premium" },
+              { name: "SQL Sports", icon: "🔍", status: "active" },
+              { name: "Model Analysis", icon: "📈", status: "ai" },
+              { name: "Market Connector", icon: "🔗", status: "live" },
+              { name: "Real Simulator", icon: "🎮", status: "beta" },
+            ].map((feature, index) => (
+              <motion.div
+                key={feature.name}
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.5 + index * 0.05 }}
+                className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-white/5 cursor-pointer group"
+              >
+                <span className="text-sm">{feature.icon}</span>
+                <span className="text-xs text-gray-400 group-hover:text-gray-300 flex-1">
+                  {feature.name}
+                </span>
+                <div
+                  className={`w-2 h-2 rounded-full ${
+                    feature.status === "active"
+                      ? "bg-green-400"
+                      : feature.status === "pro"
+                        ? "bg-purple-400"
+                        : feature.status === "premium"
+                          ? "bg-yellow-400"
+                          : feature.status === "ai"
+                            ? "bg-cyan-400"
+                            : feature.status === "live"
+                              ? "bg-red-400 animate-pulse"
+                              : "bg-orange-400"
+                  }`}
+                />
+              </motion.div>
+            ))}
+          </div>
         </div>
       </nav>
 
