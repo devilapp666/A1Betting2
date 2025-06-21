@@ -595,6 +595,11 @@ const AppContent: React.FC = () => {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
+  // Return user-friendly interface if enabled
+  if (isUserFriendlyMode) {
+    return <UserFriendlyApp />;
+  }
+
   const activeComponent = navigationItems.find(
     (item) => item.id === activeNavItem,
   )?.component;
