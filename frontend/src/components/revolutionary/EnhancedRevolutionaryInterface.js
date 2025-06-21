@@ -118,7 +118,6 @@ const EnhancedRevolutionaryInterface = () => {
   });
   // Hooks
   const logger = useLogger();
-  const backendService = EnhancedBackendApiService.getInstance();
   // Load mathematical foundations on mount
   useEffect(() => {
     loadMathematicalFoundations();
