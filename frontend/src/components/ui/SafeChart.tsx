@@ -1,11 +1,12 @@
 import React from "react";
+// Import directly from node_modules to avoid circular dependency with our alias
 import {
   Line,
   Bar,
   Doughnut,
   Radar,
   Scatter,
-} from "react-chartjs-2/dist/index.js";
+} from "../../../node_modules/react-chartjs-2/dist/index.js";
 import { Activity, BarChart3, PieChart, Zap } from "lucide-react";
 
 interface SafeChartProps {
