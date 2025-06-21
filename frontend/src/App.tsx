@@ -29,6 +29,7 @@ import {
 
 // Import providers and utilities
 import { SafeThemeProvider } from "./providers/SafeThemeProvider";
+import { ChartErrorBoundary } from "./components/ui/ChartErrorBoundary";
 
 // Import elite feature components
 import { BusinessAnalysis } from "./components/elite/BusinessAnalysis";
