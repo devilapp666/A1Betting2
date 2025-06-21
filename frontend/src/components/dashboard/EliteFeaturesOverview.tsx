@@ -442,4 +442,3 @@ export const EliteFeaturesOverview: React.FC<EliteFeaturesOverviewProps> = ({
 };
 
 export default EliteFeaturesOverview;
-export { EliteFeaturesOverview };
