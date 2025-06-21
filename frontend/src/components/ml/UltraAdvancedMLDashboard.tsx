@@ -1125,10 +1125,10 @@ const UltraAdvancedMLDashboard: React.FC = () => {
                     <div className="flex justify-between mb-2">
                       <span className="text-sm text-gray-600">CPU Usage</span>
                       <span className="text-sm font-medium">
-                        {systemHealth.cpu_usage}%
+                        {systemHealth.cpuUsage}%
                       </span>
                     </div>
-                    <Progress value={systemHealth.cpu_usage} className="h-2" />
+                    <Progress value={systemHealth.cpuUsage} className="h-2" />
                   </div>
 
                   <div>
