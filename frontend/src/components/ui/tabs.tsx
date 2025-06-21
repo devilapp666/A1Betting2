@@ -1,6 +1,28 @@
 import React from "react";
-import * as TabsPrimitive from "@radix-ui/react-tabs";
 import { cn } from "../../lib/utils";
+
+// Try to import Radix UI, fallback to simple implementation if it fails
+let TabsPrimitive: any;
+try {
+  TabsPrimitive = require("@radix-ui/react-tabs");
+} catch (error) {
+  console.warn(
+    "@radix-ui/react-tabs not available, using fallback implementation",
+  );
+  // Import our simple fallback
+  const {
+    Tabs: SimpleTabs,
+    TabsList: SimpleTabsList,
+    TabsTrigger: SimpleTabsTrigger,
+    TabsContent: SimpleTabsContent,
+  } = require("./tabs-simple");
+  TabsPrimitive = {
+    Root: SimpleTabs,
+    List: SimpleTabsList,
+    Trigger: SimpleTabsTrigger,
+    Content: SimpleTabsContent,
+  };
+}
 
 const Tabs = TabsPrimitive.Root;
 
