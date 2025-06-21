@@ -30,7 +30,7 @@ import {
   Play,
   Pause,
 } from "lucide-react";
-import { Line, Bar, Radar, Scatter, Doughnut } from "react-chartjs-2";
+import SafeChart from "../ui/SafeChart";
 import toast from "react-hot-toast";
 
 // Import enhanced services
