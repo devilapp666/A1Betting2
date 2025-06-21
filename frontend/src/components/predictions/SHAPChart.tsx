@@ -107,7 +107,12 @@ export function SHAPChart({ shapValues, className = "" }: SHAPChartProps) {
 
   return (
     <div className={`h-[400px] w-full ${className}`}>
-      <Bar data={chartData} options={options} />
+      <SafeChart
+        type="bar"
+        data={chartData}
+        options={options}
+        loadingMessage="Loading SHAP analysis..."
+      />
     </div>
   );
 }
