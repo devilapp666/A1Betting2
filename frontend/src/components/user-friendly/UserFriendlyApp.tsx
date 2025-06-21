@@ -129,7 +129,7 @@ export const UserFriendlyApp: React.FC = () => {
       <header className="sticky top-0 z-50 bg-black/30 backdrop-blur-2xl border-b border-cyan-500/20 shadow-lg shadow-cyan-500/10 relative">
         <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 via-purple-500/5 to-green-500/5" />
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-500/10 to-transparent animate-pulse" />
-        <div className="max-w-7xl mx-auto px-6 py-4">
+        <div className="relative max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             {/* Logo & Brand */}
             <div className="flex items-center space-x-4">
@@ -137,9 +137,10 @@ export const UserFriendlyApp: React.FC = () => {
                 whileHover={{ scale: 1.1, rotate: 5 }}
                 className="relative"
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-xl blur-lg opacity-75 animate-pulse" />
-                <div className="relative w-12 h-12 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-xl flex items-center justify-center">
-                  <Brain className="w-7 h-7 text-black font-bold" />
+                <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-green-400 to-blue-500 rounded-xl blur-xl opacity-80 animate-pulse" />
+                <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-xl blur-md opacity-60" />
+                <div className="relative w-12 h-12 bg-gradient-to-br from-cyan-400 via-green-400 to-blue-500 rounded-xl flex items-center justify-center shadow-2xl shadow-cyan-500/50 border border-cyan-400/30">
+                  <Brain className="w-7 h-7 text-black font-bold drop-shadow-lg" />
                 </div>
               </motion.div>
 
