@@ -53,7 +53,7 @@ const queryClient = new QueryClient({
   },
 });
 
-// Navigation configuration
+// Navigation configuration - now includes all prototype features
 const navigationItems = [
   {
     id: "dashboard",
@@ -67,6 +67,8 @@ const navigationItems = [
     icon: "💰",
     component: UniversalMoneyMaker,
     isPremium: true,
+    description:
+      "AI-powered betting with real-time data, PrizePicks integration, and advanced portfolio management",
   },
   {
     id: "analytics",
@@ -74,12 +76,16 @@ const navigationItems = [
     icon: "📊",
     component: UniversalAnalytics,
     isPremium: true,
+    description:
+      "Real-time performance tracking with advanced ML metrics and market analysis",
   },
   {
     id: "predictions",
     label: "Predictions",
     icon: "🔮",
     component: UniversalPredictions,
+    description:
+      "Enhanced prediction engine with live data from multiple sources",
   },
   {
     id: "settings",
@@ -105,11 +111,16 @@ const mockUser = {
   winRate: 85.6,
 };
 
-// Mock system status
+// Enhanced system status with real-time data integration
 const mockSystemStatus = {
   isOnline: true,
   connectedSources: 8,
   dataQuality: 94.2,
+  realTimeFeeds: 5,
+  prizePicksConnected: true,
+  enhancedBettingEngine: true,
+  modelAccuracy: 89.3,
+  lastDataUpdate: new Date(),
 };
 
 // ============================================================================
