@@ -251,9 +251,16 @@ const CyberModernSidebar: React.FC<SidebarProps> = ({
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: index * 0.1 }}
               whileHover={{ x: 4, scale: 1.02 }}
-              onClick={() => onNavigate(item.id)}
+              whileTap={{ scale: 0.98 }}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log(`🖱️ Button clicked: ${item.id}`);
+                onNavigate(item.id);
+              }}
+              style={{ pointerEvents: "auto" }}
               className={`
-                w-full flex items-center gap-4 px-4 py-3 rounded-xl text-left transition-all duration-300 group
+                w-full flex items-center gap-4 px-4 py-3 rounded-xl text-left transition-all duration-300 group cursor-pointer pointer-events-auto
                 ${
                   activeItem === item.id
                     ? "bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-500/50 text-cyan-400 shadow-lg shadow-cyan-500/20"
