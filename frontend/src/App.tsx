@@ -15,6 +15,7 @@ import {
   Menu,
   X,
   ChevronDown,
+  ChevronRight,
   Plus,
   Activity,
   TrendingUp,
