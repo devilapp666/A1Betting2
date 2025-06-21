@@ -125,7 +125,12 @@ export const WebSocketAnalytics: React.FC<WebSocketAnalyticsProps> = ({
       </div>
 
       <div className="bg-white p-4 rounded shadow">
-        <Line data={chartData} options={chartOptions} />
+        <SafeChart
+          type="line"
+          data={chartData}
+          options={chartOptions}
+          loadingMessage="Loading WebSocket metrics..."
+        />
       </div>
 
       <div className="mt-4">
