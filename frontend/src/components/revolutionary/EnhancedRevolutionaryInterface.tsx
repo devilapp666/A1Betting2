@@ -409,18 +409,21 @@ const EnhancedRevolutionaryInterface: React.FC = () => {
 
       setMathematicalAnalysis(mockAnalysis);
 
-      logger.info("Enhanced revolutionary prediction completed successfully", {
-        eventId: predictionRequest.event_id,
-        finalPrediction: result.final_prediction,
-        confidence: result.prediction_confidence,
-        processingTime: result.total_processing_time,
-        guaranteesMet: Object.values(result.mathematical_guarantees).filter(
-          Boolean,
-        ).length,
-      });
+      logger.info(
+        "Enhanced revolutionary prediction completed successfully (mock)",
+        {
+          eventId: predictionRequest.event_id,
+          finalPrediction: mockResult.final_prediction,
+          confidence: mockResult.prediction_confidence,
+          processingTime: mockResult.total_processing_time,
+          guaranteesMet: Object.values(
+            mockResult.mathematical_guarantees,
+          ).filter(Boolean).length,
+        },
+      );
 
       toast.success(
-        `Enhanced prediction completed! Confidence: ${(result.prediction_confidence * 100).toFixed(1)}%`,
+        `Enhanced prediction completed! Confidence: ${(mockResult.prediction_confidence * 100).toFixed(1)}%`,
       );
     } catch (error) {
       logger.error("Enhanced revolutionary prediction failed", error);
