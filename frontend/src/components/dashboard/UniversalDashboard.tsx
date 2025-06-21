@@ -21,10 +21,8 @@ import { predictionService } from "../../services/predictionService";
 import useStore from "../../store/useStore";
 
 // Lazy load heavy components
-const PerformanceAnalyticsDashboard = React.lazy(() =>
-  import("../analytics/PerformanceAnalyticsDashboard").then((m) => ({
-    default: m.PerformanceAnalyticsDashboard,
-  })),
+const PerformanceAnalyticsDashboard = React.lazy(
+  () => import("../analytics/PerformanceAnalyticsDashboard"),
 );
 const UnifiedMoneyMaker = React.lazy(() =>
   import("../money-maker/UnifiedMoneyMaker").then((m) => ({
