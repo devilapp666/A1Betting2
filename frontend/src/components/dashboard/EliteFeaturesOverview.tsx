@@ -195,7 +195,13 @@ const statusConfig = {
   },
 };
 
-export const EliteFeaturesOverview: React.FC = () => {
+interface EliteFeaturesOverviewProps {
+  onNavigate?: (sectionId: string) => void;
+}
+
+export const EliteFeaturesOverview: React.FC<EliteFeaturesOverviewProps> = ({
+  onNavigate,
+}) => {
   const [activeCategory, setActiveCategory] = useState(0);
   const [isRefreshing, setIsRefreshing] = useState(false);
 
