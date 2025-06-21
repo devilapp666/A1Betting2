@@ -403,7 +403,7 @@ export const PrizePicksPro: React.FC = () => {
                 onClick={() =>
                   setShowAIAnalysis(showAIAnalysis === prop.id ? null : prop.id)
                 }
-                className="w-full py-3 bg-purple-500/20 border border-purple-500/30 rounded-xl text-purple-400 font-semibold hover:bg-purple-500/30 transition-all"
+                className="w-full py-3 bg-purple-500/30 border-2 border-purple-400/50 rounded-xl text-purple-200 font-semibold hover:bg-purple-500/50 hover:border-purple-300 transition-all backdrop-blur-sm shadow-lg shadow-purple-500/25"
               >
                 {showAIAnalysis === prop.id ? "Hide" : "Show"} AI Analysis
               </motion.button>
