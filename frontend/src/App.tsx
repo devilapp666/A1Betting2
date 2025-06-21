@@ -299,7 +299,7 @@ interface TopBarProps {
   currentPage: string;
 }
 
-const ModernTopBar: React.FC<TopBarProps> = ({
+const CyberTopBar: React.FC<TopBarProps> = ({
   onOpenCommandPalette,
   onOpenNotifications,
   currentPage,
@@ -307,76 +307,107 @@ const ModernTopBar: React.FC<TopBarProps> = ({
   const currentItem = navigationItems.find((item) => item.id === currentPage);
 
   return (
-    <header className="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6">
-      {/* Left Section */}
-      <div className="flex items-center gap-4">
-        <div className="flex items-center gap-3">
-          <div
+    <header className="h-20 bg-gradient-to-r from-gray-900/95 to-black/95 border-b border-cyan-500/30 flex items-center justify-between px-8 backdrop-blur-xl">
+      {/* Animated background pattern */}
+      <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 via-transparent to-blue-500/5 animate-pulse pointer-events-none" />
+      {/* Left Section - Enhanced */}
+      <div className="relative z-10 flex items-center gap-6">
+        <div className="flex items-center gap-4">
+          <motion.div
+            whileHover={{ scale: 1.1, rotate: 5 }}
             className={`
-            p-2 rounded-lg
-            ${
-              currentPage === "dashboard"
-                ? "bg-blue-50 text-blue-600"
-                : currentPage === "money-maker"
-                  ? "bg-green-50 text-green-600"
-                  : currentPage === "analytics"
-                    ? "bg-purple-50 text-purple-600"
-                    : currentPage === "predictions"
-                      ? "bg-orange-50 text-orange-600"
-                      : "bg-gray-50 text-gray-600"
-            }
-          `}
+              p-3 rounded-xl relative overflow-hidden
+              ${
+                currentPage === "dashboard"
+                  ? "bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-500/50"
+                  : currentPage === "money-maker"
+                    ? "bg-gradient-to-r from-emerald-500/20 to-green-500/20 border border-emerald-500/50"
+                    : currentPage === "analytics"
+                      ? "bg-gradient-to-r from-purple-500/20 to-violet-500/20 border border-purple-500/50"
+                      : currentPage === "predictions"
+                        ? "bg-gradient-to-r from-orange-500/20 to-red-500/20 border border-orange-500/50"
+                        : "bg-gradient-to-r from-gray-500/20 to-gray-600/20 border border-gray-500/50"
+              }
+            `}
           >
-            {currentItem?.icon}
-          </div>
+            <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent" />
+            <div className="relative text-cyan-400">{currentItem?.icon}</div>
+          </motion.div>
           <div>
-            <h1 className="text-xl font-semibold text-gray-900">
+            <h1 className="text-2xl font-bold text-white tracking-tight">
               {currentItem?.label}
             </h1>
-            <p className="text-sm text-gray-500">
-              {currentPage === "dashboard" &&
-                "Real-time insights and performance metrics"}
-              {currentPage === "money-maker" &&
-                "AI-powered betting opportunities"}
-              {currentPage === "analytics" &&
-                "Advanced data analysis and trends"}
-              {currentPage === "predictions" && "Machine learning predictions"}
-              {currentPage === "settings" && "Configure your preferences"}
+            <p className="text-sm text-cyan-300/80 font-medium">
+              {currentPage === "dashboard" && "Ultra-Advanced ML Intelligence"}
+              {currentPage === "money-maker" && "Cyber Quantum Money Generator"}
+              {currentPage === "analytics" && "Elite Neural Analytics Hub"}
+              {currentPage === "predictions" && "Revolutionary AI Predictions"}
+              {currentPage === "settings" && "Quantum Configuration Portal"}
             </p>
+          </div>
+        </div>
+
+        {/* Status Indicators */}
+        <div className="hidden lg:flex items-center gap-4">
+          <div className="flex items-center gap-2 px-3 py-1 bg-emerald-500/20 border border-emerald-500/30 rounded-full">
+            <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
+            <span className="text-xs text-emerald-400 font-semibold">LIVE</span>
+          </div>
+          <div className="flex items-center gap-2 px-3 py-1 bg-cyan-500/20 border border-cyan-500/30 rounded-full">
+            <Activity className="w-3 h-3 text-cyan-400" />
+            <span className="text-xs text-cyan-400 font-semibold">
+              47 Models Active
+            </span>
           </div>
         </div>
       </div>
 
-      {/* Right Section */}
-      <div className="flex items-center gap-3">
-        {/* Search Button */}
-        <button
+      {/* Right Section - Enhanced */}
+      <div className="relative z-10 flex items-center gap-4">
+        {/* Enhanced Search Button */}
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
           onClick={onOpenCommandPalette}
-          className="flex items-center gap-2 px-3 py-2 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors"
+          className="flex items-center gap-3 px-4 py-2 bg-gradient-to-r from-gray-800/80 to-gray-900/80 hover:from-cyan-500/20 hover:to-blue-500/20 border border-gray-700/50 hover:border-cyan-500/50 rounded-xl transition-all duration-300"
         >
-          <Search className="w-4 h-4 text-gray-500" />
-          <span className="text-sm text-gray-500">Search...</span>
-          <span className="text-xs text-gray-400 font-mono ml-auto">⌘K</span>
-        </button>
+          <Search className="w-4 h-4 text-gray-400" />
+          <span className="text-sm text-gray-300">Quantum Search...</span>
+          <span className="text-xs text-cyan-400 font-mono bg-gray-800 px-2 py-1 rounded border border-gray-600">
+            ⌘K
+          </span>
+        </motion.button>
 
-        {/* Quick Actions */}
-        <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
-          <Plus className="w-5 h-5 text-gray-600" />
-        </button>
+        {/* Enhanced Action Buttons */}
+        <motion.button
+          whileHover={{ scale: 1.1, rotate: 90 }}
+          className="p-3 bg-gradient-to-r from-gray-800/80 to-gray-900/80 hover:from-emerald-500/20 hover:to-green-500/20 border border-gray-700/50 hover:border-emerald-500/50 rounded-xl transition-all duration-300"
+        >
+          <Plus className="w-5 h-5 text-gray-400 hover:text-emerald-400" />
+        </motion.button>
 
-        {/* Notifications */}
-        <button
+        {/* Enhanced Notifications */}
+        <motion.button
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
           onClick={onOpenNotifications}
-          className="relative p-2 hover:bg-gray-100 rounded-lg transition-colors"
+          className="relative p-3 bg-gradient-to-r from-gray-800/80 to-gray-900/80 hover:from-orange-500/20 hover:to-red-500/20 border border-gray-700/50 hover:border-orange-500/50 rounded-xl transition-all duration-300"
         >
-          <Bell className="w-5 h-5 text-gray-600" />
-          <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
-        </button>
+          <Bell className="w-5 h-5 text-gray-400 hover:text-orange-400" />
+          <motion.span
+            animate={{ scale: [1, 1.2, 1] }}
+            transition={{ repeat: Infinity, duration: 2 }}
+            className="absolute top-1 right-1 w-3 h-3 bg-gradient-to-r from-red-500 to-orange-500 rounded-full border-2 border-gray-900"
+          />
+        </motion.button>
 
-        {/* Help */}
-        <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
-          <HelpCircle className="w-5 h-5 text-gray-600" />
-        </button>
+        {/* Enhanced Help */}
+        <motion.button
+          whileHover={{ scale: 1.1, rotate: 15 }}
+          className="p-3 bg-gradient-to-r from-gray-800/80 to-gray-900/80 hover:from-purple-500/20 hover:to-violet-500/20 border border-gray-700/50 hover:border-purple-500/50 rounded-xl transition-all duration-300"
+        >
+          <HelpCircle className="w-5 h-5 text-gray-400 hover:text-purple-400" />
+        </motion.button>
       </div>
     </header>
   );
@@ -449,17 +480,19 @@ const AppContent: React.FC = () => {
 
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col min-w-0">
-        {/* Top Navigation Bar */}
-        <ModernTopBar
+        {/* Cyber Top Navigation Bar */}
+        <CyberTopBar
           onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
           onOpenNotifications={() => setIsNotificationCenterOpen(true)}
           currentPage={activeNavItem}
         />
 
         {/* Page Content */}
-        <main className="flex-1 overflow-auto">
+        <main className="flex-1 overflow-auto bg-gradient-to-b from-gray-900/50 to-black/50 backdrop-blur-sm">
           <ErrorBoundary>
-            <ActiveComponent />
+            <div className="p-8">
+              <ActiveComponent />
+            </div>
           </ErrorBoundary>
         </main>
       </div>
