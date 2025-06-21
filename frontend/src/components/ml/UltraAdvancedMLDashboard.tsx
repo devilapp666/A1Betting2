@@ -1301,7 +1301,7 @@ const UltraAdvancedMLDashboard: React.FC = () => {
                 {mathematicalFoundations ? (
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {Object.entries(
-                      mathematicalFoundations.theoretical_foundations || {},
+                      mathematicalFoundations?.theoretical_foundations || {},
                     ).map(([key, value]: [string, any]) => (
                       <Card key={key}>
                         <CardContent className="p-4">
