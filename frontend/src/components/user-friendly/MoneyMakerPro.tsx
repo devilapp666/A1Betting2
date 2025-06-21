@@ -246,7 +246,7 @@ export const MoneyMakerPro: React.FC = () => {
                 onChange={(e) =>
                   setConfig({ ...config, sport: e.target.value as any })
                 }
-                className="w-full px-4 py-4 bg-gray-800/50 border border-gray-600 rounded-xl text-white text-center focus:border-green-400 focus:ring-2 focus:ring-green-400/50 transition-all"
+                className="w-full px-4 py-4 bg-gray-800/80 border-2 border-gray-500 rounded-xl text-white text-center focus:border-green-400 focus:ring-2 focus:ring-green-400/50 transition-all backdrop-blur-sm shadow-lg"
               >
                 <option value="all">🏆 All Sports</option>
                 <option value="nba">🏀 NBA</option>
