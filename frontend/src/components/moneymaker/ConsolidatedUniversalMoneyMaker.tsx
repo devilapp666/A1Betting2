@@ -62,7 +62,7 @@ import { useBetting, useUser } from "../../store/unified/UnifiedStoreManager";
 // Services
 import { mlEngine } from "../../services/ml/UnifiedMLEngine";
 import { predictionService } from "../../services/prediction/predictionService";
-import { riskManagement } from "../../services/riskManagement";
+import { riskManagementService as riskManagement } from "../../services/riskManagement";
 import { bettingService } from "../../services/bettingService";
 
 // Types - Consolidated from all variants
