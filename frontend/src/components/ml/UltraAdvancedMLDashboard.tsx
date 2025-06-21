@@ -1220,7 +1220,7 @@ const UltraAdvancedMLDashboard: React.FC = () => {
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-3">
-                    {Object.entries(systemHealth.component_status).map(
+                    {Object.entries(systemHealth?.services || {}).map(
                       ([component, status]) => (
                         <div
                           key={component}
