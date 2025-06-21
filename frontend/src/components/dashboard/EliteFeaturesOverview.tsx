@@ -236,6 +236,13 @@ export const EliteFeaturesOverview: React.FC<EliteFeaturesOverviewProps> = ({
     setIsRefreshing(false);
   };
 
+  const handleFeatureLaunch = (featureName: string) => {
+    const navigationTarget = featureNavigation[featureName];
+    if (navigationTarget && onNavigate) {
+      onNavigate(navigationTarget);
+    }
+  };
+
   return (
     <div className="space-y-8">
       {/* Header */}
