@@ -105,14 +105,7 @@ const navigationItems: NavigationItem[] = [
     id: "dashboard",
     label: "Elite Dashboard",
     icon: <Home className="w-5 h-5" />,
-    component: () => (
-      <div className="p-8 text-white">
-        <h1 className="text-2xl font-bold">
-          Elite Sports Intelligence Platform
-        </h1>
-        <p>Dashboard Loading Successfully!</p>
-      </div>
-    ),
+    component: EliteFeaturesOverview,
     shortcut: "⌘D",
     badge: "ELITE",
   },
