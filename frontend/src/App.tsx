@@ -37,9 +37,12 @@ import EnhancedRevolutionaryInterface from "./components/revolutionary/EnhancedR
 import UltimateSettingsPage from "./components/settings/UltimateSettingsPage";
 import UnifiedProfile from "./components/profile/UnifiedProfile";
 
-// Import modern UI components
+// Import modern UI components and advanced layout
 import ModernCommandPalette from "./components/ui/ModernCommandPalette";
 import ModernNotificationCenter from "./components/ui/ModernNotificationCenter";
+import CyberLayout from "./components/layout/CyberLayout";
+import CyberSidebar from "./components/layout/CyberSidebar";
+import CyberHeader from "./components/layout/CyberHeader";
 
 // Import styling
 import "./App.css";
