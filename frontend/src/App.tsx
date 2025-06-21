@@ -533,6 +533,7 @@ const CyberTopBar: React.FC<TopBarProps> = ({
 
 const AppContent: React.FC = () => {
   const [activeNavItem, setActiveNavItem] = useState("dashboard");
+  const [isUserFriendlyMode, setIsUserFriendlyMode] = useState(true); // Default to user-friendly mode
 
   const handleNavigation = (itemId: string) => {
     console.log(`🧭 Navigation clicked: ${itemId}`);
