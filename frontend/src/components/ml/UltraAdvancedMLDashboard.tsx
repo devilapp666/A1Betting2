@@ -679,6 +679,11 @@ const UltraAdvancedMLDashboard: React.FC = () => {
                 autoRefresh: !prev.autoRefresh,
               }))
             }
+            className={`transition-all duration-300 ${
+              dashboardState.autoRefresh
+                ? "bg-gradient-to-r from-green-400 to-blue-500 text-black font-bold shadow-lg shadow-green-500/30 hover:shadow-green-500/50"
+                : "bg-transparent border border-green-500 text-green-400 hover:bg-green-500/20 hover:shadow-lg hover:shadow-green-500/30"
+            }`}
           >
             {dashboardState.autoRefresh ? (
               <Pause className="w-4 h-4 mr-2" />
@@ -693,9 +698,10 @@ const UltraAdvancedMLDashboard: React.FC = () => {
             size="sm"
             onClick={refreshDashboardData}
             disabled={dashboardState.isLoading}
+            className="bg-transparent border border-blue-500 text-blue-400 hover:bg-blue-500/20 hover:shadow-lg hover:shadow-blue-500/30 transition-all duration-300"
           >
             <RefreshCw
-              className={`w-4 h-4 mr-2 ${dashboardState.isLoading ? "animate-spin" : ""}`}
+              className={`w-4 h-4 mr-2 ${dashboardState.isLoading ? "animate-spin text-blue-400" : ""}`}
             />
             Refresh
           </Button>
@@ -704,7 +710,7 @@ const UltraAdvancedMLDashboard: React.FC = () => {
             variant="default"
             size="sm"
             onClick={executeLivePrediction}
-            className="bg-gradient-to-r from-purple-600 to-blue-600"
+            className="bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold shadow-lg shadow-purple-500/30 hover:shadow-purple-500/50 transition-all duration-300"
           >
             <Sparkles className="w-4 h-4 mr-2" />
             Live Prediction
