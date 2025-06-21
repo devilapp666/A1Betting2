@@ -139,7 +139,12 @@ export const WebSocketBatchingAnalytics: React.FC = () => {
       </div>
 
       <div className="h-64">
-        <Line data={chartData} options={chartOptions} />
+        <SafeChart
+          type="line"
+          data={chartData}
+          options={chartOptions}
+          loadingMessage="Loading batching metrics..."
+        />
       </div>
     </div>
   );
