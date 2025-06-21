@@ -5,7 +5,7 @@ import {
   createQueryKeys,
   defaultQueryConfig,
 } from "../services/UniversalServiceLayer";
-import { useTheme } from "../providers/UniversalThemeProvider";
+import { useTheme } from "../providers/SafeThemeProvider";
 
 // ============================================================================
 // DATA HOOKS
