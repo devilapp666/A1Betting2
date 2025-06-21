@@ -134,7 +134,7 @@ let RiskManagementService = (() => {
   let _classDescriptor;
   let _classExtraInitializers = [];
   let _classThis;
-  let _classSuper = EventEmitter;
+  let _classSuper = BrowserEventEmitter;
   var RiskManagementService = (_classThis = class extends _classSuper {
     constructor() {
       super();
