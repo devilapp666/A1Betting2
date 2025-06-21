@@ -3085,11 +3085,11 @@ export const ConsolidatedUniversalMoneyMaker: React.FC = () => {
 
       {/* Toast Notifications */}
       <AnimatePresence>
-        {showToast && (
+        {showToastModal && (
           <Toast
             message={toastMessage}
             type={toastType}
-            onClose={() => setShowToast(false)}
+            onClose={() => setShowToastModal(false)}
           />
         )}
       </AnimatePresence>
