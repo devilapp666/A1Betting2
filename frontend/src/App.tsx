@@ -302,24 +302,74 @@ const CyberModernSidebar: React.FC<SidebarProps> = ({
           </div>
           <div className="space-y-1">
             {[
-              { name: "Business Analysis", icon: "📊", status: "active" },
-              { name: "AI Edge ML", icon: "🧠", status: "active" },
-              { name: "Mega Sports", icon: "⚡", status: "pro" },
-              { name: "Elite Bankroll", icon: "💰", status: "premium" },
-              { name: "SQL Sports", icon: "🔍", status: "active" },
-              { name: "Model Analysis", icon: "📈", status: "ai" },
-              { name: "Market Connector", icon: "🔗", status: "live" },
-              { name: "Real Simulator", icon: "🎮", status: "beta" },
+              {
+                name: "Business Analysis",
+                icon: "📊",
+                status: "active",
+                id: "business-analysis",
+              },
+              {
+                name: "AI Edge ML",
+                icon: "🧠",
+                status: "active",
+                id: "ai-edge-ml",
+              },
+              {
+                name: "Mega Sports",
+                icon: "⚡",
+                status: "pro",
+                id: "mega-sports",
+              },
+              {
+                name: "Elite Bankroll",
+                icon: "💰",
+                status: "premium",
+                id: "elite-bankroll",
+              },
+              {
+                name: "SQL Sports",
+                icon: "🔍",
+                status: "active",
+                id: "sql-sports",
+              },
+              {
+                name: "Model Analysis",
+                icon: "📈",
+                status: "ai",
+                id: "model-analysis",
+              },
+              {
+                name: "Market Connector",
+                icon: "🔗",
+                status: "live",
+                id: "market-connector",
+              },
+              {
+                name: "Real Simulator",
+                icon: "🎮",
+                status: "beta",
+                id: "real-simulator",
+              },
             ].map((feature, index) => (
-              <motion.div
+              <motion.button
                 key={feature.name}
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.5 + index * 0.05 }}
-                className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-white/5 cursor-pointer group"
+                whileHover={{ scale: 1.02, x: 4 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  console.log(
+                    `🎯 Elite Feature clicked: ${feature.name} (${feature.id})`,
+                  );
+                  onNavigate(feature.id);
+                }}
+                className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-white/5 cursor-pointer group transition-all duration-200 border border-transparent hover:border-cyan-500/30"
               >
                 <span className="text-sm">{feature.icon}</span>
-                <span className="text-xs text-gray-400 group-hover:text-gray-300 flex-1">
+                <span className="text-xs text-gray-400 group-hover:text-cyan-300 flex-1 text-left">
                   {feature.name}
                 </span>
                 <div
@@ -337,7 +387,8 @@ const CyberModernSidebar: React.FC<SidebarProps> = ({
                               : "bg-orange-400"
                   }`}
                 />
-              </motion.div>
+                <ChevronRight className="w-3 h-3 text-gray-600 group-hover:text-cyan-400 opacity-0 group-hover:opacity-100 transition-all duration-200" />
+              </motion.button>
             ))}
           </div>
         </div>
