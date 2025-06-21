@@ -138,7 +138,12 @@ const PerformanceDashboard: React.FC = () => {
 
         {/* Chart */}
         <div className="bg-white p-4 rounded-lg shadow mb-6">
-          <Line data={chartData} options={chartOptions} />
+          <SafeChart
+            type="line"
+            data={chartData}
+            options={chartOptions}
+            loadingMessage="Loading performance dashboard..."
+          />
         </div>
 
         {/* Alerts */}
