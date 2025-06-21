@@ -520,18 +520,6 @@ export const useUser = () => {
   };
 };
 
-export const useUser = () => {
-  const user = useUnifiedStore((state) => state.user);
-  const actions = useUnifiedStore((state) => state.actions);
-
-  return {
-    ...user,
-    setUser: actions.setUser,
-    updatePreferences: actions.updatePreferences,
-    updateSettings: actions.updateSettings,
-  };
-};
-
 export const useTheme = () => {
   const theme = useUnifiedStore((state) => state.theme);
   const actions = useUnifiedStore((state) => state.actions);
