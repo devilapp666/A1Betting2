@@ -25,76 +25,42 @@ interface CommandItem {
   category: string;
 }
 
+interface NavigationItem {
+  id: string;
+  label: string;
+  icon: React.ReactNode;
+  shortcut?: string[];
+}
+
 interface ModernCommandPaletteProps {
   isOpen: boolean;
   onClose: () => void;
   onNavigate?: (page: string) => void;
+  navigationItems?: NavigationItem[];
 }
 
 export const ModernCommandPalette: React.FC<ModernCommandPaletteProps> = ({
   isOpen,
   onClose,
   onNavigate,
+  navigationItems = [],
 }) => {
   const [query, setQuery] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const commands: CommandItem[] = [
-    {
-      id: "dashboard",
-      label: "Go to Dashboard",
-      description: "View your main dashboard",
-      icon: <Home size={16} />,
-      shortcut: ["⌘", "D"],
-      action: () => onNavigate?.("dashboard"),
+    // Convert navigation items to command items
+    ...navigationItems.map((item) => ({
+      id: item.id,
+      label: `Go to ${item.label}`,
+      description: `Navigate to ${item.label}`,
+      icon: item.icon,
+      shortcut: item.shortcut || [],
+      action: () => onNavigate?.(item.id),
       category: "Navigation",
-    },
-    {
-      id: "moneymaker",
-      label: "Open Money Maker",
-      description: "AI-powered betting opportunities",
-      icon: <DollarSign size={16} />,
-      shortcut: ["⌘", "M"],
-      action: () => onNavigate?.("moneymaker"),
-      category: "Navigation",
-    },
-    {
-      id: "analytics",
-      label: "View Analytics",
-      description: "Performance metrics and insights",
-      icon: <BarChart3 size={16} />,
-      shortcut: ["⌘", "A"],
-      action: () => onNavigate?.("analytics"),
-      category: "Navigation",
-    },
-    {
-      id: "predictions",
-      label: "AI Predictions",
-      description: "Latest AI-generated predictions",
-      icon: <Brain size={16} />,
-      shortcut: ["⌘", "P"],
-      action: () => onNavigate?.("predictions"),
-      category: "Navigation",
-    },
-    {
-      id: "settings",
-      label: "Open Settings",
-      description: "Configure your preferences",
-      icon: <Settings size={16} />,
-      shortcut: ["⌘", ","],
-      action: () => onNavigate?.("settings"),
-      category: "Navigation",
-    },
-    {
-      id: "profile",
-      label: "View Profile",
-      description: "Manage your account",
-      icon: <User size={16} />,
-      shortcut: ["⌘", "U"],
-      action: () => onNavigate?.("profile"),
-      category: "Navigation",
-    },
+    })),
+    // Additional actions
     {
       id: "refresh",
       label: "Refresh Data",
