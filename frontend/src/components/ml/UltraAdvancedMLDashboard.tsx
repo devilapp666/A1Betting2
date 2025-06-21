@@ -1300,35 +1300,35 @@ const UltraAdvancedMLDashboard: React.FC = () => {
               <CardContent>
                 {mathematicalFoundations ? (
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {Object.entries(
-                      mathematicalFoundations?.theoretical_foundations || {},
-                    ).map(([key, value]: [string, any]) => (
-                      <Card key={key}>
-                        <CardContent className="p-4">
-                          <h4 className="font-medium text-gray-900 mb-2 capitalize">
-                            {key.replace(/_/g, " ")}
-                          </h4>
-                          <div className="space-y-2 text-sm">
-                            <div>
-                              <span className="text-gray-600">Basis:</span>
-                              <p className="font-mono text-xs">
-                                {value.mathematical_basis}
-                              </p>
-                            </div>
-                            {value.computational_complexity && (
+                    {Object.entries(mathematicalFoundations || {}).map(
+                      ([key, value]: [string, any]) => (
+                        <Card key={key}>
+                          <CardContent className="p-4">
+                            <h4 className="font-medium text-gray-900 mb-2 capitalize">
+                              {key.replace(/_/g, " ")}
+                            </h4>
+                            <div className="space-y-2 text-sm">
                               <div>
-                                <span className="text-gray-600">
-                                  Complexity:
-                                </span>
+                                <span className="text-gray-600">Basis:</span>
                                 <p className="font-mono text-xs">
-                                  {value.computational_complexity}
+                                  {value.mathematical_basis}
                                 </p>
                               </div>
-                            )}
-                          </div>
-                        </CardContent>
-                      </Card>
-                    ))}
+                              {value.computational_complexity && (
+                                <div>
+                                  <span className="text-gray-600">
+                                    Complexity:
+                                  </span>
+                                  <p className="font-mono text-xs">
+                                    {value.computational_complexity}
+                                  </p>
+                                </div>
+                              )}
+                            </div>
+                          </CardContent>
+                        </Card>
+                      ),
+                    )}
                   </div>
                 ) : (
                   <div className="text-center py-8 text-gray-500">
