@@ -135,45 +135,20 @@ export const MoneyMakerPro: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-6">
-      <div className="max-w-7xl mx-auto space-y-8">
-        {/* Hero Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-12"
-        >
-          <div className="relative mb-8">
-            <div className="absolute inset-0 bg-gradient-to-r from-green-400 to-blue-500 rounded-full blur-2xl opacity-50 animate-pulse" />
-            <div className="relative text-8xl mb-4">💰</div>
-          </div>
-          <h1 className="text-6xl font-black bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent mb-4">
-            MONEY MAKER PRO
-          </h1>
-          <p className="text-2xl text-gray-300 mb-6">
-            AI-Powered Sports Betting Intelligence
-          </p>
-          <div className="flex justify-center space-x-8 text-sm">
-            <div className="flex items-center space-x-2">
-              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-              <span className="text-green-400">
-                {liveStats.totalUsers.toLocaleString()} Active Users
-              </span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" />
-              <span className="text-blue-400">
-                {liveStats.winRate.toFixed(1)}% Win Rate
-              </span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse" />
-              <span className="text-purple-400">
-                ${liveStats.profit24h.toLocaleString()} Profit (24h)
-              </span>
-            </div>
-          </div>
-        </motion.div>
+    <div className="space-y-8 animate-slide-in-up">
+      {/* Hero Section */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="text-center mb-12 glass-card rounded-3xl p-12 shadow-neon relative"
+      >
+        <div className="absolute inset-0 bg-gradient-to-r from-electric-400 to-neon-blue rounded-3xl blur-2xl opacity-50 animate-pulse" />
+        <div className="relative">
+          <h1 className="holographic text-5xl font-black mb-6">ULTIMATE MONEY MAKER</h1>
+          <div className="text-6xl font-black text-green-400 mb-6 animate-cyber-pulse">$∞</div>
+          <p className="text-xl text-gray-300 mb-8">AI-powered profit generation with quantum enhancement</p>
+        </div>
+      </motion.div>
 
         {/* Configuration Panel */}
         <motion.div
