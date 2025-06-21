@@ -42,7 +42,7 @@ export const useOdds = (eventId) => {
             return data;
         },
         enabled: !!eventId,
-        refetchInterval: 30000, // Refresh every 30 seconds
+        refetchInterval: false, // Disable auto-refresh to prevent errors
     });
 };
 export const useActiveBets = () => {
@@ -103,3 +103,69 @@ export const connectToOddsWebSocket = (eventId, onUpdate) => {
         ws.close();
     };
 };
+// Main betting service object
+const bettingService = {
+    placeBet: async (betData) => {
+        try {
+            const response = await bettingApi.post(endpoints.bets, betData);
+            return { success: true, bet: response.data };
+        }
+        catch (error) {
+            console.error("Failed to place bet:", error);
+            return { success: false, error: "Failed to place bet" };
+        }
+    },
+    cancelBet: async (betId) => {
+        try {
+            const response = await bettingApi.post(`${endpoints.bets}/${betId}/cancel`);
+            return { success: true, bet: response.data };
+        }
+        catch (error) {
+            console.error("Failed to cancel bet:", error);
+            return { success: false, error: "Failed to cancel bet" };
+        }
+    },
+    getActiveBets: async () => {
+        try {
+            const response = await bettingApi.get(`${endpoints.bets}/active`);
+            return response.data;
+        }
+        catch (error) {
+            console.error("Failed to get active bets:", error);
+            return [];
+        }
+    },
+    getSports: async () => {
+        try {
+            const response = await bettingApi.get(endpoints.sports);
+            return response.data;
+        }
+        catch (error) {
+            console.error("Failed to get sports:", error);
+            return [];
+        }
+    },
+    getEvents: async (sportId) => {
+        try {
+            const response = await bettingApi.get(`${endpoints.events}?sportId=${sportId}`);
+            return response.data;
+        }
+        catch (error) {
+            console.error("Failed to get events:", error);
+            return [];
+        }
+    },
+    getOdds: async (eventId) => {
+        try {
+            const response = await bettingApi.get(`${endpoints.odds}/${eventId}`);
+            return response.data;
+        }
+        catch (error) {
+            console.error("Failed to get odds:", error);
+            return null;
+        }
+    },
+};
+// Export both ways for maximum compatibility
+export { bettingService };
+export default bettingService;

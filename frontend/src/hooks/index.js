@@ -26,6 +26,8 @@ export { useBettingOpportunities as useBettingCore } from "./UniversalHooks";
 // Prediction hooks
 export { usePredictions as usePredictionService } from "./UniversalHooks";
 export { usePredictions as useRealtimePredictions } from "./UniversalHooks";
+// Ultimate Settings Hook
+export { default as useUltimateSettings } from "./useUltimateSettings";
 // ============================================================================
 // DEPRECATED HOOK NOTICES
 // ============================================================================

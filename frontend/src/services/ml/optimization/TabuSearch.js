@@ -1,3 +1,2 @@
-"use strict";
 // Ported from Newfolder: Tabu Search optimization model
 // ...existing code from Newfolder's TabuSearch.ts...

@@ -1,4 +1,3 @@
-"use strict";
 /// <reference lib="webworker" />
 const CACHE_NAME = 'prizepicks-cache-v1';
 const API_CACHE_NAME = 'prizepicks-api-cache-v1';

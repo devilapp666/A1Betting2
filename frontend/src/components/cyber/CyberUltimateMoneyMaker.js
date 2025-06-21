@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import { DollarSign, } from "lucide-react";
 // Import existing Money Maker component
-import { UltimateMoneyMaker } from "../MoneyMaker/UltimateMoneyMaker";
+import UltimateMoneyMaker from "../MoneyMaker/UltimateMoneyMaker";
 // Cyber UI Components
 import GlassCard from "../ui/GlassCard";
 import CyberButton from "../ui/CyberButton";

@@ -1,62 +1,31 @@
 // ============================================================================
-// UNIVERSAL COMPONENT SYSTEM EXPORTS - PHASE 2 COMPLETE
+// MAIN COMPONENT EXPORTS
 // ============================================================================
 // Dashboard Components
-export { default as UniversalDashboard } from "./dashboard/UniversalDashboard";
-// UI Components
-export {
-  CyberButton,
-  BettingButton,
-  GlowButton,
-  PremiumButton,
-} from "./ui/UniversalButton";
-export { default as UniversalButton } from "./ui/UniversalButton";
-// Money Maker Systems
-export { default as UniversalMoneyMaker } from "./moneymaker/UniversalMoneyMaker";
-// Analytics Systems
-export { default as UniversalAnalytics } from "./analytics/UniversalAnalytics";
-// Prediction Systems
+export { default as ConsolidatedUniversalDashboard } from "./dashboard/ConsolidatedUniversalDashboard";
+// MoneyMaker Components
+export { default as ConsolidatedUniversalMoneyMaker } from "./moneymaker/ConsolidatedUniversalMoneyMaker";
+// Analytics Components
+export { default as ConsolidatedUniversalAnalytics } from "./analytics/ConsolidatedUniversalAnalytics";
+// Prediction Components
 export { default as UniversalPredictions } from "./predictions/UniversalPredictions";
-// Mega System Components
-export {
-  MegaButton,
-  MegaCard,
-  MegaModal,
-  MegaInput,
-  MegaAlert,
-  MegaSkeleton,
-} from "./mega/MegaUI";
-export { MegaSidebar, MegaHeader, MegaAppShell } from "./mega/MegaLayout";
-export {
-  CyberText,
-  CyberContainer,
-  CyberButton as MegaCyberButton,
-  CYBER_COLORS,
-  CYBER_GRADIENTS,
-  CYBER_GLASS,
-} from "./mega/CyberTheme";
-// ============================================================================
-// LEGACY COMPATIBILITY EXPORTS (Deprecated - Use Universal equivalents)
-// ============================================================================
-// Dashboard compatibility
-export { UniversalDashboard as Dashboard } from "./dashboard/UniversalDashboard";
-export { UniversalDashboard as CyberDashboard } from "./dashboard/UniversalDashboard";
-export { UniversalDashboard as PremiumDashboard } from "./dashboard/UniversalDashboard";
-// Button compatibility
-export { UniversalButton as Button } from "./ui/UniversalButton";
-// Money Maker compatibility
-export { UniversalMoneyMaker as MoneyMaker } from "./moneymaker/UniversalMoneyMaker";
-export { UniversalMoneyMaker as UltimateMoneyMaker } from "./moneymaker/UniversalMoneyMaker";
-export { UniversalMoneyMaker as CyberUltimateMoneyMaker } from "./moneymaker/UniversalMoneyMaker";
-export { UniversalMoneyMaker as MoneyMakerAdvanced } from "./moneymaker/UniversalMoneyMaker";
-// Analytics compatibility
-export { UniversalAnalytics as Analytics } from "./analytics/UniversalAnalytics";
-export { UniversalAnalytics as AdvancedAnalytics } from "./analytics/UniversalAnalytics";
-export { UniversalAnalytics as CyberAnalyticsHub } from "./analytics/UniversalAnalytics";
-export { UniversalAnalytics as AdvancedAnalyticsHub } from "./analytics/UniversalAnalytics";
-export { UniversalAnalytics as PerformanceAnalyticsDashboard } from "./analytics/UniversalAnalytics";
-// Prediction compatibility
-export { UniversalPredictions as PredictionDisplay } from "./predictions/UniversalPredictions";
-export { UniversalPredictions as RealtimePredictionDisplay } from "./predictions/UniversalPredictions";
-export { UniversalPredictions as LivePredictions } from "./predictions/UniversalPredictions";
-export { UniversalPredictions as PredictionGenerator } from "./predictions/UniversalPredictions";
+// Settings Components
+export { default as UltimateSettingsPage } from "./settings/UltimateSettingsPage";
+// Profile Components
+export { default as ProfilePage } from "./profile/ProfilePage";
+// UI Components
+export { default as ModernCommandPalette } from "./ui/ModernCommandPalette";
+export { default as ModernNotificationCenter } from "./ui/ModernNotificationCenter";
+// Mega UI Components
+export * from "./mega/MegaUI";
+export { default as MegaTheme } from "./mega/CyberTheme";
+// Base Components
+export { default as ErrorBoundary } from "./ErrorBoundary";
+// Core Components
+export * from "./core";
+// Layout Components
+export * from "./layout";
+// Common Components
+export * from "./common";
+// Utility Components
+export * from "./ui";
