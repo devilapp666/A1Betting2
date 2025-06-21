@@ -1267,7 +1267,7 @@ const UltraAdvancedMLDashboard: React.FC = () => {
                     </div>
                     <div className="text-center">
                       <p className="text-2xl font-bold text-green-600">
-                        {systemHealth.average_response_time.toFixed(0)}ms
+                        {(systemHealth?.responseTime || 0).toFixed(0)}ms
                       </p>
                       <p className="text-sm text-gray-600">Avg Response</p>
                     </div>
