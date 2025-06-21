@@ -74,7 +74,7 @@ export const ConsolidatedUniversalMoneyMaker: React.FC<
   return (
     <ErrorBoundary>
       <div className={className}>
-        <CleanMoneyMaker />
+        <UniversalMoneyMaker />
       </div>
     </ErrorBoundary>
   );
