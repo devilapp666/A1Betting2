@@ -625,7 +625,7 @@ const AppContent: React.FC = () => {
               transition={{ duration: 0.5 }}
               className="relative z-10 p-8"
             >
-              <ActiveComponent />
+              <ActiveComponent onNavigate={setActiveNavItem} />
             </motion.div>
           </ErrorBoundary>
         </main>
