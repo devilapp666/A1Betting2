@@ -492,7 +492,7 @@ export const ConsolidatedUniversalDashboard: React.FC<
         {features?.realTime && (
           <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
             <Suspense fallback={<Skeleton className="h-96" />}>
-              <RealTimePredictions />
+              <RealTimePredictions predictions={[]} loading={false} />
             </Suspense>
 
             <Suspense fallback={<Skeleton className="h-96" />}>
