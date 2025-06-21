@@ -56,6 +56,7 @@ import {
 import { MegaButton, MegaCard, MegaInput } from "../mega/MegaUI";
 import { CyberText, CyberContainer } from "../mega/CyberTheme";
 import { Badge } from "../ui/badge";
+import { Card } from "../ui/card";
 import { Skeleton } from "../ui/Skeleton";
 
 // Chart components (lazy loaded) - commented out to avoid import issues
