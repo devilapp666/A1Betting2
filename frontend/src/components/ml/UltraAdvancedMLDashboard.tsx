@@ -812,7 +812,7 @@ const UltraAdvancedMLDashboard: React.FC = () => {
         onValueChange={setSelectedTab}
         className="w-full"
       >
-        <TabsList className="grid w-full grid-cols-6">
+        <TabsList className="grid w-full grid-cols-6 sticky top-0 z-50 bg-white/95 backdrop-blur-sm shadow-sm mb-6">
           <TabsTrigger value="overview">Overview</TabsTrigger>
           <TabsTrigger value="models">Model Performance</TabsTrigger>
           <TabsTrigger value="predictions">Live Predictions</TabsTrigger>
