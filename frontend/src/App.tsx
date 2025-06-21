@@ -8,12 +8,12 @@ import {
   MegaSidebar,
   MegaHeader,
 } from "./components/mega/MegaLayout.tsx";
-import {
-  UniversalDashboard,
-  UniversalMoneyMaker,
-  UniversalAnalytics,
-  UniversalPredictions,
-} from "./components";
+
+// Import components directly to avoid index.ts lazy loading issues
+import UniversalDashboard from "./components/dashboard/UniversalDashboard";
+import UniversalMoneyMaker from "./components/moneymaker/UniversalMoneyMaker";
+import UniversalAnalytics from "./components/analytics/UniversalAnalytics";
+import UniversalPredictions from "./components/predictions/UniversalPredictions";
 
 // Import consolidated components directly to bypass index.ts issues
 import ConsolidatedUniversalDashboard from "./components/dashboard/ConsolidatedUniversalDashboard";
