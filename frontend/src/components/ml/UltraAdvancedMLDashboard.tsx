@@ -543,8 +543,8 @@ const UltraAdvancedMLDashboard: React.FC = () => {
         {
           label: "System Health",
           data: [
-            100 - systemHealth.cpu_usage,
-            100 - systemHealth.memory_usage,
+            100 - systemHealth.cpuUsage,
+            100 - systemHealth.memoryUsage,
             systemHealth.gpu_usage ? 100 - systemHealth.gpu_usage : 80,
             systemHealth.cache_efficiency,
             systemHealth.prediction_accuracy * 100,
