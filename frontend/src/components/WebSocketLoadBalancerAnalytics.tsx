@@ -185,10 +185,20 @@ export const WebSocketLoadBalancerAnalytics: React.FC = () => {
 
       <div className="space-y-6">
         <div className="h-64">
-          <Line data={chartData} options={chartOptions} />
+          <SafeChart
+            type="line"
+            data={chartData}
+            options={chartOptions}
+            loadingMessage="Loading server metrics..."
+          />
         </div>
         <div className="h-64">
-          <Line data={errorRateData} options={errorRateOptions} />
+          <SafeChart
+            type="line"
+            data={errorRateData}
+            options={errorRateOptions}
+            loadingMessage="Loading error rate data..."
+          />
         </div>
       </div>
     </div>
