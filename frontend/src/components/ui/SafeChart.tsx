@@ -19,15 +19,25 @@ const SafeChart: React.FC<SafeChartProps> = ({
   loadingMessage = "Loading chart data...",
   fallbackIcon,
 }) => {
-  // Validate chart data structure
-  const isValidData =
-    data &&
-    data.labels &&
-    data.datasets &&
-    Array.isArray(data.labels) &&
-    Array.isArray(data.datasets) &&
-    data.labels.length > 0 &&
-    data.datasets.length > 0;
+  // Enhanced validation for chart data structure
+  const isValidData = React.useMemo(() => {
+    try {
+      if (!data || typeof data !== "object") return false;
+      if (!data.labels || !Array.isArray(data.labels)) return false;
+      if (!data.datasets || !Array.isArray(data.datasets)) return false;
+      if (data.labels.length === 0) return false;
+      if (data.datasets.length === 0) return false;
+
+      // Validate each dataset has required properties
+      return data.datasets.every(
+        (dataset) =>
+          dataset && typeof dataset === "object" && Array.isArray(dataset.data),
+      );
+    } catch (error) {
+      console.warn("SafeChart: Data validation error:", error);
+      return false;
+    }
+  }, [data]);
 
   if (!isValidData) {
     const icons = {
