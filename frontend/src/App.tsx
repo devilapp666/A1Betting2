@@ -137,7 +137,7 @@ const navigationItems: NavigationItem[] = [
     id: "arbitrage",
     label: "AI Arbitrage",
     icon: <Target className="w-5 h-5" />,
-    component: CyberAnalyticsHub, // Using existing component for now
+    component: CyberUltimateMoneyMaker, // AI Arbitrage uses money maker for now
     shortcut: "⌘R",
     badge: "AI",
   },
