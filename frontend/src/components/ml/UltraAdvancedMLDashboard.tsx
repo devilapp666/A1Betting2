@@ -679,26 +679,30 @@ const UltraAdvancedMLDashboard: React.FC = () => {
           <Card>
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-gray-600">System Status</p>
-                  <p
-                    className={`text-lg font-semibold ${
-                      !systemHealth
-                        ? "text-gray-600"
-                        : systemHealth.overallHealth > 0.8
-                          ? "text-green-600"
-                          : systemHealth.overallHealth > 0.6
-                            ? "text-yellow-600"
-                            : "text-red-600"
-                    }`}
-                  >
-                    {!systemHealth
-                      ? "LOADING"
+                <div
+                  className={`p-2 rounded-full ${
+                    !systemHealth
+                      ? "bg-gray-100"
                       : systemHealth.overallHealth > 0.8
-                        ? "HEALTHY"
+                        ? "bg-green-100"
                         : systemHealth.overallHealth > 0.6
-                          ? "DEGRADED"
-                          : "CRITICAL"}
+                          ? "bg-yellow-100"
+                          : "bg-red-100"
+                  }`}
+                >
+                  {!systemHealth ? (
+                    <AlertTriangle className="w-6 h-6 text-gray-600" />
+                  ) : systemHealth.overallHealth > 0.8 ? (
+                    <CheckCircle className="w-6 h-6 text-green-600" />
+                  ) : systemHealth.overallHealth > 0.6 ? (
+                    <AlertTriangle className="w-6 h-6 text-yellow-600" />
+                  ) : (
+                    <XCircle className="w-6 h-6 text-red-600" />
+                  )}
+                          ? "HEALTHY"
+                          : systemHealth.overallHealth > 0.6
+                            ? "DEGRADED"
+                            : "CRITICAL")}
                   </p>
                 </div>
                 <div
