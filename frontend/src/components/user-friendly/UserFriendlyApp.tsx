@@ -222,9 +222,9 @@ export const UserFriendlyApp: React.FC = () => {
     },
     {
       id: "propgpt",
-      label: "PropGPT",
+      label: "PropOllama",
       icon: <MessageCircle className="w-5 h-5" />,
-      component: PropGPT,
+      component: PropOllama,
     },
     {
       id: "analytics",
