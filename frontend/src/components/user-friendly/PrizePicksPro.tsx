@@ -661,35 +661,6 @@ const PropCard: React.FC<{
           )}
         </button>
       </div>
-
-      {/* AI Analysis Button - Outside card */}
-      <div className="mt-4 px-3">
-        <button
-          onClick={() => onToggleAnalysis(prop.id)}
-          className="w-full py-2 bg-purple-500/30 border border-purple-400/50 rounded-lg text-purple-200 text-sm font-medium hover:bg-purple-500/50 hover:border-purple-300 transition-all"
-        >
-          {showAIAnalysis === prop.id ? "Hide" : "Show"} AI Analysis
-        </button>
-
-        {/* AI Analysis */}
-        <AnimatePresence>
-          {showAIAnalysis === prop.id && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              className="mt-2 p-3 bg-gray-900/50 rounded-lg border border-gray-700/50"
-            >
-              <p className="text-xs text-gray-300 leading-relaxed">
-                <span className="text-purple-400 font-semibold">
-                  AI Analysis:
-                </span>{" "}
-                {prop.reasoning}
-              </p>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
     </div>
   );
 };
