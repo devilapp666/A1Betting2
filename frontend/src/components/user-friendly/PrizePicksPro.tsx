@@ -693,6 +693,258 @@ const PropCard: React.FC<{
   );
 };
 
+// Expanded Player View Component
+const ExpandedPlayerView: React.FC<{
+  playerData: ExpandedPlayerData;
+  onClose: () => void;
+  onSelect: (propId: string, choice: "over" | "under") => void;
+  isSelected: (propId: string, choice: "over" | "under") => boolean;
+}> = ({ playerData, onClose, onSelect, isSelected }) => {
+  const getPlayerImageUrl = (playerName: string) => {
+    const playerMap: Record<string, string> = {
+      "LeBron James":
+        "https://cdn.nba.com/headshots/nba/latest/1040x760/2544.png",
+      "Stephen Curry":
+        "https://cdn.nba.com/headshots/nba/latest/1040x760/201939.png",
+      "Giannis Antetokounmpo":
+        "https://cdn.nba.com/headshots/nba/latest/1040x760/203507.png",
+      "Jayson Tatum":
+        "https://cdn.nba.com/headshots/nba/latest/1040x760/1628369.png",
+      "Kevin Durant":
+        "https://cdn.nba.com/headshots/nba/latest/1040x760/201142.png",
+      "Nikola Jokic":
+        "https://cdn.nba.com/headshots/nba/latest/1040x760/203999.png",
+      "Joel Embiid":
+        "https://cdn.nba.com/headshots/nba/latest/1040x760/203954.png",
+      "Luka Doncic":
+        "https://cdn.nba.com/headshots/nba/latest/1040x760/1629029.png",
+    };
+    return (
+      playerMap[playerName] ||
+      `https://cdn.nba.com/headshots/nba/latest/1040x760/2544.png`
+    );
+  };
+
+  return (
+    <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4 backdrop-blur-sm">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.9 }}
+        className="bg-gray-900 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto border border-gray-700"
+        style={{ backgroundColor: "rgb(18, 19, 32)" }}
+      >
+        {/* Header */}
+        <div className="flex items-center justify-between p-6 border-b border-gray-700">
+          <div className="flex items-center space-x-4">
+            <img
+              src={getPlayerImageUrl(playerData.player)}
+              alt={playerData.player}
+              className="w-16 h-16 rounded-lg"
+            />
+            <div>
+              <h2 className="text-2xl font-bold text-white">
+                {playerData.player}
+              </h2>
+              <p className="text-gray-400">
+                {playerData.team} vs {playerData.opponent} •{" "}
+                {playerData.gameTime}
+              </p>
+              <p className="text-gray-500 text-sm">
+                {playerData.position} • {playerData.sport}
+              </p>
+            </div>
+          </div>
+          <button
+            onClick={onClose}
+            className="text-gray-400 hover:text-white transition-colors"
+          >
+            <X className="w-6 h-6" />
+          </button>
+        </div>
+
+        {/* Player Stats Overview */}
+        <div className="p-6 border-b border-gray-700">
+          <h3 className="text-lg font-semibold text-white mb-4">
+            Season Averages
+          </h3>
+          <div className="grid grid-cols-5 gap-4">
+            {Object.entries(playerData.seasonStats).map(([stat, value]) => (
+              <div key={stat} className="text-center">
+                <div className="text-2xl font-bold text-white">{value}</div>
+                <div className="text-sm text-gray-400">{stat}</div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-4">
+            <h4 className="text-sm font-medium text-gray-300 mb-2">
+              Recent Form (Last 5 Games)
+            </h4>
+            <div className="flex space-x-2">
+              {playerData.recentForm.map((points, index) => (
+                <div
+                  key={index}
+                  className="bg-gray-800 rounded px-2 py-1 text-sm text-white"
+                >
+                  {points}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* All Available Props */}
+        <div className="p-6">
+          <div className="flex items-center justify-between mb-6">
+            <h3 className="text-lg font-semibold text-white">
+              All Available Props
+            </h3>
+            <div className="text-sm text-gray-400">
+              Sorted by best odds •
+              <span className="text-purple-400 ml-1">
+                PropOllama analysis available
+              </span>
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            {playerData.props.map((prop) => (
+              <motion.div
+                key={prop.id}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="bg-gray-800/50 rounded-lg p-4 border border-gray-700"
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-4">
+                    <div>
+                      <h4 className="text-white font-medium flex items-center space-x-2">
+                        <span>{prop.stat}</span>
+                        {prop.pickType === "demon" && (
+                          <span className="text-red-400">😈</span>
+                        )}
+                        {prop.pickType === "goblin" && (
+                          <span className="text-green-400">👺</span>
+                        )}
+                      </h4>
+                      <p className="text-gray-400 text-sm">Line: {prop.line}</p>
+                      <p className="text-gray-500 text-xs">
+                        Expected: {prop.expectedValue} • Volume: {prop.volume}%
+                      </p>
+                    </div>
+
+                    <div className="text-center">
+                      <div className="text-sm text-gray-400 mb-1">
+                        AI Confidence
+                      </div>
+                      <div className="text-lg font-bold text-green-400">
+                        {prop.confidence}%
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Odds and Buttons */}
+                  <div className="flex items-center space-x-4">
+                    {/* Odds with Tooltips */}
+                    <div className="flex space-x-2">
+                      <div className="text-center group relative">
+                        <button
+                          onClick={() => onSelect(prop.id, "under")}
+                          disabled={
+                            prop.pickType === "demon" ||
+                            prop.pickType === "goblin"
+                          }
+                          className={`px-4 py-2 rounded-lg border transition-colors ${
+                            isSelected(prop.id, "under")
+                              ? "bg-green-400 text-black border-green-400"
+                              : prop.pickType === "demon" ||
+                                  prop.pickType === "goblin"
+                                ? "bg-gray-600 text-gray-400 border-gray-600 cursor-not-allowed"
+                                : "bg-gray-700 text-white border-gray-600 hover:border-gray-500"
+                          }`}
+                        >
+                          <div className="text-sm font-bold">
+                            {prop.pickType === "demon" ||
+                            prop.pickType === "goblin"
+                              ? "N/A"
+                              : "UNDER"}
+                          </div>
+                          <div className="text-xs">{prop.underOdds}</div>
+                        </button>
+
+                        {/* Tooltip */}
+                        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-black text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-10">
+                          {prop.oddsExplanation}
+                        </div>
+                      </div>
+
+                      <div className="text-center group relative">
+                        <button
+                          onClick={() => onSelect(prop.id, "over")}
+                          className={`px-4 py-2 rounded-lg border transition-colors ${
+                            isSelected(prop.id, "over")
+                              ? "bg-green-400 text-black border-green-400"
+                              : "bg-gray-700 text-white border-gray-600 hover:border-gray-500"
+                          } ${prop.aiRecommendation === "over" ? "ring-2 ring-purple-400" : ""}`}
+                        >
+                          <div className="text-sm font-bold">OVER</div>
+                          <div className="text-xs">{prop.overOdds}</div>
+                          {prop.aiRecommendation === "over" && (
+                            <div className="text-xs text-purple-400 font-bold">
+                              ⭐ AI
+                            </div>
+                          )}
+                        </button>
+
+                        {/* Tooltip */}
+                        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-black text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-10">
+                          {prop.oddsExplanation}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* PropOllama Analysis Button */}
+                    <button className="bg-purple-600/20 text-purple-400 border border-purple-500/30 rounded-lg px-3 py-2 text-sm hover:bg-purple-600/30 transition-colors">
+                      🧠 PropOllama
+                    </button>
+                  </div>
+                </div>
+
+                {/* AI Reasoning */}
+                <div className="mt-3 p-3 bg-gray-900/50 rounded border border-gray-600">
+                  <p className="text-sm text-gray-300">
+                    <span className="text-purple-400 font-semibold">
+                      AI Analysis:
+                    </span>{" "}
+                    {prop.reasoning}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="p-6 border-t border-gray-700 bg-gray-800/30">
+          <div className="text-center">
+            <p className="text-sm text-gray-400 mb-3">
+              💡 <span className="text-purple-400">PropOllama</span> can explain
+              any odds, strategy, or betting concept in detail
+            </p>
+            <button
+              onClick={onClose}
+              className="bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-6 rounded-lg transition-colors"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </motion.div>
+    </div>
+  );
+};
+
 // PrizePicks-style Lineup Builder Component
 const LineupBuilder: React.FC<{
   selectedPicks: SelectedPick[];
