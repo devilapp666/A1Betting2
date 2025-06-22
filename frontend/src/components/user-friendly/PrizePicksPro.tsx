@@ -76,7 +76,10 @@ interface SelectedPick {
 }
 
 // Demons & Goblins Rules Modal Component
-const DemonsGoblinsModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen, onClose }) => {
+const DemonsGoblinsModal: React.FC<{
+  isOpen: boolean;
+  onClose: () => void;
+}> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
@@ -105,7 +108,9 @@ const DemonsGoblinsModal: React.FC<{ isOpen: boolean; onClose: () => void }> = (
         <div className="p-6 space-y-6">
           <div className="text-gray-300 text-sm leading-5">
             Lineups containing a Demon or Goblin may pay out differently than
-            standard lineups. You can only pick <strong className="text-green-400">MORE</strong> on these projections.
+            standard lineups. You can only pick{" "}
+            <strong className="text-green-400">MORE</strong> on these
+            projections.
           </div>
 
           {/* Demons */}
@@ -144,33 +149,43 @@ const DemonsGoblinsModal: React.FC<{ isOpen: boolean; onClose: () => void }> = (
 
           {/* Rules Section */}
           <div className="space-y-4 border-t border-gray-700/50 pt-6">
-            <h3 className="text-lg font-semibold text-white">
-              Lineup Rules
-            </h3>
+            <h3 className="text-lg font-semibold text-white">Lineup Rules</h3>
 
             <div className="space-y-3 text-sm text-gray-300">
               <div className="flex items-start gap-2">
                 <div className="w-1.5 h-1.5 bg-purple-400 rounded-full mt-2 flex-shrink-0"></div>
                 <span>
-                  Pick between <strong className="text-purple-400">2 and 6 projections</strong> to create a valid lineup.
+                  Pick between{" "}
+                  <strong className="text-purple-400">
+                    2 and 6 projections
+                  </strong>{" "}
+                  to create a valid lineup.
                 </span>
               </div>
               <div className="flex items-start gap-2">
                 <div className="w-1.5 h-1.5 bg-purple-400 rounded-full mt-2 flex-shrink-0"></div>
                 <span>
-                  Must have picks from <strong className="text-purple-400">at least 2 different teams</strong>.
+                  Must have picks from{" "}
+                  <strong className="text-purple-400">
+                    at least 2 different teams
+                  </strong>
+                  .
                 </span>
               </div>
               <div className="flex items-start gap-2">
                 <div className="w-1.5 h-1.5 bg-purple-400 rounded-full mt-2 flex-shrink-0"></div>
                 <span>
-                  Cannot have the <strong className="text-purple-400">same player twice</strong> in your lineup.
+                  Cannot have the{" "}
+                  <strong className="text-purple-400">same player twice</strong>{" "}
+                  in your lineup.
                 </span>
               </div>
               <div className="flex items-start gap-2">
                 <div className="w-1.5 h-1.5 bg-purple-400 rounded-full mt-2 flex-shrink-0"></div>
                 <span>
-                  All picks must be submitted <strong className="text-purple-400">before game start</strong>.
+                  All picks must be submitted{" "}
+                  <strong className="text-purple-400">before game start</strong>
+                  .
                 </span>
               </div>
             </div>
@@ -186,6 +201,319 @@ const DemonsGoblinsModal: React.FC<{ isOpen: boolean; onClose: () => void }> = (
             Got it!
           </button>
         </div>
+      </motion.div>
+    </div>
+  );
+};
+
+// Expanded Player View Component
+const ExpandedPlayerView: React.FC<{
+  playerData: ExpandedPlayerData;
+  onClose: () => void;
+  onSelect: (propId: string, choice: "over" | "under") => void;
+  isSelected: (propId: string, choice: "over" | "under") => boolean;
+}> = ({ playerData, onClose, onSelect, isSelected }) => {
+  const getPlayerImageUrl = (playerName: string) => {
+    const playerMap: Record<string, string> = {
+      "LeBron James":
+        "https://cdn.nba.com/headshots/nba/latest/1040x760/2544.png",
+      "Stephen Curry":
+        "https://cdn.nba.com/headshots/nba/latest/1040x760/201939.png",
+      "Giannis Antetokounmpo":
+        "https://cdn.nba.com/headshots/nba/latest/1040x760/203507.png",
+      "Jayson Tatum":
+        "https://cdn.nba.com/headshots/nba/latest/1040x760/1628369.png",
+      "Kevin Durant":
+        "https://cdn.nba.com/headshots/nba/latest/1040x760/201142.png",
+      "Nikola Jokic":
+        "https://cdn.nba.com/headshots/nba/latest/1040x760/203999.png",
+      "Joel Embiid":
+        "https://cdn.nba.com/headshots/nba/latest/1040x760/203954.png",
+      "Luka Doncic":
+        "https://cdn.nba.com/headshots/nba/latest/1040x760/1629029.png",
+    };
+    return (
+      playerMap[playerName] ||
+      `https://cdn.nba.com/headshots/nba/latest/1040x760/2544.png`
+    );
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 bg-black bg-opacity-95">
+      <div className="h-full overflow-y-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 50 }}
+          className="min-h-screen"
+          style={{
+            background:
+              "linear-gradient(135deg, rgb(30, 41, 59) 0%, rgb(15, 23, 42) 50%, rgb(30, 41, 59) 100%)",
+          }}
+        >
+          {/* Hero Header with Player Image */}
+          <div className="relative h-64 overflow-hidden">
+            <div
+              className="absolute inset-0"
+              style={{
+                background:
+                  "linear-gradient(135deg, rgb(30, 41, 59) 0%, rgb(124, 58, 237) 50%, rgb(30, 41, 59) 100%)",
+              }}
+            />
+
+            <button
+              onClick={onClose}
+              className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors z-10"
+            >
+              <X className="w-6 h-6" />
+            </button>
+
+            <div className="absolute bottom-8 left-6">
+              <h2 className="text-2xl font-bold text-white mb-1">
+                {playerData.player}
+              </h2>
+              <p className="text-gray-300 text-sm">
+                {playerData.sport} • {playerData.team} • {playerData.position}
+              </p>
+            </div>
+
+            <div className="absolute bottom-0 right-6">
+              <img
+                src={getPlayerImageUrl(playerData.player)}
+                alt={playerData.player}
+                className="w-32 h-32 object-cover"
+              />
+            </div>
+          </div>
+
+          {/* Game Matchup Card */}
+          <div className="mx-4 -mt-8 mb-6 relative z-10">
+            <div className="bg-gray-800 bg-opacity-80 rounded-lg p-4 border border-gray-600 backdrop-blur-sm">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-3">
+                  <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
+                    <span className="text-white font-bold text-sm">
+                      {playerData.team}
+                    </span>
+                  </div>
+                  <span className="text-white font-medium">
+                    {playerData.team}
+                  </span>
+                </div>
+
+                <div className="text-center">
+                  <div className="text-gray-400 text-sm">
+                    {playerData.gameTime}
+                  </div>
+                </div>
+
+                <div className="flex items-center space-x-3">
+                  <span className="text-white font-medium">
+                    {playerData.opponent}
+                  </span>
+                  <div className="w-8 h-8 bg-yellow-600 rounded-full flex items-center justify-center">
+                    <span className="text-white font-bold text-sm">
+                      {playerData.opponent}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Props List */}
+          <div className="space-y-3 px-4 pb-20">
+            {playerData.props.map((prop, index) => (
+              <div
+                key={prop.id}
+                className="bg-gray-800 bg-opacity-60 rounded-lg border border-gray-600"
+              >
+                <div className="p-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-3">
+                      <div className="text-gray-400">
+                        <svg
+                          className="w-4 h-4"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </div>
+
+                      <div>
+                        <div className="flex items-center space-x-2">
+                          <span className="text-xl font-bold text-white">
+                            {prop.line}
+                          </span>
+                          {prop.pickType === "demon" && (
+                            <img
+                              src="https://app.prizepicks.com/7534b2e82fa0ac08ec43.png"
+                              alt="Demon"
+                              className="w-5 h-5"
+                            />
+                          )}
+                          {prop.pickType === "goblin" && (
+                            <img
+                              src="https://app.prizepicks.com/e00b98475351cdfd1c38.png"
+                              alt="Goblin"
+                              className="w-5 h-5"
+                            />
+                          )}
+                        </div>
+                        <div className="text-gray-300 text-sm">{prop.stat}</div>
+                      </div>
+                    </div>
+
+                    <div className="flex space-x-2">
+                      <button
+                        onClick={() => onSelect(prop.id, "under")}
+                        disabled={
+                          prop.pickType === "demon" ||
+                          prop.pickType === "goblin"
+                        }
+                        className={`px-6 py-2 rounded-lg font-medium transition-colors ${
+                          isSelected(prop.id, "under")
+                            ? "bg-green-500 text-black"
+                            : prop.pickType === "demon" ||
+                                prop.pickType === "goblin"
+                              ? "bg-gray-600 text-gray-400 cursor-not-allowed"
+                              : "bg-gray-700 hover:bg-gray-600 text-white border border-gray-600"
+                        }`}
+                      >
+                        <div className="flex items-center space-x-1">
+                          <span>↓</span>
+                          <span>Less</span>
+                        </div>
+                      </button>
+
+                      <button
+                        onClick={() => onSelect(prop.id, "over")}
+                        className={`px-6 py-2 rounded-lg font-medium transition-colors ${
+                          isSelected(prop.id, "over")
+                            ? "bg-green-500 text-black"
+                            : "bg-gray-700 hover:bg-gray-600 text-white border border-gray-600"
+                        }`}
+                      >
+                        <div className="flex items-center space-x-1">
+                          <span>↑</span>
+                          <span>More</span>
+                        </div>
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Performance Chart for Points */}
+                  {prop.stat === "Points" && (
+                    <div className="mt-4 p-4 bg-gray-900 bg-opacity-50 rounded-lg">
+                      <div className="flex justify-center space-x-2 mb-4">
+                        {[
+                          { value: 18.5, type: "goblin" },
+                          { value: 22.5, type: "normal", selected: true },
+                          { value: 25.5, type: "demon" },
+                          { value: 28.5, type: "demon" },
+                        ].map((item, i) => (
+                          <div
+                            key={i}
+                            className={`px-3 py-1 rounded-full text-sm font-medium flex items-center space-x-1 ${
+                              item.selected
+                                ? "bg-white text-black border-2 border-white"
+                                : "bg-gray-700 text-white"
+                            }`}
+                          >
+                            {item.type === "goblin" && <span>👺</span>}
+                            {item.type === "demon" && <span>😈</span>}
+                            <span>{item.value}</span>
+                          </div>
+                        ))}
+                      </div>
+
+                      <div className="relative h-20 mb-2">
+                        <div className="absolute inset-x-0 top-1/2 border-t border-dashed border-gray-500"></div>
+                        <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-xs text-gray-400">
+                          22.5
+                        </div>
+
+                        <div className="flex items-end justify-center space-x-2 h-full">
+                          {[
+                            {
+                              value: 35,
+                              opponent: "IND",
+                              date: "5/21",
+                              color: "bg-green-500",
+                            },
+                            {
+                              value: 20,
+                              opponent: "IND",
+                              date: "5/23",
+                              color: "bg-red-500",
+                            },
+                            {
+                              value: 24,
+                              opponent: "IND",
+                              date: "5/25",
+                              color: "bg-green-500",
+                            },
+                            {
+                              value: 24,
+                              opponent: "IND",
+                              date: "5/27",
+                              color: "bg-green-500",
+                            },
+                            {
+                              value: 24,
+                              opponent: "IND",
+                              date: "5/29",
+                              color: "bg-green-500",
+                            },
+                          ].map((game, i) => (
+                            <div key={i} className="flex flex-col items-center">
+                              <div
+                                className={`w-8 ${game.color} rounded-t`}
+                                style={{
+                                  height: `${(game.value / 40) * 60}px`,
+                                }}
+                              ></div>
+                              <div className="text-xs text-white mt-1 font-bold">
+                                {game.value}
+                              </div>
+                              <div className="text-xs text-gray-400">
+                                {game.opponent}
+                              </div>
+                              <div className="text-xs text-gray-500">
+                                {game.date}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="text-center text-sm text-gray-300">
+                        <span className="font-semibold">25.4</span> avg last 5
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* PropOllama Footer */}
+          <div className="px-4 pb-8">
+            <div className="bg-purple-600 bg-opacity-20 border border-purple-500 border-opacity-30 rounded-lg p-4 text-center">
+              <p className="text-purple-400 text-sm mb-2">
+                🧠 <span className="font-semibold">PropOllama</span> can explain
+                any prop, odds, or betting strategy
+              </p>
+              <button className="bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded-lg transition-colors text-sm">
+                Ask PropOllama
+              </button>
+            </div>
+          </div>
         </motion.div>
       </div>
     </div>
@@ -198,23 +526,33 @@ const PropCard: React.FC<{
   onSelect: (propId: string, choice: "over" | "under") => void;
   isSelected: (propId: string, choice: "over" | "under") => boolean;
   showAIAnalysis: string | null;
-  onToggleAnalysis: (propId: string) => void;
+  onToggleAnalysis: (playerName: string) => void;
 }> = ({ prop, onSelect, isSelected, showAIAnalysis, onToggleAnalysis }) => {
-
   // Real NBA player headshots from official sources
   const getPlayerImageUrl = (playerName: string) => {
     const playerMap: Record<string, string> = {
-      "LeBron James": "https://cdn.nba.com/headshots/nba/latest/1040x760/2544.png",
-      "Stephen Curry": "https://cdn.nba.com/headshots/nba/latest/1040x760/201939.png",
-      "Giannis Antetokounmpo": "https://cdn.nba.com/headshots/nba/latest/1040x760/203507.png",
-      "Jayson Tatum": "https://cdn.nba.com/headshots/nba/latest/1040x760/1628369.png",
-      "Kevin Durant": "https://cdn.nba.com/headshots/nba/latest/1040x760/201142.png",
-      "Nikola Jokic": "https://cdn.nba.com/headshots/nba/latest/1040x760/203999.png",
-      "Joel Embiid": "https://cdn.nba.com/headshots/nba/latest/1040x760/203954.png",
-      "Luka Doncic": "https://cdn.nba.com/headshots/nba/latest/1040x760/1629029.png",
+      "LeBron James":
+        "https://cdn.nba.com/headshots/nba/latest/1040x760/2544.png",
+      "Stephen Curry":
+        "https://cdn.nba.com/headshots/nba/latest/1040x760/201939.png",
+      "Giannis Antetokounmpo":
+        "https://cdn.nba.com/headshots/nba/latest/1040x760/203507.png",
+      "Jayson Tatum":
+        "https://cdn.nba.com/headshots/nba/latest/1040x760/1628369.png",
+      "Kevin Durant":
+        "https://cdn.nba.com/headshots/nba/latest/1040x760/201142.png",
+      "Nikola Jokic":
+        "https://cdn.nba.com/headshots/nba/latest/1040x760/203999.png",
+      "Joel Embiid":
+        "https://cdn.nba.com/headshots/nba/latest/1040x760/203954.png",
+      "Luka Doncic":
+        "https://cdn.nba.com/headshots/nba/latest/1040x760/1629029.png",
     };
 
-    return playerMap[playerName] || `https://cdn.nba.com/headshots/nba/latest/1040x760/2544.png`;
+    return (
+      playerMap[playerName] ||
+      `https://cdn.nba.com/headshots/nba/latest/1040x760/2544.png`
+    );
   };
 
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
@@ -224,21 +562,6 @@ const PropCard: React.FC<{
   };
 
   const playerImageUrl = getPlayerImageUrl(prop.player);
-
-  // Get team emoji/indicator
-  const getTeamIndicator = (team: string) => {
-    const indicators: Record<string, string> = {
-      "LAL": "🟡",
-      "GSW": "🔵",
-      "MIL": "🟢",
-      "BOS": "🟢",
-      "MIA": "🔴",
-      "PHX": "🟠",
-      "DEN": "🔵",
-      "PHI": "🔵"
-    };
-    return indicators[team] || "⚫";
-  };
 
   return (
     <div
@@ -276,7 +599,12 @@ const PropCard: React.FC<{
           top: "8px",
         }}
       >
-        <svg width="16" height="16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <svg
+          width="16"
+          height="16"
+          fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <path d="M7.333 2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v11a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-11ZM4 4.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-9ZM8.667 7.833a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5V13.5a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5V7.833ZM14 5.833a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5V13.5a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V5.833Z" />
         </svg>
       </button>
@@ -284,7 +612,12 @@ const PropCard: React.FC<{
       {/* Trending Indicator - Top Right */}
       <div
         className="absolute top-2 right-2 flex items-center z-10"
-        style={{ position: "absolute", right: "8px", top: "8px", display: "flex" }}
+        style={{
+          position: "absolute",
+          right: "8px",
+          top: "8px",
+          display: "flex",
+        }}
       >
         <img
           alt="Trending"
@@ -294,7 +627,12 @@ const PropCard: React.FC<{
         />
         <span
           className="text-white text-xs"
-          style={{ color: "rgb(251, 249, 255)", fontSize: "12px", lineHeight: "16px", paddingTop: "4px" }}
+          style={{
+            color: "rgb(251, 249, 255)",
+            fontSize: "12px",
+            lineHeight: "16px",
+            paddingTop: "4px",
+          }}
         >
           {prop.trendValue || Math.floor(Math.random() * 10 + 1)}K
         </span>
@@ -377,7 +715,8 @@ const PropCard: React.FC<{
                   textAlign: "center",
                   verticalAlign: "middle",
                   width: "24px",
-                  transform: "matrix(0.978148, 0.207912, -0.207912, 0.978148, 0, 0)",
+                  transform:
+                    "matrix(0.978148, 0.207912, -0.207912, 0.978148, 0, 0)",
                 }}
               />
             </button>
@@ -550,9 +889,10 @@ const PropCard: React.FC<{
               : prop.pickType === "demon" || prop.pickType === "goblin"
                 ? "rgb(107, 114, 128)"
                 : "rgb(255, 255, 255)",
-            cursor: prop.pickType === "demon" || prop.pickType === "goblin"
-              ? "not-allowed"
-              : "pointer",
+            cursor:
+              prop.pickType === "demon" || prop.pickType === "goblin"
+                ? "not-allowed"
+                : "pointer",
             display: "flex",
             flexBasis: "0%",
             flexGrow: "1",
@@ -583,7 +923,9 @@ const PropCard: React.FC<{
             />
           </svg>
           <span className="text-sm">
-            {prop.pickType === "demon" || prop.pickType === "goblin" ? "N/A" : "Less"}
+            {prop.pickType === "demon" || prop.pickType === "goblin"
+              ? "N/A"
+              : "Less"}
           </span>
         </button>
 
@@ -646,249 +988,10 @@ const PropCard: React.FC<{
           )}
         </button>
       </div>
-
-
     </div>
   );
 };
 
-// Expanded Player View Component - PrizePicks Mobile Style
-const ExpandedPlayerView: React.FC<{
-  playerData: ExpandedPlayerData;
-  onClose: () => void;
-  onSelect: (propId: string, choice: "over" | "under") => void;
-  isSelected: (propId: string, choice: "over" | "under") => boolean;
-}> = ({ playerData, onClose, onSelect, isSelected }) => {
-  const getPlayerImageUrl = (playerName: string) => {
-    const playerMap: Record<string, string> = {
-      "LeBron James": "https://cdn.nba.com/headshots/nba/latest/1040x760/2544.png",
-      "Stephen Curry": "https://cdn.nba.com/headshots/nba/latest/1040x760/201939.png",
-      "Giannis Antetokounmpo": "https://cdn.nba.com/headshots/nba/latest/1040x760/203507.png",
-      "Jayson Tatum": "https://cdn.nba.com/headshots/nba/latest/1040x760/1628369.png",
-      "Kevin Durant": "https://cdn.nba.com/headshots/nba/latest/1040x760/201142.png",
-      "Nikola Jokic": "https://cdn.nba.com/headshots/nba/latest/1040x760/203999.png",
-      "Joel Embiid": "https://cdn.nba.com/headshots/nba/latest/1040x760/203954.png",
-      "Luka Doncic": "https://cdn.nba.com/headshots/nba/latest/1040x760/1629029.png",
-    };
-    return playerMap[playerName] || `https://cdn.nba.com/headshots/nba/latest/1040x760/2544.png`;
-  };
-
-  return (
-    <div className="fixed inset-0 z-50 bg-black bg-opacity-95">
-      <div className="h-full overflow-y-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 50 }}
-          className="min-h-screen"
-          style={{
-            background: "linear-gradient(135deg, rgb(30, 41, 59) 0%, rgb(15, 23, 42) 50%, rgb(30, 41, 59) 100%)",
-          }}
-        >
-          {/* Hero Header with Player Image */}
-          <div className="relative h-64 overflow-hidden">
-            {/* Background Gradient */}
-            <div
-              className="absolute inset-0"
-              style={{
-                background: "linear-gradient(135deg, rgb(30, 41, 59) 0%, rgb(124, 58, 237) 50%, rgb(30, 41, 59) 100%)",
-              }}
-            />
-
-            {/* Close Button */}
-            <button
-              onClick={onClose}
-              className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors z-10"
-            >
-              <X className="w-6 h-6" />
-            </button>
-
-            {/* Player Info */}
-            <div className="absolute bottom-8 left-6">
-              <h2 className="text-2xl font-bold text-white mb-1">{playerData.player}</h2>
-              <p className="text-gray-300 text-sm">{playerData.sport} • {playerData.team} • {playerData.position}</p>
-            </div>
-
-            {/* Player Image */}
-            <div className="absolute bottom-0 right-6">
-              <img
-                src={getPlayerImageUrl(playerData.player)}
-                alt={playerData.player}
-                className="w-32 h-32 object-cover"
-              />
-            </div>
-          </div>
-
-          {/* Game Matchup Card */}
-          <div className="mx-4 -mt-8 mb-6 relative z-10">
-            <div className="bg-gray-800 bg-opacity-80 rounded-lg p-4 border border-gray-600 backdrop-blur-sm">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-3">
-                  <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
-                    <span className="text-white font-bold text-sm">{playerData.team}</span>
-                  </div>
-                  <span className="text-white font-medium">{playerData.team}</span>
-                </div>
-
-                <div className="text-center">
-                  <div className="text-gray-400 text-sm">{playerData.gameTime}</div>
-                </div>
-
-                <div className="flex items-center space-x-3">
-                  <span className="text-white font-medium">{playerData.opponent}</span>
-                  <div className="w-8 h-8 bg-yellow-600 rounded-full flex items-center justify-center">
-                    <span className="text-white font-bold text-sm">{playerData.opponent}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Props List */}
-          <div className="space-y-3 px-4 pb-20">
-            {playerData.props.map((prop, index) => (
-              <div
-                key={prop.id}
-                className="bg-gray-800 bg-opacity-60 rounded-lg border border-gray-600 overflow-hidden"
-              >
-                <div className="p-4">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-3">
-                      <div className="text-gray-400">
-                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
-                        </svg>
-                      </div>
-
-                      <div>
-                        <div className="flex items-center space-x-2">
-                          <span className="text-xl font-bold text-white">{prop.line}</span>
-                          {prop.pickType === "demon" && (
-                            <img
-                              src="https://app.prizepicks.com/7534b2e82fa0ac08ec43.png"
-                              alt="Demon"
-                              className="w-5 h-5"
-                            />
-                          )}
-                          {prop.pickType === "goblin" && (
-                            <img
-                              src="https://app.prizepicks.com/e00b98475351cdfd1c38.png"
-                              alt="Goblin"
-                              className="w-5 h-5"
-                            />
-                          )}
-                        </div>
-                        <div className="text-gray-300 text-sm">{prop.stat}</div>
-                      </div>
-                    </div>
-
-                    <div className="flex space-x-2">
-                      <button
-                        onClick={() => onSelect(prop.id, "under")}
-                        disabled={prop.pickType === "demon" || prop.pickType === "goblin"}
-                        className={`px-6 py-2 rounded-lg font-medium transition-colors ${
-                          isSelected(prop.id, "under")
-                            ? "bg-green-500 text-black"
-                            : prop.pickType === "demon" || prop.pickType === "goblin"
-                              ? "bg-gray-600 text-gray-400 cursor-not-allowed"
-                              : "bg-gray-700 hover:bg-gray-600 text-white border border-gray-600"
-                        }`}
-                      >
-                        <div className="flex items-center space-x-1">
-                          <span>↓</span>
-                          <span>{prop.pickType === "demon" || prop.pickType === "goblin" ? "N/A" : "Less"}</span>
-                        </div>
-                      </button>
-
-                      <button
-                        onClick={() => onSelect(prop.id, "over")}
-                        className={`px-6 py-2 rounded-lg font-medium transition-colors ${
-                          isSelected(prop.id, "over")
-                            ? "bg-green-500 text-black"
-                            : "bg-gray-700 hover:bg-gray-600 text-white border border-gray-600"
-                        }`}
-                      >
-                        <div className="flex items-center space-x-1">
-                          <span>↑</span>
-                          <span>More</span>
-                        </div>
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Performance Chart for Points */}
-                  {prop.stat === "Points" && (
-                    <div className="mt-4 p-4 bg-gray-900 bg-opacity-50 rounded-lg">
-                      <div className="flex justify-center space-x-2 mb-4">
-                        {[
-                          { value: 18.5, type: "goblin" },
-                          { value: 22.5, type: "normal", selected: true },
-                          { value: 25.5, type: "demon" },
-                          { value: 28.5, type: "demon" }
-                        ].map((item, i) => (
-                          <div key={i} className={`px-3 py-1 rounded-full text-sm font-medium flex items-center space-x-1 ${
-                            item.selected ? "bg-white text-black border-2 border-white" : "bg-gray-700 text-white"
-                          }`}>
-                            {item.type === "goblin" && <span>👺</span>}
-                            {item.type === "demon" && <span>😈</span>}
-                            <span>{item.value}</span>
-                          </div>
-                        ))}
-                      </div>
-
-                      <div className="relative h-20 mb-2">
-                        <div className="absolute inset-x-0 top-1/2 border-t border-dashed border-gray-500"></div>
-                        <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-xs text-gray-400">
-                          22.5
-                        </div>
-
-                        <div className="flex items-end justify-center space-x-2 h-full">
-                          {[
-                            { value: 35, opponent: "IND", date: "5/21", color: "bg-green-500" },
-                            { value: 20, opponent: "IND", date: "5/23", color: "bg-red-500" },
-                            { value: 24, opponent: "IND", date: "5/25", color: "bg-green-500" },
-                            { value: 24, opponent: "IND", date: "5/27", color: "bg-green-500" },
-                            { value: 24, opponent: "IND", date: "5/29", color: "bg-green-500" }
-                          ].map((game, i) => (
-                            <div key={i} className="flex flex-col items-center">
-                              <div
-                                className={`w-8 ${game.color} rounded-t`}
-                                style={{ height: `${(game.value / 40) * 60}px` }}
-                              ></div>
-                              <div className="text-xs text-white mt-1 font-bold">{game.value}</div>
-                              <div className="text-xs text-gray-400">{game.opponent}</div>
-                              <div className="text-xs text-gray-500">{game.date}</div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-
-                      <div className="text-center text-sm text-gray-300">
-                        <span className="font-semibold">25.4</span> avg last 5
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* PropOllama Footer */}
-          <div className="px-4 pb-8">
-            <div className="bg-purple-600 bg-opacity-20 border border-purple-500 border-opacity-30 rounded-lg p-4 text-center">
-              <p className="text-purple-400 text-sm mb-2">
-                🧠 <span className="font-semibold">PropOllama</span> can explain any prop, odds, or betting strategy
-              </p>
-              <button className="bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded-lg transition-colors text-sm">
-                Ask PropOllama
-              </button>
-            </div>
-          </div>
-        </motion.div>
-      </div>
-    </div>
-  );
-};
 // PrizePicks-style Lineup Builder Component
 const LineupBuilder: React.FC<{
   selectedPicks: SelectedPick[];
@@ -907,7 +1010,7 @@ const LineupBuilder: React.FC<{
   onSubmitLineup,
   calculatePayout,
   getOverallConfidence,
-  validateLineup
+  validateLineup,
 }) => {
   const validation = validateLineup();
 
@@ -930,11 +1033,15 @@ const LineupBuilder: React.FC<{
         <div className="flex items-center justify-between">
           <div>
             <h3 className="text-white font-semibold text-lg">Current Lineup</h3>
-            <p className="text-gray-400 text-sm">{selectedPicks.length} Players Selected</p>
+            <p className="text-gray-400 text-sm">
+              {selectedPicks.length} Players Selected
+            </p>
           </div>
           {selectedPicks.length > 0 && (
             <button
-              onClick={() => selectedPicks.forEach(pick => onRemovePick(pick.propId))}
+              onClick={() =>
+                selectedPicks.forEach((pick) => onRemovePick(pick.propId))
+              }
               className="text-gray-400 hover:text-white text-sm"
             >
               Clear
@@ -1009,7 +1116,9 @@ const LineupBuilder: React.FC<{
               <div className="text-gray-500">OR</div>
               <div className="text-center">
                 <div className="text-xs text-gray-400">Perfect Lineup</div>
-                <div className="text-purple-400 font-bold">{(calculatePayout() / entryAmount).toFixed(1)}X</div>
+                <div className="text-purple-400 font-bold">
+                  {(calculatePayout() / entryAmount).toFixed(1)}X
+                </div>
               </div>
             </div>
           </div>
@@ -1017,13 +1126,19 @@ const LineupBuilder: React.FC<{
           {/* Entry Fee and Payout */}
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs text-gray-400 mb-1">Entry Fee</label>
+              <label className="block text-xs text-gray-400 mb-1">
+                Entry Fee
+              </label>
               <div className="relative">
-                <span className="absolute left-2 top-1/2 transform -translate-y-1/2 text-white text-sm">$</span>
+                <span className="absolute left-2 top-1/2 transform -translate-y-1/2 text-white text-sm">
+                  $
+                </span>
                 <input
                   type="number"
                   value={entryAmount}
-                  onChange={(e) => onEntryAmountChange(parseInt(e.target.value) || 0)}
+                  onChange={(e) =>
+                    onEntryAmountChange(parseInt(e.target.value) || 0)
+                  }
                   className="w-full pl-6 pr-2 py-2 bg-gray-800 border border-gray-600 rounded text-white text-sm focus:border-purple-400 focus:outline-none"
                   min="5"
                   max="1000"
@@ -1041,7 +1156,10 @@ const LineupBuilder: React.FC<{
           {/* Overall Confidence */}
           <div className="text-center">
             <div className="text-sm text-gray-400">
-              Overall AI Confidence: <span className="text-green-400 font-bold">{getOverallConfidence().toFixed(1)}%</span>
+              Overall AI Confidence:{" "}
+              <span className="text-green-400 font-bold">
+                {getOverallConfidence().toFixed(1)}%
+              </span>
             </div>
           </div>
 
@@ -1055,14 +1173,16 @@ const LineupBuilder: React.FC<{
                 : "bg-gray-600 text-gray-400 cursor-not-allowed"
             }`}
           >
-            {validation.valid ? "SUBMIT LINEUP" : validation.message.toUpperCase()}
+            {validation.valid
+              ? "SUBMIT LINEUP"
+              : validation.message.toUpperCase()}
           </button>
 
           {/* Info Banner */}
           <div className="bg-gray-800/50 border border-gray-700/50 rounded-lg p-3">
             <p className="text-xs text-gray-400">
-              Payout multipliers may be adjusted based on your player selections.{" "}
-              <span className="text-blue-400">Learn more</span>
+              Payout multipliers may be adjusted based on your player
+              selections. <span className="text-blue-400">Learn more</span>
             </p>
           </div>
         </div>
@@ -1311,7 +1431,7 @@ export const PrizePicksPro: React.FC = () => {
     let baseMultiplier = multipliers[pickCount] || 0;
 
     // Apply demon/goblin modifiers
-    selectedPicks.forEach(pick => {
+    selectedPicks.forEach((pick) => {
       if (pick.pickType === "demon") {
         baseMultiplier *= 1.25;
       } else if (pick.pickType === "goblin") {
@@ -1337,16 +1457,24 @@ export const PrizePicksPro: React.FC = () => {
   };
 
   const validateLineup = () => {
-    if (selectedPicks.length < 2) return { valid: false, message: "Select at least 2 picks" };
-    if (selectedPicks.length > 6) return { valid: false, message: "Maximum 6 picks allowed" };
+    if (selectedPicks.length < 2)
+      return { valid: false, message: "Select at least 2 picks" };
+    if (selectedPicks.length > 6)
+      return { valid: false, message: "Maximum 6 picks allowed" };
 
     // Check for at least 2 different teams
-    const teams = new Set(selectedPicks.map(pick => {
-      const prop = playerProps.find(p => p.id === pick.propId);
-      return prop?.team;
-    }));
+    const teams = new Set(
+      selectedPicks.map((pick) => {
+        const prop = playerProps.find((p) => p.id === pick.propId);
+        return prop?.team;
+      }),
+    );
 
-    if (teams.size < 2) return { valid: false, message: "Must have picks from at least 2 different teams" };
+    if (teams.size < 2)
+      return {
+        valid: false,
+        message: "Must have picks from at least 2 different teams",
+      };
 
     return { valid: true, message: "Lineup is valid" };
   };
@@ -1358,12 +1486,14 @@ export const PrizePicksPro: React.FC = () => {
       return;
     }
 
-    alert(`Lineup submitted! Entry: $${entryAmount}, Potential payout: $${calculatePayout().toFixed(2)}`);
+    alert(
+      `Lineup submitted! Entry: $${entryAmount}, Potential payout: $${calculatePayout().toFixed(2)}`,
+    );
   };
 
   // Generate expanded player data with all available props
   const getExpandedPlayerData = (playerName: string): ExpandedPlayerData => {
-    const basePlayer = playerProps.find(p => p.player === playerName);
+    const basePlayer = playerProps.find((p) => p.player === playerName);
     if (!basePlayer) throw new Error("Player not found");
 
     // Generate all available props for this player (sorted by odds)
@@ -1379,8 +1509,8 @@ export const PrizePicksPro: React.FC = () => {
         reasoning: basePlayer.reasoning,
         expectedValue: 25.4,
         volume: 87,
-        oddsExplanation: `${basePlayer.overOdds} odds means ${(100/basePlayer.overOdds).toFixed(1)}% implied probability.`,
-        pickType: basePlayer.pickType || "normal"
+        oddsExplanation: `${basePlayer.overOdds} odds means ${(100 / basePlayer.overOdds).toFixed(1)}% implied probability.`,
+        pickType: basePlayer.pickType || "normal",
       },
       {
         id: `${playerName}_rebounds`,
@@ -1390,11 +1520,13 @@ export const PrizePicksPro: React.FC = () => {
         underOdds: 1.88,
         confidence: 89.2,
         aiRecommendation: "over",
-        reasoning: "Opponent plays fast pace allowing more rebounding opportunities",
+        reasoning:
+          "Opponent plays fast pace allowing more rebounding opportunities",
         expectedValue: 8.7,
         volume: 73,
-        oddsExplanation: "1.92 odds means 52.1% implied probability. Slightly favored over.",
-        pickType: "normal"
+        oddsExplanation:
+          "1.92 odds means 52.1% implied probability. Slightly favored over.",
+        pickType: "normal",
       },
       {
         id: `${playerName}_assists`,
@@ -1407,8 +1539,9 @@ export const PrizePicksPro: React.FC = () => {
         reasoning: "Limited playmaking role in recent games",
         expectedValue: 5.8,
         volume: 45,
-        oddsExplanation: "2.1 odds means 47.6% implied probability. Market sees this as challenging.",
-        pickType: "demon"
+        oddsExplanation:
+          "2.1 odds means 47.6% implied probability. Market sees this as challenging.",
+        pickType: "demon",
       },
       {
         id: `${playerName}_combo`,
@@ -1421,8 +1554,9 @@ export const PrizePicksPro: React.FC = () => {
         reasoning: "Triple-double potential in high-pace matchup",
         expectedValue: 42.1,
         volume: 68,
-        oddsExplanation: "1.88 odds means 53.2% implied probability. Good value combo bet.",
-        pickType: "normal"
+        oddsExplanation:
+          "1.88 odds means 53.2% implied probability. Good value combo bet.",
+        pickType: "normal",
       },
       {
         id: `${playerName}_threes`,
@@ -1435,8 +1569,9 @@ export const PrizePicksPro: React.FC = () => {
         reasoning: "Opponent has strong perimeter defense",
         expectedValue: 2.2,
         volume: 32,
-        oddsExplanation: "2.25 odds means 44.4% implied probability. Lower volume prop.",
-        pickType: "goblin"
+        oddsExplanation:
+          "2.25 odds means 44.4% implied probability. Lower volume prop.",
+        pickType: "goblin",
       },
     ];
 
@@ -1448,14 +1583,14 @@ export const PrizePicksPro: React.FC = () => {
       sport: basePlayer.sport || "NBA",
       gameTime: basePlayer.gameTime || "Today 7:30 PM",
       seasonStats: {
-        "Points": 25.4,
-        "Rebounds": 7.2,
-        "Assists": 6.8,
+        Points: 25.4,
+        Rebounds: 7.2,
+        Assists: 6.8,
         "3PM": 2.1,
-        "Steals": 1.3,
+        Steals: 1.3,
       },
       recentForm: ["35", "20", "24", "24", "24"], // Last 5 games matching the chart
-      props: allProps
+      props: allProps,
     };
   };
 
@@ -1470,20 +1605,30 @@ export const PrizePicksPro: React.FC = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-electric-400 to-neon-blue rounded-3xl blur-2xl opacity-50 animate-pulse" />
         <div className="relative">
           <div className="text-8xl mb-4">🏆</div>
-          <h1 className="holographic text-6xl font-black mb-4">PRIZEPICKS PRO</h1>
-          <p className="text-2xl text-gray-300 mb-6">AI-Enhanced Player Prop Analysis</p>
+          <h1 className="holographic text-6xl font-black mb-4">
+            PRIZEPICKS PRO
+          </h1>
+          <p className="text-2xl text-gray-300 mb-6">
+            AI-Enhanced Player Prop Analysis
+          </p>
           <div className="flex justify-center space-x-8 text-sm">
             <div className="flex items-center space-x-2 px-3 py-2 bg-yellow-500/10 rounded-lg border border-yellow-500/30 backdrop-blur-sm">
               <Star className="w-4 h-4 text-yellow-400" />
-              <span className="text-yellow-400 font-semibold">Expert AI Recommendations</span>
+              <span className="text-yellow-400 font-semibold">
+                Expert AI Recommendations
+              </span>
             </div>
             <div className="flex items-center space-x-2 px-3 py-2 bg-green-500/10 rounded-lg border border-green-500/30 backdrop-blur-sm">
               <Activity className="w-4 h-4 text-green-400" />
-              <span className="text-green-400 font-semibold">Real-time Data Analysis</span>
+              <span className="text-green-400 font-semibold">
+                Real-time Data Analysis
+              </span>
             </div>
             <div className="flex items-center space-x-2 px-3 py-2 bg-purple-500/10 rounded-lg border border-purple-500/30 backdrop-blur-sm">
               <Brain className="w-4 h-4 text-purple-400" />
-              <span className="text-purple-400 font-semibold">Advanced Pattern Recognition</span>
+              <span className="text-purple-400 font-semibold">
+                Advanced Pattern Recognition
+              </span>
             </div>
           </div>
         </div>
@@ -1498,8 +1643,12 @@ export const PrizePicksPro: React.FC = () => {
       >
         <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
           <div className="text-center md:text-left">
-            <h2 className="text-2xl font-bold text-white mb-2">Configure Your Entry</h2>
-            <p className="text-gray-400">Select 2-6 picks for your PrizePicks entry</p>
+            <h2 className="text-2xl font-bold text-white mb-2">
+              Configure Your Entry
+            </h2>
+            <p className="text-gray-400">
+              Select 2-6 picks for your PrizePicks entry
+            </p>
             <div className="flex items-center space-x-4 mt-2">
               <button
                 onClick={() => setShowDemonsGoblinsModal(true)}
@@ -1513,13 +1662,19 @@ export const PrizePicksPro: React.FC = () => {
 
           <div className="flex items-center space-x-6">
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">Entry Amount</label>
+              <label className="block text-sm font-medium text-gray-300 mb-2">
+                Entry Amount
+              </label>
               <div className="relative">
-                <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-green-400 font-bold">$</span>
+                <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-green-400 font-bold">
+                  $
+                </span>
                 <input
                   type="number"
                   value={entryAmount}
-                  onChange={(e) => setEntryAmount(parseInt(e.target.value) || 0)}
+                  onChange={(e) =>
+                    setEntryAmount(parseInt(e.target.value) || 0)
+                  }
                   className="pl-8 pr-4 py-3 bg-gray-800/80 border-2 border-gray-500 rounded-xl text-white font-bold text-center focus:border-green-400 focus:ring-2 focus:ring-green-400/50 transition-all backdrop-blur-sm shadow-lg"
                   min="5"
                   max="1000"
@@ -1529,12 +1684,16 @@ export const PrizePicksPro: React.FC = () => {
 
             <div className="text-center">
               <div className="text-sm text-gray-400 mb-1">Potential Payout</div>
-              <div className="text-3xl font-black text-green-400">${calculatePayout().toFixed(2)}</div>
+              <div className="text-3xl font-black text-green-400">
+                ${calculatePayout().toFixed(2)}
+              </div>
             </div>
 
             <div className="text-center">
               <div className="text-sm text-gray-400 mb-1">AI Confidence</div>
-              <div className="text-2xl font-bold text-blue-400">{getOverallConfidence().toFixed(1)}%</div>
+              <div className="text-2xl font-bold text-blue-400">
+                {getOverallConfidence().toFixed(1)}%
+              </div>
             </div>
           </div>
         </div>
@@ -1559,7 +1718,9 @@ export const PrizePicksPro: React.FC = () => {
                   isSelected={isPickSelected}
                   showAIAnalysis={showAIAnalysis}
                   onToggleAnalysis={(playerName) =>
-                    setExpandedPlayer(expandedPlayer === playerName ? null : playerName)
+                    setExpandedPlayer(
+                      expandedPlayer === playerName ? null : playerName,
+                    )
                   }
                 />
               </motion.div>
@@ -1582,8 +1743,6 @@ export const PrizePicksPro: React.FC = () => {
         </div>
       </div>
 
-
-
       {/* Expanded Player View */}
       <AnimatePresence>
         {expandedPlayer && (
@@ -1593,7 +1752,9 @@ export const PrizePicksPro: React.FC = () => {
             onSelect={(propId, choice) => {
               // Create a temporary prop object for the selection
               const expandedData = getExpandedPlayerData(expandedPlayer);
-              const selectedProp = expandedData.props.find(p => p.id === propId);
+              const selectedProp = expandedData.props.find(
+                (p) => p.id === propId,
+              );
               if (selectedProp) {
                 const tempProp: PlayerProp = {
                   id: propId,
@@ -1612,13 +1773,15 @@ export const PrizePicksPro: React.FC = () => {
                   position: expandedData.position,
                   sport: expandedData.sport,
                   gameTime: expandedData.gameTime,
-                  pickType: selectedProp.pickType
+                  pickType: selectedProp.pickType,
                 };
                 addPick(tempProp, choice);
               }
             }}
             isSelected={(propId, choice) => {
-              return selectedPicks.some(pick => pick.propId === propId && pick.choice === choice);
+              return selectedPicks.some(
+                (pick) => pick.propId === propId && pick.choice === choice,
+              );
             }}
           />
         )}
