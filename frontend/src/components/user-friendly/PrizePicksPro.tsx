@@ -380,14 +380,14 @@ const PropCard: React.FC<{
                   borderTopStyle: "none",
                   cursor: "pointer",
                   display: "inline-block",
-                  height: "36px",
+                  height: "24px",
                   maxWidth: "100%",
                   overflowClipMargin: "content-box",
                   overflowX: "clip",
                   overflowY: "clip",
                   textAlign: "center",
                   verticalAlign: "middle",
-                  width: "36px",
+                  width: "24px",
                   transform:
                     "matrix(0.978148, 0.207912, -0.207912, 0.978148, 0, 0)",
                 }}
