@@ -239,19 +239,12 @@ const ExpandedPlayerView: React.FC<{
   };
 
   return (
-    <div
-      className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
-      style={{ backgroundColor: "rgba(0, 0, 0, 0.9)" }}
-    >
+    <div className="fixed inset-0 z-[9999] bg-gray-900 overflow-y-auto">
       <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0, scale: 0.9 }}
-        className="w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl"
-        style={{
-          background:
-            "linear-gradient(135deg, rgb(30, 41, 59) 0%, rgb(15, 23, 42) 50%, rgb(30, 41, 59) 100%)",
-        }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: 20 }}
+        className="min-h-screen bg-gray-900"
       >
         {/* Header with Close Button */}
         <div className="relative p-6 border-b border-gray-700">
