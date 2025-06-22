@@ -35,7 +35,7 @@ export const PropOllama: React.FC = () => {
       id: "1",
       type: "ai",
       content:
-        "🏀 Hey! I'm PropGPT, your AI sports betting assistant. I can analyze player props, find value bets, track line movements, and provide real-time insights across all major sports. What would you like to explore today?",
+        "🏀 Hey! I'm PropOllama, your AI sports betting assistant. I can analyze player props, find value bets, track line movements, and provide real-time insights across all major sports. What would you like to explore today?",
       timestamp: new Date(),
       suggestions: [
         "Analyze tonight's NBA props",
