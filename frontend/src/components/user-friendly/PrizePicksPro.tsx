@@ -186,7 +186,8 @@ const DemonsGoblinsModal: React.FC<{ isOpen: boolean; onClose: () => void }> = (
             Got it!
           </button>
         </div>
-      </motion.div>
+        </motion.div>
+      </div>
     </div>
   );
 };
