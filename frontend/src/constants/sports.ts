@@ -37,15 +37,14 @@ export const SPORT_EMOJIS = {
 
 export const SPORT_SEASONS = {
   NBA: { start: "October", end: "June" },
-  NFL: { start: "September", end: "February" },
-  MLB: { start: "March", end: "October" },
-  NHL: { start: "October", end: "June" },
-  Soccer: { start: "August", end: "May" },
   WNBA: { start: "May", end: "October" },
-  MMA: { start: "Year-round", end: "Year-round" },
+  MLB: { start: "March", end: "October" },
+  NFL: { start: "September", end: "February" },
+  Soccer: { start: "August", end: "May" },
   PGA: { start: "January", end: "November" },
   Tennis: { start: "January", end: "November" },
-  Boxing: { start: "Year-round", end: "Year-round" },
+  Esports: { start: "Year-round", end: "Year-round" },
+  MMA: { start: "Year-round", end: "Year-round" },
 };
 
 export function getSportDisplayName(sport: string): string {
