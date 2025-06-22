@@ -419,23 +419,24 @@ const PropCard: React.FC<{
 
       {/* Player Name and Game Info */}
       <div
-        className="grid px-3"
+        className="grid px-2"
         style={{
           display: "grid",
           gridTemplateRows: "min-content min-content 1fr",
-          paddingLeft: "12px",
-          paddingRight: "12px",
+          paddingLeft: "8px",
+          paddingRight: "8px",
           textAlign: "center",
         }}
       >
         <h3
-          className="text-white text-sm pb-1"
+          className="text-white text-xs pb-1"
           style={{
-            fontSize: "14px",
-            lineHeight: "16px",
-            paddingBottom: "4px",
+            fontSize: "12px",
+            lineHeight: "14px",
+            paddingBottom: "2px",
             textAlign: "center",
             color: "rgb(255, 255, 255)",
+            fontWeight: "500",
           }}
         >
           {prop.player}
@@ -445,14 +446,14 @@ const PropCard: React.FC<{
           className="text-gray-400 text-xs"
           style={{
             color: "rgb(199, 198, 206)",
-            fontSize: "12px",
-            lineHeight: "16px",
+            fontSize: "10px",
+            lineHeight: "12px",
             textAlign: "center",
           }}
         >
           <span>vs </span>
           <span>{prop.opponent} </span>
-          <span>{prop.gameTime || "Today 7:30 PM"}</span>
+          <span>{prop.gameTime || "Today 7:30"}</span>
         </time>
 
         {/* Centered Stat Section */}
