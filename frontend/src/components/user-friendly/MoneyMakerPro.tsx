@@ -31,7 +31,18 @@ interface PredictionResult {
 interface MoneyMakerConfig {
   investment: number;
   strategy: "conservative" | "balanced" | "aggressive";
-  sport: "all" | "nba" | "nfl" | "mlb" | "nhl";
+  sport:
+    | "all"
+    | "nba"
+    | "wnba"
+    | "mlb"
+    | "nfl"
+    | "soccer"
+    | "pga"
+    | "tennis"
+    | "esports"
+    | "mma";
+  timeFrame: "1hour" | "3hours" | "6hours" | "12hours" | "24hours" | "all";
   riskTolerance: number;
 }
 
