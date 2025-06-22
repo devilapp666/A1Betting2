@@ -896,6 +896,7 @@ export const PrizePicksPro: React.FC = () => {
   const [entryAmount, setEntryAmount] = useState(25);
   const [showAIAnalysis, setShowAIAnalysis] = useState<string | null>(null);
   const [showDemonsGoblinsModal, setShowDemonsGoblinsModal] = useState(false);
+  const [expandedPlayer, setExpandedPlayer] = useState<string | null>(null);
 
   // Enhanced mock player props with demons/goblins and tooltips - 9 cards for 3x3 grid
   const [playerProps] = useState<PlayerProp[]>([
