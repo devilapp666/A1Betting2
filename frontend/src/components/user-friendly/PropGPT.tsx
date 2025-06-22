@@ -440,6 +440,7 @@ export const PropOllama: React.FC = () => {
           </div>
 
           <div className="text-center mt-4">
+            PropOllama provides AI-powered analysis. Always gamble responsibly.
             <p className="text-xs text-gray-400">
               PropGPT provides AI-powered analysis. Always gamble responsibly.
             </p>
