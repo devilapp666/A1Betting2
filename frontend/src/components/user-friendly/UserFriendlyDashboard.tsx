@@ -198,21 +198,15 @@ export const UserFriendlyDashboard: React.FC<{
         <div className="absolute inset-0 bg-gradient-to-r from-electric-400 to-neon-blue rounded-3xl blur-2xl opacity-50 animate-pulse" />
         <div className="relative">
           <div className="text-8xl mb-6 animate-float">💰</div>
-          <h1 className="holographic text-6xl font-black mb-6">
-            A1BETTING INTELLIGENCE
-          </h1>
-          <div className="text-6xl font-black text-electric-500 mb-6 animate-cyber-pulse">
-            $∞
-          </div>
+          <h1 className="holographic text-6xl font-black mb-6">A1BETTING INTELLIGENCE</h1>
+          <div className="text-6xl font-black text-electric-500 mb-6 animate-cyber-pulse">$∞</div>
           <p className="text-2xl text-gray-300 mb-8">
             Real-time AI-powered sports analysis with quantum enhancement
           </p>
           <div className="flex justify-center space-x-8 text-sm">
             <div className="flex items-center space-x-2 px-3 py-2 bg-green-500/10 rounded-lg border border-green-500/30 backdrop-blur-sm">
               <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse shadow-lg shadow-green-400/50" />
-              <span className="text-green-400 font-semibold drop-shadow-lg">
-                All Systems Online
-              </span>
+              <span className="text-green-400 font-semibold drop-shadow-lg">All Systems Online</span>
             </div>
             <div className="flex items-center space-x-2 px-3 py-2 bg-blue-500/10 rounded-lg border border-blue-500/30 backdrop-blur-sm">
               <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse shadow-lg shadow-blue-400/50" />
@@ -222,9 +216,7 @@ export const UserFriendlyDashboard: React.FC<{
             </div>
             <div className="flex items-center space-x-2 px-3 py-2 bg-purple-500/10 rounded-lg border border-purple-500/30 backdrop-blur-sm">
               <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse shadow-lg shadow-purple-400/50" />
-              <span className="text-purple-400 font-semibold drop-shadow-lg">
-                Quantum Processing Active
-              </span>
+              <span className="text-purple-400 font-semibold drop-shadow-lg">Quantum Processing Active</span>
             </div>
           </div>
         </div>
@@ -311,12 +303,8 @@ export const UserFriendlyDashboard: React.FC<{
           className="glass-card rounded-2xl p-8 text-center hover:shadow-neon transition-all duration-300 cursor-pointer group"
         >
           <div className="text-5xl mb-4 text-green-400 animate-float">💰</div>
-          <h3 className="text-xl font-bold mb-2 text-green-400">
-            Money Maker Pro
-          </h3>
-          <p className="text-gray-300 mb-4 text-sm">
-            AI-powered profit generation with quantum enhancement
-          </p>
+          <h3 className="text-xl font-bold mb-2 text-green-400">Money Maker Pro</h3>
+          <p className="text-gray-300 mb-4 text-sm">AI-powered profit generation with quantum enhancement</p>
           <button className="cyber-btn w-full py-3 rounded-xl font-semibold transition-all duration-300">
             <div className="flex items-center justify-center space-x-2">
               <span>Get Started</span>
@@ -335,12 +323,8 @@ export const UserFriendlyDashboard: React.FC<{
           className="glass-card rounded-2xl p-8 text-center hover:shadow-neon transition-all duration-300 cursor-pointer group"
         >
           <div className="text-5xl mb-4 text-blue-400 animate-float">🏆</div>
-          <h3 className="text-xl font-bold mb-2 text-blue-400">
-            PrizePicks Pro
-          </h3>
-          <p className="text-gray-300 mb-4 text-sm">
-            Enhanced player prop analysis with AI recommendations
-          </p>
+          <h3 className="text-xl font-bold mb-2 text-blue-400">PrizePicks Pro</h3>
+          <p className="text-gray-300 mb-4 text-sm">Enhanced player prop analysis with AI recommendations</p>
           <button className="cyber-btn w-full py-3 rounded-xl font-semibold transition-all duration-300">
             <div className="flex items-center justify-center space-x-2">
               <span>Get Started</span>
@@ -359,12 +343,8 @@ export const UserFriendlyDashboard: React.FC<{
           className="glass-card rounded-2xl p-8 text-center hover:shadow-neon transition-all duration-300 cursor-pointer group"
         >
           <div className="text-5xl mb-4 text-purple-400 animate-float">🤖</div>
-          <h3 className="text-xl font-bold mb-2 text-purple-400">
-            PropGPT Chat
-          </h3>
-          <p className="text-gray-300 mb-4 text-sm">
-            Your AI sports betting assistant for instant insights
-          </p>
+          <h3 className="text-xl font-bold mb-2 text-purple-400">PropGPT Chat</h3>
+          <p className="text-gray-300 mb-4 text-sm">Your AI sports betting assistant for instant insights</p>
           <button className="cyber-btn w-full py-3 rounded-xl font-semibold transition-all duration-300">
             <div className="flex items-center justify-center space-x-2">
               <span>Get Started</span>
@@ -383,12 +363,8 @@ export const UserFriendlyDashboard: React.FC<{
           className="glass-card rounded-2xl p-8 text-center hover:shadow-neon transition-all duration-300 cursor-pointer group"
         >
           <div className="text-5xl mb-4 text-orange-400 animate-float">📊</div>
-          <h3 className="text-xl font-bold mb-2 text-orange-400">
-            Live Analytics
-          </h3>
-          <p className="text-gray-300 mb-4 text-sm">
-            Real-time data analysis and performance tracking
-          </p>
+          <h3 className="text-xl font-bold mb-2 text-orange-400">Live Analytics</h3>
+          <p className="text-gray-300 mb-4 text-sm">Real-time data analysis and performance tracking</p>
           <button className="cyber-btn w-full py-3 rounded-xl font-semibold transition-all duration-300">
             <div className="flex items-center justify-center space-x-2">
               <span>Get Started</span>
@@ -398,77 +374,85 @@ export const UserFriendlyDashboard: React.FC<{
         </motion.div>
       </motion.div>
 
-      {/* Live Games Feed */}
+      {/* Live Games Analysis */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4 }}
-        className="bg-white/5 backdrop-blur-xl rounded-3xl p-8 border border-white/10"
+        className="grid grid-cols-1 lg:grid-cols-2 gap-8"
       >
-        <div className="flex items-center justify-between mb-8">
-          <h2 className="text-3xl font-bold text-white">
-            🔴 Live Games & AI Picks
-          </h2>
-          <div className="flex items-center space-x-2 text-green-400">
-            <Activity className="w-5 h-5 animate-pulse" />
-            <span className="font-semibold">Real-time Updates</span>
+        <div className="glass-card rounded-2xl p-8 shadow-neon">
+          <h3 className="text-2xl font-bold text-electric-400 mb-6 text-center">
+            🔴 Live Games Analysis
+          </h3>
+          <div className="space-y-4">
+            {liveGames.map((game, index) => (
+              <motion.div
+                key={game.id}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.5 + index * 0.1 }}
+                className={`p-4 rounded-lg border transition-all ${
+                  game.status === "live"
+                    ? "bg-green-500/10 border-green-500/30"
+                    : game.status === "upcoming"
+                      ? "bg-blue-500/10 border-blue-500/30"
+                      : "bg-gray-500/10 border-gray-500/30"
+                }`}
+              >
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center space-x-4">
+                    <div
+                      className={`w-2 h-2 rounded-full ${
+                        game.status === "live"
+                          ? "bg-green-400 animate-pulse shadow-lg shadow-green-400/50"
+                          : game.status === "upcoming"
+                            ? "bg-blue-400"
+                            : "bg-gray-400"
+                      }`}
+                    />
+                    <div>
+                      <h4 className="font-bold text-white">{game.teams}</h4>
+                      <p className="text-gray-400 text-sm">{game.time}</p>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-electric-400 font-semibold">{game.aiPick}</div>
+                    <div className="text-sm text-green-400">{game.confidence}% confidence</div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
 
-        <div className="space-y-4">
-          {liveGames.map((game, index) => (
-            <motion.div
-              key={game.id}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.5 + index * 0.1 }}
-              className={`p-6 rounded-2xl border transition-all ${
-                game.status === "live"
-                  ? "bg-green-500/10 border-green-500/30"
-                  : game.status === "upcoming"
-                    ? "bg-blue-500/10 border-blue-500/30"
-                    : "bg-gray-500/10 border-gray-500/30"
-              }`}
-            >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-4">
-                  <div
-                    className={`w-3 h-3 rounded-full ${
-                      game.status === "live"
-                        ? "bg-green-400 animate-pulse"
-                        : game.status === "upcoming"
-                          ? "bg-blue-400"
-                          : "bg-gray-400"
-                    }`}
-                  />
-
-                  <div>
-                    <h3 className="text-xl font-bold text-white">
-                      {game.teams}
-                    </h3>
-                    <p className="text-gray-400 text-sm">{game.time}</p>
-                  </div>
-                </div>
-
-                <div className="text-right">
-                  <div className="text-lg font-semibold text-cyan-400 mb-1">
-                    {game.aiPick}
-                  </div>
-                  <div className="text-sm text-green-400">
-                    {game.confidence}% AI Confidence
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          ))}
+        <div className="glass-card rounded-2xl p-8">
+          <h3 className="text-2xl font-bold text-electric-400 mb-6 text-center">
+            🧠 AI Processing Activity
+          </h3>
+          <div className="space-y-4">
+            <div className="flex items-center space-x-4 p-3 bg-electric-500/10 rounded-lg">
+              <div className="w-2 h-2 bg-electric-400 rounded-full animate-pulse shadow-lg shadow-electric-400/50" />
+              <span className="text-electric-300 text-sm">Neural Network processed 1,247 data points (12ms)</span>
+            </div>
+            <div className="flex items-center space-x-4 p-3 bg-purple-500/10 rounded-lg">
+              <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse shadow-lg shadow-purple-400/50" />
+              <span className="text-purple-300 text-sm">Quantum processor generated new prediction</span>
+            </div>
+            <div className="flex items-center space-x-4 p-3 bg-blue-500/10 rounded-lg">
+              <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse shadow-lg shadow-blue-400/50" />
+              <span className="text-blue-300 text-sm">Ensemble model accuracy increased to 97.3%</span>
+            </div>
+          </div>
         </div>
+      </motion.div>
 
-        <div className="text-center mt-8">
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => onNavigate("analytics")}
-            className="px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-bold rounded-xl hover:shadow-lg hover:shadow-cyan-500/25 transition-all"
+      <div className="text-center mt-8">
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={() => onNavigate("analytics")}
+          className="cyber-btn px-8 py-4 rounded-xl font-semibold transition-all duration-300"
           >
             <div className="flex items-center space-x-2">
               <Eye className="w-5 h-5" />
