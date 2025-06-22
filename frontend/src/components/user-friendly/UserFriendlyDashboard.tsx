@@ -25,16 +25,6 @@ interface LiveStats {
   liveAlerts: number;
 }
 
-interface QuickAction {
-  id: string;
-  title: string;
-  description: string;
-  icon: React.ReactNode;
-  action: string;
-  gradient: string;
-  badge?: string;
-}
-
 interface LiveGame {
   id: string;
   teams: string;
@@ -48,7 +38,7 @@ export const UserFriendlyDashboard: React.FC<{
   onNavigate: (page: string) => void;
 }> = ({ onNavigate }) => {
   const [liveStats, setLiveStats] = useState<LiveStats>({
-    totalProfit: 47230,
+    totalProfit: 47756,
     winRate: 94.7,
     activeGames: 23,
     aiAccuracy: 97.3,
@@ -107,86 +97,6 @@ export const UserFriendlyDashboard: React.FC<{
     return () => clearInterval(interval);
   }, []);
 
-  const quickActions: QuickAction[] = [
-    {
-      id: "money-maker",
-      title: "Money Maker Pro",
-      description: "AI-powered profit generation with quantum enhancement",
-      icon: <DollarSign className="w-8 h-8" />,
-      action: "money-maker",
-      gradient: "from-green-500 to-emerald-500",
-      badge: "HOT",
-    },
-    {
-      id: "prizepicks",
-      title: "PrizePicks Pro",
-      description: "Enhanced player prop analysis with AI recommendations",
-      icon: <Trophy className="w-8 h-8" />,
-      action: "prizepicks",
-      gradient: "from-blue-500 to-cyan-500",
-      badge: "NEW",
-    },
-    {
-      id: "propgpt",
-      title: "PropGPT Chat",
-      description: "Your AI sports betting assistant for instant insights",
-      icon: <Brain className="w-8 h-8" />,
-      action: "propgpt",
-      gradient: "from-purple-500 to-pink-500",
-    },
-    {
-      id: "analytics",
-      title: "Live Analytics",
-      description: "Real-time data analysis and performance tracking",
-      icon: <BarChart3 className="w-8 h-8" />,
-      action: "analytics",
-      gradient: "from-orange-500 to-red-500",
-    },
-  ];
-
-  const StatCard: React.FC<{
-    label: string;
-    value: string | number;
-    icon: React.ReactNode;
-    change?: string;
-    live?: boolean;
-    color: string;
-  }> = ({ label, value, icon, change, live, color }) => (
-    <motion.div
-      whileHover={{ scale: 1.02, y: -2 }}
-      className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10 hover:border-white/20 transition-all"
-    >
-      <div className="flex items-start justify-between mb-4">
-        <div
-          className={`p-3 rounded-xl bg-gradient-to-r ${color} bg-opacity-20`}
-        >
-          {icon}
-        </div>
-        {live && (
-          <div className="flex items-center space-x-1">
-            <div className="w-2 h-2 bg-red-400 rounded-full animate-pulse" />
-            <span className="text-xs text-red-400 font-semibold">LIVE</span>
-          </div>
-        )}
-      </div>
-
-      <div
-        className={`text-3xl font-bold mb-2 ${live ? "animate-pulse" : ""} text-white`}
-      >
-        {value}
-      </div>
-
-      <div className="text-gray-400 text-sm mb-2">{label}</div>
-
-      {change && (
-        <div className="flex items-center text-xs text-green-400">
-          <TrendingUp className="w-3 h-3 mr-1" />
-          {change}
-        </div>
-      )}
-    </motion.div>
-  );
-
   return (
     <div className="space-y-8 animate-slide-in-up">
       {/* Hero Section */}
@@ -198,15 +108,21 @@ export const UserFriendlyDashboard: React.FC<{
         <div className="absolute inset-0 bg-gradient-to-r from-electric-400 to-neon-blue rounded-3xl blur-2xl opacity-50 animate-pulse" />
         <div className="relative">
           <div className="text-8xl mb-6 animate-float">💰</div>
-          <h1 className="holographic text-6xl font-black mb-6">A1BETTING INTELLIGENCE</h1>
-          <div className="text-6xl font-black text-electric-500 mb-6 animate-cyber-pulse">$∞</div>
+          <h1 className="holographic text-6xl font-black mb-6">
+            A1BETTING INTELLIGENCE
+          </h1>
+          <div className="text-6xl font-black text-electric-500 mb-6 animate-cyber-pulse">
+            $∞
+          </div>
           <p className="text-2xl text-gray-300 mb-8">
             Real-time AI-powered sports analysis with quantum enhancement
           </p>
           <div className="flex justify-center space-x-8 text-sm">
             <div className="flex items-center space-x-2 px-3 py-2 bg-green-500/10 rounded-lg border border-green-500/30 backdrop-blur-sm">
               <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse shadow-lg shadow-green-400/50" />
-              <span className="text-green-400 font-semibold drop-shadow-lg">All Systems Online</span>
+              <span className="text-green-400 font-semibold drop-shadow-lg">
+                All Systems Online
+              </span>
             </div>
             <div className="flex items-center space-x-2 px-3 py-2 bg-blue-500/10 rounded-lg border border-blue-500/30 backdrop-blur-sm">
               <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse shadow-lg shadow-blue-400/50" />
@@ -216,7 +132,9 @@ export const UserFriendlyDashboard: React.FC<{
             </div>
             <div className="flex items-center space-x-2 px-3 py-2 bg-purple-500/10 rounded-lg border border-purple-500/30 backdrop-blur-sm">
               <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse shadow-lg shadow-purple-400/50" />
-              <span className="text-purple-400 font-semibold drop-shadow-lg">Quantum Processing Active</span>
+              <span className="text-purple-400 font-semibold drop-shadow-lg">
+                Quantum Processing Active
+              </span>
             </div>
           </div>
         </div>
@@ -303,8 +221,12 @@ export const UserFriendlyDashboard: React.FC<{
           className="glass-card rounded-2xl p-8 text-center hover:shadow-neon transition-all duration-300 cursor-pointer group"
         >
           <div className="text-5xl mb-4 text-green-400 animate-float">💰</div>
-          <h3 className="text-xl font-bold mb-2 text-green-400">Money Maker Pro</h3>
-          <p className="text-gray-300 mb-4 text-sm">AI-powered profit generation with quantum enhancement</p>
+          <h3 className="text-xl font-bold mb-2 text-green-400">
+            Money Maker Pro
+          </h3>
+          <p className="text-gray-300 mb-4 text-sm">
+            AI-powered profit generation with quantum enhancement
+          </p>
           <button className="cyber-btn w-full py-3 rounded-xl font-semibold transition-all duration-300">
             <div className="flex items-center justify-center space-x-2">
               <span>Get Started</span>
@@ -323,8 +245,12 @@ export const UserFriendlyDashboard: React.FC<{
           className="glass-card rounded-2xl p-8 text-center hover:shadow-neon transition-all duration-300 cursor-pointer group"
         >
           <div className="text-5xl mb-4 text-blue-400 animate-float">🏆</div>
-          <h3 className="text-xl font-bold mb-2 text-blue-400">PrizePicks Pro</h3>
-          <p className="text-gray-300 mb-4 text-sm">Enhanced player prop analysis with AI recommendations</p>
+          <h3 className="text-xl font-bold mb-2 text-blue-400">
+            PrizePicks Pro
+          </h3>
+          <p className="text-gray-300 mb-4 text-sm">
+            Enhanced player prop analysis with AI recommendations
+          </p>
           <button className="cyber-btn w-full py-3 rounded-xl font-semibold transition-all duration-300">
             <div className="flex items-center justify-center space-x-2">
               <span>Get Started</span>
@@ -343,8 +269,12 @@ export const UserFriendlyDashboard: React.FC<{
           className="glass-card rounded-2xl p-8 text-center hover:shadow-neon transition-all duration-300 cursor-pointer group"
         >
           <div className="text-5xl mb-4 text-purple-400 animate-float">🤖</div>
-          <h3 className="text-xl font-bold mb-2 text-purple-400">PropGPT Chat</h3>
-          <p className="text-gray-300 mb-4 text-sm">Your AI sports betting assistant for instant insights</p>
+          <h3 className="text-xl font-bold mb-2 text-purple-400">
+            PropGPT Chat
+          </h3>
+          <p className="text-gray-300 mb-4 text-sm">
+            Your AI sports betting assistant for instant insights
+          </p>
           <button className="cyber-btn w-full py-3 rounded-xl font-semibold transition-all duration-300">
             <div className="flex items-center justify-center space-x-2">
               <span>Get Started</span>
@@ -363,8 +293,12 @@ export const UserFriendlyDashboard: React.FC<{
           className="glass-card rounded-2xl p-8 text-center hover:shadow-neon transition-all duration-300 cursor-pointer group"
         >
           <div className="text-5xl mb-4 text-orange-400 animate-float">📊</div>
-          <h3 className="text-xl font-bold mb-2 text-orange-400">Live Analytics</h3>
-          <p className="text-gray-300 mb-4 text-sm">Real-time data analysis and performance tracking</p>
+          <h3 className="text-xl font-bold mb-2 text-orange-400">
+            Live Analytics
+          </h3>
+          <p className="text-gray-300 mb-4 text-sm">
+            Real-time data analysis and performance tracking
+          </p>
           <button className="cyber-btn w-full py-3 rounded-xl font-semibold transition-all duration-300">
             <div className="flex items-center justify-center space-x-2">
               <span>Get Started</span>
@@ -417,8 +351,12 @@ export const UserFriendlyDashboard: React.FC<{
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-electric-400 font-semibold">{game.aiPick}</div>
-                    <div className="text-sm text-green-400">{game.confidence}% confidence</div>
+                    <div className="text-electric-400 font-semibold">
+                      {game.aiPick}
+                    </div>
+                    <div className="text-sm text-green-400">
+                      {game.confidence}% confidence
+                    </div>
                   </div>
                 </div>
               </motion.div>
@@ -433,74 +371,22 @@ export const UserFriendlyDashboard: React.FC<{
           <div className="space-y-4">
             <div className="flex items-center space-x-4 p-3 bg-electric-500/10 rounded-lg">
               <div className="w-2 h-2 bg-electric-400 rounded-full animate-pulse shadow-lg shadow-electric-400/50" />
-              <span className="text-electric-300 text-sm">Neural Network processed 1,247 data points (12ms)</span>
+              <span className="text-electric-300 text-sm">
+                Neural Network processed 1,247 data points (12ms)
+              </span>
             </div>
             <div className="flex items-center space-x-4 p-3 bg-purple-500/10 rounded-lg">
               <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse shadow-lg shadow-purple-400/50" />
-              <span className="text-purple-300 text-sm">Quantum processor generated new prediction</span>
+              <span className="text-purple-300 text-sm">
+                Quantum processor generated new prediction
+              </span>
             </div>
             <div className="flex items-center space-x-4 p-3 bg-blue-500/10 rounded-lg">
               <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse shadow-lg shadow-blue-400/50" />
-              <span className="text-blue-300 text-sm">Ensemble model accuracy increased to 97.3%</span>
+              <span className="text-blue-300 text-sm">
+                Ensemble model accuracy increased to 97.3%
+              </span>
             </div>
-          </div>
-        </div>
-      </motion.div>
-
-      <div className="text-center mt-8">
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          onClick={() => onNavigate("analytics")}
-          className="cyber-btn px-8 py-4 rounded-xl font-semibold transition-all duration-300"
-          >
-            <div className="flex items-center space-x-2">
-              <Eye className="w-5 h-5" />
-              <span>View All Live Analytics</span>
-            </div>
-          </motion.button>
-        </div>
-      </motion.div>
-
-      {/* AI Status Panel */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5 }}
-        className="bg-gradient-to-r from-purple-500/10 to-pink-500/10 backdrop-blur-xl rounded-3xl p-8 border border-purple-500/30"
-      >
-        <h2 className="text-3xl font-bold text-center text-white mb-8">
-          🧠 AI Processing Status
-        </h2>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="text-center p-6 bg-white/5 rounded-2xl border border-white/10">
-            <div className="text-4xl font-black text-purple-400 mb-2">47</div>
-            <div className="text-white font-semibold mb-1">Neural Networks</div>
-            <div className="text-sm text-green-400">All Active</div>
-          </div>
-
-          <div className="text-center p-6 bg-white/5 rounded-2xl border border-white/10">
-            <div className="text-4xl font-black text-cyan-400 mb-2">∞</div>
-            <div className="text-white font-semibold mb-1">Quantum Qubits</div>
-            <div className="text-sm text-green-400">Superposition Active</div>
-          </div>
-
-          <div className="text-center p-6 bg-white/5 rounded-2xl border border-white/10">
-            <div className="text-4xl font-black text-green-400 mb-2">12ms</div>
-            <div className="text-white font-semibold mb-1">
-              Processing Speed
-            </div>
-            <div className="text-sm text-green-400">Lightning Fast</div>
-          </div>
-        </div>
-
-        <div className="text-center mt-8">
-          <div className="inline-flex items-center space-x-2 text-green-400">
-            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-            <span className="font-semibold">
-              All AI systems operating at peak performance
-            </span>
           </div>
         </div>
       </motion.div>
