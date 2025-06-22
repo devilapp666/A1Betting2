@@ -1,15 +1,14 @@
 export const SPORT_OPTIONS = [
   "All",
   "NBA",
-  "NFL",
-  "MLB",
-  "NHL",
-  "Soccer",
   "WNBA",
-  "MMA",
+  "MLB",
+  "NFL",
+  "Soccer",
   "PGA",
   "Tennis",
-  "Boxing",
+  "Esports",
+  "MMA",
 ];
 
 export const SPORT_DISPLAY_NAMES = {
