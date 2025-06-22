@@ -269,6 +269,7 @@ export const UserFriendlyDashboard: React.FC<{
           className="glass-card rounded-2xl p-8 text-center hover:shadow-neon transition-all duration-300 cursor-pointer group"
         >
           <div className="text-5xl mb-4 text-purple-400 animate-float">🤖</div>
+          PropOllama Chat
           <h3 className="text-xl font-bold mb-2 text-purple-400">
             PropGPT Chat
           </h3>
