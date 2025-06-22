@@ -326,14 +326,14 @@ const PropCard: React.FC<{
               borderTopStyle: "none",
               cursor: "pointer",
               display: "inline-block",
-              height: "64px",
+              height: "48px",
               maxWidth: "100%",
               overflowClipMargin: "content-box",
               overflowX: "clip",
               overflowY: "clip",
               textAlign: "center",
               verticalAlign: "middle",
-              width: "64px",
+              width: "48px",
             }}
           />
         </button>
