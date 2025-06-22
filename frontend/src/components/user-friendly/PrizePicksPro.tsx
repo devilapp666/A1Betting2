@@ -693,7 +693,7 @@ const PropCard: React.FC<{
   );
 };
 
-// Expanded Player View Component
+// Expanded Player View Component - PrizePicks Mobile Style
 const ExpandedPlayerView: React.FC<{
   playerData: ExpandedPlayerData;
   onClose: () => void;
@@ -726,217 +726,332 @@ const ExpandedPlayerView: React.FC<{
   };
 
   return (
-    <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4 backdrop-blur-sm">
+    <div
+      className="fixed inset-0 z-50 overflow-y-auto"
+      style={{ backgroundColor: "rgba(0, 0, 0, 0.9)" }}
+    >
       <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0, scale: 0.9 }}
-        className="bg-gray-900 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto border border-gray-700"
-        style={{ backgroundColor: "rgb(18, 19, 32)" }}
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: 50 }}
+        className="min-h-screen"
+        style={{
+          background:
+            "linear-gradient(135deg, rgb(30, 41, 59) 0%, rgb(15, 23, 42) 50%, rgb(30, 41, 59) 100%)",
+        }}
       >
-        {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-gray-700">
-          <div className="flex items-center space-x-4">
-            <img
-              src={getPlayerImageUrl(playerData.player)}
-              alt={playerData.player}
-              className="w-16 h-16 rounded-lg"
-            />
-            <div>
-              <h2 className="text-2xl font-bold text-white">
-                {playerData.player}
-              </h2>
-              <p className="text-gray-400">
-                {playerData.team} vs {playerData.opponent} •{" "}
-                {playerData.gameTime}
-              </p>
-              <p className="text-gray-500 text-sm">
-                {playerData.position} • {playerData.sport}
-              </p>
-            </div>
-          </div>
+        {/* Hero Header with Player Image */}
+        <div className="relative h-80 overflow-hidden">
+          {/* Background Gradient */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(135deg, rgb(30, 41, 59) 0%, rgb(124, 58, 237) 50%, rgb(30, 41, 59) 100%)",
+            }}
+          />
+
+          {/* Close Button */}
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-white transition-colors"
+            className="absolute top-4 right-4 text-white/70 hover:text-white transition-colors z-10"
           >
             <X className="w-6 h-6" />
           </button>
-        </div>
 
-        {/* Player Stats Overview */}
-        <div className="p-6 border-b border-gray-700">
-          <h3 className="text-lg font-semibold text-white mb-4">
-            Season Averages
-          </h3>
-          <div className="grid grid-cols-5 gap-4">
-            {Object.entries(playerData.seasonStats).map(([stat, value]) => (
-              <div key={stat} className="text-center">
-                <div className="text-2xl font-bold text-white">{value}</div>
-                <div className="text-sm text-gray-400">{stat}</div>
-              </div>
-            ))}
+          {/* Player Info */}
+          <div className="absolute bottom-8 left-6">
+            <h2 className="text-2xl font-bold text-white mb-1">
+              {playerData.player}
+            </h2>
+            <p className="text-gray-300 text-sm">
+              {playerData.sport} • {playerData.team} • {playerData.position}
+            </p>
           </div>
 
-          <div className="mt-4">
-            <h4 className="text-sm font-medium text-gray-300 mb-2">
-              Recent Form (Last 5 Games)
-            </h4>
-            <div className="flex space-x-2">
-              {playerData.recentForm.map((points, index) => (
-                <div
-                  key={index}
-                  className="bg-gray-800 rounded px-2 py-1 text-sm text-white"
-                >
-                  {points}
+          {/* Player Image */}
+          <div className="absolute bottom-0 right-6">
+            <img
+              src={getPlayerImageUrl(playerData.player)}
+              alt={playerData.player}
+              className="w-32 h-32 object-cover"
+              style={{
+                filter: "drop-shadow(0 0 20px rgba(124, 58, 237, 0.3))",
+              }}
+            />
+          </div>
+        </div>
+
+        {/* Game Matchup Card */}
+        <div className="mx-4 -mt-8 mb-6 relative z-10">
+          <div
+            className="rounded-lg p-4 border border-gray-600"
+            style={{
+              backgroundColor: "rgba(30, 41, 59, 0.8)",
+              backdropFilter: "blur(10px)",
+            }}
+          >
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-3">
+                <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
+                  <span className="text-white font-bold text-sm">
+                    {playerData.team}
+                  </span>
                 </div>
-              ))}
+                <span className="text-white font-medium">
+                  {playerData.team}
+                </span>
+              </div>
+
+              <div className="text-center">
+                <div className="text-gray-400 text-sm">
+                  {playerData.gameTime}
+                </div>
+              </div>
+
+              <div className="flex items-center space-x-3">
+                <span className="text-white font-medium">
+                  {playerData.opponent}
+                </span>
+                <div className="w-8 h-8 bg-yellow-600 rounded-full flex items-center justify-center">
+                  <span className="text-white font-bold text-sm">
+                    {playerData.opponent}
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* All Available Props */}
-        <div className="p-6">
-          <div className="flex items-center justify-between mb-6">
-            <h3 className="text-lg font-semibold text-white">
-              All Available Props
-            </h3>
-            <div className="text-sm text-gray-400">
-              Sorted by best odds •
-              <span className="text-purple-400 ml-1">
-                PropOllama analysis available
-              </span>
-            </div>
-          </div>
-
-          <div className="space-y-4">
-            {playerData.props.map((prop) => (
-              <motion.div
-                key={prop.id}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="bg-gray-800/50 rounded-lg p-4 border border-gray-700"
-              >
+        {/* Props List */}
+        <div className="space-y-3 px-4 pb-6">
+          {playerData.props.map((prop, index) => (
+            <motion.div
+              key={prop.id}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
+              className="rounded-lg border border-gray-600 overflow-hidden"
+              style={{ backgroundColor: "rgba(30, 41, 59, 0.6)" }}
+            >
+              {/* Main Prop Row */}
+              <div className="p-4">
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-4">
-                    <div>
-                      <h4 className="text-white font-medium flex items-center space-x-2">
-                        <span>{prop.stat}</span>
-                        {prop.pickType === "demon" && (
-                          <span className="text-red-400">😈</span>
-                        )}
-                        {prop.pickType === "goblin" && (
-                          <span className="text-green-400">👺</span>
-                        )}
-                      </h4>
-                      <p className="text-gray-400 text-sm">Line: {prop.line}</p>
-                      <p className="text-gray-500 text-xs">
-                        Expected: {prop.expectedValue} • Volume: {prop.volume}%
-                      </p>
+                  <div className="flex items-center space-x-3">
+                    {/* Expand/Collapse Arrow */}
+                    <div className="text-gray-400">
+                      <svg
+                        className="w-4 h-4"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
                     </div>
 
-                    <div className="text-center">
-                      <div className="text-sm text-gray-400 mb-1">
-                        AI Confidence
+                    {/* Stat Info */}
+                    <div>
+                      <div className="flex items-center space-x-2">
+                        <span className="text-xl font-bold text-white">
+                          {prop.line}
+                        </span>
+                        {prop.pickType === "demon" && (
+                          <img
+                            src="https://app.prizepicks.com/7534b2e82fa0ac08ec43.png"
+                            alt="Demon"
+                            className="w-5 h-5"
+                          />
+                        )}
+                        {prop.pickType === "goblin" && (
+                          <img
+                            src="https://app.prizepicks.com/e00b98475351cdfd1c38.png"
+                            alt="Goblin"
+                            className="w-5 h-5"
+                          />
+                        )}
                       </div>
-                      <div className="text-lg font-bold text-green-400">
-                        {prop.confidence}%
-                      </div>
+                      <div className="text-gray-300 text-sm">{prop.stat}</div>
                     </div>
                   </div>
 
-                  {/* Odds and Buttons */}
-                  <div className="flex items-center space-x-4">
-                    {/* Odds with Tooltips */}
-                    <div className="flex space-x-2">
-                      <div className="text-center group relative">
-                        <button
-                          onClick={() => onSelect(prop.id, "under")}
-                          disabled={
-                            prop.pickType === "demon" ||
-                            prop.pickType === "goblin"
-                          }
-                          className={`px-4 py-2 rounded-lg border transition-colors ${
-                            isSelected(prop.id, "under")
-                              ? "bg-green-400 text-black border-green-400"
-                              : prop.pickType === "demon" ||
-                                  prop.pickType === "goblin"
-                                ? "bg-gray-600 text-gray-400 border-gray-600 cursor-not-allowed"
-                                : "bg-gray-700 text-white border-gray-600 hover:border-gray-500"
-                          }`}
+                  {/* Action Buttons */}
+                  <div className="flex space-x-2">
+                    <button
+                      onClick={() => onSelect(prop.id, "under")}
+                      disabled={
+                        prop.pickType === "demon" || prop.pickType === "goblin"
+                      }
+                      className={`px-6 py-2 rounded-lg font-medium transition-colors ${
+                        isSelected(prop.id, "under")
+                          ? "bg-green-500 text-black"
+                          : prop.pickType === "demon" ||
+                              prop.pickType === "goblin"
+                            ? "bg-gray-600 text-gray-400 cursor-not-allowed"
+                            : "bg-gray-700 hover:bg-gray-600 text-white border border-gray-600"
+                      }`}
+                    >
+                      <div className="flex items-center space-x-1">
+                        <svg
+                          className="w-4 h-4"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
                         >
-                          <div className="text-sm font-bold">
-                            {prop.pickType === "demon" ||
-                            prop.pickType === "goblin"
-                              ? "N/A"
-                              : "UNDER"}
-                          </div>
-                          <div className="text-xs">{prop.underOdds}</div>
-                        </button>
-
-                        {/* Tooltip */}
-                        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-black text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-10">
-                          {prop.oddsExplanation}
-                        </div>
+                          <path
+                            fillRule="evenodd"
+                            d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                        <span>
+                          {prop.pickType === "demon" ||
+                          prop.pickType === "goblin"
+                            ? "N/A"
+                            : "Less"}
+                        </span>
                       </div>
+                    </button>
 
-                      <div className="text-center group relative">
-                        <button
-                          onClick={() => onSelect(prop.id, "over")}
-                          className={`px-4 py-2 rounded-lg border transition-colors ${
-                            isSelected(prop.id, "over")
-                              ? "bg-green-400 text-black border-green-400"
-                              : "bg-gray-700 text-white border-gray-600 hover:border-gray-500"
-                          } ${prop.aiRecommendation === "over" ? "ring-2 ring-purple-400" : ""}`}
+                    <button
+                      onClick={() => onSelect(prop.id, "over")}
+                      className={`px-6 py-2 rounded-lg font-medium transition-colors ${
+                        isSelected(prop.id, "over")
+                          ? "bg-green-500 text-black"
+                          : "bg-gray-700 hover:bg-gray-600 text-white border border-gray-600"
+                      }`}
+                    >
+                      <div className="flex items-center space-x-1">
+                        <svg
+                          className="w-4 h-4"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
                         >
-                          <div className="text-sm font-bold">OVER</div>
-                          <div className="text-xs">{prop.overOdds}</div>
-                          {prop.aiRecommendation === "over" && (
-                            <div className="text-xs text-purple-400 font-bold">
-                              ⭐ AI
-                            </div>
-                          )}
-                        </button>
-
-                        {/* Tooltip */}
-                        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-black text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-10">
-                          {prop.oddsExplanation}
-                        </div>
+                          <path
+                            fillRule="evenodd"
+                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                        <span>More</span>
                       </div>
-                    </div>
-
-                    {/* PropOllama Analysis Button */}
-                    <button className="bg-purple-600/20 text-purple-400 border border-purple-500/30 rounded-lg px-3 py-2 text-sm hover:bg-purple-600/30 transition-colors">
-                      🧠 PropOllama
                     </button>
                   </div>
                 </div>
 
-                {/* AI Reasoning */}
-                <div className="mt-3 p-3 bg-gray-900/50 rounded border border-gray-600">
-                  <p className="text-sm text-gray-300">
-                    <span className="text-purple-400 font-semibold">
-                      AI Analysis:
-                    </span>{" "}
-                    {prop.reasoning}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+                {/* Performance Chart Section (for Points only) */}
+                {prop.stat === "Points" && (
+                  <div className="mt-4 p-4 bg-gray-800/50 rounded-lg">
+                    {/* Recent Values */}
+                    <div className="flex justify-center space-x-2 mb-4">
+                      {[
+                        { value: 18.5, type: "goblin" },
+                        { value: 22.5, type: "normal", selected: true },
+                        { value: 25.5, type: "demon" },
+                        { value: 28.5, type: "demon" },
+                      ].map((item, i) => (
+                        <div
+                          key={i}
+                          className={`px-3 py-1 rounded-full text-sm font-medium flex items-center space-x-1 ${
+                            item.selected
+                              ? "bg-white text-black border-2 border-white"
+                              : "bg-gray-700 text-white"
+                          }`}
+                        >
+                          {item.type === "goblin" && (
+                            <span className="text-green-400">👺</span>
+                          )}
+                          {item.type === "demon" && (
+                            <span className="text-red-400">😈</span>
+                          )}
+                          <span>{item.value}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Performance Chart */}
+                    <div className="relative h-20 mb-2">
+                      <div className="absolute inset-x-0 top-1/2 border-t border-dashed border-gray-500"></div>
+                      <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-xs text-gray-400">
+                        22.5
+                      </div>
+
+                      <div className="flex items-end justify-center space-x-2 h-full">
+                        {[
+                          {
+                            value: 35,
+                            opponent: "IND",
+                            date: "5/21",
+                            color: "bg-green-500",
+                          },
+                          {
+                            value: 20,
+                            opponent: "IND",
+                            date: "5/23",
+                            color: "bg-red-500",
+                          },
+                          {
+                            value: 24,
+                            opponent: "IND",
+                            date: "5/25",
+                            color: "bg-green-500",
+                          },
+                          {
+                            value: 24,
+                            opponent: "IND",
+                            date: "5/27",
+                            color: "bg-green-500",
+                          },
+                          {
+                            value: 24,
+                            opponent: "IND",
+                            date: "5/29",
+                            color: "bg-green-500",
+                          },
+                        ].map((game, i) => (
+                          <div key={i} className="flex flex-col items-center">
+                            <div
+                              className={`w-8 ${game.color} rounded-t`}
+                              style={{ height: `${(game.value / 40) * 60}px` }}
+                            ></div>
+                            <div className="text-xs text-white mt-1 font-bold">
+                              {game.value}
+                            </div>
+                            <div className="text-xs text-gray-400">
+                              {game.opponent}
+                            </div>
+                            <div className="text-xs text-gray-500">
+                              {game.date}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="text-center text-sm text-gray-300">
+                      <span className="font-semibold">
+                        {playerData.seasonStats.Points}
+                      </span>{" "}
+                      avg last 5
+                    </div>
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          ))}
         </div>
 
-        {/* Footer */}
-        <div className="p-6 border-t border-gray-700 bg-gray-800/30">
-          <div className="text-center">
-            <p className="text-sm text-gray-400 mb-3">
-              💡 <span className="text-purple-400">PropOllama</span> can explain
-              any odds, strategy, or betting concept in detail
+        {/* PropOllama Footer */}
+        <div className="px-4 pb-8">
+          <div className="bg-purple-600/20 border border-purple-500/30 rounded-lg p-4 text-center">
+            <p className="text-purple-400 text-sm mb-2">
+              🧠 <span className="font-semibold">PropOllama</span> can explain
+              any prop, odds, or betting strategy
             </p>
-            <button
-              onClick={onClose}
-              className="bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-6 rounded-lg transition-colors"
-            >
-              Close
+            <button className="bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded-lg transition-colors text-sm">
+              Ask PropOllama
             </button>
           </div>
         </div>
