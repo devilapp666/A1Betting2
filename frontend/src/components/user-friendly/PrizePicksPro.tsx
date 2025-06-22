@@ -213,137 +213,208 @@ const ExpandedPlayerView: React.FC<{
   onSelect: (propId: string, choice: "over" | "under") => void;
   isSelected: (propId: string, choice: "over" | "under") => boolean;
 }> = ({ playerData, onClose, onSelect, isSelected }) => {
-  const getPlayerImageUrl = (playerName: string) => {
-    const playerMap: Record<string, string> = {
-      "LeBron James":
-        "https://cdn.nba.com/headshots/nba/latest/1040x760/2544.png",
-      "Stephen Curry":
-        "https://cdn.nba.com/headshots/nba/latest/1040x760/201939.png",
-      "Giannis Antetokounmpo":
-        "https://cdn.nba.com/headshots/nba/latest/1040x760/203507.png",
-      "Jayson Tatum":
-        "https://cdn.nba.com/headshots/nba/latest/1040x760/1628369.png",
-      "Kevin Durant":
-        "https://cdn.nba.com/headshots/nba/latest/1040x760/201142.png",
-      "Nikola Jokic":
-        "https://cdn.nba.com/headshots/nba/latest/1040x760/203999.png",
-      "Joel Embiid":
-        "https://cdn.nba.com/headshots/nba/latest/1040x760/203954.png",
-      "Luka Doncic":
-        "https://cdn.nba.com/headshots/nba/latest/1040x760/1629029.png",
-    };
-    return (
-      playerMap[playerName] ||
-      `https://cdn.nba.com/headshots/nba/latest/1040x760/2544.png`
-    );
-  };
-
   return (
     <div
-      className="fixed inset-0 bg-black bg-opacity-90 z-50 overflow-y-auto"
-      style={{ zIndex: 10000 }}
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        backgroundColor: "rgba(0, 0, 0, 0.9)",
+        zIndex: 99999,
+        overflowY: "auto",
+      }}
     >
-      <div className="min-h-screen bg-gray-900 text-white">
+      <div
+        style={{
+          backgroundColor: "#1f2937",
+          minHeight: "100vh",
+          color: "white",
+        }}
+      >
         {/* Header */}
-        <div className="bg-gray-800 p-4 border-b border-gray-700">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <img
-                src={getPlayerImageUrl(playerData.player)}
-                alt={playerData.player}
-                className="w-12 h-12 rounded"
-              />
-              <div>
-                <h2 className="text-xl font-bold">{playerData.player}</h2>
-                <p className="text-gray-300 text-sm">
-                  {playerData.team} vs {playerData.opponent}
-                </p>
-              </div>
-            </div>
-            <button
-              onClick={onClose}
-              className="text-white hover:text-gray-300 text-2xl font-bold"
-            >
-              ×
-            </button>
+        <div
+          style={{
+            backgroundColor: "#374151",
+            padding: "1rem",
+            borderBottom: "1px solid #4b5563",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <div>
+            <h2 style={{ fontSize: "1.25rem", fontWeight: "bold", margin: 0 }}>
+              {playerData.player}
+            </h2>
+            <p style={{ color: "#d1d5db", fontSize: "0.875rem", margin: 0 }}>
+              {playerData.team} vs {playerData.opponent}
+            </p>
           </div>
+          <button
+            onClick={onClose}
+            style={{
+              color: "white",
+              fontSize: "2rem",
+              fontWeight: "bold",
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+            }}
+          >
+            ×
+          </button>
         </div>
 
         {/* Content */}
-        <div className="p-4">
-          <h3 className="text-lg font-semibold mb-4">All Available Props</h3>
+        <div style={{ padding: "1rem" }}>
+          <h3
+            style={{
+              fontSize: "1.125rem",
+              fontWeight: "600",
+              marginBottom: "1rem",
+            }}
+          >
+            All Available Props
+          </h3>
 
-          <div className="space-y-4">
-            {playerData.props.map((prop) => (
+          {playerData.props.map((prop) => (
+            <div
+              key={prop.id}
+              style={{
+                backgroundColor: "#374151",
+                borderRadius: "0.5rem",
+                padding: "1rem",
+                marginBottom: "1rem",
+                border: "1px solid #4b5563",
+              }}
+            >
               <div
-                key={prop.id}
-                className="bg-gray-800 rounded-lg p-4 border border-gray-700"
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  marginBottom: "0.75rem",
+                }}
               >
-                <div className="flex items-center justify-between">
-                  <div>
-                    <div className="flex items-center space-x-2 mb-1">
-                      <span className="text-lg font-bold">{prop.line}</span>
-                      <span className="text-gray-300">{prop.stat}</span>
-                      {prop.pickType === "demon" && (
-                        <span className="text-red-400">😈</span>
-                      )}
-                      {prop.pickType === "goblin" && (
-                        <span className="text-green-400">👺</span>
-                      )}
-                    </div>
-                    <div className="text-sm text-gray-400">
-                      Confidence: {prop.confidence}% | Rec:{" "}
-                      {prop.aiRecommendation.toUpperCase()}
-                    </div>
+                <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "0.5rem",
+                      marginBottom: "0.25rem",
+                    }}
+                  >
+                    <span style={{ fontSize: "1.125rem", fontWeight: "bold" }}>
+                      {prop.line}
+                    </span>
+                    <span style={{ color: "#d1d5db" }}>{prop.stat}</span>
+                    {prop.pickType === "demon" && <span>😈</span>}
+                    {prop.pickType === "goblin" && <span>👺</span>}
                   </div>
-
-                  <div className="flex space-x-2">
-                    <button
-                      onClick={() => onSelect(prop.id, "under")}
-                      disabled={
-                        prop.pickType === "demon" || prop.pickType === "goblin"
-                      }
-                      className={`px-4 py-2 rounded font-medium ${
-                        isSelected(prop.id, "under")
-                          ? "bg-green-500 text-black"
-                          : prop.pickType === "demon" ||
-                              prop.pickType === "goblin"
-                            ? "bg-gray-600 text-gray-400 cursor-not-allowed"
-                            : "bg-gray-700 text-white hover:bg-gray-600"
-                      }`}
-                    >
-                      Less
-                    </button>
-
-                    <button
-                      onClick={() => onSelect(prop.id, "over")}
-                      className={`px-4 py-2 rounded font-medium ${
-                        isSelected(prop.id, "over")
-                          ? "bg-green-500 text-black"
-                          : "bg-gray-700 text-white hover:bg-gray-600"
-                      }`}
-                    >
-                      More
-                    </button>
+                  <div style={{ fontSize: "0.875rem", color: "#9ca3af" }}>
+                    Confidence: {prop.confidence}% | Rec:{" "}
+                    {prop.aiRecommendation.toUpperCase()}
                   </div>
                 </div>
 
-                <div className="mt-3 p-3 bg-gray-900 rounded text-sm">
-                  <span className="text-purple-400 font-semibold">AI:</span>{" "}
-                  {prop.reasoning}
+                <div style={{ display: "flex", gap: "0.5rem" }}>
+                  <button
+                    onClick={() => onSelect(prop.id, "under")}
+                    disabled={
+                      prop.pickType === "demon" || prop.pickType === "goblin"
+                    }
+                    style={{
+                      padding: "0.5rem 1rem",
+                      borderRadius: "0.25rem",
+                      fontWeight: "500",
+                      border: "none",
+                      cursor:
+                        prop.pickType === "demon" || prop.pickType === "goblin"
+                          ? "not-allowed"
+                          : "pointer",
+                      backgroundColor: isSelected(prop.id, "under")
+                        ? "#10b981"
+                        : prop.pickType === "demon" ||
+                            prop.pickType === "goblin"
+                          ? "#4b5563"
+                          : "#374151",
+                      color: isSelected(prop.id, "under") ? "black" : "white",
+                    }}
+                  >
+                    Less
+                  </button>
+
+                  <button
+                    onClick={() => onSelect(prop.id, "over")}
+                    style={{
+                      padding: "0.5rem 1rem",
+                      borderRadius: "0.25rem",
+                      fontWeight: "500",
+                      border: "none",
+                      cursor: "pointer",
+                      backgroundColor: isSelected(prop.id, "over")
+                        ? "#10b981"
+                        : "#374151",
+                      color: isSelected(prop.id, "over") ? "black" : "white",
+                    }}
+                  >
+                    More
+                  </button>
                 </div>
               </div>
-            ))}
-          </div>
+
+              <div
+                style={{
+                  padding: "0.75rem",
+                  backgroundColor: "#111827",
+                  borderRadius: "0.25rem",
+                  fontSize: "0.875rem",
+                }}
+              >
+                <span style={{ color: "#a855f7", fontWeight: "600" }}>AI:</span>{" "}
+                {prop.reasoning}
+              </div>
+            </div>
+          ))}
         </div>
 
         {/* Footer */}
-        <div className="p-4 border-t border-gray-700">
-          <div className="bg-purple-600 bg-opacity-20 rounded-lg p-4 text-center">
-            <p className="text-purple-400 text-sm mb-2">
+        <div
+          style={{
+            padding: "1rem",
+            borderTop: "1px solid #4b5563",
+          }}
+        >
+          <div
+            style={{
+              backgroundColor: "rgba(147, 51, 234, 0.2)",
+              borderRadius: "0.5rem",
+              padding: "1rem",
+              textAlign: "center",
+            }}
+          >
+            <p
+              style={{
+                color: "#a855f7",
+                fontSize: "0.875rem",
+                marginBottom: "0.5rem",
+              }}
+            >
               🧠 PropOllama can explain any prop or strategy
             </p>
-            <button className="bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded">
+            <button
+              style={{
+                backgroundColor: "#9333ea",
+                color: "white",
+                padding: "0.5rem 1rem",
+                borderRadius: "0.25rem",
+                border: "none",
+                cursor: "pointer",
+              }}
+            >
               Ask PropOllama
             </button>
           </div>
