@@ -380,6 +380,7 @@ export const PropOllama: React.FC = () => {
                           style={{ animationDelay: "0.2s" }}
                         />
                       </div>
+                      PropOllama is analyzing...
                       <span className="text-sm text-purple-400">
                         PropGPT is analyzing...
                       </span>
