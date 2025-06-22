@@ -1648,48 +1648,46 @@ export const PrizePicksPro: React.FC = () => {
       </div>
 
       {/* Expanded Player View */}
-      <AnimatePresence>
-        {expandedPlayer && (
-          <ExpandedPlayerView
-            playerData={getExpandedPlayerData(expandedPlayer)}
-            onClose={() => setExpandedPlayer(null)}
-            onSelect={(propId, choice) => {
-              // Create a temporary prop object for the selection
-              const expandedData = getExpandedPlayerData(expandedPlayer);
-              const selectedProp = expandedData.props.find(
-                (p) => p.id === propId,
-              );
-              if (selectedProp) {
-                const tempProp: PlayerProp = {
-                  id: propId,
-                  player: expandedData.player,
-                  team: expandedData.team,
-                  opponent: expandedData.opponent,
-                  stat: selectedProp.stat,
-                  line: selectedProp.line,
-                  overOdds: selectedProp.overOdds,
-                  underOdds: selectedProp.underOdds,
-                  confidence: selectedProp.confidence,
-                  aiRecommendation: selectedProp.aiRecommendation,
-                  reasoning: selectedProp.reasoning,
-                  trend: "TBD",
-                  recentForm: expandedData.recentForm.join(", "),
-                  position: expandedData.position,
-                  sport: expandedData.sport,
-                  gameTime: expandedData.gameTime,
-                  pickType: selectedProp.pickType,
-                };
-                addPick(tempProp, choice);
-              }
-            }}
-            isSelected={(propId, choice) => {
-              return selectedPicks.some(
-                (pick) => pick.propId === propId && pick.choice === choice,
-              );
-            }}
-          />
-        )}
-      </AnimatePresence>
+      {expandedPlayer && (
+        <ExpandedPlayerView
+          playerData={getExpandedPlayerData(expandedPlayer)}
+          onClose={() => setExpandedPlayer(null)}
+          onSelect={(propId, choice) => {
+            // Create a temporary prop object for the selection
+            const expandedData = getExpandedPlayerData(expandedPlayer);
+            const selectedProp = expandedData.props.find(
+              (p) => p.id === propId,
+            );
+            if (selectedProp) {
+              const tempProp: PlayerProp = {
+                id: propId,
+                player: expandedData.player,
+                team: expandedData.team,
+                opponent: expandedData.opponent,
+                stat: selectedProp.stat,
+                line: selectedProp.line,
+                overOdds: selectedProp.overOdds,
+                underOdds: selectedProp.underOdds,
+                confidence: selectedProp.confidence,
+                aiRecommendation: selectedProp.aiRecommendation,
+                reasoning: selectedProp.reasoning,
+                trend: "TBD",
+                recentForm: expandedData.recentForm.join(", "),
+                position: expandedData.position,
+                sport: expandedData.sport,
+                gameTime: expandedData.gameTime,
+                pickType: selectedProp.pickType,
+              };
+              addPick(tempProp, choice);
+            }
+          }}
+          isSelected={(propId, choice) => {
+            return selectedPicks.some(
+              (pick) => pick.propId === propId && pick.choice === choice,
+            );
+          }}
+        />
+      )}
 
       {/* Demons & Goblins Modal */}
       <DemonsGoblinsModal
