@@ -156,7 +156,7 @@ export const MoneyMakerPro: React.FC = () => {
         <h2 className="text-2xl font-bold text-electric-400 mb-6">
           AI Configuration
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6">
           {/* Investment Amount */}
           <div>
             <label className="block text-sm font-medium mb-2">
