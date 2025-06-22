@@ -51,6 +51,7 @@ export const MoneyMakerPro: React.FC = () => {
     investment: 100,
     strategy: "balanced",
     sport: "all",
+    timeFrame: "all",
     riskTolerance: 50,
   });
 
