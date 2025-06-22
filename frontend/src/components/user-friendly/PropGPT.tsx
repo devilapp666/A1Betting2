@@ -232,7 +232,7 @@ export const PropOllama: React.FC = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-electric-400 to-neon-blue rounded-3xl blur-2xl opacity-50 animate-pulse" />
         <div className="relative">
           <div className="text-6xl mb-4">🤖</div>
-          <h1 className="holographic text-5xl font-black mb-4">PropGPT</h1>
+          <h1 className="holographic text-5xl font-black mb-4">PropOllama</h1>
           <p className="text-xl text-gray-300 mb-6">
             Your AI Sports Betting Assistant
           </p>
