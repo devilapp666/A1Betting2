@@ -239,12 +239,12 @@ const ExpandedPlayerView: React.FC<{
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-black bg-opacity-95 overflow-y-auto">
+    <div className="fixed inset-0 z-[9999] bg-black bg-opacity-95 overflow-y-auto">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 50 }}
-        className="min-h-screen pb-8"
+        className="min-h-screen w-full"
         style={{
           background:
             "linear-gradient(135deg, rgb(30, 41, 59) 0%, rgb(15, 23, 42) 50%, rgb(30, 41, 59) 100%)",
