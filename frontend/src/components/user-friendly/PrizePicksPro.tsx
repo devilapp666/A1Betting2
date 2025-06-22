@@ -1191,6 +1191,111 @@ export const PrizePicksPro: React.FC = () => {
     );
   };
 
+  // Generate expanded player data with all available props
+  const getExpandedPlayerData = (playerName: string): ExpandedPlayerData => {
+    const basePlayer = playerProps.find((p) => p.player === playerName);
+    if (!basePlayer) throw new Error("Player not found");
+
+    // Generate all available props for this player (sorted by odds)
+    const allProps: ExpandedPlayerProp[] = [
+      {
+        id: `${playerName}_points`,
+        stat: "Points",
+        line: 25.5,
+        overOdds: 1.85,
+        underOdds: 1.95,
+        confidence: 94.7,
+        aiRecommendation: "over",
+        reasoning: "Strong offensive matchup with high pace game expected",
+        expectedValue: 12.3,
+        volume: 87,
+        oddsExplanation:
+          "1.85 odds means 54.1% implied probability. Market expects high scoring.",
+        pickType: "normal",
+      },
+      {
+        id: `${playerName}_rebounds`,
+        stat: "Rebounds",
+        line: 8.5,
+        overOdds: 1.92,
+        underOdds: 1.88,
+        confidence: 89.2,
+        aiRecommendation: "over",
+        reasoning:
+          "Opponent plays fast pace allowing more rebounding opportunities",
+        expectedValue: 8.7,
+        volume: 73,
+        oddsExplanation:
+          "1.92 odds means 52.1% implied probability. Slightly favored over.",
+        pickType: "normal",
+      },
+      {
+        id: `${playerName}_assists`,
+        stat: "Assists",
+        line: 6.5,
+        overOdds: 2.1,
+        underOdds: 1.75,
+        confidence: 76.3,
+        aiRecommendation: "under",
+        reasoning: "Limited playmaking role in recent games",
+        expectedValue: 5.8,
+        volume: 45,
+        oddsExplanation:
+          "2.1 odds means 47.6% implied probability. Market sees this as challenging.",
+        pickType: "demon",
+      },
+      {
+        id: `${playerName}_threes`,
+        stat: "3-Pointers Made",
+        line: 2.5,
+        overOdds: 1.88,
+        underOdds: 1.92,
+        confidence: 82.1,
+        aiRecommendation: "over",
+        reasoning:
+          "Excellent three-point matchup against poor perimeter defense",
+        expectedValue: 3.1,
+        volume: 68,
+        oddsExplanation:
+          "1.88 odds means 53.2% implied probability. Good value on the over.",
+        pickType: "normal",
+      },
+      {
+        id: `${playerName}_steals`,
+        stat: "Steals",
+        line: 1.5,
+        overOdds: 2.25,
+        underOdds: 1.65,
+        confidence: 71.4,
+        aiRecommendation: "under",
+        reasoning: "Opponent has low turnover rate",
+        expectedValue: 1.2,
+        volume: 32,
+        oddsExplanation:
+          "2.25 odds means 44.4% implied probability. Low occurrence stat.",
+        pickType: "goblin",
+      },
+    ].sort((a, b) => a.overOdds - b.overOdds); // Sort by best odds first
+
+    return {
+      player: playerName,
+      team: basePlayer.team,
+      opponent: basePlayer.opponent,
+      position: basePlayer.position || "Unknown",
+      sport: basePlayer.sport || "NBA",
+      gameTime: basePlayer.gameTime || "Today 7:30 PM",
+      seasonStats: {
+        Points: 27.8,
+        Rebounds: 9.2,
+        Assists: 6.1,
+        "3PM": 2.8,
+        Steals: 1.3,
+      },
+      recentForm: ["32", "28", "35", "24", "31"], // Last 5 games
+      props: allProps,
+    };
+  };
+
   return (
     <div className="space-y-6 animate-slide-in-up">
       {/* Hero Section */}
