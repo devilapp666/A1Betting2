@@ -1770,10 +1770,10 @@ export const PrizePicksPro: React.FC = () => {
       </motion.div>
 
       {/* Main Layout - Props Grid + Lineup Builder */}
-      <div className="flex flex-col xl:flex-row gap-6 max-w-full">
+      <div className="flex gap-6 max-w-none">
         {/* Props Grid - Left Side */}
-        <div className="flex-1 min-w-0">
-          <div className="grid grid-cols-3 gap-3 max-w-4xl">
+        <div className="flex-1">
+          <div className="grid grid-cols-3 gap-4 w-full">
             {playerProps.map((prop, index) => (
               <motion.div
                 key={prop.id}
@@ -1799,7 +1799,7 @@ export const PrizePicksPro: React.FC = () => {
         </div>
 
         {/* Lineup Builder - Right Side */}
-        <div className="w-full xl:w-80 xl:flex-shrink-0 xl:max-w-80">
+        <div className="w-80 flex-shrink-0">
           <LineupBuilder
             selectedPicks={selectedPicks}
             onRemovePick={removePick}
