@@ -159,7 +159,7 @@ export const MoneyMakerPro: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6">
           {/* Investment Amount */}
           <div>
-            <label className="block text-sm font-medium mb-2">
+            <label className="block text-sm font-medium mb-2 text-gray-300">
               Investment ($)
             </label>
             <input
