@@ -285,8 +285,9 @@ const PropCard: React.FC<{
     >
       {/* Stats Button - Top Left */}
       <button
+        onClick={() => onToggleAnalysis(prop.player)}
         className="absolute top-2 left-2 bg-black/50 rounded-md p-1 text-gray-300 hover:text-white transition-colors z-10"
-        title="View player stats"
+        title="View all player props & odds"
         style={{
           backgroundColor: "rgba(0, 0, 0, 0.5)",
           border: "none",
