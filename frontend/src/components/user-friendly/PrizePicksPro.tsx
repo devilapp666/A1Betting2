@@ -398,15 +398,15 @@ const PropCard: React.FC<{
 
         {/* Team and Position */}
         <div
-          className="text-gray-400 text-xs mx-auto mt-2 relative"
+          className="text-gray-400 text-xs mx-auto mt-1 relative"
           style={{
             color: "rgb(199, 198, 206)",
-            fontSize: "12px",
-            lineHeight: "16px",
+            fontSize: "10px",
+            lineHeight: "12px",
             marginLeft: "auto",
             marginRight: "auto",
-            marginTop: "8px",
-            paddingBottom: "2px",
+            marginTop: "4px",
+            paddingBottom: "1px",
             position: "relative",
             textAlign: "center",
           }}
