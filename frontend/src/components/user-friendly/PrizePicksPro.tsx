@@ -458,16 +458,16 @@ const PropCard: React.FC<{
 
         {/* Centered Stat Section */}
         <div
-          className="self-end flex gap-2 justify-center pb-3 pt-2 px-1"
+          className="self-end flex gap-1 justify-center pb-2 pt-1 px-1"
           style={{
             alignSelf: "flex-end",
             display: "flex",
-            gap: "8px",
+            gap: "4px",
             justifySelf: "center",
-            paddingBottom: "12px",
+            paddingBottom: "8px",
             paddingLeft: "4px",
             paddingRight: "4px",
-            paddingTop: "8px",
+            paddingTop: "4px",
             textAlign: "center",
           }}
         >
@@ -478,30 +478,31 @@ const PropCard: React.FC<{
               display: "flex",
               flexBasis: "0%",
               flexGrow: "1",
-              fontSize: "12px",
-              gap: "4px",
-              lineHeight: "16px",
+              fontSize: "10px",
+              gap: "2px",
+              lineHeight: "12px",
               textAlign: "center",
             }}
           >
             <div
-              className="text-xl"
+              className="text-lg"
               style={{
-                fontSize: "20px",
-                lineHeight: "28px",
+                fontSize: "16px",
+                lineHeight: "20px",
                 textAlign: "center",
                 color: "rgb(255, 255, 255)",
+                fontWeight: "600",
               }}
             >
               {prop.line}
             </div>
             <span
-              className="text-gray-400 text-sm max-w-28 text-left"
+              className="text-gray-400 text-xs max-w-20 text-left"
               style={{
                 color: "rgb(199, 198, 206)",
-                fontSize: "14px",
-                lineHeight: "20px",
-                maxWidth: "112px",
+                fontSize: "10px",
+                lineHeight: "12px",
+                maxWidth: "80px",
                 textAlign: "left",
               }}
             >
@@ -510,8 +511,8 @@ const PropCard: React.FC<{
                 style={{
                   color: "rgb(199, 198, 206)",
                   display: "inline",
-                  fontSize: "14px",
-                  lineHeight: "20px",
+                  fontSize: "10px",
+                  lineHeight: "12px",
                   overflowWrap: "break-word",
                   textAlign: "left",
                   wordWrap: "break-word",
