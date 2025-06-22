@@ -29,7 +29,7 @@ interface QuickAction {
   category: "analysis" | "picks" | "trends" | "live";
 }
 
-export const PropGPT: React.FC = () => {
+export const PropOllama: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
@@ -181,7 +181,7 @@ export const PropGPT: React.FC = () => {
 • *Edge*: Warriors defense allows 118 PPG at home
 • *Trend*: 8/10 games over 25.5 this season
 
-**Stephen Curry Over 4.5 Three-Pointers** | 91.3% Confidence  
+**Stephen Curry Over 4.5 Three-Pointers** | 91.3% Confidence
 • *Analysis*: Shooting 43% from three at home (5.2 attempts/game)
 • *Edge*: Lakers allow 14.2 threes per game (28th in NBA)
 • *Trend*: 7/10 games over 4.5 threes
