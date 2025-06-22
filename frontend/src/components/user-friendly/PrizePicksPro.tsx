@@ -1095,26 +1095,45 @@ export const PrizePicksPro: React.FC = () => {
         </div>
       </motion.div>
 
-      {/* Props Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-        {playerProps.map((prop, index) => (
-          <motion.div
-            key={prop.id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 * index }}
-          >
-            <PropCard
-              prop={prop}
-              onSelect={addPick}
-              isSelected={isPickSelected}
-              showAIAnalysis={showAIAnalysis}
-              onToggleAnalysis={(propId) =>
-                setShowAIAnalysis(showAIAnalysis === propId ? null : propId)
-              }
-            />
-          </motion.div>
-        ))}
+      {/* Main Layout - Props Grid + Lineup Builder */}
+      <div className="flex flex-col xl:flex-row gap-6 max-w-full">
+        {/* Props Grid - Left Side */}
+        <div className="flex-1 min-w-0">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+            {playerProps.map((prop, index) => (
+              <motion.div
+                key={prop.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.05 * index }}
+              >
+                <PropCard
+                  prop={prop}
+                  onSelect={addPick}
+                  isSelected={isPickSelected}
+                  showAIAnalysis={showAIAnalysis}
+                  onToggleAnalysis={(propId) =>
+                    setShowAIAnalysis(showAIAnalysis === propId ? null : propId)
+                  }
+                />
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Lineup Builder - Right Side */}
+        <div className="w-full xl:w-80 xl:flex-shrink-0 xl:max-w-80">
+          <LineupBuilder
+            selectedPicks={selectedPicks}
+            onRemovePick={removePick}
+            entryAmount={entryAmount}
+            onEntryAmountChange={setEntryAmount}
+            onSubmitLineup={submitLineup}
+            calculatePayout={calculatePayout}
+            getOverallConfidence={getOverallConfidence}
+            validateLineup={validateLineup}
+          />
+        </div>
       </div>
 
       {/* Selected Picks Summary */}
