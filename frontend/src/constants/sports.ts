@@ -13,28 +13,26 @@ export const SPORT_OPTIONS = [
 
 export const SPORT_DISPLAY_NAMES = {
   NBA: "NBA Basketball",
-  NFL: "NFL Football",
-  MLB: "MLB Baseball",
-  NHL: "NHL Hockey",
-  Soccer: "Soccer/Football",
   WNBA: "WNBA Basketball",
-  MMA: "Mixed Martial Arts",
+  MLB: "MLB Baseball",
+  NFL: "NFL Football",
+  Soccer: "Soccer/Football",
   PGA: "PGA Golf",
   Tennis: "Tennis",
-  Boxing: "Boxing",
+  Esports: "Esports",
+  MMA: "Mixed Martial Arts",
 };
 
 export const SPORT_EMOJIS = {
   NBA: "🏀",
-  NFL: "🏈",
-  MLB: "⚾",
-  NHL: "🏒",
-  Soccer: "⚽",
   WNBA: "🏀",
-  MMA: "🥊",
+  MLB: "⚾",
+  NFL: "🏈",
+  Soccer: "⚽",
   PGA: "⛳",
   Tennis: "🎾",
-  Boxing: "🥊",
+  Esports: "🎮",
+  MMA: "🥊",
 };
 
 export const SPORT_SEASONS = {
