@@ -239,267 +239,226 @@ const ExpandedPlayerView: React.FC<{
   };
 
   return (
-    <div className="fixed inset-0 z-[9999] bg-black bg-opacity-95 overflow-y-auto">
+    <div
+      className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
+      style={{ backgroundColor: "rgba(0, 0, 0, 0.9)" }}
+    >
       <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: 50 }}
-        className="min-h-screen w-full"
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.9 }}
+        className="w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl"
         style={{
           background:
             "linear-gradient(135deg, rgb(30, 41, 59) 0%, rgb(15, 23, 42) 50%, rgb(30, 41, 59) 100%)",
         }}
       >
-        {/* Hero Header with Player Image */}
-        <div className="relative h-64 overflow-hidden">
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(135deg, rgb(30, 41, 59) 0%, rgb(124, 58, 237) 50%, rgb(30, 41, 59) 100%)",
-            }}
-          />
-
+        {/* Header with Close Button */}
+        <div className="relative p-6 border-b border-gray-700">
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors z-10"
+            className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors"
           >
             <X className="w-6 h-6" />
           </button>
 
-          <div className="absolute bottom-8 left-6">
-            <h2 className="text-2xl font-bold text-white mb-1">
-              {playerData.player}
-            </h2>
-            <p className="text-gray-300 text-sm">
-              {playerData.sport} • {playerData.team} • {playerData.position}
-            </p>
-          </div>
-
-          <div className="absolute bottom-0 right-6">
+          <div className="flex items-center space-x-4">
             <img
               src={getPlayerImageUrl(playerData.player)}
               alt={playerData.player}
-              className="w-32 h-32 object-cover"
+              className="w-16 h-16 rounded-lg"
             />
-          </div>
-        </div>
-
-        {/* Game Matchup Card */}
-        <div className="mx-4 -mt-8 mb-6 relative z-10">
-          <div className="bg-gray-800 bg-opacity-80 rounded-lg p-4 border border-gray-600 backdrop-blur-sm">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
-                  <span className="text-white font-bold text-sm">
-                    {playerData.team}
-                  </span>
-                </div>
-                <span className="text-white font-medium">
-                  {playerData.team}
-                </span>
-              </div>
-
-              <div className="text-center">
-                <div className="text-gray-400 text-sm">
-                  {playerData.gameTime}
-                </div>
-              </div>
-
-              <div className="flex items-center space-x-3">
-                <span className="text-white font-medium">
-                  {playerData.opponent}
-                </span>
-                <div className="w-8 h-8 bg-yellow-600 rounded-full flex items-center justify-center">
-                  <span className="text-white font-bold text-sm">
-                    {playerData.opponent}
-                  </span>
-                </div>
-              </div>
+            <div>
+              <h2 className="text-2xl font-bold text-white">
+                {playerData.player}
+              </h2>
+              <p className="text-gray-300">
+                {playerData.team} vs {playerData.opponent}
+              </p>
+              <p className="text-gray-400 text-sm">
+                {playerData.position} • {playerData.sport} •{" "}
+                {playerData.gameTime}
+              </p>
             </div>
           </div>
         </div>
 
         {/* Props List */}
-        <div className="space-y-3 px-4 pb-20">
+        <div className="p-6 space-y-4">
+          <h3 className="text-lg font-semibold text-white mb-4">
+            All Available Props
+          </h3>
+
           {playerData.props.map((prop, index) => (
             <div
               key={prop.id}
-              className="bg-gray-800 bg-opacity-60 rounded-lg border border-gray-600"
+              className="bg-gray-800 bg-opacity-60 rounded-lg border border-gray-600 p-4"
             >
-              <div className="p-4">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-3">
-                    <div className="text-gray-400">
-                      <svg
-                        className="w-4 h-4"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                          clipRule="evenodd"
+              <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center space-x-3">
+                  <div>
+                    <div className="flex items-center space-x-2">
+                      <span className="text-xl font-bold text-white">
+                        {prop.line}
+                      </span>
+                      {prop.pickType === "demon" && (
+                        <img
+                          src="https://app.prizepicks.com/7534b2e82fa0ac08ec43.png"
+                          alt="Demon"
+                          className="w-5 h-5"
                         />
-                      </svg>
+                      )}
+                      {prop.pickType === "goblin" && (
+                        <img
+                          src="https://app.prizepicks.com/e00b98475351cdfd1c38.png"
+                          alt="Goblin"
+                          className="w-5 h-5"
+                        />
+                      )}
                     </div>
-
-                    <div>
-                      <div className="flex items-center space-x-2">
-                        <span className="text-xl font-bold text-white">
-                          {prop.line}
-                        </span>
-                        {prop.pickType === "demon" && (
-                          <img
-                            src="https://app.prizepicks.com/7534b2e82fa0ac08ec43.png"
-                            alt="Demon"
-                            className="w-5 h-5"
-                          />
-                        )}
-                        {prop.pickType === "goblin" && (
-                          <img
-                            src="https://app.prizepicks.com/e00b98475351cdfd1c38.png"
-                            alt="Goblin"
-                            className="w-5 h-5"
-                          />
-                        )}
-                      </div>
-                      <div className="text-gray-300 text-sm">{prop.stat}</div>
+                    <div className="text-gray-300 text-sm">{prop.stat}</div>
+                    <div className="text-xs text-gray-400">
+                      AI Confidence: {prop.confidence}% • Rec:{" "}
+                      {prop.aiRecommendation.toUpperCase()}
                     </div>
-                  </div>
-
-                  <div className="flex space-x-2">
-                    <button
-                      onClick={() => onSelect(prop.id, "under")}
-                      disabled={
-                        prop.pickType === "demon" || prop.pickType === "goblin"
-                      }
-                      className={`px-6 py-2 rounded-lg font-medium transition-colors ${
-                        isSelected(prop.id, "under")
-                          ? "bg-green-500 text-black"
-                          : prop.pickType === "demon" ||
-                              prop.pickType === "goblin"
-                            ? "bg-gray-600 text-gray-400 cursor-not-allowed"
-                            : "bg-gray-700 hover:bg-gray-600 text-white border border-gray-600"
-                      }`}
-                    >
-                      <div className="flex items-center space-x-1">
-                        <span>↓</span>
-                        <span>Less</span>
-                      </div>
-                    </button>
-
-                    <button
-                      onClick={() => onSelect(prop.id, "over")}
-                      className={`px-6 py-2 rounded-lg font-medium transition-colors ${
-                        isSelected(prop.id, "over")
-                          ? "bg-green-500 text-black"
-                          : "bg-gray-700 hover:bg-gray-600 text-white border border-gray-600"
-                      }`}
-                    >
-                      <div className="flex items-center space-x-1">
-                        <span>↑</span>
-                        <span>More</span>
-                      </div>
-                    </button>
                   </div>
                 </div>
 
-                {/* Performance Chart for Points */}
-                {prop.stat === "Points" && (
-                  <div className="mt-4 p-4 bg-gray-900 bg-opacity-50 rounded-lg">
-                    <div className="flex justify-center space-x-2 mb-4">
+                <div className="flex space-x-2">
+                  <button
+                    onClick={() => onSelect(prop.id, "under")}
+                    disabled={
+                      prop.pickType === "demon" || prop.pickType === "goblin"
+                    }
+                    className={`px-4 py-2 rounded-lg font-medium transition-colors text-sm ${
+                      isSelected(prop.id, "under")
+                        ? "bg-green-500 text-black"
+                        : prop.pickType === "demon" ||
+                            prop.pickType === "goblin"
+                          ? "bg-gray-600 text-gray-400 cursor-not-allowed"
+                          : "bg-gray-700 hover:bg-gray-600 text-white border border-gray-600"
+                    }`}
+                  >
+                    Less
+                  </button>
+
+                  <button
+                    onClick={() => onSelect(prop.id, "over")}
+                    className={`px-4 py-2 rounded-lg font-medium transition-colors text-sm ${
+                      isSelected(prop.id, "over")
+                        ? "bg-green-500 text-black"
+                        : "bg-gray-700 hover:bg-gray-600 text-white border border-gray-600"
+                    }`}
+                  >
+                    More
+                  </button>
+                </div>
+              </div>
+
+              {/* AI Reasoning */}
+              <div className="p-3 bg-gray-900 bg-opacity-50 rounded border border-gray-600">
+                <p className="text-sm text-gray-300">
+                  <span className="text-purple-400 font-semibold">
+                    AI Analysis:
+                  </span>{" "}
+                  {prop.reasoning}
+                </p>
+              </div>
+
+              {/* Performance Chart for Points */}
+              {prop.stat === "Points" && (
+                <div className="mt-4 p-4 bg-gray-900 bg-opacity-50 rounded-lg">
+                  <div className="flex justify-center space-x-2 mb-4">
+                    {[
+                      { value: 18.5, type: "goblin" },
+                      { value: 22.5, type: "normal", selected: true },
+                      { value: 25.5, type: "demon" },
+                      { value: 28.5, type: "demon" },
+                    ].map((item, i) => (
+                      <div
+                        key={i}
+                        className={`px-3 py-1 rounded-full text-sm font-medium flex items-center space-x-1 ${
+                          item.selected
+                            ? "bg-white text-black border-2 border-white"
+                            : "bg-gray-700 text-white"
+                        }`}
+                      >
+                        {item.type === "goblin" && <span>👺</span>}
+                        {item.type === "demon" && <span>😈</span>}
+                        <span>{item.value}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="relative h-20 mb-2">
+                    <div className="absolute inset-x-0 top-1/2 border-t border-dashed border-gray-500"></div>
+                    <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-xs text-gray-400">
+                      22.5
+                    </div>
+
+                    <div className="flex items-end justify-center space-x-2 h-full">
                       {[
-                        { value: 18.5, type: "goblin" },
-                        { value: 22.5, type: "normal", selected: true },
-                        { value: 25.5, type: "demon" },
-                        { value: 28.5, type: "demon" },
-                      ].map((item, i) => (
-                        <div
-                          key={i}
-                          className={`px-3 py-1 rounded-full text-sm font-medium flex items-center space-x-1 ${
-                            item.selected
-                              ? "bg-white text-black border-2 border-white"
-                              : "bg-gray-700 text-white"
-                          }`}
-                        >
-                          {item.type === "goblin" && <span>👺</span>}
-                          {item.type === "demon" && <span>😈</span>}
-                          <span>{item.value}</span>
+                        {
+                          value: 35,
+                          opponent: "IND",
+                          date: "5/21",
+                          color: "bg-green-500",
+                        },
+                        {
+                          value: 20,
+                          opponent: "IND",
+                          date: "5/23",
+                          color: "bg-red-500",
+                        },
+                        {
+                          value: 24,
+                          opponent: "IND",
+                          date: "5/25",
+                          color: "bg-green-500",
+                        },
+                        {
+                          value: 24,
+                          opponent: "IND",
+                          date: "5/27",
+                          color: "bg-green-500",
+                        },
+                        {
+                          value: 24,
+                          opponent: "IND",
+                          date: "5/29",
+                          color: "bg-green-500",
+                        },
+                      ].map((game, i) => (
+                        <div key={i} className="flex flex-col items-center">
+                          <div
+                            className={`w-8 ${game.color} rounded-t`}
+                            style={{ height: `${(game.value / 40) * 60}px` }}
+                          ></div>
+                          <div className="text-xs text-white mt-1 font-bold">
+                            {game.value}
+                          </div>
+                          <div className="text-xs text-gray-400">
+                            {game.opponent}
+                          </div>
+                          <div className="text-xs text-gray-500">
+                            {game.date}
+                          </div>
                         </div>
                       ))}
                     </div>
-
-                    <div className="relative h-20 mb-2">
-                      <div className="absolute inset-x-0 top-1/2 border-t border-dashed border-gray-500"></div>
-                      <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-xs text-gray-400">
-                        22.5
-                      </div>
-
-                      <div className="flex items-end justify-center space-x-2 h-full">
-                        {[
-                          {
-                            value: 35,
-                            opponent: "IND",
-                            date: "5/21",
-                            color: "bg-green-500",
-                          },
-                          {
-                            value: 20,
-                            opponent: "IND",
-                            date: "5/23",
-                            color: "bg-red-500",
-                          },
-                          {
-                            value: 24,
-                            opponent: "IND",
-                            date: "5/25",
-                            color: "bg-green-500",
-                          },
-                          {
-                            value: 24,
-                            opponent: "IND",
-                            date: "5/27",
-                            color: "bg-green-500",
-                          },
-                          {
-                            value: 24,
-                            opponent: "IND",
-                            date: "5/29",
-                            color: "bg-green-500",
-                          },
-                        ].map((game, i) => (
-                          <div key={i} className="flex flex-col items-center">
-                            <div
-                              className={`w-8 ${game.color} rounded-t`}
-                              style={{ height: `${(game.value / 40) * 60}px` }}
-                            ></div>
-                            <div className="text-xs text-white mt-1 font-bold">
-                              {game.value}
-                            </div>
-                            <div className="text-xs text-gray-400">
-                              {game.opponent}
-                            </div>
-                            <div className="text-xs text-gray-500">
-                              {game.date}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="text-center text-sm text-gray-300">
-                      <span className="font-semibold">25.4</span> avg last 5
-                    </div>
                   </div>
-                )}
-              </div>
+
+                  <div className="text-center text-sm text-gray-300">
+                    <span className="font-semibold">25.4</span> avg last 5
+                  </div>
+                </div>
+              )}
             </div>
           ))}
         </div>
 
         {/* PropOllama Footer */}
-        <div className="px-4 pb-8">
+        <div className="p-6 border-t border-gray-700">
           <div className="bg-purple-600 bg-opacity-20 border border-purple-500 border-opacity-30 rounded-lg p-4 text-center">
             <p className="text-purple-400 text-sm mb-2">
               🧠 <span className="font-semibold">PropOllama</span> can explain
