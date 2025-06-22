@@ -345,9 +345,9 @@ const PropCard: React.FC<{
             style={{
               left: "50%",
               position: "absolute",
-              right: "-16px",
+              right: "-12px",
               textAlign: "center",
-              top: "48px",
+              top: "36px",
             }}
           >
             <button
