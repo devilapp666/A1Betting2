@@ -1272,13 +1272,14 @@ export const PrizePicksPro: React.FC = () => {
       <div className="flex flex-col xl:flex-row gap-6 max-w-full">
         {/* Props Grid - Left Side */}
         <div className="flex-1 min-w-0">
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+          <div className="grid grid-cols-3 gap-3 max-w-4xl">
             {playerProps.map((prop, index) => (
               <motion.div
                 key={prop.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.05 * index }}
+                className="w-full"
               >
                 <PropCard
                   prop={prop}
