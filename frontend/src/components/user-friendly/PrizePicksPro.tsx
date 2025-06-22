@@ -741,7 +741,7 @@ const ExpandedPlayerView: React.FC<{
         }}
       >
         {/* Hero Header with Player Image */}
-        <div className="relative h-80 overflow-hidden">
+        <div className="relative h-64 overflow-hidden flex-shrink-0">
           {/* Background Gradient */}
           <div
             className="absolute inset-0"
