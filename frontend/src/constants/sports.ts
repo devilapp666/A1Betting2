@@ -196,10 +196,14 @@ export function getStatTypesForSport(sport: string): string[] {
 
 export const POSITION_BY_SPORT = {
   NBA: ["PG", "SG", "SF", "PF", "C"],
-  NFL: ["QB", "RB", "WR", "TE", "K", "DEF", "OL", "DL", "LB", "DB"],
+  WNBA: ["PG", "SG", "SF", "PF", "C"],
   MLB: ["C", "1B", "2B", "3B", "SS", "OF", "P", "DH"],
-  NHL: ["C", "LW", "RW", "D", "G"],
+  NFL: ["QB", "RB", "WR", "TE", "K", "DEF", "OL", "DL", "LB", "DB"],
   Soccer: ["GK", "CB", "FB", "CM", "WM", "FW"],
+  PGA: ["Golfer"],
+  Tennis: ["Player"],
+  Esports: ["Player", "Support", "Tank", "DPS", "Flex"],
+  MMA: ["Fighter"],
 };
 
 export function getPositionsForSport(sport: string): string[] {
