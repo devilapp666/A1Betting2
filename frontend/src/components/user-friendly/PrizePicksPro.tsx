@@ -38,6 +38,33 @@ interface PlayerProp {
   trendValue?: number;
 }
 
+interface ExpandedPlayerProp {
+  id: string;
+  stat: string;
+  line: number;
+  overOdds: number;
+  underOdds: number;
+  confidence: number;
+  aiRecommendation: "over" | "under";
+  reasoning: string;
+  pickType?: "normal" | "demon" | "goblin";
+  expectedValue: number;
+  volume: number;
+  oddsExplanation: string;
+}
+
+interface ExpandedPlayerData {
+  player: string;
+  team: string;
+  opponent: string;
+  position: string;
+  sport: string;
+  gameTime: string;
+  seasonStats: Record<string, number>;
+  recentForm: string[];
+  props: ExpandedPlayerProp[];
+}
+
 interface SelectedPick {
   propId: string;
   choice: "over" | "under";
