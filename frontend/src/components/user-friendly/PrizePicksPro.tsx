@@ -605,7 +605,7 @@ const PropCard: React.FC<{
         {/* More Button */}
         <button
           onClick={() => onSelect(prop.id, "over")}
-          className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 px-3 border-t border-gray-600 transition-colors ${
+          className={`flex-1 flex items-center justify-center gap-1 py-1.5 px-2 border-t border-gray-600 transition-colors ${
             isSelected(prop.id, "over")
               ? "bg-green-400 text-black"
               : "bg-black/50 hover:bg-gray-700/50 text-white"
@@ -626,14 +626,14 @@ const PropCard: React.FC<{
             display: "flex",
             flexBasis: "0%",
             flexGrow: "1",
-            fontSize: "14px",
-            gap: "6px",
+            fontSize: "11px",
+            gap: "3px",
             justifyContent: "center",
-            lineHeight: "16px",
-            paddingBottom: "10px",
-            paddingLeft: "12px",
-            paddingRight: "12px",
-            paddingTop: "10px",
+            lineHeight: "12px",
+            paddingBottom: "6px",
+            paddingLeft: "8px",
+            paddingRight: "8px",
+            paddingTop: "6px",
             textAlign: "center",
             border: "none",
           }}
