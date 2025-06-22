@@ -1672,8 +1672,10 @@ export const PrizePicksPro: React.FC = () => {
                   onSelect={addPick}
                   isSelected={isPickSelected}
                   showAIAnalysis={showAIAnalysis}
-                  onToggleAnalysis={(propId) =>
-                    setShowAIAnalysis(showAIAnalysis === propId ? null : propId)
+                  onToggleAnalysis={(playerName) =>
+                    setExpandedPlayer(
+                      expandedPlayer === playerName ? null : playerName,
+                    )
                   }
                 />
               </motion.div>
