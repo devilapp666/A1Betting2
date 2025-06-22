@@ -156,6 +156,21 @@ styleSheet.textContent = `
   .text-neon-pink { color: #ff10f0; }
   .text-neon-purple { color: #7c3aed; }
   .text-neon-green { color: #39ff14; }
+
+  /* Global dropdown styling fix */
+  select {
+    background-color: rgba(31, 41, 55, 0.8) !important;
+    color: white !important;
+  }
+
+  select option {
+    background-color: #1f2937 !important;
+    color: white !important;
+  }
+
+  select option:hover {
+    background-color: #374151 !important;
+  }
 `;
 document.head.appendChild(styleSheet);
 
