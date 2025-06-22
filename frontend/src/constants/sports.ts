@@ -65,15 +65,14 @@ export function isInSeason(sport: string): boolean {
 
   const seasonMap = {
     NBA: [9, 10, 11, 0, 1, 2, 3, 4, 5], // Oct-Jun
-    NFL: [8, 9, 10, 11, 0, 1], // Sep-Feb
-    MLB: [2, 3, 4, 5, 6, 7, 8, 9], // Mar-Oct
-    NHL: [9, 10, 11, 0, 1, 2, 3, 4, 5], // Oct-Jun
-    Soccer: [7, 8, 9, 10, 11, 0, 1, 2, 3, 4], // Aug-May
     WNBA: [4, 5, 6, 7, 8, 9], // May-Oct
-    MMA: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], // Year-round
+    MLB: [2, 3, 4, 5, 6, 7, 8, 9], // Mar-Oct
+    NFL: [8, 9, 10, 11, 0, 1], // Sep-Feb
+    Soccer: [7, 8, 9, 10, 11, 0, 1, 2, 3, 4], // Aug-May
     PGA: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], // Jan-Nov
     Tennis: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], // Jan-Nov
-    Boxing: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], // Year-round
+    Esports: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], // Year-round
+    MMA: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], // Year-round
   };
 
   const sportMonths = seasonMap[sport];
