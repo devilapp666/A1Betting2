@@ -1621,12 +1621,11 @@ export const PrizePicksPro: React.FC = () => {
                   onSelect={addPick}
                   isSelected={isPickSelected}
                   showAIAnalysis={showAIAnalysis}
-                  onToggleAnalysis={(playerName) => {
-                    alert(
-                      `Clicked stats for ${playerName}. All props for this player would show here.`,
-                    );
-                    // setExpandedPlayer(expandedPlayer === playerName ? null : playerName)
-                  }}
+                  onToggleAnalysis={(playerName) =>
+                    setExpandedPlayer(
+                      expandedPlayer === playerName ? null : playerName,
+                    )
+                  }
                 />
               </motion.div>
             ))}
