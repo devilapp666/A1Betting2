@@ -179,7 +179,7 @@ const DemonsGoblinsModal: React.FC<{
   );
 };
 
-// Enhanced PropCard Component
+// Perfect PrizePicks PropCard Component
 const PropCard: React.FC<{
   prop: PlayerProp;
   onSelect: (propId: string, choice: "over" | "under") => void;
@@ -187,70 +187,89 @@ const PropCard: React.FC<{
   showAIAnalysis: string | null;
   onToggleAnalysis: (propId: string) => void;
 }> = ({ prop, onSelect, isSelected, showAIAnalysis, onToggleAnalysis }) => {
-  const getPlayerImageUrl = (playerName: string, sport: string = "NBA") => {
-    const encodedName = encodeURIComponent(playerName);
-    const sportColors = {
-      NBA: { bg: "1f2937", color: "ffffff" },
-      NFL: { bg: "059669", color: "ffffff" },
-      MLB: { bg: "7c2d12", color: "ffffff" },
-      NHL: { bg: "1e40af", color: "ffffff" },
-      Soccer: { bg: "166534", color: "ffffff" },
-      MMA: { bg: "dc2626", color: "ffffff" },
-      PGA: { bg: "15803d", color: "ffffff" },
-      WNBA: { bg: "ea580c", color: "ffffff" },
+  // Real NBA player headshots from official sources
+  const getPlayerImageUrl = (playerName: string) => {
+    const playerMap: Record<string, string> = {
+      "LeBron James":
+        "https://cdn.nba.com/headshots/nba/latest/1040x760/2544.png",
+      "Stephen Curry":
+        "https://cdn.nba.com/headshots/nba/latest/1040x760/201939.png",
+      "Giannis Antetokounmpo":
+        "https://cdn.nba.com/headshots/nba/latest/1040x760/203507.png",
+      "Jayson Tatum":
+        "https://cdn.nba.com/headshots/nba/latest/1040x760/1628369.png",
+      "Kevin Durant":
+        "https://cdn.nba.com/headshots/nba/latest/1040x760/201142.png",
+      "Nikola Jokic":
+        "https://cdn.nba.com/headshots/nba/latest/1040x760/203999.png",
+      "Joel Embiid":
+        "https://cdn.nba.com/headshots/nba/latest/1040x760/203954.png",
+      "Luka Doncic":
+        "https://cdn.nba.com/headshots/nba/latest/1040x760/1629029.png",
     };
 
-    const colors = sportColors[sport] || { bg: "6366f1", color: "ffffff" };
-    return `https://api.dicebear.com/7.x/initials/png?seed=${encodedName}&size=64&backgroundColor=${colors.bg}&color=${colors.color}&fontSize=24&fontWeight=600`;
+    return (
+      playerMap[playerName] ||
+      `https://cdn.nba.com/headshots/nba/latest/1040x760/2544.png`
+    );
   };
 
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
     const target = e.target as HTMLImageElement;
-    const encodedName = encodeURIComponent(prop.player);
-    const initials = prop.player
-      .split(" ")
-      .map((n) => n[0])
-      .join("");
-
-    if (target.src.includes("dicebear.com")) {
-      target.src = `https://ui-avatars.com/api/?name=${encodedName}&size=64&background=374151&color=ffffff&bold=true&format=png`;
-    } else if (target.src.includes("ui-avatars.com")) {
-      target.src = `https://via.placeholder.com/64x64/6366f1/ffffff?text=${initials}`;
-    } else {
-      target.style.display = "none";
-      const parent = target.parentElement;
-      if (parent) {
-        parent.innerHTML = `
-          <div style="
-            width: 64px;
-            height: 64px;
-            background: linear-gradient(135deg, #6366f1, #8b5cf6);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 18px;
-            border: 1px solid rgb(75, 85, 99);
-          ">${initials}</div>
-        `;
-      }
-    }
+    // Fallback to a generic NBA player silhouette
+    target.src = "https://cdn.nba.com/manage/2021/08/nba-player-fallback.png";
   };
 
-  const playerImageUrl = getPlayerImageUrl(prop.player, prop.sport);
+  const playerImageUrl = getPlayerImageUrl(prop.player);
+
+  // Get team emoji/indicator
+  const getTeamIndicator = (team: string) => {
+    const indicators: Record<string, string> = {
+      LAL: "🟡",
+      GSW: "🔵",
+      MIL: "🟢",
+      BOS: "🟢",
+      MIA: "🔴",
+      PHX: "🟠",
+      DEN: "🔵",
+      PHI: "🔵",
+    };
+    return indicators[team] || "⚫";
+  };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="glass-card rounded-2xl p-6 border border-white/10 hover:border-white/20 transition-all relative"
+    <div
+      className="rounded-lg overflow-hidden relative text-center"
+      style={{
+        backgroundColor: "rgb(18, 19, 32)",
+        borderBottom: "1px solid rgb(44, 44, 57)",
+        borderBottomLeftRadius: "8px",
+        borderBottomRightRadius: "8px",
+        display: "grid",
+        gridTemplateRows: "min-content min-content 1fr",
+        overflowX: "hidden",
+        overflowY: "hidden",
+        paddingTop: "12px",
+        position: "relative",
+        textAlign: "center",
+        minHeight: "280px",
+      }}
     >
       {/* Stats Button - Top Left */}
       <button
-        className="absolute top-2 left-2 bg-black/50 rounded-md p-1 text-gray-300 hover:text-white transition-colors"
+        className="absolute top-2 left-2 bg-black/50 rounded-md p-1 text-gray-300 hover:text-white transition-colors z-10"
         title="View player stats"
+        style={{
+          backgroundColor: "rgba(0, 0, 0, 0.5)",
+          border: "none",
+          borderRadius: "6px",
+          color: "rgb(212, 211, 218)",
+          cursor: "pointer",
+          left: "8px",
+          padding: "4px",
+          position: "absolute",
+          top: "8px",
+        }}
       >
         <svg
           width="16"
@@ -263,31 +282,73 @@ const PropCard: React.FC<{
       </button>
 
       {/* Trending Indicator - Top Right */}
-      <div className="absolute top-2 right-2 flex items-center">
+      <div
+        className="absolute top-2 right-2 flex items-center z-10"
+        style={{
+          position: "absolute",
+          right: "8px",
+          top: "8px",
+          display: "flex",
+        }}
+      >
         <img
           alt="Trending"
           src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAbCAYAAABiFp9rAAAEXUlEQVR4Ae2VW2gcVRjH/+ecmZ3LXpvYrcnGJtskqG9qRSgNhZI+1D6oFIQUxT4piIiKINQLmhYvL4r0VfCCFVREiwENVaNYrIUQWtrExraxoTYXN3Gzu83uZG7n+E2KIq3NZvPkQz84zNmz832/73a+AW7Iv2S8p23n+D3Zb091GaNKKbHSuxrWIH88tWdD9fzpQ+rShR0KDMh3jzDGwpV0OBqUC307O6rD3x/n85d2MDsBbykA37ztzXp6DYEoPUzz57/RvMsdvLUL0qnBTzSj+4l9h+vpNpS6qd78Xl6a6kKyCTKegvQDSF2sSrehiDj8J7lGhpW8oqrpUIUZ/PLZod31dRsQpuRd4KQSerRc8EQKmlBwjw29VSwW02sGTTy7p+fcA12d0b4yPX0TWBnICLAERaTKYBvWQUtzhKM/ZmfeO/jMmkDTL97/ghwbOCoC52zl56GtyZaWKmslp7M20MzA9CJUxgJr0hBLB3CGv37u4sXx1oZAM6/3dbCFEwf0tjRkSuPuT4dfo3vi8Gz2LJriYGkdbAvVqjMGmaB9kkFNjViVzz98pSGQYIWXJWYZktSUGRvOme+2VSdO7ZK+96liVJ94DEqvgW/0wfM6YDOIBFA7Odg3/+vJ3KpAdFcM7k3sRpy8NOgglYRbOY+l41+9k7n36feVvwQlHEQDR4UVYFPkDAez6PfcaHLqy3cfXRWoOri/h/HZFLNotHAyqocIqRbloYOtbraznzXnSoo7kBqDpM6DCsBuoQYxGDRbQk6feJyc1eqCwvLI7TxOHtq0Yg6Y5lLBm+BpJcx/8PBDbu23jKT/QykoIheSQDJBTqUiGEcwN5adOPLJbXVBwpQ5FtehxU3oJs2xZBHSbIZa34GAADJGkJRFIHIqoBSqEIo4KgKZ1BisSlGN3X213WtHkKHHuCUgYmnEKO9+3AE3ivCm0tATNwNyAWFiEVIuQSIgiFx2V9k6RI1D0ak/O9ZcF8S5NwmDQCxDzUCRaQV6zkGyRQTTCiLnUYSUrkDRqJBQUU6oXozKwsoiGlPQbW7XBans9t+ZMwwubHDLpFSWoNxFmFYFYbu6MuYiSPT18ekZEC8kiKSlc3KQgceThWsCuPrAzmz+AVZLhcdscpRmmd0MQY0hqKOEFVIaQ6qFpMIT0VDgJhmhVHNicqpftLfyW07XBbH89pJIdX3E+AJ5TC0rCagbEJq2vKLp/c/Soyh0Sjel+HKM6gqYGzZN5nofO1YXFInR/dKrTNMmOZ+HmHMhYBCM0rgMpCWip7m81ygko0DOUJ30uIB96337/8smw3XEG3v+Dr9wdEB5QZv0qwgtB4HpIaAGCKku0qMOK9KLRfomhSZFRjk0Um+07x3a1xAoEufMFx3yz4F+6dUeke4CGaeJ4HvLHSfpwspoRjET3G4p8WSuf33vgbevZ2tF0N+ydO7jzqA8+aB0F7fKULXTtU4SaSaUfDwUxqC+cdeRdfk7S/g/yF/ZrLFK5X31mgAAAABJRU5ErkJggg=="
           className="w-4 h-4 mr-1"
+          style={{ height: "16px", width: "16px", paddingRight: "2px" }}
         />
-        <span className="text-white text-xs">
+        <span
+          className="text-white text-xs"
+          style={{
+            color: "rgb(251, 249, 255)",
+            fontSize: "12px",
+            lineHeight: "16px",
+            paddingTop: "4px",
+          }}
+        >
           {prop.trendValue || Math.floor(Math.random() * 10 + 1)}K
         </span>
       </div>
 
       {/* Player Image and Basic Info */}
-      <div className="text-center mb-4">
+      <div className="text-center">
         <button className="inline-block cursor-pointer">
           <img
             alt={prop.player}
             src={playerImageUrl}
             onError={handleImageError}
-            className="w-16 h-16 rounded-lg mx-auto mb-2"
+            className="cursor-pointer inline-block max-w-full"
+            style={{
+              borderBottomStyle: "none",
+              borderLeftStyle: "none",
+              borderRightStyle: "none",
+              borderTopStyle: "none",
+              cursor: "pointer",
+              display: "inline-block",
+              height: "64px",
+              maxWidth: "100%",
+              overflowClipMargin: "content-box",
+              overflowX: "clip",
+              overflowY: "clip",
+              textAlign: "center",
+              verticalAlign: "middle",
+              width: "64px",
+            }}
           />
         </button>
 
         {/* Demon/Goblin Icon */}
         {(prop.pickType === "demon" || prop.pickType === "goblin") && (
-          <div className="absolute top-12 right-8">
+          <div
+            className="absolute"
+            style={{
+              left: "50%",
+              position: "absolute",
+              right: "-16px",
+              textAlign: "center",
+              top: "48px",
+            }}
+          >
             <button
               title={
                 prop.pickType === "demon"
@@ -295,6 +356,13 @@ const PropCard: React.FC<{
                   : "Goblin pick - Easier to win, lower payout (0.85x)"
               }
               className="inline-block cursor-pointer relative group"
+              style={{
+                backgroundColor: "rgba(0, 0, 0, 0)",
+                border: "none",
+                cursor: "pointer",
+                display: "inline-block",
+                textAlign: "center",
+              }}
             >
               <img
                 alt={prop.pickType === "demon" ? "Demon" : "Goblin"}
@@ -303,140 +371,323 @@ const PropCard: React.FC<{
                     ? "https://app.prizepicks.com/7534b2e82fa0ac08ec43.png"
                     : "https://app.prizepicks.com/e00b98475351cdfd1c38.png"
                 }
-                className="w-8 h-8 transform rotate-12"
+                className="cursor-pointer inline-block max-w-full"
+                style={{
+                  borderBottomStyle: "none",
+                  borderLeftStyle: "none",
+                  borderRightStyle: "none",
+                  borderTopStyle: "none",
+                  cursor: "pointer",
+                  display: "inline-block",
+                  height: "36px",
+                  maxWidth: "100%",
+                  overflowClipMargin: "content-box",
+                  overflowX: "clip",
+                  overflowY: "clip",
+                  textAlign: "center",
+                  verticalAlign: "middle",
+                  width: "36px",
+                  transform:
+                    "matrix(0.978148, 0.207912, -0.207912, 0.978148, 0, 0)",
+                }}
               />
             </button>
           </div>
         )}
 
         {/* Team and Position */}
-        <div className="text-gray-400 text-xs">
-          <span>{prop.team}</span> - <span>{prop.position || "Unknown"}</span>
+        <div
+          className="text-gray-400 text-xs mx-auto mt-2 relative"
+          style={{
+            color: "rgb(199, 198, 206)",
+            fontSize: "12px",
+            lineHeight: "16px",
+            marginLeft: "auto",
+            marginRight: "auto",
+            marginTop: "8px",
+            paddingBottom: "2px",
+            position: "relative",
+            textAlign: "center",
+          }}
+        >
+          <span>{prop.team}</span>
+          <span> - </span>
+          <span>{prop.position || "Unknown"}</span>
         </div>
       </div>
 
       {/* Player Name and Game Info */}
-      <div className="text-center mb-4">
-        <h3 className="text-white text-sm font-medium mb-1">{prop.player}</h3>
-        <div className="text-gray-400 text-xs">
-          <span>vs {prop.opponent} </span>
+      <div
+        className="grid px-3"
+        style={{
+          display: "grid",
+          gridTemplateRows: "min-content min-content 1fr",
+          paddingLeft: "12px",
+          paddingRight: "12px",
+          textAlign: "center",
+        }}
+      >
+        <h3
+          className="text-white text-sm pb-1"
+          style={{
+            fontSize: "14px",
+            lineHeight: "16px",
+            paddingBottom: "4px",
+            textAlign: "center",
+            color: "rgb(255, 255, 255)",
+          }}
+        >
+          {prop.player}
+        </h3>
+
+        <time
+          className="text-gray-400 text-xs"
+          style={{
+            color: "rgb(199, 198, 206)",
+            fontSize: "12px",
+            lineHeight: "16px",
+            textAlign: "center",
+          }}
+        >
+          <span>vs </span>
+          <span>{prop.opponent} </span>
           <span>{prop.gameTime || "Today 7:30 PM"}</span>
-        </div>
-      </div>
+        </time>
 
-      {/* Line Display */}
-      <div className="text-center mb-6">
-        <div className="text-4xl font-black text-white mb-2">{prop.line}</div>
-        <div className="text-sm text-gray-400">{prop.stat}</div>
-      </div>
-
-      {/* AI Recommendation Badge */}
-      <div className="flex justify-center mb-4">
-        <div className="px-4 py-2 rounded-full text-sm font-bold bg-green-500/20 text-green-400 border border-green-500/30">
-          <div className="flex items-center space-x-2">
-            <Zap className="w-4 h-4" />
-            <span>AI Recommends: {prop.aiRecommendation.toUpperCase()}</span>
+        {/* Centered Stat Section */}
+        <div
+          className="self-end flex gap-2 justify-center pb-3 pt-2 px-1"
+          style={{
+            alignSelf: "flex-end",
+            display: "flex",
+            gap: "8px",
+            justifySelf: "center",
+            paddingBottom: "12px",
+            paddingLeft: "4px",
+            paddingRight: "4px",
+            paddingTop: "8px",
+            textAlign: "center",
+          }}
+        >
+          <div
+            className="flex items-baseline flex-1 text-xs gap-1"
+            style={{
+              alignItems: "last baseline",
+              display: "flex",
+              flexBasis: "0%",
+              flexGrow: "1",
+              fontSize: "12px",
+              gap: "4px",
+              lineHeight: "16px",
+              textAlign: "center",
+            }}
+          >
+            <div
+              className="text-xl"
+              style={{
+                fontSize: "20px",
+                lineHeight: "28px",
+                textAlign: "center",
+                color: "rgb(255, 255, 255)",
+              }}
+            >
+              {prop.line}
+            </div>
+            <span
+              className="text-gray-400 text-sm max-w-28 text-left"
+              style={{
+                color: "rgb(199, 198, 206)",
+                fontSize: "14px",
+                lineHeight: "20px",
+                maxWidth: "112px",
+                textAlign: "left",
+              }}
+            >
+              <span
+                className="inline"
+                style={{
+                  color: "rgb(199, 198, 206)",
+                  display: "inline",
+                  fontSize: "14px",
+                  lineHeight: "20px",
+                  overflowWrap: "break-word",
+                  textAlign: "left",
+                  wordWrap: "break-word",
+                }}
+              >
+                {prop.stat}
+              </span>
+            </span>
           </div>
         </div>
       </div>
 
-      {/* Betting Options */}
-      <div className="grid grid-cols-2 gap-3 mb-4">
-        <motion.button
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
+      {/* Less/More Buttons - Exact PrizePicks Style */}
+      <div
+        className="self-end flex"
+        style={{
+          alignSelf: "flex-end",
+          display: "flex",
+          textAlign: "center",
+        }}
+      >
+        {/* Less Button */}
+        <button
           onClick={() => onSelect(prop.id, "under")}
           disabled={prop.pickType === "demon" || prop.pickType === "goblin"}
-          className={`p-4 rounded-xl border-2 transition-all backdrop-blur-sm shadow-lg ${
+          className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 px-3 border-r border-t border-gray-600 transition-colors ${
             isSelected(prop.id, "under")
-              ? "border-red-400 bg-red-500/30 text-red-200 shadow-red-500/25"
+              ? "bg-green-400 text-black"
               : prop.pickType === "demon" || prop.pickType === "goblin"
-                ? "border-gray-600 bg-gray-800/30 text-gray-500 cursor-not-allowed opacity-50"
-                : "border-gray-500 hover:border-red-400 text-gray-200 hover:bg-red-500/20 bg-gray-800/60 hover:text-red-200"
+                ? "bg-gray-800/50 text-gray-500 cursor-not-allowed opacity-50"
+                : "bg-black/50 hover:bg-gray-700/50 text-white"
           }`}
+          style={{
+            alignContent: "center",
+            alignItems: "baseline",
+            backgroundColor: isSelected(prop.id, "under")
+              ? "rgb(110, 255, 0)"
+              : prop.pickType === "demon" || prop.pickType === "goblin"
+                ? "rgba(75, 85, 99, 0.5)"
+                : "rgba(0, 0, 0, 0.5)",
+            borderBottomLeftRadius: "6px",
+            borderColor: "rgb(44, 44, 57)",
+            borderRight: "1px solid rgb(44, 44, 57)",
+            borderTop: "1px solid rgb(44, 44, 57)",
+            color: isSelected(prop.id, "under")
+              ? "rgb(5, 6, 20)"
+              : prop.pickType === "demon" || prop.pickType === "goblin"
+                ? "rgb(107, 114, 128)"
+                : "rgb(255, 255, 255)",
+            cursor:
+              prop.pickType === "demon" || prop.pickType === "goblin"
+                ? "not-allowed"
+                : "pointer",
+            display: "flex",
+            flexBasis: "0%",
+            flexGrow: "1",
+            fontSize: "14px",
+            gap: "6px",
+            justifyContent: "center",
+            lineHeight: "16px",
+            paddingBottom: "10px",
+            paddingLeft: "12px",
+            paddingRight: "12px",
+            paddingTop: "10px",
+            textAlign: "center",
+            border: "none",
+          }}
         >
-          <div className="font-bold text-lg drop-shadow-lg">
+          <svg
+            width="8"
+            height="8"
+            viewBox="0 0 9 8"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-2 w-2"
+          >
+            <path
+              fillRule="evenodd"
+              clipRule="evenodd"
+              d="M3.815 7.842a.678.678 0 0 0 .87 0l3.36-2.89a.562.562 0 0 0 .034-.837.677.677 0 0 0-.905-.03L4.89 6.047V.593C4.89.265 4.603 0 4.25 0c-.353 0-.64.265-.64.593v5.455L1.325 4.085a.677.677 0 0 0-.904.031.562.562 0 0 0 .034.838l3.36 2.889Z"
+            />
+          </svg>
+          <span className="text-sm">
             {prop.pickType === "demon" || prop.pickType === "goblin"
               ? "N/A"
-              : "UNDER"}
-          </div>
-          <div className="text-sm drop-shadow-lg">
-            {prop.pickType === "demon" || prop.pickType === "goblin"
-              ? "-"
-              : prop.underOdds}
-          </div>
-        </motion.button>
+              : "Less"}
+          </span>
+        </button>
 
-        <motion.button
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
+        {/* More Button */}
+        <button
           onClick={() => onSelect(prop.id, "over")}
-          className={`p-4 rounded-xl border-2 transition-all backdrop-blur-sm shadow-lg ${
+          className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 px-3 border-t border-gray-600 transition-colors ${
             isSelected(prop.id, "over")
-              ? "border-green-400 bg-green-500/30 text-green-200 shadow-green-500/25"
-              : prop.pickType === "demon"
-                ? "border-red-500 hover:border-red-400 text-red-200 hover:bg-red-500/20 bg-red-900/30"
-                : prop.pickType === "goblin"
-                  ? "border-green-500 hover:border-green-400 text-green-200 hover:bg-green-500/20 bg-green-900/30"
-                  : "border-gray-500 hover:border-green-400 text-gray-200 hover:bg-green-500/20 bg-gray-800/60 hover:text-green-200"
-          } ${prop.aiRecommendation === "over" ? "ring-2 ring-purple-400/50" : ""}`}
+              ? "bg-green-400 text-black"
+              : "bg-black/50 hover:bg-gray-700/50 text-white"
+          }`}
+          style={{
+            alignContent: "center",
+            alignItems: "baseline",
+            backgroundColor: isSelected(prop.id, "over")
+              ? "rgb(110, 255, 0)"
+              : "rgba(0, 0, 0, 0.5)",
+            borderBottomRightRadius: "6px",
+            borderColor: "rgb(44, 44, 57)",
+            borderTop: "1px solid rgb(44, 44, 57)",
+            color: isSelected(prop.id, "over")
+              ? "rgb(5, 6, 20)"
+              : "rgb(255, 255, 255)",
+            cursor: "pointer",
+            display: "flex",
+            flexBasis: "0%",
+            flexGrow: "1",
+            fontSize: "14px",
+            gap: "6px",
+            justifyContent: "center",
+            lineHeight: "16px",
+            paddingBottom: "10px",
+            paddingLeft: "12px",
+            paddingRight: "12px",
+            paddingTop: "10px",
+            textAlign: "center",
+            border: "none",
+          }}
         >
-          <div className="font-bold text-lg drop-shadow-lg">OVER</div>
-          <div className="text-sm drop-shadow-lg">{prop.overOdds}</div>
-          {prop.aiRecommendation === "over" && (
-            <div className="text-xs text-purple-400 font-bold mt-1 drop-shadow-lg">
-              ⭐ AI PICK
-            </div>
-          )}
+          <svg
+            width="8"
+            height="8"
+            viewBox="0 0 9 8"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-2 w-2"
+          >
+            <path
+              fillRule="evenodd"
+              clipRule="evenodd"
+              d="M4.315.158a.678.678 0 0 1 .87 0l3.36 2.89a.562.562 0 0 1 .034.837.677.677 0 0 1-.905.03L5.39 1.953v5.455c0 .328-.287.593-.64.593-.353 0-.64-.265-.64-.593V1.952L1.825 3.916a.677.677 0 0 1-.904-.031.562.562 0 0 1 .034-.838L4.315.158Z"
+            />
+          </svg>
+          <span className="text-sm">More</span>
           {prop.pickType === "demon" && (
-            <div className="text-xs opacity-75 ml-1">1.25x</div>
+            <span className="text-xs opacity-75 ml-1">1.25x</span>
           )}
           {prop.pickType === "goblin" && (
-            <div className="text-xs opacity-75 ml-1">0.85x</div>
+            <span className="text-xs opacity-75 ml-1">0.85x</span>
           )}
-        </motion.button>
+        </button>
       </div>
 
-      {/* Quick Stats */}
-      <div className="space-y-2 mb-4">
-        <div className="text-sm text-gray-400">
-          <span className="text-blue-400 font-semibold">Trend:</span>{" "}
-          {prop.trend}
-        </div>
-        <div className="text-sm text-gray-400">
-          <span className="text-green-400 font-semibold">Form:</span>{" "}
-          {prop.recentForm}
-        </div>
+      {/* AI Analysis Button - Outside card */}
+      <div className="mt-4 px-3">
+        <button
+          onClick={() => onToggleAnalysis(prop.id)}
+          className="w-full py-2 bg-purple-500/30 border border-purple-400/50 rounded-lg text-purple-200 text-sm font-medium hover:bg-purple-500/50 hover:border-purple-300 transition-all"
+        >
+          {showAIAnalysis === prop.id ? "Hide" : "Show"} AI Analysis
+        </button>
+
+        {/* AI Analysis */}
+        <AnimatePresence>
+          {showAIAnalysis === prop.id && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              className="mt-2 p-3 bg-gray-900/50 rounded-lg border border-gray-700/50"
+            >
+              <p className="text-xs text-gray-300 leading-relaxed">
+                <span className="text-purple-400 font-semibold">
+                  AI Analysis:
+                </span>{" "}
+                {prop.reasoning}
+              </p>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
-
-      {/* AI Analysis Toggle */}
-      <motion.button
-        whileHover={{ scale: 1.02 }}
-        onClick={() => onToggleAnalysis(prop.id)}
-        className="w-full py-3 bg-purple-500/30 border-2 border-purple-400/50 rounded-xl text-purple-200 font-semibold hover:bg-purple-500/50 hover:border-purple-300 transition-all backdrop-blur-sm shadow-lg shadow-purple-500/25"
-      >
-        {showAIAnalysis === prop.id ? "Hide" : "Show"} AI Analysis
-      </motion.button>
-
-      {/* AI Analysis */}
-      <AnimatePresence>
-        {showAIAnalysis === prop.id && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="mt-4 p-4 bg-gray-900/50 rounded-xl border border-gray-700/50"
-          >
-            <p className="text-sm text-gray-300 leading-relaxed">
-              <span className="text-purple-400 font-semibold">
-                AI Analysis:
-              </span>{" "}
-              {prop.reasoning}
-            </p>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.div>
+    </div>
   );
 };
 
