@@ -177,23 +177,46 @@ export const MoneyMakerPro: React.FC = () => {
 
           {/* Strategy */}
           <div>
-            <label className="block text-sm font-medium mb-2">Strategy</label>
+            <label className="block text-sm font-medium mb-2 text-gray-300">
+              Strategy
+            </label>
             <select
               value={config.strategy}
               onChange={(e) =>
                 setConfig({ ...config, strategy: e.target.value as any })
               }
               className="w-full p-3 rounded-xl bg-gray-800/80 border-2 border-gray-500 text-white focus:border-green-400 focus:ring-2 focus:ring-green-400/50 transition-all backdrop-blur-sm shadow-lg"
+              style={{
+                backgroundColor: "rgba(31, 41, 55, 0.8)",
+                color: "white",
+              }}
             >
-              <option value="conservative">Conservative</option>
-              <option value="balanced">Balanced</option>
-              <option value="aggressive">Aggressive</option>
+              <option
+                value="conservative"
+                style={{ backgroundColor: "#1f2937", color: "white" }}
+              >
+                Conservative
+              </option>
+              <option
+                value="balanced"
+                style={{ backgroundColor: "#1f2937", color: "white" }}
+              >
+                Balanced
+              </option>
+              <option
+                value="aggressive"
+                style={{ backgroundColor: "#1f2937", color: "white" }}
+              >
+                Aggressive
+              </option>
             </select>
           </div>
 
           {/* Confidence */}
           <div>
-            <label className="block text-sm font-medium mb-2">Confidence</label>
+            <label className="block text-sm font-medium mb-2 text-gray-300">
+              Confidence
+            </label>
             <select
               value={config.riskTolerance}
               onChange={(e) =>
@@ -203,28 +226,163 @@ export const MoneyMakerPro: React.FC = () => {
                 })
               }
               className="w-full p-3 rounded-xl bg-gray-800/80 border-2 border-gray-500 text-white focus:border-green-400 focus:ring-2 focus:ring-green-400/50 transition-all backdrop-blur-sm shadow-lg"
+              style={{
+                backgroundColor: "rgba(31, 41, 55, 0.8)",
+                color: "white",
+              }}
             >
-              <option value={85}>85%+</option>
-              <option value={90}>90%+</option>
-              <option value={95}>95%+</option>
+              <option
+                value={85}
+                style={{ backgroundColor: "#1f2937", color: "white" }}
+              >
+                85%+
+              </option>
+              <option
+                value={90}
+                style={{ backgroundColor: "#1f2937", color: "white" }}
+              >
+                90%+
+              </option>
+              <option
+                value={95}
+                style={{ backgroundColor: "#1f2937", color: "white" }}
+              >
+                95%+
+              </option>
+            </select>
+          </div>
+
+          {/* Time Frame */}
+          <div>
+            <label className="block text-sm font-medium mb-2 text-gray-300">
+              Time Frame
+            </label>
+            <select
+              value={config.timeFrame}
+              onChange={(e) =>
+                setConfig({ ...config, timeFrame: e.target.value as any })
+              }
+              className="w-full p-3 rounded-xl bg-gray-800/80 border-2 border-gray-500 text-white focus:border-green-400 focus:ring-2 focus:ring-green-400/50 transition-all backdrop-blur-sm shadow-lg"
+              style={{
+                backgroundColor: "rgba(31, 41, 55, 0.8)",
+                color: "white",
+              }}
+            >
+              <option
+                value="1hour"
+                style={{ backgroundColor: "#1f2937", color: "white" }}
+              >
+                Next Hour
+              </option>
+              <option
+                value="3hours"
+                style={{ backgroundColor: "#1f2937", color: "white" }}
+              >
+                Next 3 Hours
+              </option>
+              <option
+                value="6hours"
+                style={{ backgroundColor: "#1f2937", color: "white" }}
+              >
+                Next 6 Hours
+              </option>
+              <option
+                value="12hours"
+                style={{ backgroundColor: "#1f2937", color: "white" }}
+              >
+                Next 12 Hours
+              </option>
+              <option
+                value="24hours"
+                style={{ backgroundColor: "#1f2937", color: "white" }}
+              >
+                Next 24 Hours
+              </option>
+              <option
+                value="all"
+                style={{ backgroundColor: "#1f2937", color: "white" }}
+              >
+                All Games
+              </option>
             </select>
           </div>
 
           {/* Sports */}
           <div>
-            <label className="block text-sm font-medium mb-2">Sports</label>
+            <label className="block text-sm font-medium mb-2 text-gray-300">
+              Sports
+            </label>
             <select
               value={config.sport}
               onChange={(e) =>
                 setConfig({ ...config, sport: e.target.value as any })
               }
               className="w-full p-3 rounded-xl bg-gray-800/80 border-2 border-gray-500 text-white focus:border-green-400 focus:ring-2 focus:ring-green-400/50 transition-all backdrop-blur-sm shadow-lg"
+              style={{
+                backgroundColor: "rgba(31, 41, 55, 0.8)",
+                color: "white",
+              }}
             >
-              <option value="all">All Sports</option>
-              <option value="nba">NBA</option>
-              <option value="nfl">NFL</option>
-              <option value="mlb">MLB</option>
-              <option value="nhl">NHL</option>
+              <option
+                value="all"
+                style={{ backgroundColor: "#1f2937", color: "white" }}
+              >
+                All Sports
+              </option>
+              <option
+                value="nba"
+                style={{ backgroundColor: "#1f2937", color: "white" }}
+              >
+                NBA
+              </option>
+              <option
+                value="wnba"
+                style={{ backgroundColor: "#1f2937", color: "white" }}
+              >
+                WNBA
+              </option>
+              <option
+                value="mlb"
+                style={{ backgroundColor: "#1f2937", color: "white" }}
+              >
+                MLB
+              </option>
+              <option
+                value="nfl"
+                style={{ backgroundColor: "#1f2937", color: "white" }}
+              >
+                NFL
+              </option>
+              <option
+                value="soccer"
+                style={{ backgroundColor: "#1f2937", color: "white" }}
+              >
+                Soccer
+              </option>
+              <option
+                value="pga"
+                style={{ backgroundColor: "#1f2937", color: "white" }}
+              >
+                PGA
+              </option>
+              <option
+                value="tennis"
+                style={{ backgroundColor: "#1f2937", color: "white" }}
+              >
+                Tennis
+              </option>
+              <option
+                value="esports"
+                style={{ backgroundColor: "#1f2937", color: "white" }}
+              >
+                Esports
+              </option>
+              <option
+                value="mma"
+                style={{ backgroundColor: "#1f2937", color: "white" }}
+              >
+                MMA
+              </option>
             </select>
           </div>
 
