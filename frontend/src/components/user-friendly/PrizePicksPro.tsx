@@ -691,6 +691,205 @@ const PropCard: React.FC<{
   );
 };
 
+// PrizePicks-style Lineup Builder Component
+const LineupBuilder: React.FC<{
+  selectedPicks: SelectedPick[];
+  onRemovePick: (propId: string) => void;
+  entryAmount: number;
+  onEntryAmountChange: (amount: number) => void;
+  onSubmitLineup: () => void;
+  calculatePayout: () => number;
+  getOverallConfidence: () => number;
+  validateLineup: () => { valid: boolean; message: string };
+}> = ({
+  selectedPicks,
+  onRemovePick,
+  entryAmount,
+  onEntryAmountChange,
+  onSubmitLineup,
+  calculatePayout,
+  getOverallConfidence,
+  validateLineup,
+}) => {
+  const validation = validateLineup();
+
+  return (
+    <div
+      className="sticky top-4 self-start"
+      style={{
+        backgroundColor: "rgb(5, 6, 20)",
+        borderBottom: "1px solid rgb(57, 57, 69)",
+        borderBottomLeftRadius: "8px",
+        borderBottomRightRadius: "8px",
+        display: "flex",
+        flexDirection: "column",
+        minHeight: "500px",
+        overflow: "hidden",
+      }}
+    >
+      {/* Header */}
+      <div className="px-4 py-4 border-b border-gray-700/50">
+        <div className="flex items-center justify-between">
+          <div>
+            <h3 className="text-white font-semibold text-lg">Current Lineup</h3>
+            <p className="text-gray-400 text-sm">
+              {selectedPicks.length} Players Selected
+            </p>
+          </div>
+          {selectedPicks.length > 0 && (
+            <button
+              onClick={() =>
+                selectedPicks.forEach((pick) => onRemovePick(pick.propId))
+              }
+              className="text-gray-400 hover:text-white text-sm"
+            >
+              Clear
+            </button>
+          )}
+        </div>
+      </div>
+
+      {/* Selected Players List */}
+      <div className="flex-1 overflow-y-auto">
+        {selectedPicks.length === 0 ? (
+          <div className="p-6 text-center">
+            <div className="text-6xl mb-4">🏆</div>
+            <h4 className="text-white font-semibold mb-2">Build Your Lineup</h4>
+            <p className="text-gray-400 text-sm">
+              Select 2-6 players to create your PrizePicks entry
+            </p>
+          </div>
+        ) : (
+          <div className="space-y-3 p-4">
+            {selectedPicks.map((pick, index) => (
+              <motion.div
+                key={`${pick.propId}-${pick.choice}`}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className="bg-gray-800/50 rounded-lg p-3 border border-gray-700/50"
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-3">
+                    <div className="text-lg">
+                      {pick.choice === "over" ? "📈" : "📉"}
+                      {pick.pickType === "demon" && "😈"}
+                      {pick.pickType === "goblin" && "👺"}
+                    </div>
+                    <div className="flex-1">
+                      <div className="text-white font-medium text-sm">
+                        {pick.player}
+                      </div>
+                      <div className="text-gray-400 text-xs">
+                        {pick.choice.toUpperCase()} {pick.line} {pick.stat}
+                      </div>
+                      <div className="text-green-400 text-xs">
+                        {pick.confidence?.toFixed(1)}% confidence
+                      </div>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => onRemovePick(pick.propId)}
+                    className="text-gray-400 hover:text-red-400 transition-colors"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Entry Configuration */}
+      {selectedPicks.length >= 2 && (
+        <div className="border-t border-gray-700/50 p-4 space-y-4">
+          {/* Payout Info */}
+          <div className="text-center">
+            <div className="text-sm text-gray-400 mb-1">Two Ways to Win:</div>
+            <div className="flex justify-between items-center mb-3">
+              <div className="text-center">
+                <div className="text-xs text-gray-400">1st Place</div>
+                <div className="text-white font-bold">5X</div>
+              </div>
+              <div className="text-gray-500">OR</div>
+              <div className="text-center">
+                <div className="text-xs text-gray-400">Perfect Lineup</div>
+                <div className="text-purple-400 font-bold">
+                  {(calculatePayout() / entryAmount).toFixed(1)}X
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Entry Fee and Payout */}
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="block text-xs text-gray-400 mb-1">
+                Entry Fee
+              </label>
+              <div className="relative">
+                <span className="absolute left-2 top-1/2 transform -translate-y-1/2 text-white text-sm">
+                  $
+                </span>
+                <input
+                  type="number"
+                  value={entryAmount}
+                  onChange={(e) =>
+                    onEntryAmountChange(parseInt(e.target.value) || 0)
+                  }
+                  className="w-full pl-6 pr-2 py-2 bg-gray-800 border border-gray-600 rounded text-white text-sm focus:border-purple-400 focus:outline-none"
+                  min="5"
+                  max="1000"
+                />
+              </div>
+            </div>
+            <div>
+              <label className="block text-xs text-gray-400 mb-1">To Win</label>
+              <div className="py-2 px-2 bg-gray-700/50 border border-gray-600 rounded text-white text-sm">
+                ${calculatePayout().toFixed(2)}
+              </div>
+            </div>
+          </div>
+
+          {/* Overall Confidence */}
+          <div className="text-center">
+            <div className="text-sm text-gray-400">
+              Overall AI Confidence:{" "}
+              <span className="text-green-400 font-bold">
+                {getOverallConfidence().toFixed(1)}%
+              </span>
+            </div>
+          </div>
+
+          {/* Submit Button */}
+          <button
+            onClick={onSubmitLineup}
+            disabled={!validation.valid}
+            className={`w-full py-3 rounded-lg font-semibold transition-all ${
+              validation.valid
+                ? "bg-purple-600 hover:bg-purple-700 text-white"
+                : "bg-gray-600 text-gray-400 cursor-not-allowed"
+            }`}
+          >
+            {validation.valid
+              ? "SUBMIT LINEUP"
+              : validation.message.toUpperCase()}
+          </button>
+
+          {/* Info Banner */}
+          <div className="bg-gray-800/50 border border-gray-700/50 rounded-lg p-3">
+            <p className="text-xs text-gray-400">
+              Payout multipliers may be adjusted based on your player
+              selections. <span className="text-blue-400">Learn more</span>
+            </p>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
 export const PrizePicksPro: React.FC = () => {
   const [selectedPicks, setSelectedPicks] = useState<SelectedPick[]>([]);
   const [entryAmount, setEntryAmount] = useState(25);
