@@ -19,7 +19,7 @@ import {
 import UserFriendlyDashboard from "./UserFriendlyDashboard";
 import MoneyMakerPro from "./MoneyMakerPro";
 import PrizePicksPro from "./PrizePicksPro";
-import PropGPT from "./PropGPT";
+import PropOllama from "./PropOllama";
 // Import advanced dashboard
 import UltraAdvancedMLDashboard from "../ml/UltraAdvancedMLDashboard";
 
