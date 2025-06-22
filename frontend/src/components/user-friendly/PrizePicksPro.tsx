@@ -249,10 +249,11 @@ const PropCard: React.FC<{
         gridTemplateRows: "min-content min-content 1fr",
         overflowX: "hidden",
         overflowY: "hidden",
-        paddingTop: "12px",
+        paddingTop: "8px",
         position: "relative",
         textAlign: "center",
-        minHeight: "280px",
+        minHeight: "220px",
+        maxWidth: "100%",
       }}
     >
       {/* Stats Button - Top Left */}
