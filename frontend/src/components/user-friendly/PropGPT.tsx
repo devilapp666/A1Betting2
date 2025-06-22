@@ -451,4 +451,4 @@ export const PropOllama: React.FC = () => {
   );
 };
 
-export default PropGPT;
+export default PropOllama;
